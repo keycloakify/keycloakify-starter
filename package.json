@@ -1,0 +1,50 @@
+{
+    "name": "keycloakify-starter",
+    "homepage": "https://demo-app.keycloakify.dev",
+    "version": "1.0.2",
+    "description": "A starter/demo project for keycloakify",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/garronej/keycloakify-starter.git"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "keycloak": "yarn build && keycloakify",
+        "download-builtin-keycloak-theme": "download-builtin-keycloak-theme 15.0.2"
+    },
+    "author": "u/garronej",
+    "license": "MIT",
+    "keywords": [],
+    "dependencies": {
+        "@emotion/react": "^11.9.0",
+        "keycloakify": "^6.0.0",
+        "react": "18.1.0",
+        "react-dom": "18.1.0"
+    },
+    "devDependencies": {
+        "@types/node": "^15.3.1",
+        "@types/react": "18.0.9",
+        "@types/react-dom": "18.0.4",
+        "react-scripts": "5.0.0",
+        "typescript": "^4.7.3"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}
