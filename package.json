@@ -1,6 +1,6 @@
 {
     "name": "keycloakify-starter",
-    "homepage": "https://demo-app.keycloakify.dev",
+    "homepage": "https://demo-app-advanced.keycloakify.dev",
     "version": "1.0.2",
     "description": "A starter/demo project for keycloakify",
     "repository": {

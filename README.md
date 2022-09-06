@@ -1,13 +1,14 @@
 <p align="center">
     <img src="https://github.com/garronej/keycloakify-starter/workflows/ci/badge.svg?branch=main">
 </p>
+!!!WIP!!!
 
 A starter/demo project for [Keycloakify](https://keycloakify.dev)
 
 # ⚠️ Please read the two following notices ⚠️
 
-> This starter is for **CSS-level customization**, if you want to customize the pages at
-> **the component level** heads over to [keycloakify-advanced-starter](https://github.com/garronej/keycloakify-advanced-starter).
+> This starter is for **Component-level customization**, if you only want to customize **the page at the CSS level**
+> heads over to [keycloakify-starter](https://github.com/garronej/keycloakify-starter).
 
 > If you are only looking to create a theme and don't care about integrating it into a preexisting React app there
 > are a lot of things that you can remove from this starter. [Please read this](/standalone-keycloak-theme).
