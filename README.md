@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/garronej/keycloakify-starter/workflows/ci/badge.svg?branch=main">
+    <img src="https://github.com/garronej/keycloakify-advanced-starter/workflows/ci/badge.svg?branch=main">
 </p>
 !!!WIP!!! For the moment checkout [this](https://github.com/etalab/sill-web/tree/main/src/ui/components/KcApp).
 
@@ -65,11 +65,11 @@ More info on the `--external-assets` build option [here](https://docs.keycloakif
 # Docker
 
 ```bash
-docker build -f Dockerfile -t garronej/keycloakify-starter:test .
+docker build -f Dockerfile -t garronej/keycloakify-advanced-starter:test .
 #OR (to reproduce how the image is built in the ci workflow):
-yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.ci -t garronej/keycloakify-starter:test . && rm build.tar
+yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.ci -t garronej/keycloakify-advanced-starter:test . && rm build.tar
 
-docker run -it -dp 8083:80 garronej/keycloakify-starter:test
+docker run -it -dp 8083:80 garronej/keycloakify-advanced-starter:test
 ```
 
 ## DockerHub credentials

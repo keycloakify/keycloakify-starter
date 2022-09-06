@@ -1,11 +1,11 @@
 {
-    "name": "keycloakify-starter",
+    "name": "keycloakify-advanced-starter",
     "homepage": "https://demo-app-advanced.keycloakify.dev",
     "version": "1.0.2",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
-        "url": "git://github.com/garronej/keycloakify-starter.git"
+        "url": "git://github.com/garronej/keycloakify-advanced-starter.git"
     },
     "scripts": {
         "start": "react-scripts start",
