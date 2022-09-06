@@ -1,7 +1,7 @@
 <p align="center">
     <img src="https://github.com/garronej/keycloakify-starter/workflows/ci/badge.svg?branch=main">
 </p>
-!!!WIP!!!
+!!!WIP!!! For the moment checkout [this](https://github.com/etalab/sill-web/tree/main/src/ui/components/KcApp).
 
 A starter/demo project for [Keycloakify](https://keycloakify.dev)
 
