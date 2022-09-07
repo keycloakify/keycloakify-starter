@@ -4401,6 +4401,15 @@ evt@^2.4.0:
     run-exclusive "^2.2.16"
     tsafe "^1.0.1"
 
+evt@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/evt/-/evt-2.4.1.tgz#68beca2f7bd7eb755fdda5b263a80b934100e046"
+  integrity sha512-eo7sZcfDbiVWD5Aw6STkIEMmchYLdeGnJB6tVaM9AXZc7pViin3PmQhb6fgFIFHfl0re9zSEHtSjyu70Y7dRJg==
+  dependencies:
+    minimal-polyfills "^2.2.2"
+    run-exclusive "^2.2.16"
+    tsafe "^1.0.1"
+
 execa@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/execa/-/execa-5.1.1.tgz#f80ad9cbf4298f7bd1d4c9555c21e93741c411dd"
@@ -6075,10 +6084,10 @@ jsonpointer@^5.0.0:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
-keycloakify@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.0.0.tgz#3a3f71a14514d6b2a5fbfe3517d74ac974224a3d"
-  integrity sha512-9SZAEuBiOTxfd0dOYdb+RJAaYq6eTc7SaoM7LTQuw/JqQfUM7x6/kOHUNOP7x9iTs6vptHRfSUZb52ydp8fltA==
+keycloakify@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.0.2.tgz#0bc95111117b6bc28e4668c335948c5ae70da7f0"
+  integrity sha512-/Y4YaWUB/rzXAwL1StEIYnVwKLmePlHcqqKC6ZrfhEaf02N0EWxqS9oZNrE1wU3mrD9xDSe5qcYMr/mgxkYAoQ==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"

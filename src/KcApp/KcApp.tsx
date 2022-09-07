@@ -3,7 +3,10 @@ import type { KcContext } from "./kcContext";
 import KcAppBase, { defaultKcProps } from "keycloakify";
 import { useI18n } from "./i18n";
 
+const Register = lazy(() => import("./Register"));
 const Terms = lazy(() => import("./Terms"));
+const MyExtraPage1 = lazy(() => import("./MyExtraPage1"));
+const MyExtraPage2 = lazy(() => import("./MyExtraPage2"));
 
 export type Props = {
     kcContext: KcContext;
