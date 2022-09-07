@@ -10,7 +10,7 @@ A starter/demo project for [Keycloakify](https://keycloakify.dev)
 > heads over to [keycloakify-starter](https://github.com/garronej/keycloakify-starter).
 
 > If you are only looking to create a theme and don't care about integrating it into a preexisting React app there
-> are a lot of things that you can remove from this starter. [Please read this](/standalone-keycloak-theme).
+> are a lot of things that you can remove from this starter. [Please read this](https://github.com/garronej/keycloakify-advanced-starter#standalone-keycloak-theme).
 
 # Quick start
 
