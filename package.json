@@ -13,6 +13,12 @@
         "keycloak": "yarn build && keycloakify",
         "download-builtin-keycloak-theme": "download-builtin-keycloak-theme 15.0.2"
     },
+    "keycloakify": {
+        "extraPages": [
+            "my-extra-page-1.ftl",
+            "my-extra-page-2.ftl"
+        ]
+    },
     "author": "u/garronej",
     "license": "MIT",
     "keywords": [],
@@ -20,7 +26,8 @@
         "@emotion/react": "^11.9.0",
         "keycloakify": "^6.0.0",
         "react": "18.1.0",
-        "react-dom": "18.1.0"
+        "react-dom": "18.1.0",
+        "evt": "^2.4.1"
     },
     "devDependencies": {
         "@types/node": "^15.3.1",
