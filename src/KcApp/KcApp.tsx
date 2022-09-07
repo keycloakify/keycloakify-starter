@@ -1,3 +1,4 @@
+import "./KcApp.css";
 import { lazy, Suspense } from "react";
 import type { KcContext } from "./kcContext";
 import KcAppBase, { defaultKcProps } from "keycloakify";

@@ -6084,10 +6084,10 @@ jsonpointer@^5.0.0:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
-keycloakify@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.0.2.tgz#0bc95111117b6bc28e4668c335948c5ae70da7f0"
-  integrity sha512-/Y4YaWUB/rzXAwL1StEIYnVwKLmePlHcqqKC6ZrfhEaf02N0EWxqS9oZNrE1wU3mrD9xDSe5qcYMr/mgxkYAoQ==
+keycloakify@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.0.3.tgz#c17af036016ca983878c28340127d744776def02"
+  integrity sha512-1CmVE6x1DyEpDVAWa3CKUjciGeuBbS7FWIGGuMLtoeRepJzhXxVxghAyKSl4TCo1ZxG2JTUrAE4Q7g/PQKXs8A==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"
