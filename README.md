@@ -92,8 +92,8 @@ mv src/KcApp/* src/
 
 cat << EOF > src/index.tsx
 import { createRoot } from "react-dom/client";
-import { StrictMode, lazy, Suspense } from "react";
-import { kcContext } from "./KcApp/kcContext";
+import { StrictMode, lazy } from "react";
+import { kcContext } from "./kcContext";
 
 const KcApp = lazy(() => import("./KcApp"));
 
