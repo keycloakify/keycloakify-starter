@@ -1,7 +1,7 @@
 {
     "name": "keycloakify-advanced-starter",
     "homepage": "https://demo-app-advanced.keycloakify.dev",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
