@@ -9,8 +9,8 @@ A starter/demo project for [Keycloakify](https://keycloakify.dev)
 > This starter is for **Component-level customization**, if you only want to customize **the page at the CSS level**
 > heads over to [keycloakify-starter](https://github.com/garronej/keycloakify-starter).
 
-> If you are only looking to create a theme and don't care about integrating it into a preexisting React app there
-> are a lot of things that you can remove from this starter. [Please read this](https://github.com/garronej/keycloakify-advanced-starter#standalone-keycloak-theme).
+> If you are only looking to create a theme and don't care about integrating it into a React app there
+> are a lot of things that you can remove from this starter. [Please read this](#standalone-keycloak-theme).
 
 # Quick start
 
@@ -106,7 +106,7 @@ if( kcContext === undefined ){
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <KcApp kcContext={kcContext} />
-    </StrictMode>,
+    </StrictMode>
 );
 EOF
 
