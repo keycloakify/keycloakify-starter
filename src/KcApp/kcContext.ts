@@ -12,9 +12,6 @@ export const { kcContext } = getKcContext<
     | { pageId: "register.ftl"; authorizedMailDomains: string[]; }
 >({
     // Uncomment to test the login page for development.
-    // Try with another page like "register-user-profile.ftl"
-    // DON'T forget to re-comment before publishing to production.
-    // You must run 'yarn keycloak' at least once before testing locally.
     //"mockPageId": "login.ftl",
     "mockData": [
         {
