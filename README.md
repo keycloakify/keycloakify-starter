@@ -15,9 +15,11 @@ A starter/demo project for [Keycloakify](https://keycloakify.dev)
 # Quick start
 
 ```bash
-yarn install
+yarn
+yarn keycloak # Build the theme one time (some assets will be copied to 
+              # public/keycloak_static, they are needed to dev your page outside of Keycloak)
 yarn start # See the Hello World app
-# Uncomment line 6 of src/KcApp/kcContext, reload https://localhost:3000
+# Uncomment line 15 of src/KcApp/kcContext, reload https://localhost:3000
 # You can now develop your Login pages.
 
 # Think your theme is ready? Run
