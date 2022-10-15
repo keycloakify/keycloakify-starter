@@ -8,7 +8,7 @@ import { evtTermMarkdown } from "keycloakify/lib/components/Terms";
 import { useRerenderOnStateChange } from "evt/hooks";
 import tos_en_url from "./tos_en.md";
 import tos_fr_url from "./tos_fr.md";
-import { useCssAndCx } from "keycloakify/lib/tools/useCssAndCx";
+import { clsx } from "keycloakify/lib/tools/clsx";
 
 /**
  * NOTE: Yo do not need to do all this to put your own Terms and conditions
@@ -45,8 +45,6 @@ const Terms = memo(
 
 		useRerenderOnStateChange(evtTermMarkdown);
 
-		const { cx } = useCssAndCx();
-
 		if (evtTermMarkdown.state === undefined) {
 			return null;
 		}
@@ -64,7 +62,7 @@ const Terms = memo(
 						<div id="kc-terms-text">{evtTermMarkdown.state}</div>
 						<form className="form-actions" action={url.loginAction} method="POST">
 							<input
-								className={cx(
+								className={clsx(
 									props.kcButtonClass,
 									props.kcButtonClass,
 									props.kcButtonClass,
@@ -77,7 +75,7 @@ const Terms = memo(
 								value={msgStr("doAccept")}
 							/>
 							<input
-								className={cx(props.kcButtonClass, props.kcButtonDefaultClass, props.kcButtonLargeClass)}
+								className={clsx(props.kcButtonClass, props.kcButtonDefaultClass, props.kcButtonLargeClass)}
 								name="cancel"
 								id="kc-decline"
 								type="submit"
