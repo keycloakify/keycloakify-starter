@@ -4401,14 +4401,14 @@ evt@^2.4.1:
     run-exclusive "^2.2.16"
     tsafe "^1.0.1"
 
-evt@^2.4.4:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/evt/-/evt-2.4.4.tgz#37d6e28ccb5b1bc91162fc3d5bcfbeb1ef3191cf"
-  integrity sha512-w/ZYdPCRdSfslOhcQHq7DuYoaU04YZKkFPyBwF8pYmOkRizivpbI0jZ8ffY/jITzbLo7RZ0wxN2dqyi62kyGwg==
+evt@^2.4.6:
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/evt/-/evt-2.4.6.tgz#79e242cd2f84c2ec0b8119478712f7af80368832"
+  integrity sha512-4kSu9YVklCeddEAu/UCzIISrxc5SAD82hX7gXjBox4yyrPNblYrmJr4GgTOOQpNXTGYci+UIpFUYikgZa9fyTQ==
   dependencies:
     minimal-polyfills "^2.2.2"
     run-exclusive "^2.2.16"
-    tsafe "^1.1.1"
+    tsafe "^1.1.3"
 
 execa@^5.0.0:
   version "5.1.1"
@@ -6084,23 +6084,24 @@ jsonpointer@^5.0.0:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
-keycloakify@^6.6.3:
-  version "6.6.3"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.6.3.tgz#5de6b573e3579700546dfcf6f39b570ffd741f3d"
-  integrity sha512-QkLU5eGwFnp2Q6ZtqqYpDyECUNJejlbLz8TK1o9RAw2neJFcfktBl/Wr2hKsNHMZ7r2PSjM8CGrX8+9xRwKgAw==
+keycloakify@^6.8.3:
+  version "6.8.3"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.8.3.tgz#5d9ddaa246fc717bfafa1db07eb78bb66be174d1"
+  integrity sha512-WypUGEkXR4Rn6B5ttsL9O043+PhNEpyHh6M0VGqWjooQJ/tmNYn/cH+3WLVyjrsBea9qcl3hf9/tmbsETcgfeg==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"
     cli-select "^1.1.2"
-    evt "^2.4.4"
+    evt "^2.4.6"
     memoizee "^0.4.15"
     minimal-polyfills "^2.2.2"
     minimist "^1.2.6"
     path-browserify "^1.0.1"
-    powerhooks "^0.20.20"
+    powerhooks "^0.20.23"
     react-markdown "^5.0.3"
+    rfc4648 "^1.5.2"
     scripting-tools "^0.19.13"
-    tsafe "^1.1.1"
+    tsafe "^1.1.3"
     tss-react "^4.3.4"
     zod "^3.17.10"
 
@@ -7496,15 +7497,15 @@ postcss@^8.3.5, postcss@^8.4.14, postcss@^8.4.4, postcss@^8.4.7:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-powerhooks@^0.20.20:
-  version "0.20.20"
-  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.20.20.tgz#f9b2549710f5166f63d80e07c46c16d6da4c6f78"
-  integrity sha512-98Ymz0bjo5Ds9u273wYz1tdJ51sB1jcyjqGa08mRY5dKumewydA/+71zrFelfgkOLRRhVZ+mWynG6DZ7zOVjrQ==
+powerhooks@^0.20.23:
+  version "0.20.23"
+  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.20.23.tgz#52619405f63bf621c52f0cb944c58414734b618f"
+  integrity sha512-+44ltLJmvti6XZJuaRlfMbjX/2ZkJBw8CybkwDIh/GntOtyertWhbYa1k9QBy2deLKTcBj39Tx86/exIHoCcFA==
   dependencies:
-    evt "^2.4.4"
+    evt "^2.4.6"
     memoizee "^0.4.15"
     resize-observer-polyfill "^1.5.1"
-    tsafe "^1.1.1"
+    tsafe "^1.1.3"
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -8012,6 +8013,11 @@ reusify@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
+
+rfc4648@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/rfc4648/-/rfc4648-1.5.2.tgz#cf5dac417dd83e7f4debf52e3797a723c1373383"
+  integrity sha512-tLOizhR6YGovrEBLatX1sdcuhoSCXddw3mqNVAcKxGJ+J0hFeJ+SjeWCv5UPA/WU3YzWPPuCVYgXBKZUPGpKtg==
 
 rimraf@^3.0.0, rimraf@^3.0.2:
   version "3.0.2"
@@ -8796,10 +8802,10 @@ tsafe@^1.0.1:
   resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.0.1.tgz#c8c4eb2d75d1478418a4941307c5dd667fd76d23"
   integrity sha512-FgJ1a4rE7YbmW5QIzpsfFl4tsAp0x74FH2bVE6qODb2U8jSrwTr5/ckIazeylme5zXndVbtgKm4BZdqmoGhiPw==
 
-tsafe@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.1.1.tgz#8d6998c726f8c63c518e1d1e283bbcd282a2b9a9"
-  integrity sha512-Ogblm3uh0dVupcCcC4IT641rnSQ7CW9IO0q8yIncG8OBe4DDXEqGtUE8LWf7+0MK1qZGeWPWEqSxlLzY2xzREA==
+tsafe@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.1.3.tgz#fa7c2ae7da689884292b70ee30febbca5c665d03"
+  integrity sha512-QQQoed5Acb7Qe/sjMwE/qg57mxD5MXqY5HcGN4i3QyhJiplpo79ABEZiOBvL1cRTOYIzeryWvWQ3xsotTA49MQ==
 
 tsconfig-paths@^3.14.1:
   version "3.14.1"
