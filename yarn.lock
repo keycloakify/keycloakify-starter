@@ -5989,10 +5989,10 @@ jsonpointer@^5.0.0:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
-keycloakify@^6.11.3:
-  version "6.11.3"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.11.3.tgz#0e15b7685462f6aa1e27e7e968ed8741f8f24b80"
-  integrity sha512-C9LMgzVNJvxMUFAt9JbuGGv5Jy3i2w6e4Kyue7gNZGPfmmyNd7uodHLOGJ9V6XVz2e5obRG+ni3qtijwzPsluQ==
+keycloakify@^6.11.4:
+  version "6.11.4"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.11.4.tgz#4cfb4f655be34358290684ee9fb5d052a4d54a66"
+  integrity sha512-3wm+8QhksYDef0KRljz+e3iNp3o9WgmjKfpK17Vl+HuDO5dMpGFTIfHC3YB6xC/Awti+9oRGrvXgB0tk2AgRLQ==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"

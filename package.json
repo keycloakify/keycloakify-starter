@@ -17,14 +17,13 @@
         "extraPages": [
             "my-extra-page-1.ftl",
             "my-extra-page-2.ftl"
-        ],
-        "bundler": "keycloakify"
+        ]
     },
     "author": "u/garronej",
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "keycloakify": "^6.11.3",
+        "keycloakify": "^6.11.4",
         "react": "18.1.0",
         "react-dom": "18.1.0",
         "evt": "^2.4.1"
