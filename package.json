@@ -1,7 +1,7 @@
 {
     "name": "keycloakify-advanced-starter",
     "homepage": "https://demo-app-advanced.keycloakify.dev",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
@@ -17,13 +17,14 @@
         "extraPages": [
             "my-extra-page-1.ftl",
             "my-extra-page-2.ftl"
-        ]
+        ],
+        "bundler": "keycloakify"
     },
     "author": "u/garronej",
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "keycloakify": "^6.10.0",
+        "keycloakify": "^6.11.3",
         "react": "18.1.0",
         "react-dom": "18.1.0",
         "evt": "^2.4.1"
