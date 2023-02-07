@@ -5989,10 +5989,10 @@ jsonpointer@^5.0.0:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
-keycloakify@^6.11.4:
-  version "6.11.4"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.11.4.tgz#4cfb4f655be34358290684ee9fb5d052a4d54a66"
-  integrity sha512-3wm+8QhksYDef0KRljz+e3iNp3o9WgmjKfpK17Vl+HuDO5dMpGFTIfHC3YB6xC/Awti+9oRGrvXgB0tk2AgRLQ==
+keycloakify@^6.11.7:
+  version "6.11.7"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.11.7.tgz#3660aae697d595e32d5fa2a7e08c8659203ae7ac"
+  integrity sha512-borUJERPKeNcuImM0NqfjFOZz/4HYOW+eDVe+CaVl52d7gh5g0mmKRwmbaLXHV2duYDrDgwu9vCjDfuTcx8x0g==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"
@@ -6002,11 +6002,11 @@ keycloakify@^6.11.4:
     minimal-polyfills "^2.2.2"
     minimist "^1.2.6"
     path-browserify "^1.0.1"
-    powerhooks "^0.22.1"
+    powerhooks "^0.26.0"
     react-markdown "^5.0.3"
     rfc4648 "^1.5.2"
     scripting-tools "^0.19.13"
-    tsafe "^1.4.2"
+    tsafe "^1.4.3"
     tss-react "4.4.1-rc.0"
     zod "^3.17.10"
 
@@ -7402,10 +7402,10 @@ postcss@^8.3.5, postcss@^8.4.14, postcss@^8.4.4, postcss@^8.4.7:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-powerhooks@^0.22.1:
-  version "0.22.1"
-  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.22.1.tgz#4e6c720e702e138c0869447e0d04bd0550530bbb"
-  integrity sha512-wR/gVPtpOeVAkjJXAHbTB6IBAIWL3RZo69DqxPZ2rXV108cwzOW978KZKd2h7m0QHJdg4ZXYwOsZ13E1EGrTFA==
+powerhooks@^0.26.0:
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.26.0.tgz#260f8e5c019ea117911c880bf3b371ecd09786df"
+  integrity sha512-FvoEuj340Jm9HPGV98gjDVVdlolaIYXvQ4Xg7fiNtYdeClAJk264uFHAwFo9isXP92OW2ksvy9wVMCwMhFUGGQ==
   dependencies:
     evt "^2.4.13"
     memoizee "^0.4.15"
@@ -8713,6 +8713,11 @@ tsafe@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.4.2.tgz#1cc597f6e286ef8a64b918a0a6284bd04347e11f"
   integrity sha512-KfP0PYzRjl1LY1DnJPNlD4a0tZSg4uUuZxI4aG04T+j7WJvKZbh1zpaukphhSmtoJMgX1RV8eZVKTEiH8wOGbA==
+
+tsafe@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.4.3.tgz#a98ce83616f0d9c01e3c6167a2ead45ba455b2ae"
+  integrity sha512-KjCdgjIqsbKW9oeJGSMVC23jhWm/VXJwkaZ7jffo/WaTioLGTHJqliHe9dECEVzIACNVNs/fwtKwU8wWK4jY4g==
 
 tsconfig-paths@^3.14.1:
   version "3.14.1"
