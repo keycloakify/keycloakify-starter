@@ -12,8 +12,8 @@ import { Markdown } from "keycloakify/lib/tools/Markdown";
 import { evtTermMarkdown, useDownloadTerms } from "keycloakify/lib/pages/Terms";
 import tos_en_url from "../assets/tos_en.md";
 import tos_fr_url from "../assets/tos_fr.md";
-import type { KcContext } from "../kcContext";
 import type { PageProps } from "keycloakify/lib/KcProps";
+import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 
 export default function Terms(props: PageProps<Extract<KcContext, { pageId: "terms.ftl"; }>, I18n>) {

@@ -9,9 +9,7 @@ import { assert } from "keycloakify/lib/tools/assert";
 import { clsx } from "keycloakify/lib/tools/clsx";
 import { pathJoin } from "keycloakify/bin/tools/pathJoin";
 import type { TemplateProps } from "keycloakify/lib/KcProps";
-//import type { KcContextBase } from "keycloakify/lib/getKcContext";
 import type { KcContext } from "./kcContext";
-// Here Instead of KcContextBase.Common you should provide your own context
 import type { I18n } from "./i18n";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
@@ -118,7 +116,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                         {locale.supported.map(({ languageTag }) => (
                                             <li key={languageTag} className="kc-dropdown-item">
                                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                                <a href="#" onClick={()=> changeLocale(languageTag)}>
+                                                <a href="#" onClick={() => changeLocale(languageTag)}>
                                                     {labelBySupportedLanguageTag[languageTag]}
                                                 </a>
                                             </li>
@@ -212,7 +210,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                     <div className={clsx(props.kcFormGroupClass)}>
                                         <input type="hidden" name="tryAnotherWay" value="on" />
                                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                        <a href="#" id="try-another-way" onClick={()=>{
+                                        <a href="#" id="try-another-way" onClick={() => {
                                             document.forms["kc-select-try-another-way-form" as never].submit();
                                             return false;
                                         }}>

@@ -4,7 +4,7 @@
 // Note that it is no longer recommended to use register.ftl, it's best to use register-user-profile.ftl
 // See: https://docs.keycloakify.dev/realtime-input-validation
 import { clsx } from "keycloakify/lib/tools/clsx";
-import type { PageProps } from "keycloakify";
+import type { PageProps } from "keycloakify/lib/KcProps";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 
