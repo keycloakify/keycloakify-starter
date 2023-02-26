@@ -129,7 +129,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2.1.3
       with:
-        node-version: '14'
+        node-version: '16'
     - uses: bahmutov/npm-install@v1
     - run: yarn build
     - run: npx keycloakify
