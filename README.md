@@ -147,9 +147,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     outputs:
-      from_version: ${{ steps.step1.outputs.from_version }}
-      to_version: ${{ steps.step1.outputs.to_version }}
-      is_upgraded_version: ${{ steps.step1.outputs.is_upgraded_version }}
+      from_version: \${{ steps.step1.outputs.from_version }}
+      to_version: \${{ steps.step1.outputs.to_version }}
+      is_upgraded_version: \${{ steps.step1.outputs.is_upgraded_version }}
     steps:
     - uses: garronej/ts-ci@v1.1.7
       id: step1
@@ -176,15 +176,15 @@ jobs:
     - run: mv *keycloak-theme*.jar jars/standalone-keycloak-theme.jar
     - uses: softprops/action-gh-release@v1
       with:
-        name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
-        tag_name: v${{ needs.check_if_version_upgraded.outputs.to_version }}
-        target_commitish: ${{ github.head_ref || github.ref }}
+        name: Release v\${{ needs.check_if_version_upgraded.outputs.to_version }}
+        tag_name: v\${{ needs.check_if_version_upgraded.outputs.to_version }}
+        target_commitish: \${{ github.head_ref || github.ref }}
         generate_release_notes: true
         files: |
           jars/standalone-keycloak-theme.jar
         draft: false
-        prerelease: ${{ needs.check_if_version_upgraded.outputs.is_release_beta == 'true' }}
+        prerelease: \${{ needs.check_if_version_upgraded.outputs.is_release_beta == 'true' }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
 EOF
 ```
