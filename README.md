@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/garronej/keycloakify-advanced-starter/workflows/ci/badge.svg?branch=main">
+    <img src="https://github.com/codegouvfr/keycloakify-starter/workflows/ci/badge.svg?branch=main">
 </p>
 
 A starter/demo project for [Keycloakify](https://keycloakify.dev)
@@ -30,16 +30,16 @@ using [keycloakify](https://github.com/InseeFrLab/keycloakify).
 
 # The CI workflow
 
--   This CI is configured to both publish on [GitHub Pages](https://github.com/garronej/keycloakify-starter/blob/71baa789254f00bf521d40dc0a8db6925aa72942/.github/workflows/ci.yaml#L47-L65) and on [DockerHub](https://github.com/garronej/keycloakify-starter/blob/71baa789254f00bf521d40dc0a8db6925aa72942/.github/workflows/ci.yaml#L66-L111). In practice you probably want one
+-   This CI is configured to both publish on [GitHub Pages](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L51-L76) and on [DockerHub](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L78-L123). In practice you probably want one
     or the other but not both.  
-    We deploy the demo app at [demo-app.keycloakify.dev](https://demo-app.keycloakify.dev) using GitHub page on the branch `gh-pages` (you have to enable it).  
+    We deploy the demo app at [starter.keycloakify.dev](https://starter.keycloakify.dev) using GitHub page on the branch `gh-pages` (you have to enable it).  
     To configure your own domain name please refer to [this documentation](https://docs.gitlanding.dev/using-a-custom-domain-name).
 -   To release **don't create a tag manually**, the CI do it for you. Just update the `package.json`'s version field and push.
 -   The `.jar` files that bundle the Keycloak theme will be attached as an asset with every GitHub release. [Example](https://github.com/InseeFrLab/keycloakify-starter/releases/tag/v0.1.0). The permalink to download the latest version is: `https://github.com/USER/PROJECT/releases/latest/download/keycloak-theme.jar`.
-    For this demo repo it's [here](https://github.com/garronej/keycloakify-starter/releases/latest/download/keycloak-theme.jar)
+    For this demo repo it's [here](https://github.com/codegouvfr/keycloakify-starter/releases/latest/download/keycloak-theme.jar)
 -   The CI publishes the app docker image on DockerHub. `<org>/<repo>:main` for each **commit** on `main`, `<org>/<repo>:<feature-branch-name>` for each **pull-request** on `main`
     and when **releasing a new version**: `<org>/<repo>:latest` and `<org>/<repo>:X.Y.Z`
-    [See on DockerHub](https://hub.docker.com/r/garronej/keycloakify-starter/tags?page=1&ordering=last_updated)
+    [See on DockerHub](https://hub.docker.com/r/codegouvfr/keycloakify-starter)
 
 ![image](https://user-images.githubusercontent.com/6702424/187989551-9461fb46-f545-4e99-b20c-e0fe4a0f773d.png)
 
@@ -65,7 +65,7 @@ docker build -f Dockerfile -t codegouvfr/keycloakify-starter:test .
 #OR (to reproduce how the image is built in the ci workflow):
 yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.ci -t codegouvfr/keycloakify-starter:test . && rm build.tar
 
-docker run -it -dp 8083:80 garronej/keycloakify-starter:test
+docker run -it -dp 8083:80 codegouvfr/keycloakify-starter:test
 ```
 
 ## DockerHub credentials
