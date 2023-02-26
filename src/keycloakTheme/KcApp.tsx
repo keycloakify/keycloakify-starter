@@ -3,15 +3,16 @@ import { lazy, Suspense } from "react";
 import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
 import Fallback, { defaultKcProps, type KcProps, type PageProps } from "keycloakify";
-// Here we have overloaded the default template, however you could use the default one with:  
-//import Template from "keycloakify/lib/Template";
 import Template from "./Template";
+import DefaultTemplate from "keycloakify/lib/Template";
 
-const Login = lazy(() => import("keycloakify/lib/pages/Login"));
+const Login = lazy(()=> import("./pages/Login"));
+// If you can, favor register-user-profile.ftl over register.ftl, see: https://docs.keycloakify.dev/realtime-input-validation
 const Register = lazy(() => import("./pages/Register"));
 const Terms = lazy(() => import("./pages/Terms"));
 const MyExtraPage1 = lazy(() => import("./pages/MyExtraPage1"));
 const MyExtraPage2 = lazy(() => import("./pages/MyExtraPage2"));
+const Info = lazy(()=> import("keycloakify/lib/pages/Info"));
 
 // This is like editing the theme.properties 
 // https://github.com/keycloak/keycloak/blob/11.0.3/themes/src/main/resources/theme/keycloak/login/theme.properties
@@ -35,7 +36,10 @@ export default function App(props: { kcContext: KcContext; }) {
 
     const pageProps: Omit<PageProps<any, typeof i18n>, "kcContext"> = {
         i18n,
+        // Here we have overloaded the default template, however you could use the default one with:  
+        //Template: DefaultTemplate,
         Template,
+        // Wether or not we should download the CSS and JS resources that comes with the default Keycloak theme.  
         doFetchDefaultThemeResources: true,
         ...kcProps,
     };
@@ -49,6 +53,8 @@ export default function App(props: { kcContext: KcContext; }) {
                     case "terms.ftl": return <Terms {...{ kcContext, ...pageProps }} />;
                     case "my-extra-page-1.ftl": return <MyExtraPage1 {...{ kcContext, ...pageProps }} />;
                     case "my-extra-page-2.ftl": return <MyExtraPage2 {...{ kcContext, ...pageProps }} />;
+                    // We choose to use the default Template for the Info page and to download the theme resources.
+                    case "info.ftl": return <Info {...{ kcContext, ...pageProps}} Template={DefaultTemplate} doFetchDefaultThemeResources={true} />;
                     default: return <Fallback {...{ kcContext, ...pageProps }} />;
                 }
             })()}

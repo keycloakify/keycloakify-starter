@@ -17,7 +17,7 @@ export const { kcContext } = getKcContext<
 	| { pageId: "register.ftl"; authorizedMailDomains: string[]; }
 >({
 	// Uncomment to test the login page for development.
-	// mockPageId: "login.ftl",
+	//mockPageId: "login.ftl",
 	mockData: [
 		{
 			pageId: "login.ftl",
@@ -33,16 +33,6 @@ export const { kcContext } = getKcContext<
 		{
 			pageId: "my-extra-page-2.ftl",
 			someCustomValue: "foo bar baz"
-		},
-		{
-			pageId: "register.ftl",
-			authorizedMailDomains: [
-				"example.com",
-				"another-example.com",
-				"*.yet-another-example.com",
-				"*.example.com",
-				"hello-world.com"
-			]
 		},
 		{
 			//NOTE: You will either use register.ftl (legacy) or register-user-profile.ftl, not both
@@ -81,6 +71,24 @@ export const { kcContext } = getKcContext<
 					}
 				]
 			}
+		},
+		{
+			pageId: "register.ftl",
+			authorizedMailDomains: [
+				"example.com",
+				"another-example.com",
+				"*.yet-another-example.com",
+				"*.example.com",
+				"hello-world.com"
+			],
+			// Simulate we got an error with the email field
+			messagesPerField: {
+				printIfExists: <T>(fieldName: string, className: T) => { console.log({ fieldName}); return fieldName === "email" ? className : undefined; },
+				existsError: (fieldName: string)=> fieldName === "email",
+				get: (fieldName: string) => `Fake error for ${fieldName}`,
+				exists: (fieldName: string) => fieldName === "email"
+			},
+			
 		}
 	]
 });

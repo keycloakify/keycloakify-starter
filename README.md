@@ -4,26 +4,23 @@
 
 A starter/demo project for [Keycloakify](https://keycloakify.dev)
 
-# ⚠️ Please read the two following notices ⚠️
+# ⚠️ Please read the two following notice ⚠️
 
-> This starter is for **Component-level customization**, if you only want to customize **the page at the CSS level**
-> heads over to [keycloakify-starter](https://github.com/garronej/keycloakify-starter).
-
-> If you are only looking to create a theme and don't care about integrating it into a React app there
+> If you are only looking to create a theme and don't care about integrating it into an React app there
 > are a lot of things that you can remove from this starter. [Please read this](#standalone-keycloak-theme).
 
 # Quick start
 
 ```bash
 yarn
-yarn keycloak # Build the theme one time (some assets will be copied to 
+yarn build-keycloak-theme # Build the theme one time (some assets will be copied to 
               # public/keycloak_static, they are needed to dev your page outside of Keycloak)
 yarn start # See the Hello World app
 # Uncomment line 15 of src/keycloakTheme/kcContext, reload https://localhost:3000
 # You can now develop your Login pages.
 
 # Think your theme is ready? Run
-yarn keycloak
+yarn build-keycloak-theme
 # Read the instruction printed on the console to see how to test
 # your theme on a real Keycloak instance.
 ```
@@ -66,11 +63,11 @@ More info on the `--external-assets` build option [here](https://docs.keycloakif
 # Docker
 
 ```bash
-docker build -f Dockerfile -t garronej/keycloakify-advanced-starter:test .
+docker build -f Dockerfile -t codegouvfr/keycloakify-starter:test .
 #OR (to reproduce how the image is built in the ci workflow):
-yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.ci -t garronej/keycloakify-advanced-starter:test . && rm build.tar
+yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.ci -t codegouvfr/keycloakify-starter:test . && rm build.tar
 
-docker run -it -dp 8083:80 garronej/keycloakify-advanced-starter:test
+docker run -it -dp 8083:80 garronej/keycloakify-starter:test
 ```
 
 ## DockerHub credentials

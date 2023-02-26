@@ -1,16 +1,16 @@
 {
-    "name": "keycloakify-advanced-starter",
-    "homepage": "https://demo-app-advanced.keycloakify.dev",
+    "name": "keycloakify-starter",
+    "homepage": "https://starter.keycloakify.dev",
     "version": "1.0.8",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
-        "url": "git://github.com/garronej/keycloakify-advanced-starter.git"
+        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
     },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "keycloak": "yarn build && keycloakify",
+        "build-keycloak-theme": "yarn build && keycloakify",
         "download-builtin-keycloak-theme": "download-builtin-keycloak-theme 15.0.2"
     },
     "keycloakify": {
