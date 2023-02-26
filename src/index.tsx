@@ -1,13 +1,9 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode, lazy, Suspense } from "react";
-import { kcContext } from "./KcApp/kcContext";
+import { kcContext } from "./keycloakTheme/kcContext";
 
 const App = lazy(() => import("./App"));
-const KcApp = lazy(() => import("./KcApp"));
-
-if (kcContext !== undefined) {
-    console.log(kcContext);
-}
+const KcApp = lazy(() => import("./keycloakTheme/KcApp"));
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
