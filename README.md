@@ -4,9 +4,7 @@
 
 A starter/demo project for [Keycloakify](https://keycloakify.dev)
 
-# ⚠️ Please read the two following notice ⚠️
-
-> If you are only looking to create a theme and don't care about integrating it into an React app there
+> NOTE: If you are only looking to create a theme and don't care about integrating it into an React app there
 > are a lot of things that you can remove from this starter. [Please read this](#standalone-keycloak-theme).
 
 # Quick start
