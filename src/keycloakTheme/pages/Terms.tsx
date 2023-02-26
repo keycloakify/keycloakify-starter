@@ -5,7 +5,6 @@
  * in the KcApp.tsx
  * Example: https://github.com/garronej/keycloakify-starter/blob/a20c21b2aae7c6dc6dbea294f3d321955ddf9355/src/KcApp/KcApp.tsx#L14-L30
  */
-
 import { clsx } from "keycloakify/lib/tools/clsx";
 import { useRerenderOnStateChange } from "evt/hooks";
 import { Markdown } from "keycloakify/lib/tools/Markdown";

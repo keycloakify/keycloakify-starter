@@ -1,7 +1,13 @@
+// This is a copy paste from https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/pages/Login.tsx
 import { useState, type FormEventHandler } from "react";
+// You can replace all relative imports by cherry picking files from the keycloakify module.  
+// For example, the following import:  
+// import { clsx } from "./tools/clsx";
+// becomes:  
 import { clsx } from "keycloakify/lib/tools/clsx";
 import { useConstCallback } from "keycloakify/lib/tools/useConstCallback";
 import type { PageProps } from "keycloakify/lib/KcProps";
+// Here use your own KcContext and I18n that you might have overloaded.  
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 
