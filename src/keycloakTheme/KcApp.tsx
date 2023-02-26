@@ -19,8 +19,10 @@ const Info = lazy(()=> import("keycloakify/lib/pages/Info"));
 const kcProps: KcProps = {
     ...defaultKcProps,
     // NOTE: The classes are defined in ./KcApp.css
-    "kcHeaderWrapperClass": "my-color my-font",
+    // You can add your classes alongside thoses that are present in the default Keycloak theme...
     "kcHtmlClass": [...defaultKcProps.kcHtmlClass, "my-root-class"],
+    // ...or overwrite  
+    "kcHeaderWrapperClass": "my-color my-font"
 };
 
 export default function App(props: { kcContext: KcContext; }) {
