@@ -1,14 +1,13 @@
 // Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/components/shared/Template.tsx
-import { useReducer, useEffect } from "react";
+
 // You can replace all relative imports by cherry picking files from the keycloakify module.  
 // For example, the following import:  
-// import { headInsert } from "./tools/headInsert";
+// import { assert } from "./tools/assert";
 // becomes:  
-import { headInsert } from "keycloakify/lib/tools/headInsert";
 import { assert } from "keycloakify/lib/tools/assert";
 import { clsx } from "keycloakify/lib/tools/clsx";
-import { pathJoin } from "keycloakify/bin/tools/pathJoin";
 import type { TemplateProps } from "keycloakify/lib/KcProps";
+import { usePrepareTemplate } from "keycloakify/lib/Template";
 import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
 
@@ -25,72 +24,27 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         infoNode = null,
         kcContext,
         i18n,
-        doFetchDefaultThemeResources
+        doFetchDefaultThemeResources,
+        stylesCommon,
+        styles,
+        scripts,
+        kcHtmlClass
     } = props;
 
     const { msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag } = i18n;
 
     const { realm, locale, auth, url, message, isAppInitiatedAction } = kcContext;
 
-    const [isExtraCssLoaded, setExtraCssLoaded] = useReducer(() => true, false);
+    const { isReady } = usePrepareTemplate({
+        doFetchDefaultThemeResources,
+        stylesCommon,
+        styles,
+        scripts,
+        url,
+        kcHtmlClass
+    });
 
-    useEffect(() => {
-        if (!doFetchDefaultThemeResources) {
-            setExtraCssLoaded();
-            return;
-        }
-
-        let isUnmounted = false;
-        const cleanups: (() => void)[] = [];
-
-        const toArr = (x: string | readonly string[] | undefined) => (typeof x === "string" ? x.split(" ") : x ?? []);
-
-        Promise.all(
-            [
-                ...toArr(props.stylesCommon).map(relativePath => pathJoin(url.resourcesCommonPath, relativePath)),
-                ...toArr(props.styles).map(relativePath => pathJoin(url.resourcesPath, relativePath))
-            ]
-                .reverse()
-                .map(href =>
-                    headInsert({
-                        "type": "css",
-                        href,
-                        "position": "prepend"
-                    })
-                )
-        ).then(() => {
-            if (isUnmounted) {
-                return;
-            }
-
-            setExtraCssLoaded();
-        });
-
-        toArr(props.scripts).forEach(relativePath =>
-            headInsert({
-                "type": "javascript",
-                "src": pathJoin(url.resourcesPath, relativePath)
-            })
-        );
-
-        if (props.kcHtmlClass !== undefined) {
-            const htmlClassList = document.getElementsByTagName("html")[0].classList;
-
-            const tokens = clsx(props.kcHtmlClass).split(" ");
-
-            htmlClassList.add(...tokens);
-
-            cleanups.push(() => htmlClassList.remove(...tokens));
-        }
-
-        return () => {
-            isUnmounted = true;
-
-            cleanups.forEach(f => f());
-        };
-    }, [props.kcHtmlClass]);
-
-    if (!isExtraCssLoaded) {
+    if (!isReady) {
         return null;
     }
 
