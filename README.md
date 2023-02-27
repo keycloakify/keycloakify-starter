@@ -14,7 +14,7 @@ yarn
 yarn build-keycloak-theme # Build the theme one time (some assets will be copied to 
               # public/keycloak_static, they are needed to dev your page outside of Keycloak)
 yarn start # See the Hello World app
-# Uncomment line 15 of src/keycloakTheme/kcContext, reload https://localhost:3000
+# Uncomment line 15 of src/keycloak-theme/kcContext, reload https://localhost:3000
 # You can now develop your Login pages.
 
 # Think your theme is ready? Run
@@ -85,8 +85,8 @@ and remove unnecessary file.
 
 ```bash
 rm -r src/App
-mv src/keycloakTheme/* src/
-rm -r src/keycloakTheme
+mv src/keycloak-theme/* src/
+rm -r src/keycloak-theme
 
 cat << EOF > src/index.tsx
 import { createRoot } from "react-dom/client";
