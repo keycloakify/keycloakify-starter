@@ -50,7 +50,7 @@ If you want an example of an app that put that setup in production checkout onyx
 
 The CI creates two jars 
 - `keycloak-theme.jar`: Generated with `npx keycloakify --external-assets`, the assets, located `static/**/*`, like for example 
-  `static/js/main.<hash>.js` will be downloaded from `https://demo-app.keycloakify.dev/static/js/main.<hash>.js` (`demo-app.keycloakify.dev` is 
+  `static/js/main.<hash>.js` will be downloaded from `https://starter.keycloakify.dev/static/js/main.<hash>.js` (`starter.keycloakify.dev` is 
   specified in the `package.json`.
 - `standalone-keycloak-theme.jar`: Generated with `npx keycloakify`, this theme is fully standalone, all assets will be served by the 
   Keycloak server, for example `static/js/main.<hash>.js` will be downloaded from an url like `http://<your keycloak url>/resources/xxxx/login/keycloakify-starter/build/static/js/main.<hash>.js`.
