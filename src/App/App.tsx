@@ -19,7 +19,7 @@ const { OidcClientProvider } = createOidcClientProvider({
             //Instead of foo and bar you could have isDark for example or any other state that you wish to 
             //transfer from the main app to the login pages.
             .map(url => addFooToQueryParams({ url, value: { foo: 42 } }))
-            .map(url => addBarToQueryParams({ url, "value": "value of bar transferred to login page" }))
+            .map(url => addBarToQueryParams({ url, value: "value of bar transferred to login page" }))
         [0],
     // An event emitter that posts whenever the user interacts with the app
     // This is to tell if we should allow the token to expires.  

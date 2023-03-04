@@ -58,12 +58,12 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
 
     const isAuthenticated = await keycloakInstance
         .init({
-            "onLoad": "check-sso",
-            "silentCheckSsoRedirectUri": `${window.location.origin}/silent-sso.html`,
-            "responseMode": "query",
-            "checkLoginIframe": false,
-            "adapter": createKeycloakAdapter({
-                "transformUrlBeforeRedirect": url =>
+            onLoad: "check-sso",
+            silentCheckSsoRedirectUri: `${window.location.origin}/silent-sso.html`,
+            responseMode: "query",
+            checkLoginIframe: false,
+            adapter: createKeycloakAdapter({
+                transformUrlBeforeRedirect: url =>
                     [url].map(transformUrlBeforeRedirect).map(
                         url =>
                             addParamToUrl({
@@ -73,7 +73,7 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
                             }).newUrl
                     )[0],
                 keycloakInstance,
-                "getRedirectMethod": () => redirectMethod
+                getRedirectMethod: () => redirectMethod
             })
         })
         .catch((error: Error) => error);
