@@ -8,7 +8,7 @@ A starter/demo project for [Keycloakify](https://keycloakify.dev)
 
 This repo constitutes an easily reusable setup for a standalone Keycloak theme project OR for a SPA React App that generates a
 Keycloak theme that goes along with it.  
-If you are only looking to create a theme (an not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this](#standalone-keycloak-theme).
+If you are only looking to create a theme (and not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this](#standalone-keycloak-theme).
 
 # Quick start
 
