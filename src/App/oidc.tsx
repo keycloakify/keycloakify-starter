@@ -6,8 +6,8 @@ import type { ReturnType } from "tsafe/ReturnType";
 import type { Param0 } from "tsafe/Param0";
 import { assert } from "tsafe/assert";
 import { createKeycloakAdapter } from "keycloakify";
-import type { NonPostableEvt } from "evt";
 import jwt_decode from "jwt-decode";
+import { Evt } from "evt";
 
 export declare type OidcClient = OidcClient.LoggedIn | OidcClient.NotLoggedIn;
 
@@ -34,7 +34,6 @@ type Params = {
     realm: string;
     clientId: string;
     transformUrlBeforeRedirect: (url: string) => string;
-    evtUserActivity: NonPostableEvt<void>;
     getUiLocales: () => string;
     log?: typeof console.log;
 };
@@ -45,7 +44,6 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
         realm,
         clientId,
         transformUrlBeforeRedirect,
-        evtUserActivity,
         getUiLocales,
         log
     } = params;
@@ -135,7 +133,10 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
                 `OIDC access token will expire in ${minValiditySecond} seconds, waiting for user activity before renewing`
             );
 
-            await evtUserActivity.waitFor();
+            await Evt.merge([
+                Evt.from(document, "mousemove"),
+                Evt.from(document, "keydown")
+            ]).waitFor();
 
             log?.("User activity detected. Refreshing access token now");
 

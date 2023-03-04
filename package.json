@@ -23,7 +23,7 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "evt": "^2.4.1",
+        "evt": "^2.4.13",
         "jwt-decode": "^3.1.2",
         "keycloak-js": "^21.0.1",
         "keycloakify": "^6.12.1",

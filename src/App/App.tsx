@@ -3,16 +3,15 @@ import logo from "./logo.svg";
 import myimg from "./myimg.png";
 import { createOidcClientProvider, useOidcClient } from "./oidc";
 import { addFooToQueryParams, addBarToQueryParams } from "../keycloak-theme/valuesTransferredOverUrl";
-import { Evt } from "evt";
-import { id } from "tsafe/id";
 import jwt_decode from "jwt-decode";
 
 const { OidcClientProvider } = createOidcClientProvider({
     url: "https://auth.code.gouv.fr/auth",
     realm: "keycloakify",
     clientId: "starter",
-    log: console.log,
-    //The login pages will be in english.
+    //This function will be called just before redirecting, 
+    //it should return the current langue. 
+    //kcContext.locale.currentLanguageTag will be what this function returned just before redirecting.  
     getUiLocales: () => "en",
     transformUrlBeforeRedirect: url =>
         [url]
@@ -21,13 +20,7 @@ const { OidcClientProvider } = createOidcClientProvider({
             .map(url => addFooToQueryParams({ url, value: { foo: 42 } }))
             .map(url => addBarToQueryParams({ url, value: "value of bar transferred to login page" }))
         [0],
-    // An event emitter that posts whenever the user interacts with the app
-    // This is to tell if we should allow the token to expires.  
-    evtUserActivity:
-        Evt.merge([
-            Evt.from(document, "mousemove"),
-            Evt.from(document, "keydown")
-        ]).pipe(() => [id<void>(undefined)]),
+    log: console.log
 });
 
 export default function App() {
@@ -49,7 +42,7 @@ function ContextualizedApp() {
             {
                 oidcClient.isUserLoggedIn ?
                     <>
-                        <h1>You are authenticated</h1>
+                        <h1>You are authenticated !</h1>
                         <pre>{JSON.stringify(jwt_decode(oidcClient.accessToken))}</pre>
                         <button onClick={() => oidcClient.logout({ redirectTo: "home" })}>Logout</button>
                     </>
