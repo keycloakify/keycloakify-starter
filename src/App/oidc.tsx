@@ -15,7 +15,8 @@ export declare namespace OidcClient {
     export type NotLoggedIn = {
         isUserLoggedIn: false;
         login: (params: {
-            //To prevent infinite loop if the user click login then cancel.
+            //To prevent infinite loop if the user access a page that requires to
+            //be authenticated but cancel (clicks back). 
             doesCurrentHrefRequiresAuth: boolean;
         }) => Promise<never>;
     };
