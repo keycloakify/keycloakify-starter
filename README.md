@@ -74,7 +74,7 @@ docker run -it -dp 8083:80 codegouvfr/keycloakify-starter:test
 
 If you are only looking to create a keycloak theme, you can run theses few commands
 after clicking ![image](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) to refactor the template 
-and remove unnecessary files.
+and remove unnecessary files.  
 
 ```bash
 rm -r src/App
@@ -181,3 +181,5 @@ jobs:
         GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
 EOF
 ```
+
+You can also remove `jwt-decode`, `keycloak-js` and `tsafe from your dependencies.  
