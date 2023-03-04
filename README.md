@@ -18,7 +18,7 @@ yarn build-keycloak-theme # Build the theme one time (some assets will be copied
               # public/keycloak_static, they are needed to dev your page outside of Keycloak)
 yarn start # See the Hello World app
 # Uncomment line 15 of src/keycloak-theme/kcContext, reload https://localhost:3000
-# You can now develop your Login pages.
+# You can now develop your Login pages. (Don't forget to comment it back when you're done)
 
 # Think your theme is ready? Run
 yarn build-keycloak-theme
