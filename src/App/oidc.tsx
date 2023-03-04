@@ -194,8 +194,6 @@ export function createOidcClientProvider(params: Params) {
 
     }
 
-
-
     return { OidcClientProvider };
 
 }
