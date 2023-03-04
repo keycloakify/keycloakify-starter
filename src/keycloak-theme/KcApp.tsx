@@ -35,6 +35,12 @@ export default function App(props: { kcContext: KcContext; }) {
     if (i18n === null) {
         return null;
     }
+    
+    /* 
+    * Examples assuming i18n.currentLanguageTag === "en":
+    * i18n.msg("access-denied") === <span>Access denied</span>
+    * i18n.msg("foo") === <span>foo in English</span>
+    */
 
     const pageProps: Omit<PageProps<any, typeof i18n>, "kcContext"> = {
         i18n,
