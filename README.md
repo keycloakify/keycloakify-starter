@@ -30,7 +30,10 @@ yarn build-keycloak-theme
 
 -   You need to manually allow GitHub Action to push on your REPO.  For this reason the initial setup will fail.  You need to enabled permission and re-run failed job: [see video](https://user-images.githubusercontent.com/6702424/213480604-0aac0ea7-487f-491d-94ae-df245b2c7ee8.mov).  
 -   This CI is configured to both publish on [GitHub Pages](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L51-L76) and on [DockerHub](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L78-L123). In practice you probably want one
-    or the other but not both... or none if you are just building a theme (and not a theme + an app).  
+    or the other but not both... or neither if you are just building a theme (and not a theme + an app).  
+    To enables the CI to publish on DockerHub on your behalf go to repository `Settings` tab, then `Secrets` you will need to add two new secrets:
+    `DOCKERHUB_TOKEN`, you Dockerhub authorization token.  
+    `DOCKERHUB_USERNAME`, Your Dockerhub username.
     We deploy the demo app at [starter.keycloakify.dev](https://starter.keycloakify.dev) using GitHub page on the branch `gh-pages` (you have to enable it).  
     To configure your own domain name please refer to [this documentation](https://docs.gitlanding.dev/using-a-custom-domain-name).
 -   To release **don't create a tag manually**, the CI do it for you. Just update the `package.json`'s version field and push.
@@ -66,14 +69,6 @@ yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.c
 
 docker run -it -dp 8083:80 codegouvfr/keycloakify-starter:test
 ```
-
-## DockerHub credentials
-
-To enables the CI to publish on DockerHub on your behalf go to
-repository `Settings` tab, then `Secrets` you will need to add two new secrets:
-
--   `DOCKERHUB_TOKEN`, you Dockerhub authorization token.
--   `DOCKERHUB_USERNAME`, Your Dockerhub username.
 
 # Standalone keycloak theme
 
