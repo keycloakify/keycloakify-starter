@@ -4,8 +4,11 @@
 
 A starter/demo project for [Keycloakify](https://keycloakify.dev)
 
-> NOTE: If you are only looking to create a theme and don't care about integrating it into an React app there
-> are a lot of things that you can remove from this starter. [Please read this](#standalone-keycloak-theme).
+# Introduction
+
+This repo constitutes an easily reusable setup for a standalone Keycloak theme project OR for a SPA React App that generates a
+Keycloak theme that goes along with it.  
+If you are only looking to create a theme (an not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this](#standalone-keycloak-theme).
 
 # Quick start
 
@@ -15,7 +18,7 @@ yarn build-keycloak-theme # Build the theme one time (some assets will be copied
               # public/keycloak_static, they are needed to dev your page outside of Keycloak)
 yarn start # See the Hello World app
 # Uncomment line 15 of src/keycloak-theme/kcContext, reload https://localhost:3000
-# You can now develop your Login pages.
+# You can now develop your Login pages. (Don't forget to comment it back when you're done)
 
 # Think your theme is ready? Run
 yarn build-keycloak-theme
@@ -23,16 +26,14 @@ yarn build-keycloak-theme
 # your theme on a real Keycloak instance.
 ```
 
-# Introduction
-
-This repo constitutes an easily reusable CI setup for SPA React App that generates Keycloaks's theme
-using [keycloakify](https://github.com/InseeFrLab/keycloakify).
-
 # The CI workflow
 
 -   You need to manually allow GitHub Action to push on your REPO.  For this reason the initial setup will fail.  You need to enabled permission and re-run failed job: [see video](https://user-images.githubusercontent.com/6702424/213480604-0aac0ea7-487f-491d-94ae-df245b2c7ee8.mov).  
--   This CI is configured to both publish on [GitHub Pages](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L51-L76) and on [DockerHub](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L78-L123). In practice you probably want one
-    or the other but not both.  
+-   This CI is configured to both publish on [GitHub Pages](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L51-L76) and on [DockerHub](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L78-L123) (An Ngnix based image). In practice you probably want one
+    or the other but not both... or neither if you are just building a theme (and not a theme + an app).  
+    To enables the CI to publish on DockerHub on your behalf go to repository `Settings` tab, then `Secrets` you will need to add two new secrets:
+    `DOCKERHUB_TOKEN`, you Dockerhub authorization token.  
+    `DOCKERHUB_USERNAME`, Your Dockerhub username.
     We deploy the demo app at [starter.keycloakify.dev](https://starter.keycloakify.dev) using GitHub page on the branch `gh-pages` (you have to enable it).  
     To configure your own domain name please refer to [this documentation](https://docs.gitlanding.dev/using-a-custom-domain-name).
 -   To release **don't create a tag manually**, the CI do it for you. Just update the `package.json`'s version field and push.
@@ -52,7 +53,7 @@ If you want an example of an app that put that setup in production checkout onyx
 
 The CI creates two jars 
 - `keycloak-theme.jar`: Generated with `npx keycloakify --external-assets`, the assets, located `static/**/*`, like for example 
-  `static/js/main.<hash>.js` will be downloaded from `https://demo-app.keycloakify.dev/static/js/main.<hash>.js` (`demo-app.keycloakify.dev` is 
+  `static/js/main.<hash>.js` will be downloaded from `https://starter.keycloakify.dev/static/js/main.<hash>.js` (`starter.keycloakify.dev` is 
   specified in the `package.json`.
 - `standalone-keycloak-theme.jar`: Generated with `npx keycloakify`, this theme is fully standalone, all assets will be served by the 
   Keycloak server, for example `static/js/main.<hash>.js` will be downloaded from an url like `http://<your keycloak url>/resources/xxxx/login/keycloakify-starter/build/static/js/main.<hash>.js`.
@@ -68,14 +69,6 @@ yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.c
 
 docker run -it -dp 8083:80 codegouvfr/keycloakify-starter:test
 ```
-
-## DockerHub credentials
-
-To enables the CI to publish on DockerHub on your behalf go to
-repository `Settings` tab, then `Secrets` you will need to add two new secrets:
-
--   `DOCKERHUB_TOKEN`, you Dockerhub authorization token.
--   `DOCKERHUB_USERNAME`, Your Dockerhub username.
 
 # Standalone keycloak theme
 

@@ -34,10 +34,16 @@ export default function App(props: { kcContext: KcContext; }) {
 
     const i18n = useI18n({ kcContext });
 
-    //NOTE: Locales not yet downloaded
     if (i18n === null) {
+        //NOTE: Locales not yet downloaded, we could as well display a loading progress but it's usually a matter of milliseconds.
         return null;
     }
+    
+    /* 
+    * Examples assuming i18n.currentLanguageTag === "en":
+    * i18n.msg("access-denied") === <span>Access denied</span>
+    * i18n.msg("foo") === <span>foo in English</span>
+    */
 
     const pageProps: Omit<PageProps<any, typeof i18n>, "kcContext"> = {
         i18n,
