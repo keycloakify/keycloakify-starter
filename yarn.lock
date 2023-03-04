@@ -4323,6 +4323,15 @@ evt@^2.4.13:
     run-exclusive "^2.2.18"
     tsafe "^1.4.1"
 
+evt@^2.4.15:
+  version "2.4.15"
+  resolved "https://registry.yarnpkg.com/evt/-/evt-2.4.15.tgz#bf673dd2b409067fcdc182becd8e7dbed13692e1"
+  integrity sha512-jlDDDWdoDg2wIZa9m08HVelHzEAlZLpLbDcWMqlc6nqKHG1Z3ZqC7teDoNH3upClx3SKwJTC0H7RIMfxe7zX2g==
+  dependencies:
+    minimal-polyfills "^2.2.2"
+    run-exclusive "^2.2.18"
+    tsafe "^1.4.3"
+
 execa@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/execa/-/execa-5.1.1.tgz#f80ad9cbf4298f7bd1d4c9555c21e93741c411dd"
@@ -6003,10 +6012,10 @@ keycloak-js@^21.0.1:
     base64-js "^1.5.1"
     js-sha256 "^0.9.0"
 
-keycloakify@^6.12.1:
-  version "6.12.1"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.12.1.tgz#50b5a0d75dc0d31d8dddcba9b695a5afdb9a6a9e"
-  integrity sha512-4V2Na15ubff9bDxVMHxO4BuB9UqX5cslT24/FlgBGcdfJlER5UUo+EpWK4OPdpsRbv1rEU1DfgAX6ptiqaD3NQ==
+keycloakify@^6.12.4:
+  version "6.12.4"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.12.4.tgz#96aa3cab5e3f76e550f20e9b4de7e6b425df79ad"
+  integrity sha512-Po3GfnAsAUVVEzIuNiVi/Wz2Jxb4VCLHre8FheLAZilt0MFZ6h2NJ5EK7oaCb6I5pe4Ip4LsxnrM2DP2/kqcaQ==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"
