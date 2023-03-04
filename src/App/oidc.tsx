@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, useEffect } from "react";
-import keycloak_js from "keycloak-js";
+import Keycloak_js from "keycloak-js";
 import { id } from "tsafe/id";
 import { addParamToUrl } from "powerhooks/tools/urlSearchParams";
 import type { ReturnType } from "tsafe/ReturnType";
@@ -22,10 +22,12 @@ export declare namespace OidcClient {
 
     export type LoggedIn = {
         isUserLoggedIn: true;
-        //NOTE: It changes when renewed, don't store it.
-        accessToken: string;
+        getAccessToken: ()=> string;
         logout: (params: { redirectTo: "home" | "current page" }) => Promise<never>;
-        updateTokenInfo: () => Promise<void>;
+        //If we have sent a API request to change user's email for example
+        //and we want that jwt_decode(oidcClient.getAccessToken()).email be the new email
+        //in this case we would call this method...
+        updateTokenInfos: () => Promise<void>;
     };
 }
 
@@ -48,7 +50,7 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
         log
     } = params;
 
-    const keycloakInstance = keycloak_js({ url, realm, clientId });
+    const keycloakInstance = new Keycloak_js({ url, realm, clientId });
 
     let redirectMethod: ReturnType<
         Param0<typeof createKeycloakAdapter>["getRedirectMethod"]
@@ -100,9 +102,11 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
         });
     }
 
+    let currentAccessToken= keycloakInstance.token!;
+
     const oidcClient = id<OidcClient.LoggedIn>({
         "isUserLoggedIn": true,
-        "accessToken": keycloakInstance.token!,
+        "getAccessToken": ()=> currentAccessToken,
         "logout": async ({ redirectTo }) => {
             await keycloakInstance.logout({
                 "redirectUri": (() => {
@@ -117,21 +121,19 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
 
             return new Promise<never>(() => { });
         },
-        "updateTokenInfo": async () => {
+        "updateTokenInfos": async () => {
             await keycloakInstance.updateToken(-1);
 
-            oidcClient.accessToken = keycloakInstance.token!;
+            currentAccessToken = keycloakInstance.token!;
         }
     });
 
     (function callee() {
-        const msBeforeExpiration =
-            jwt_decode<{ exp: number }>(oidcClient.accessToken)["exp"] * 1000 - Date.now();
+        const msBeforeExpiration = jwt_decode<{ exp: number }>(currentAccessToken)["exp"] * 1000 - Date.now();
 
         setTimeout(async () => {
-            log?.(
-                `OIDC access token will expire in ${minValiditySecond} seconds, waiting for user activity before renewing`
-            );
+
+            log?.(`OIDC access token will expire in ${minValiditySecond} seconds, waiting for user activity before renewing`);
 
             await Evt.merge([
                 Evt.from(document, "mousemove"),
@@ -151,9 +153,10 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
                 await login({ "doesCurrentHrefRequiresAuth": true });
             }
 
-            oidcClient.accessToken = keycloakInstance.token!;
+            currentAccessToken = keycloakInstance.token!;
 
             callee();
+            
         }, msBeforeExpiration - minValiditySecond * 1000);
     })();
 
@@ -161,7 +164,6 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
 }
 
 const minValiditySecond = 25;
-
 
 const oidcClientContext = createContext<OidcClient | undefined>(undefined);
 

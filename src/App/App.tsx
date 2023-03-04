@@ -43,7 +43,7 @@ function ContextualizedApp() {
                 oidcClient.isUserLoggedIn ?
                     <>
                         <h1>You are authenticated !</h1>
-                        <pre style={{ textAlign: "left" }}>{JSON.stringify(jwt_decode(oidcClient.accessToken), null, 2)}</pre>
+                        <pre style={{ textAlign: "left" }}>{JSON.stringify(jwt_decode(oidcClient.getAccessToken()), null, 2)}</pre>
                         <button onClick={() => oidcClient.logout({ redirectTo: "home" })}>Logout</button>
                     </>
                     :
