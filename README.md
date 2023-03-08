@@ -8,7 +8,7 @@ A starter/demo project for [Keycloakify](https://keycloakify.dev)
 
 This repo constitutes an easily reusable setup for a standalone Keycloak theme project OR for a SPA React App that generates a
 Keycloak theme that goes along with it.  
-If you are only looking to create a theme (an not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this](#standalone-keycloak-theme).
+If you are only looking to create a theme (and not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
 
 # Quick start
 
@@ -74,7 +74,7 @@ docker run -it -dp 8083:80 codegouvfr/keycloakify-starter:test
 
 If you are only looking to create a keycloak theme, you can run theses few commands
 after clicking ![image](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) to refactor the template 
-and remove unnecessary file.
+and remove unnecessary files.  
 
 ```bash
 rm -r src/App
@@ -181,3 +181,5 @@ jobs:
         GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
 EOF
 ```
+
+You can also remove `jwt-decode`, `keycloak-js` and `tsafe from your dependencies.  
