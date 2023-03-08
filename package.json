@@ -1,7 +1,7 @@
 {
     "name": "keycloakify-starter",
     "homepage": "https://starter.keycloakify.dev",
-    "version": "3.0.0",
+    "version": "3.1.0",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
@@ -26,7 +26,7 @@
         "evt": "^2.4.15",
         "jwt-decode": "^3.1.2",
         "keycloak-js": "^21.0.1",
-        "keycloakify": "^6.12.4",
+        "keycloakify": "^6.12.7",
         "powerhooks": "^0.26.2",
         "react": "18.1.0",
         "react-dom": "18.1.0",

@@ -12,6 +12,7 @@ console.log(`Values passed by the main app in the URL parameter:`, { foo, bar })
 const Login = lazy(()=> import("./pages/Login"));
 // If you can, favor register-user-profile.ftl over register.ftl, see: https://docs.keycloakify.dev/realtime-input-validation
 const Register = lazy(() => import("./pages/Register"));
+const RegisterUserProfile = lazy(() => import("./pages/RegisterUserProfile"));
 const Terms = lazy(() => import("./pages/Terms"));
 const MyExtraPage1 = lazy(() => import("./pages/MyExtraPage1"));
 const MyExtraPage2 = lazy(() => import("./pages/MyExtraPage2"));
@@ -61,6 +62,7 @@ export default function App(props: { kcContext: KcContext; }) {
                 switch (kcContext.pageId) {
                     case "login.ftl": return <Login {...{ kcContext, ...pageProps }} />;
                     case "register.ftl": return <Register {...{ kcContext, ...pageProps }} />;
+                    case "register-user-profile.ftl": return <RegisterUserProfile {...{ kcContext, ...pageProps }} />
                     case "terms.ftl": return <Terms {...{ kcContext, ...pageProps }} />;
                     case "my-extra-page-1.ftl": return <MyExtraPage1 {...{ kcContext, ...pageProps }} />;
                     case "my-extra-page-2.ftl": return <MyExtraPage2 {...{ kcContext, ...pageProps }} />;
