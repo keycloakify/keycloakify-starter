@@ -5,9 +5,10 @@ import { useI18n } from "./i18n";
 import Fallback, { defaultKcProps, type KcProps, type PageProps } from "keycloakify";
 import Template from "./Template";
 import DefaultTemplate from "keycloakify/lib/Template";
-import { foo, bar } from "./valuesTransferredOverUrl";
 
-console.log(`Values passed by the main app in the URL parameter:`, { foo, bar });
+// You can uncomment this to see the values passed by the main app before redirecting.  
+//import { foo, bar } from "./valuesTransferredOverUrl";
+//console.log(`Values passed by the main app in the URL parameter:`, { foo, bar });
 
 const Login = lazy(()=> import("./pages/Login"));
 // If you can, favor register-user-profile.ftl over register.ftl, see: https://docs.keycloakify.dev/realtime-input-validation
