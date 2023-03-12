@@ -11,7 +11,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "build-keycloak-theme": "yarn build && keycloakify",
-        "download-builtin-keycloak-theme": "download-builtin-keycloak-theme 15.0.2"
+        "download-builtin-keycloak-theme": "download-builtin-keycloak-theme 15.0.2",
+        "storybook": "start-storybook -p 6006 -s public",
+        "build-storybook": "build-storybook -s public",
     },
     "keycloakify": {
         "extraPages": [
@@ -33,6 +35,16 @@
         "tsafe": "^1.4.3"
     },
     "devDependencies": {
+        "@storybook/addon-actions": "^6.5.16",
+        "@storybook/addon-essentials": "^6.5.16",
+        "@storybook/addon-interactions": "^6.5.16",
+        "@storybook/addon-links": "^6.5.16",
+        "@storybook/builder-webpack5": "^6.5.16",
+        "@storybook/manager-webpack5": "^6.5.16",
+        "@storybook/node-logger": "^6.5.16",
+        "@storybook/preset-create-react-app": "^4.1.2",
+        "@storybook/react": "^6.5.16",
+        "@storybook/testing-library": "^0.0.13",
         "@types/node": "^15.3.1",
         "@types/react": "18.0.9",
         "@types/react-dom": "18.0.4",
@@ -48,7 +60,17 @@
             "react-hooks/exhaustive-deps": "off",
             "@typescript-eslint/no-redeclare": "off",
             "no-labels": "off"
-        }
+        },
+        "overrides": [
+            {
+                "files": [
+                    "**/*.stories.*"
+                ],
+                "rules": {
+                    "import/no-anonymous-default-export": "off"
+                }
+            }
+        ]
     },
     "browserslist": {
         "production": [
