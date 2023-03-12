@@ -1,27 +1,15 @@
 import { KcContextBase, getKcContext } from "keycloakify/lib/getKcContext";
 import type { DeepPartial } from "keycloakify/lib/tools/DeepPartial";
 import type { ExtendsKcContextBase } from "keycloakify/lib/getKcContext/getKcContextFromWindow";
+import type { KcContextExtension } from "keycloak-theme/kcContext";
 
-type KcContextExt =
-    | { pageId: "my-extra-page-1.ftl"; }
-    | { pageId: "my-extra-page-2.ftl"; someCustomValue: string; }
-    // NOTE: register.ftl is deprecated in favor of register-user-profile.ftl
-    // but let's say we use it anyway and have this plugin enabled: https://github.com/micedre/keycloak-mail-whitelisting
-    // keycloak-mail-whitelisting define the non standard ftl global authorizedMailDomains, we declare it here.
-    | { pageId: "register.ftl"; authorizedMailDomains: string[]; }
 
 export const useKcStoryData = (mockData: (
-    { pageId: KcContextBase['pageId'] | KcContextExt['pageId'] } & DeepPartial<ExtendsKcContextBase<KcContextExt>>
+    { pageId: KcContextBase['pageId'] | KcContextExtension['pageId'] } & DeepPartial<ExtendsKcContextBase<KcContextExtension>>
 )) => {
-
-    const { kcContext } = getKcContext<KcContextExt>({
-        mockPageId: mockData.pageId,
-        mockData: [mockData]
-    })
-    if (!kcContext) throw new Error("no kcContext")
-    return { kcContext }
+    const { kcContext } = getKcContext<KcContextExtension>({ mockPageId: mockData.pageId, mockData: [mockData] })
+    return { kcContext: kcContext as NonNullable<typeof kcContext> }
 }
-
 
 export const socialProviders = [
     { loginUrl: 'google', alias: 'google', providerId: 'google', displayName: 'Google' },
