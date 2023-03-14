@@ -46,7 +46,7 @@ jobs:
       - run: yarn build-storybook
       - uses: actions/upload-artifact@v2
         with:
-          name: standalone_keycloak_theme
+          name: storybook
           path: storybook-static
 
   check_if_version_upgraded:
