@@ -34,6 +34,21 @@ jobs:
         name: build
         path: build
 
+  build_storybook:
+    runs-on: windows-latest
+    if: github.event.head_commit.author.name != 'actions'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.3
+        with:
+          node-version: '16'
+      - uses: bahmutov/npm-install@v1
+      - run: yarn build-storybook
+      - uses: actions/upload-artifact@v2
+        with:
+          name: standalone_keycloak_theme
+          path: storybook-static
+
   check_if_version_upgraded:
     name: Check if version upgrade
     runs-on: ubuntu-latest
@@ -53,7 +68,7 @@ jobs:
     needs: 
       - check_if_version_upgraded
       - build
-    # We publish the the docker image only if it's a push on the default branch or if it's a PR from a 
+    # We publish the docker image only if it's a push on the default branch or if it's a PR from a
     # branch (meaning not a PR from a fork). It would be more straightforward to test if secrets.DOCKERHUB_TOKEN is 
     # defined but GitHub Action don't allow it.
     if: |
@@ -80,7 +95,7 @@ jobs:
       - check_if_version_upgraded
       - build
     runs-on: ubuntu-latest
-    # We publish the the docker image only if it's a push on the default branch or if it's a PR from a 
+    # We publish the docker image only if it's a push on the default branch or if it's a PR from a
     # branch (meaning not a PR from a fork). It would be more straightforward to test if secrets.DOCKERHUB_TOKEN is 
     # defined but GitHub Action don't allow it.
     if: |
