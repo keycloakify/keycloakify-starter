@@ -4,15 +4,14 @@ import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/My Extra Page 2',
+    title: 'Theme/Pages/Login/Confirm IDP Link',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',
     },
 } as ComponentMeta<typeof KcApp>;
 
-const bind = template('my-extra-page-2.ftl')
+const bind = template('login-idp-link-confirm.ftl');
 
 export const Default = bind({})
 
-export const WithCustomValue = bind({someCustomValue: 'Foo Bar Baz'})

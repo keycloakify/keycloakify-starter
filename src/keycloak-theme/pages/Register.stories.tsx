@@ -1,69 +1,54 @@
-import { ComponentMeta } from '@storybook/react';
+import {ComponentMeta} from '@storybook/react';
 import KcApp from '../KcApp';
-
-import { useKcStoryData, socialProviders } from '../../../.storybook/data'
+import {template} from '../../../.storybook/util'
 
 export default {
-  title: 'Register',
-  component: KcApp,
-  parameters: {
-    layout: 'fullscreen',
-  },
+    kind: 'Page',
+    title: 'Theme/Pages/Register',
+    component: KcApp,
+    parameters: {
+        layout: 'fullscreen',
+    },
 } as ComponentMeta<typeof KcApp>;
 
-const pageId = 'register.ftl'
+const bind = template('register.ftl')
 
-export const Default = () => {
-  const { kcContext } = useKcStoryData({ pageId, message: undefined })
-  return <KcApp kcContext={kcContext} />
-}
+export const Default = bind({})
 
-export const InFrench = () => {
-  const { kcContext } = useKcStoryData({ pageId, message: undefined, locale: { currentLanguageTag: 'fr' } })
-  return <KcApp kcContext={kcContext} />
-}
+export const WithFieldError = bind({
+    register: {
+        formData: {
+            email: 'max.mustermann@mail.com'
+        }
+    },
+    messagesPerField: {
+        existsError: (fieldName: string) => fieldName === "email",
+        exists: (fieldName: string) => fieldName === "email",
+        get: (fieldName: string) => fieldName === "email" ? "I don't like your email address" : undefined,
+        printIfExists: <T, >(fieldName: string, x: T) => fieldName === "email" ? x : undefined,
+    }
+})
 
-export const WithError = () => {
-  const { kcContext } = useKcStoryData({ pageId, message: { type: "error", summary: "This is an error" } })
-  return <KcApp kcContext={kcContext} />
-}
+export const WithEmailAsUsername = bind({
+    realm: {registrationEmailAsUsername: true}
+})
 
-export const EmailIsUsername = () => {
-  const { kcContext } = useKcStoryData({
-    pageId, message: undefined,
-    realm: { registrationEmailAsUsername: true }
-  })
-  return <KcApp kcContext={kcContext} />
-}
+export const WithoutPassword = bind({
+    passwordRequired: false
+})
 
-export const NoPassword = () => {
-  const { kcContext } = useKcStoryData({
-    pageId, message: undefined, passwordRequired: false
-  })
-  return <KcApp kcContext={kcContext} />
-}
-
-export const WithRecaptcha = () => {
-  const { kcContext } = useKcStoryData({
-    pageId, message: undefined,
+export const WithRecaptcha = bind({
     recaptchaRequired: true,
     recaptchaSiteKey: 'foobar'
-  })
-  return <KcApp kcContext={kcContext} />
-}
+})
 
-export const WithPresets = () => {
-  const { kcContext } = useKcStoryData({
-    pageId, message: undefined,
+export const WithPresets = bind({
     register: {
-      formData: {
-        firstName: 'Max',
-        lastName: 'Mustermann',
-        email: 'max.mustermann@mail.com',
-        username: 'max.mustermann'
-      }
+        formData: {
+            firstName: 'Max',
+            lastName: 'Mustermann',
+            email: 'max.mustermann@mail.com',
+            username: 'max.mustermann'
+        }
     }
-  })
-  return <KcApp kcContext={kcContext} />
-
-}
+})

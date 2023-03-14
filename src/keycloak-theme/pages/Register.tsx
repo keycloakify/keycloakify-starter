@@ -54,6 +54,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                                 name="lastName"
                                 defaultValue={register.formData.lastName ?? ""}
                             />
+
                         </div>
                     </div>
 
