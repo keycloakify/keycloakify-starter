@@ -13,7 +13,7 @@
         "build-keycloak-theme": "yarn build && keycloakify",
         "download-builtin-keycloak-theme": "download-builtin-keycloak-theme 15.0.2",
         "storybook": "start-storybook -p 6006 -s public",
-        "build-storybook": "build-storybook -s public",
+        "build-storybook": "build-storybook -s public"
     },
     "keycloakify": {
         "extraPages": [
