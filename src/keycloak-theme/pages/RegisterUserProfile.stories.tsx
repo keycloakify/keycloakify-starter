@@ -6,7 +6,7 @@ const bind = template('register-user-profile.ftl')
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Register User Profile',
+    title: 'Theme/Pages/Register/Modern',
     component: KcApp,
     parameters: {layout: 'fullscreen'},
 } as ComponentMeta<typeof KcApp>;

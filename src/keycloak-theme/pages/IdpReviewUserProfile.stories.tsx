@@ -4,7 +4,7 @@ import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Login/Review IDP User Profile',
+    title: 'Theme/Pages/IDP/Review User Profile',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',

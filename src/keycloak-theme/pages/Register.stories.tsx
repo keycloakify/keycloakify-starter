@@ -4,7 +4,7 @@ import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Register',
+    title: 'Theme/Pages/Register/Legacy',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',

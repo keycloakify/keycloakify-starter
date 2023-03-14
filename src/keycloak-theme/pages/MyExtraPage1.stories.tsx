@@ -4,7 +4,7 @@ import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/My Extra Page 1',
+    title: 'Theme/Pages/Custom/My Extra Page 1',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',

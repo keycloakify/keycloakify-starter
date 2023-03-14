@@ -1,10 +1,10 @@
 import {ComponentMeta} from '@storybook/react';
 import KcApp from '../KcApp';
-import {socialProviders, template} from '../../../.storybook/util'
+import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Login/Login OTP',
+    title: 'Theme/Pages/Login/OTP',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',

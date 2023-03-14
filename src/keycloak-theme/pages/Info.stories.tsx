@@ -4,7 +4,7 @@ import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Info',
+    title: 'Theme/Pages/Notification/Info',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',

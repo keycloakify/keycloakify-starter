@@ -4,7 +4,7 @@ import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Login/Confirm IDP Email',
+    title: 'Theme/Pages/IDP/Confirm Email',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',

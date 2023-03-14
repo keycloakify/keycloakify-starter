@@ -4,7 +4,7 @@ import {template} from '../../../.storybook/util'
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Login/Password Update',
+    title: 'Theme/Pages/Actions/Update Password',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',

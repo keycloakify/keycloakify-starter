@@ -6,7 +6,7 @@ const bind = template('error.ftl');
 
 export default {
     kind: 'Page',
-    title: 'Theme/Pages/Error',
+    title: 'Theme/Pages/Notification/Error',
     component: KcApp,
     parameters: {
         layout: 'fullscreen',
