@@ -1,5 +1,5 @@
-// This is a copy paste from https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/pages/Login.tsx
 import { useState, type FormEventHandler } from "react";
+// This is a copy paste from https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/pages/Login.tsx
 // You can replace all relative imports by cherry picking files from the keycloakify module.  
 // For example, the following import:  
 // import { clsx } from "./tools/clsx";
