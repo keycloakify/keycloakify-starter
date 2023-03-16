@@ -78,6 +78,7 @@ and remove unnecessary files.
 
 ```bash
 rm -r src/App
+rm src/keycloak-theme/valuesTransferredOverUrl.ts
 mv src/keycloak-theme/* src/
 rm -r src/keycloak-theme
 
