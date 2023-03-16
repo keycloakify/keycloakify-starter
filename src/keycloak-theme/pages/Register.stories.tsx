@@ -1,6 +1,8 @@
-import {ComponentMeta} from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import KcApp from '../KcApp';
-import {template} from '../../../.storybook/util'
+import { template } from '../../../.storybook/util'
+
+const bind = template('register.ftl')
 
 export default {
     kind: 'Page',
@@ -10,8 +12,6 @@ export default {
         layout: 'fullscreen',
     },
 } as ComponentMeta<typeof KcApp>;
-
-const bind = template('register.ftl')
 
 export const Default = bind({})
 
@@ -25,12 +25,12 @@ export const WithFieldError = bind({
         existsError: (fieldName: string) => fieldName === "email",
         exists: (fieldName: string) => fieldName === "email",
         get: (fieldName: string) => fieldName === "email" ? "I don't like your email address" : undefined,
-        printIfExists: <T, >(fieldName: string, x: T) => fieldName === "email" ? x : undefined,
+        printIfExists: <T,>(fieldName: string, x: T) => fieldName === "email" ? x : undefined,
     }
 })
 
 export const WithEmailAsUsername = bind({
-    realm: {registrationEmailAsUsername: true}
+    realm: { registrationEmailAsUsername: true }
 })
 
 export const WithoutPassword = bind({

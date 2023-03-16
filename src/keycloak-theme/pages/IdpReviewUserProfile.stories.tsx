@@ -1,6 +1,8 @@
-import {ComponentMeta} from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import KcApp from '../KcApp';
-import {template} from '../../../.storybook/util'
+import { template } from '../../../.storybook/util'
+
+const bind = template('idp-review-user-profile.ftl');
 
 export default {
     kind: 'Page',
@@ -10,8 +12,6 @@ export default {
         layout: 'fullscreen',
     },
 } as ComponentMeta<typeof KcApp>;
-
-const bind = template('idp-review-user-profile.ftl');
 
 export const Default = bind({})
 

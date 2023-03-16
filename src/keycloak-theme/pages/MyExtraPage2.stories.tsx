@@ -1,6 +1,8 @@
-import {ComponentMeta} from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import KcApp from '../KcApp';
-import {template} from '../../../.storybook/util'
+import { template } from '../../../.storybook/util'
+
+const bind = template('my-extra-page-2.ftl')
 
 export default {
     kind: 'Page',
@@ -11,8 +13,6 @@ export default {
     },
 } as ComponentMeta<typeof KcApp>;
 
-const bind = template('my-extra-page-2.ftl')
-
 export const Default = bind({})
 
-export const WithCustomValue = bind({someCustomValue: 'Foo Bar Baz'})
+export const WithCustomValue = bind({ someCustomValue: 'Foo Bar Baz' })

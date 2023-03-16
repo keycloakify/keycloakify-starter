@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { clsx } from "keycloakify/lib/tools/clsx";
-import { UserProfileFormFields } from "./shared/UserProfileCommons";
+import { UserProfileFormFields } from "keycloakify/lib/pages/shared/UserProfileCommons";
 import type { PageProps } from "keycloakify";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";

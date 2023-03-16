@@ -1,8 +1,9 @@
-import {ComponentMeta} from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import KcApp from '../KcApp';
-import {template} from '../../../.storybook/util'
+import { template } from '../../../.storybook/util'
 
 const bind = template('terms.ftl');
+
 export default {
     kind: 'Page',
     title: 'Theme/Pages/Actions/Terms',

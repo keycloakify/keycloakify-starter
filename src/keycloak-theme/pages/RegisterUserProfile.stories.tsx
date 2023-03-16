@@ -1,6 +1,6 @@
-import {ComponentMeta} from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import KcApp from '../KcApp';
-import {template} from '../../../.storybook/util'
+import { template } from '../../../.storybook/util'
 
 const bind = template('register-user-profile.ftl')
 
@@ -8,11 +8,12 @@ export default {
     kind: 'Page',
     title: 'Theme/Pages/Register/Modern',
     component: KcApp,
-    parameters: {layout: 'fullscreen'},
+    parameters: { layout: 'fullscreen' },
 } as ComponentMeta<typeof KcApp>;
 
 export const Default = bind({})
 
+/*
 export const WithFieldError = bind({
     profile: {
         attributes: [
@@ -77,3 +78,5 @@ export const WithImmutablePresets = bind({
         ]
     }
 })
+
+*/

@@ -1,7 +1,7 @@
 // Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/pages/RegisterUserProfile.tsx
 import { useState } from "react";
 import { clsx } from "keycloakify/lib/tools/clsx";
-import { UserProfileFormFields } from "./shared/UserProfileCommons";
+import { UserProfileFormFields } from "keycloakify/lib/pages/shared/UserProfileCommons";
 import type { PageProps } from "keycloakify/lib/KcProps";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";

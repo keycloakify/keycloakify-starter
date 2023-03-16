@@ -1,6 +1,8 @@
-import {ComponentMeta} from '@storybook/react';
+import { ComponentMeta } from '@storybook/react';
 import KcApp from '../KcApp';
-import {template} from '../../../.storybook/util'
+import { template } from '../../../.storybook/util'
+
+const bind = template('login-reset-password.ftl');
 
 export default {
     kind: 'Page',
@@ -11,7 +13,5 @@ export default {
     },
 } as ComponentMeta<typeof KcApp>;
 
-const bind = template('login-reset-password.ftl');
-
 export const Default = bind({})
-export const WithEmailAsUsername = bind({realm: {loginWithEmailAllowed: true, registrationEmailAsUsername: true}})
+export const WithEmailAsUsername = bind({ realm: { loginWithEmailAllowed: true, registrationEmailAsUsername: true } })
