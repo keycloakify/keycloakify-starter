@@ -19,7 +19,7 @@ jobs:
         node-version: '16'
     - uses: bahmutov/npm-install@v1
     - run: yarn build
-    - run: echo $(node -e 'console.log(require("url").parse(require(\"./package.json\").homepage).host)') > build/CNAME
+    - run: echo $(node -e 'console.log(require("url").parse(require("./package.json").homepage).host)') > build/CNAME
     - run: npx keycloakify
     - uses: actions/upload-artifact@v2
       with:
@@ -42,7 +42,6 @@ jobs:
     outputs:
       from_version: ${{ steps.step1.outputs.from_version }}
       to_version: ${{ steps.step1.outputs.to_version }}
-      is_upgraded_version: ${{ steps.step1.outputs.is_upgraded_version }}
     steps:
     - uses: garronej/ts-ci@v1.1.7
       id: step1
@@ -101,13 +100,7 @@ jobs:
     needs: 
       - check_if_version_upgraded
     # We create a release only if the version have been upgraded and we are on a default branch
-    # PR on the default branch can release beta but not real release
-    if: |
-      needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true' &&
-      (
-        github.event_name == 'push' ||
-        needs.check_if_version_upgraded.outputs.is_release_beta == 'true'
-      )
+    if: needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true' && github.event_name == 'push'
     steps:
     - uses: actions/download-artifact@v2
       with:
@@ -128,7 +121,6 @@ jobs:
           jars/keycloak-theme.jar
           jars/standalone-keycloak-theme.jar
         draft: false
-        prerelease: ${{ needs.check_if_version_upgraded.outputs.is_release_beta == 'true' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
