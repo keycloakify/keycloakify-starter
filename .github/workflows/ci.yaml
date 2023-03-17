@@ -119,6 +119,7 @@ jobs:
     needs: 
       - create_github_release
     steps:
+    - uses: actions/checkout@v2
     - uses: actions/download-artifact@v2
       with:
         name: build
