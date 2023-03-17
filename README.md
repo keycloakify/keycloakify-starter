@@ -1,8 +1,16 @@
 <p align="center">
+    <i>🚀 A starter/demo project for <a href="https://keycloakify.dev">Keycloakify</a> 🚀</i>
+    <br/>
+    <br/>
     <img src="https://github.com/codegouvfr/keycloakify-starter/workflows/ci/badge.svg?branch=main">
+    <br/>
+    <br/>
+    <a href="https://starter.keycloakify.dev">Demo authenticated React SPA</a>
+    -
+    <a href="https://starter.keycloakify.dev/storybook">Keycloak theme Storybook</a>
 </p>
 
-A starter/demo project for [Keycloakify](https://keycloakify.dev)
+
 
 # Introduction
 
