@@ -51,9 +51,10 @@ yarn build-keycloak-theme
     and when **releasing a new version**: `<org>/<repo>:latest` and `<org>/<repo>:X.Y.Z`
     [See on DockerHub](https://hub.docker.com/r/codegouvfr/keycloakify-starter)
 
-![image](https://user-images.githubusercontent.com/6702424/187989551-9461fb46-f545-4e99-b20c-e0fe4a0f773d.png)
+![image](https://user-images.githubusercontent.com/6702424/225972266-86bae7ed-d097-47a3-aff0-a6b00c92ad1a.png)  
 
-![image](https://user-images.githubusercontent.com/6702424/187988970-99c71326-5228-4d51-8a07-dab8113387f4.png)  
+![image](https://user-images.githubusercontent.com/6702424/225972250-75288953-d18a-4c5a-8c65-a676e927d736.png)
+
 
 If you want an example of an app that put that setup in production checkout onyxia-ui: [the repo](https://github.com/InseeFrLab/onyxia-ui), [the login](https://auth.lab.sspcloud.fr/auth/realms/sspcloud/protocol/openid-connect/auth?client_id=onyxia&redirect_uri=https%3A%2F%2Fonyxia.lab.sspcloud.fr), [the app](https://datalab.sspcloud.fr).
 
