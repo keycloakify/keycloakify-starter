@@ -142,5 +142,5 @@ jobs:
     - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d build_storybook --dest storybook --add  
+    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d storybook-static --dest storybook --add  
         
