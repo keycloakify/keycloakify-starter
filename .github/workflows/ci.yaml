@@ -19,7 +19,7 @@ jobs:
         node-version: '16'
     - uses: bahmutov/npm-install@v1
     - run: yarn build
-    - run: echo $(node -e 'console.log(require("url").parse(require("./package.json").homepage).host)') > build/CNAME
+    - run: echo $(node -e 'console.log(require("url").parse(require(\"./package.json\").homepage).host)') > build/CNAME
     - run: npx keycloakify
     - uses: actions/upload-artifact@v2
       with:
