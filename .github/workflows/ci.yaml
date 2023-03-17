@@ -19,6 +19,7 @@ jobs:
         node-version: '16'
     - uses: bahmutov/npm-install@v1
     - run: yarn build
+    - run: echo $(node -e 'console.log(require("url").parse(require("./package.json").homepage).host)') > build/CNAME
     - run: npx keycloakify
     - uses: actions/upload-artifact@v2
       with:
@@ -47,34 +48,6 @@ jobs:
       id: step1
       with: 
         action_name: is_package_json_version_upgraded
-
-  github_pages:
-    runs-on: ubuntu-latest
-    needs: 
-      - check_if_version_upgraded
-      - build
-    # We publish the docker image only if it's a push on the default branch or if it's a PR from a
-    # branch (meaning not a PR from a fork). It would be more straightforward to test if secrets.DOCKERHUB_TOKEN is 
-    # defined but GitHub Action don't allow it.
-    if: |
-      needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true' &&
-      github.event_name == 'push' || 
-      github.event.pull_request.head.repo.owner.login == github.event.pull_request.base.repo.owner.login 
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/download-artifact@v2
-      with:
-        name: build
-        path: build
-    - uses: actions/setup-node@v2.1.3
-      with:
-        node-version: '16'
-    - run: echo $(node -e 'console.log(require("url").parse(require("./package.json").homepage).host)') > build/CNAME
-    - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d build 
-    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d build_storybook --dest storybook --add  
 
   docker:
     needs: 
@@ -158,4 +131,33 @@ jobs:
         prerelease: ${{ needs.check_if_version_upgraded.outputs.is_release_beta == 'true' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  github_pages_app:
+    runs-on: ubuntu-latest
+    needs: 
+      - create_github_release
+    steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: build
+    - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/setup-node@v3.6.0
+    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d build 
+
+  github_pages_storybook:
+    runs-on: ubuntu-latest
+    needs: 
+      - create_github_release
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v3.6.0
+    - uses: bahmutov/npm-install@v1
+    - run: yarn build-storybook
+    - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d build_storybook --dest storybook --add  
         
