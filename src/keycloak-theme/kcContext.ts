@@ -1,11 +1,6 @@
 import { getKcContext } from "keycloakify/lib/getKcContext";
 
-//NOTE: In most of the cases you do not need to overload the KcContext, you can 
-// just call getKcContext(...) without type arguments.  
-// You want to overload the KcContext only if:  
-// - You have custom plugins that add some values to the context (like https://github.com/micedre/keycloak-mail-whitelisting that adds authorizedMailDomains)
-// - You want to add support for extra pages that are not yey featured by default, see: https://docs.keycloakify.dev/contributing#adding-support-for-a-new-page
-export const { kcContext } = getKcContext<
+export type KcContextExtension =
 	// NOTE: A 'keycloakify' field must be added 
 	// in the package.json to generate theses extra pages
 	// https://docs.keycloakify.dev/build-options#keycloakify.extrapages
@@ -14,8 +9,14 @@ export const { kcContext } = getKcContext<
 	// NOTE: register.ftl is deprecated in favor of register-user-profile.ftl
 	// but let's say we use it anyway and have this plugin enabled: https://github.com/micedre/keycloak-mail-whitelisting
 	// keycloak-mail-whitelisting define the non standard ftl global authorizedMailDomains, we declare it here.
-	| { pageId: "register.ftl"; authorizedMailDomains: string[]; }
->({
+	| { pageId: "register.ftl"; authorizedMailDomains: string[]; };
+
+//NOTE: In most of the cases you do not need to overload the KcContext, you can 
+// just call getKcContext(...) without type arguments.  
+// You want to overload the KcContext only if:  
+// - You have custom plugins that add some values to the context (like https://github.com/micedre/keycloak-mail-whitelisting that adds authorizedMailDomains)
+// - You want to add support for extra pages that are not yey featured by default, see: https://docs.keycloakify.dev/contributing#adding-support-for-a-new-page
+export const { kcContext } = getKcContext<KcContextExtension>({
 	// Uncomment to test the login page for development.
 	//mockPageId: "login.ftl",
 	mockData: [
@@ -83,12 +84,12 @@ export const { kcContext } = getKcContext<
 			],
 			// Simulate we got an error with the email field
 			messagesPerField: {
-				printIfExists: <T>(fieldName: string, className: T) => { console.log({ fieldName}); return fieldName === "email" ? className : undefined; },
-				existsError: (fieldName: string)=> fieldName === "email",
+				printIfExists: <T>(fieldName: string, className: T) => { console.log({ fieldName }); return fieldName === "email" ? className : undefined; },
+				existsError: (fieldName: string) => fieldName === "email",
 				get: (fieldName: string) => `Fake error for ${fieldName}`,
 				exists: (fieldName: string) => fieldName === "email"
 			},
-			
+
 		}
 	]
 });
