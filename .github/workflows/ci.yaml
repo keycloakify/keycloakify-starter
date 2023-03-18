@@ -130,18 +130,18 @@ jobs:
     - uses: actions/setup-node@v3.6.0
     - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d build 
 
-  github_pages_storybook:
-    runs-on: ubuntu-latest
-    needs: 
-      - create_github_release
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v3.6.0
-    - uses: bahmutov/npm-install@v1
-    - run: yarn build-keycloak-theme # Only for the assets in public
-    - run: yarn build-storybook
-    - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d storybook-static --dest storybook --add  
+#  github_pages_storybook:
+#    runs-on: ubuntu-latest
+#    needs: 
+#      - create_github_release
+#    steps:
+#    - uses: actions/checkout@v2
+#    - uses: actions/setup-node@v3.6.0
+#    - uses: bahmutov/npm-install@v1
+#    - run: yarn build-keycloak-theme # Only for the assets in public
+#    - run: yarn build-storybook
+#    - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d storybook-static --dest storybook --add  
         
