@@ -54,6 +54,7 @@ function ContextualizedApp() {
                 <img src={logo} className="App-logo" alt="logo" />
                 <img src={myimg} alt="test_image" />
                 <p style={{ "fontFamily": '"Work Sans"' }}>Hello world</p>
+                <p>Check out all keycloak pages in the <a href="https://starter.keycloakify.dev/storybook">Storybook</a>!</p>
             </header>
         </div>
     );
