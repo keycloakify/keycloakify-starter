@@ -5,45 +5,28 @@
  * in the KcApp.tsx
  * Example: https://github.com/garronej/keycloakify-starter/blob/a20c21b2aae7c6dc6dbea294f3d321955ddf9355/src/KcApp/KcApp.tsx#L14-L30
  */
-import {clsx} from "keycloakify/lib/tools/clsx";
-import {useRerenderOnStateChange} from "evt/hooks";
-import {Markdown} from "keycloakify/lib/tools/Markdown";
-import {evtTermMarkdown, useDownloadTerms} from "keycloakify/lib/pages/Terms";
-import tos_en_url from "../assets/tos_en.md";
-import tos_fr_url from "../assets/tos_fr.md";
-import type {PageProps} from "keycloakify/lib/KcProps";
-import type {KcContext} from "../kcContext";
-import type {I18n} from "../i18n";
+import { clsx } from "keycloakify/tools/clsx";
+import { useRerenderOnStateChange } from "evt/hooks";
+import { Markdown } from "keycloakify/tools/Markdown";
+import { type PageProps, defaultClasses } from "keycloakify/pages/PageProps";
+import { useGetClassName } from "keycloakify/lib/useGetClassName";
+import { evtTermMarkdown } from "keycloakify/lib/useDownloadTerms";
+import type { KcContext } from "../kcContext";
+import type { I18n } from "../i18n";
 
-export default function Terms(props: PageProps<Extract<KcContext, { pageId: "terms.ftl"; }>, I18n>) {
-    const {kcContext, i18n, doFetchDefaultThemeResources = true, Template, ...kcProps} = props;
+export default function Terms(props: PageProps<Extract<KcContext, { pageId: "terms.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const {msg, msgStr} = i18n;
-
-    useDownloadTerms({
-        kcContext,
-        "downloadTermMarkdown": async ({currentLanguageTag}) => {
-
-            const resource = (() => {
-                switch (currentLanguageTag) {
-                    case "fr":
-                        return tos_fr_url;
-                    default:
-                        return tos_en_url;
-                }
-            })();
-
-            // webpack5 (used via storybook) loads markdown as string, not url
-            if (resource.includes("\n")) return resource
-
-            const response = await fetch(resource);
-            return response.text();
-        },
+    const { getClassName } = useGetClassName({
+        "defaultClasses": !doUseDefaultCss ? undefined : defaultClasses,
+        classes
     });
+
+    const { msg, msgStr } = i18n;
 
     useRerenderOnStateChange(evtTermMarkdown);
 
-    const {url} = kcContext;
+    const { url } = kcContext;
 
     if (evtTermMarkdown.state === undefined) {
         return null;
@@ -51,21 +34,20 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
 
     return (
         <Template
-            {...{kcContext, i18n, doFetchDefaultThemeResources, ...kcProps}}
+            {...{ kcContext, i18n, doUseDefaultCss, classes }}
             displayMessage={false}
             headerNode={msg("termsTitle")}
             formNode={
                 <>
-                    <div id="kc-terms-text">{evtTermMarkdown.state &&
-                        <Markdown>{evtTermMarkdown.state}</Markdown>}</div>
+                    <div id="kc-terms-text">{evtTermMarkdown.state && <Markdown>{evtTermMarkdown.state}</Markdown>}</div>
                     <form className="form-actions" action={url.loginAction} method="POST">
                         <input
                             className={clsx(
-                                kcProps.kcButtonClass,
-                                kcProps.kcButtonClass,
-                                kcProps.kcButtonClass,
-                                kcProps.kcButtonPrimaryClass,
-                                kcProps.kcButtonLargeClass
+                                getClassName("kcButtonClass"),
+                                getClassName("kcButtonClass"),
+                                getClassName("kcButtonClass"),
+                                getClassName("kcButtonPrimaryClass"),
+                                getClassName("kcButtonLargeClass")
                             )}
                             name="accept"
                             id="kc-accept"
@@ -73,14 +55,14 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
                             value={msgStr("doAccept")}
                         />
                         <input
-                            className={clsx(kcProps.kcButtonClass, kcProps.kcButtonDefaultClass, kcProps.kcButtonLargeClass)}
+                            className={clsx(getClassName("kcButtonClass"), getClassName("kcButtonDefaultClass"), getClassName("kcButtonLargeClass"))}
                             name="cancel"
                             id="kc-decline"
                             type="submit"
                             value={msgStr("doDecline")}
                         />
                     </form>
-                    <div className="clearfix"/>
+                    <div className="clearfix" />
                 </>
             }
         />

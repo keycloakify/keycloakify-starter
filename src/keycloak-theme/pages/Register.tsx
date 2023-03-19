@@ -1,74 +1,89 @@
-// This is a copy paste from https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/pages/Register.tsx
-// It is now up to us to implement a special behavior to leverage the non standard authorizedMailDomains
-// provided by the plugin: https://github.com/micedre/keycloak-mail-whitelisting installed on our keycloak server.
-// Note that it is no longer recommended to use register.ftl, it's best to use register-user-profile.ftl
-// See: https://docs.keycloakify.dev/realtime-input-validation
-import { clsx } from "keycloakify/lib/tools/clsx";
-import type { PageProps } from "keycloakify/lib/KcProps";
+// Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/pages/Register.tsx
+
+import { clsx } from "keycloakify/tools/clsx";
+import { type PageProps, defaultClasses } from "keycloakify/pages/PageProps";
+import { useGetClassName } from "keycloakify/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 
-export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl"; }>, I18n>) {
-    const { kcContext, i18n, doFetchDefaultThemeResources = true, Template, ...kcProps } = props;
+export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+
+    const { getClassName } = useGetClassName({
+        "defaultClasses": !doUseDefaultCss ? undefined : defaultClasses,
+        classes
+    });
 
     const { url, messagesPerField, register, realm, passwordRequired, recaptchaRequired, recaptchaSiteKey } = kcContext;
 
     const { msg, msgStr } = i18n;
 
-    console.log(`NOTE: It is up to you do do something meaningful with ${kcContext.authorizedMailDomains}`);
-
     return (
         <Template
-            {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}
+            {...{ kcContext, i18n, doUseDefaultCss, classes }}
             headerNode={msg("registerTitle")}
             formNode={
-                <form id="kc-register-form" className={clsx(kcProps.kcFormClass)} action={url.registrationAction} method="post">
-                    <div className={clsx(kcProps.kcFormGroupClass, messagesPerField.printIfExists("firstName", kcProps.kcFormGroupErrorClass))}>
-                        <div className={clsx(kcProps.kcLabelWrapperClass)}>
-                            <label htmlFor="firstName" className={clsx(kcProps.kcLabelClass)}>
+                <form id="kc-register-form" className={getClassName("kcFormClass")} action={url.registrationAction} method="post">
+                    <div
+                        className={clsx(
+                            getClassName("kcFormGroupClass"),
+                            messagesPerField.printIfExists("firstName", getClassName("kcFormGroupErrorClass"))
+                        )}
+                    >
+                        <div className={getClassName("kcLabelWrapperClass")}>
+                            <label htmlFor="firstName" className={getClassName("kcLabelClass")}>
                                 {msg("firstName")}
                             </label>
                         </div>
-                        <div className={clsx(kcProps.kcInputWrapperClass)}>
+                        <div className={getClassName("kcInputWrapperClass")}>
                             <input
                                 type="text"
                                 id="firstName"
-                                className={clsx(kcProps.kcInputClass)}
+                                className={getClassName("kcInputClass")}
                                 name="firstName"
                                 defaultValue={register.formData.firstName ?? ""}
                             />
                         </div>
                     </div>
 
-                    <div className={clsx(kcProps.kcFormGroupClass, messagesPerField.printIfExists("lastName", kcProps.kcFormGroupErrorClass))}>
-                        <div className={clsx(kcProps.kcLabelWrapperClass)}>
-                            <label htmlFor="lastName" className={clsx(kcProps.kcLabelClass)}>
+                    <div
+                        className={clsx(
+                            getClassName("kcFormGroupClass"),
+                            messagesPerField.printIfExists("lastName", getClassName("kcFormGroupErrorClass"))
+                        )}
+                    >
+                        <div className={getClassName("kcLabelWrapperClass")}>
+                            <label htmlFor="lastName" className={getClassName("kcLabelClass")}>
                                 {msg("lastName")}
                             </label>
                         </div>
-                        <div className={clsx(kcProps.kcInputWrapperClass)}>
+                        <div className={getClassName("kcInputWrapperClass")}>
                             <input
                                 type="text"
                                 id="lastName"
-                                className={clsx(kcProps.kcInputClass)}
+                                className={getClassName("kcInputClass")}
                                 name="lastName"
                                 defaultValue={register.formData.lastName ?? ""}
                             />
-
                         </div>
                     </div>
 
-                    <div className={clsx(kcProps.kcFormGroupClass, messagesPerField.printIfExists("email", kcProps.kcFormGroupErrorClass))}>
-                        <div className={clsx(kcProps.kcLabelWrapperClass)}>
-                            <label htmlFor="email" className={clsx(kcProps.kcLabelClass)}>
+                    <div
+                        className={clsx(
+                            getClassName("kcFormGroupClass"),
+                            messagesPerField.printIfExists("email", getClassName("kcFormGroupErrorClass"))
+                        )}
+                    >
+                        <div className={getClassName("kcLabelWrapperClass")}>
+                            <label htmlFor="email" className={getClassName("kcLabelClass")}>
                                 {msg("email")}
                             </label>
                         </div>
-                        <div className={clsx(kcProps.kcInputWrapperClass)}>
+                        <div className={getClassName("kcInputWrapperClass")}>
                             <input
                                 type="text"
                                 id="email"
-                                className={clsx(kcProps.kcInputClass)}
+                                className={getClassName("kcInputClass")}
                                 name="email"
                                 defaultValue={register.formData.email ?? ""}
                                 autoComplete="email"
@@ -76,17 +91,22 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                         </div>
                     </div>
                     {!realm.registrationEmailAsUsername && (
-                        <div className={clsx(kcProps.kcFormGroupClass, messagesPerField.printIfExists("username", kcProps.kcFormGroupErrorClass))}>
-                            <div className={clsx(kcProps.kcLabelWrapperClass)}>
-                                <label htmlFor="username" className={clsx(kcProps.kcLabelClass)}>
+                        <div
+                            className={clsx(
+                                getClassName("kcFormGroupClass"),
+                                messagesPerField.printIfExists("username", getClassName("kcFormGroupErrorClass"))
+                            )}
+                        >
+                            <div className={getClassName("kcLabelWrapperClass")}>
+                                <label htmlFor="username" className={getClassName("kcLabelClass")}>
                                     {msg("username")}
                                 </label>
                             </div>
-                            <div className={clsx(kcProps.kcInputWrapperClass)}>
+                            <div className={getClassName("kcInputWrapperClass")}>
                                 <input
                                     type="text"
                                     id="username"
-                                    className={clsx(kcProps.kcInputClass)}
+                                    className={getClassName("kcInputClass")}
                                     name="username"
                                     defaultValue={register.formData.username ?? ""}
                                     autoComplete="username"
@@ -97,18 +117,21 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                     {passwordRequired && (
                         <>
                             <div
-                                className={clsx(kcProps.kcFormGroupClass, messagesPerField.printIfExists("password", kcProps.kcFormGroupErrorClass))}
+                                className={clsx(
+                                    getClassName("kcFormGroupClass"),
+                                    messagesPerField.printIfExists("password", getClassName("kcFormGroupErrorClass"))
+                                )}
                             >
-                                <div className={clsx(kcProps.kcLabelWrapperClass)}>
-                                    <label htmlFor="password" className={clsx(kcProps.kcLabelClass)}>
+                                <div className={getClassName("kcLabelWrapperClass")}>
+                                    <label htmlFor="password" className={getClassName("kcLabelClass")}>
                                         {msg("password")}
                                     </label>
                                 </div>
-                                <div className={clsx(kcProps.kcInputWrapperClass)}>
+                                <div className={getClassName("kcInputWrapperClass")}>
                                     <input
                                         type="password"
                                         id="password"
-                                        className={clsx(kcProps.kcInputClass)}
+                                        className={getClassName("kcInputClass")}
                                         name="password"
                                         autoComplete="new-password"
                                     />
@@ -117,44 +140,44 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
 
                             <div
                                 className={clsx(
-                                    kcProps.kcFormGroupClass,
-                                    messagesPerField.printIfExists("password-confirm", kcProps.kcFormGroupErrorClass)
+                                    getClassName("kcFormGroupClass"),
+                                    messagesPerField.printIfExists("password-confirm", getClassName("kcFormGroupErrorClass"))
                                 )}
                             >
-                                <div className={clsx(kcProps.kcLabelWrapperClass)}>
-                                    <label htmlFor="password-confirm" className={clsx(kcProps.kcLabelClass)}>
+                                <div className={getClassName("kcLabelWrapperClass")}>
+                                    <label htmlFor="password-confirm" className={getClassName("kcLabelClass")}>
                                         {msg("passwordConfirm")}
                                     </label>
                                 </div>
-                                <div className={clsx(kcProps.kcInputWrapperClass)}>
-                                    <input type="password" id="password-confirm" className={clsx(kcProps.kcInputClass)} name="password-confirm" />
+                                <div className={getClassName("kcInputWrapperClass")}>
+                                    <input type="password" id="password-confirm" className={getClassName("kcInputClass")} name="password-confirm" />
                                 </div>
                             </div>
                         </>
                     )}
                     {recaptchaRequired && (
                         <div className="form-group">
-                            <div className={clsx(kcProps.kcInputWrapperClass)}>
+                            <div className={getClassName("kcInputWrapperClass")}>
                                 <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey}></div>
                             </div>
                         </div>
                     )}
-                    <div className={clsx(kcProps.kcFormGroupClass)}>
-                        <div id="kc-form-options" className={clsx(kcProps.kcFormOptionsClass)}>
-                            <div className={clsx(kcProps.kcFormOptionsWrapperClass)}>
+                    <div className={getClassName("kcFormGroupClass")}>
+                        <div id="kc-form-options" className={getClassName("kcFormOptionsClass")}>
+                            <div className={getClassName("kcFormOptionsWrapperClass")}>
                                 <span>
                                     <a href={url.loginUrl}>{msg("backToLogin")}</a>
                                 </span>
                             </div>
                         </div>
 
-                        <div id="kc-form-buttons" className={clsx(kcProps.kcFormButtonsClass)}>
+                        <div id="kc-form-buttons" className={getClassName("kcFormButtonsClass")}>
                             <input
                                 className={clsx(
-                                    kcProps.kcButtonClass,
-                                    kcProps.kcButtonPrimaryClass,
-                                    kcProps.kcButtonBlockClass,
-                                    kcProps.kcButtonLargeClass
+                                    getClassName("kcButtonClass"),
+                                    getClassName("kcButtonPrimaryClass"),
+                                    getClassName("kcButtonBlockClass"),
+                                    getClassName("kcButtonLargeClass")
                                 )}
                                 type="submit"
                                 value={msgStr("doRegister")}
@@ -166,4 +189,3 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
         />
     );
 }
-

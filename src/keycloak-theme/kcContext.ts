@@ -1,4 +1,4 @@
-import { getKcContext } from "keycloakify/lib/getKcContext";
+import { getKcContext } from "keycloakify";
 
 export type KcContextExtension =
 	// NOTE: A 'keycloakify' field must be added 

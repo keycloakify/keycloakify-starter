@@ -1,13 +1,20 @@
-// Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/pages/RegisterUserProfile.tsx
+// Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/pages/RegisterUserProfile.tsx
+
 import { useState } from "react";
-import { clsx } from "keycloakify/lib/tools/clsx";
-import { UserProfileFormFields } from "keycloakify/lib/pages/shared/UserProfileCommons";
-import type { PageProps } from "keycloakify/lib/KcProps";
+import { clsx } from "keycloakify/tools/clsx";
+import { UserProfileFormFields } from "./shared/UserProfileCommons";
+import { type PageProps, defaultClasses } from "keycloakify/pages/PageProps";
+import { useGetClassName } from "keycloakify/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 
 export default function RegisterUserProfile(props: PageProps<Extract<KcContext, { pageId: "register-user-profile.ftl" }>, I18n>) {
-    const { kcContext, i18n, doFetchDefaultThemeResources = true, Template, ...kcProps } = props;
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+
+    const { getClassName } = useGetClassName({
+        "defaultClasses": !doUseDefaultCss ? undefined : defaultClasses,
+        classes
+    });
 
     const { url, messagesPerField, recaptchaRequired, recaptchaSiteKey } = kcContext;
 
@@ -17,36 +24,41 @@ export default function RegisterUserProfile(props: PageProps<Extract<KcContext, 
 
     return (
         <Template
-            {...{ kcContext, i18n, doFetchDefaultThemeResources, ...kcProps }}
+            {...{ kcContext, i18n, doUseDefaultCss, classes }}
             displayMessage={messagesPerField.exists("global")}
             displayRequiredFields={true}
             headerNode={msg("registerTitle")}
             formNode={
-                <form id="kc-register-form" className={clsx(kcProps.kcFormClass)} action={url.registrationAction} method="post">
-                    <UserProfileFormFields kcContext={kcContext} onIsFormSubmittableValueChange={setIsFomSubmittable} i18n={i18n} {...kcProps} />
+                <form id="kc-register-form" className={getClassName("kcFormClass")} action={url.registrationAction} method="post">
+                    <UserProfileFormFields
+                        kcContext={kcContext}
+                        onIsFormSubmittableValueChange={setIsFomSubmittable}
+                        i18n={i18n}
+                        getClassName={getClassName}
+                    />
                     {recaptchaRequired && (
                         <div className="form-group">
-                            <div className={clsx(kcProps.kcInputWrapperClass)}>
+                            <div className={getClassName("kcInputWrapperClass")}>
                                 <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey} />
                             </div>
                         </div>
                     )}
-                    <div className={clsx(kcProps.kcFormGroupClass)} style={{ "marginBottom": 30 }}>
-                        <div id="kc-form-options" className={clsx(kcProps.kcFormOptionsClass)}>
-                            <div className={clsx(kcProps.kcFormOptionsWrapperClass)}>
+                    <div className={getClassName("kcFormGroupClass")} style={{ "marginBottom": 30 }}>
+                        <div id="kc-form-options" className={getClassName("kcFormOptionsClass")}>
+                            <div className={getClassName("kcFormOptionsWrapperClass")}>
                                 <span>
                                     <a href={url.loginUrl}>{msg("backToLogin")}</a>
                                 </span>
                             </div>
                         </div>
 
-                        <div id="kc-form-buttons" className={clsx(kcProps.kcFormButtonsClass)}>
+                        <div id="kc-form-buttons" className={getClassName("kcFormButtonsClass")}>
                             <input
                                 className={clsx(
-                                    kcProps.kcButtonClass,
-                                    kcProps.kcButtonPrimaryClass,
-                                    kcProps.kcButtonBlockClass,
-                                    kcProps.kcButtonLargeClass
+                                    getClassName("kcButtonClass"),
+                                    getClassName("kcButtonPrimaryClass"),
+                                    getClassName("kcButtonBlockClass"),
+                                    getClassName("kcButtonLargeClass")
                                 )}
                                 type="submit"
                                 value={msgStr("doRegister")}
