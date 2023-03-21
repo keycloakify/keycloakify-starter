@@ -5,9 +5,12 @@ import { createOidcClientProvider, useOidcClient } from "./oidc";
 import { addFooToQueryParams, addBarToQueryParams } from "../keycloak-theme/login/valuesTransferredOverUrl";
 import jwt_decode from "jwt-decode";
 
+const keycloakUrl = "https://auth.code.gouv.fr"
+const keycloakRealm = "keycloakify";
+
 const { OidcClientProvider } = createOidcClientProvider({
-    url: "https://auth.code.gouv.fr/auth",
-    realm: "keycloakify",
+    url: `${keycloakUrl}/auth`,
+    realm: keycloakRealm,
     clientId: "starter",
     //This function will be called just before redirecting, 
     //it should return the current langue. 
@@ -38,18 +41,20 @@ function ContextualizedApp() {
     return (
         <div className="App">
             <header className="App-header">
-            {
-                oidcClient.isUserLoggedIn ?
-                    <>
-                        <h1>You are authenticated !</h1>
-                        <pre style={{ textAlign: "left" }}>{JSON.stringify(jwt_decode(oidcClient.getAccessToken()), null, 2)}</pre>
-                        <button onClick={() => oidcClient.logout({ redirectTo: "home" })}>Logout</button>
-                    </>
-                    :
-                    <>
-                        <button onClick={() => oidcClient.login({ doesCurrentHrefRequiresAuth: false })}>Login</button>
-                    </>
-            }
+                {
+                    oidcClient.isUserLoggedIn ?
+                        <>
+                            <h1>You are authenticated !</h1>
+                            {/* On older Keycloak version its /auth/realms instead of /realms */}
+                            <a href={`${keycloakUrl}/realms/${keycloakRealm}/account`} target="_blank">Link to your Keycloak account</a>
+                            <pre style={{ textAlign: "left" }}>{JSON.stringify(jwt_decode(oidcClient.getAccessToken()), null, 2)}</pre>
+                            <button onClick={() => oidcClient.logout({ redirectTo: "home" })}>Logout</button>
+                        </>
+                        :
+                        <>
+                            <button onClick={() => oidcClient.login({ doesCurrentHrefRequiresAuth: false })}>Login</button>
+                        </>
+                }
                 <img src={logo} className="App-logo" alt="logo" />
                 <img src={myimg} alt="test_image" />
                 <p style={{ "fontFamily": '"Work Sans"' }}>Hello world</p>

@@ -1,9 +1,10 @@
-// Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/Template.tsx
+// Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/login/Template.tsx
+
 import { assert } from "keycloakify/tools/assert";
 import { clsx } from "keycloakify/tools/clsx";
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
-import { type TemplateProps, defaultTemplateClasses } from "keycloakify/login/TemplateProps";
-import { useGetClassName } from "keycloakify/lib/useGetClassName";
+import { type TemplateProps } from "keycloakify/login/TemplateProps";
+import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
 
@@ -24,10 +25,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         children
     } = props;
 
-    const { getClassName } = useGetClassName({
-        "defaultClasses": !doUseDefaultCss ? undefined : defaultTemplateClasses,
-        classes
-    });
+    const { getClassName } = useGetClassName({ doUseDefaultCss, classes });
 
     const { msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag } = i18n;
 
