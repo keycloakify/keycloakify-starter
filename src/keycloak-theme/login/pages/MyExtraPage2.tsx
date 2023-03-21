@@ -1,4 +1,4 @@
-import type { PageProps } from "keycloakify/pages/PageProps";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 
@@ -13,13 +13,13 @@ export default function MyExtraPage1(props: PageProps<Extract<KcContext, { pageI
         <Template
             {...{ kcContext, i18n, doUseDefaultCss, classes }}
             headerNode={<>Header <i>text</i></>}
-            formNode={
-                <form>
-                    {/*...*/}
-                </form>
-            }
-            infoNode={<span>footer</span> }
-        />
+            infoNode={<span>footer</span>}
+        >
+
+            <form>
+                {/*...*/}
+            </form>
+        </Template>
     );
 
 }

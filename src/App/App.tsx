@@ -2,7 +2,7 @@ import "./App.css";
 import logo from "./logo.svg";
 import myimg from "./myimg.png";
 import { createOidcClientProvider, useOidcClient } from "./oidc";
-import { addFooToQueryParams, addBarToQueryParams } from "../keycloak-theme/valuesTransferredOverUrl";
+import { addFooToQueryParams, addBarToQueryParams } from "../keycloak-theme/login/valuesTransferredOverUrl";
 import jwt_decode from "jwt-decode";
 
 const { OidcClientProvider } = createOidcClientProvider({
@@ -29,7 +29,6 @@ export default function App() {
             <ContextualizedApp />
         </OidcClientProvider>
     );
-
 }
 
 function ContextualizedApp() {

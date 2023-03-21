@@ -7415,7 +7415,7 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-react-app@^7.0.0:
+eslint-config-react-app@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-7.0.1.tgz#73ba3929978001c5c86274c017ea57eb5fa644b4"
   integrity sha512-K6rNzvkIeHaTd8m/QEh1Zko0KI7BACWkkneSs6s9cKZC/J27X3eZR6Upt1jkmZ/4FK+XUOPPxMEN7+lbUXfSlA==
@@ -7738,6 +7738,15 @@ evt@^2.4.15:
     minimal-polyfills "^2.2.2"
     run-exclusive "^2.2.18"
     tsafe "^1.4.3"
+
+evt@^2.4.18:
+  version "2.4.18"
+  resolved "https://registry.yarnpkg.com/evt/-/evt-2.4.18.tgz#931012610dcd3bc7c0877d61018a704e9e5511db"
+  integrity sha512-kMYW3DPrUWvFsOUf3cN1NMdg0MEFYLMLqC7hPSasNs8TOZCOBsDgazr6nXda2iUur/2L6BtRu0oCl2++oGYZxA==
+  dependencies:
+    minimal-polyfills "^2.2.2"
+    run-exclusive "^2.2.18"
+    tsafe "^1.6.0"
 
 exec-sh@^0.3.2:
   version "0.3.6"
@@ -10432,22 +10441,22 @@ keycloak-js@^21.0.1:
     base64-js "^1.5.1"
     js-sha256 "^0.9.0"
 
-keycloakify@^6.13.1:
-  version "6.13.1"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-6.13.1.tgz#258a6b0d55f7e520bcfec8616aa9f38783c674e8"
-  integrity sha512-bLrWYomKUodEFWdI0p/Y30FBh4j/LRFUM7di5pxnF/GDC2WGT6QXntid5QK55tkLTUY/GNTWdWN8of2KxdwBjw==
+keycloakify@7.0.0-rc.6:
+  version "7.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.0.0-rc.6.tgz#3bd53be93588b14b6b23b1f01cb12cfb16b73ab3"
+  integrity sha512-vjMM3fdW1mVemuwCzfEgqKSMMMVfTH8Ti+tI1cq/26L1/G3tv2V0hGrCf9PqOOPSVIxdjQPNeAkOCrPX70h+CQ==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"
     cli-select "^1.1.2"
-    evt "^2.4.15"
+    evt "^2.4.18"
     make-fetch-happen "^11.0.3"
     minimal-polyfills "^2.2.2"
     minimist "^1.2.6"
     path-browserify "^1.0.1"
     react-markdown "^5.0.3"
     rfc4648 "^1.5.2"
-    tsafe "^1.4.3"
+    tsafe "^1.6.0"
     zod "^3.17.10"
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
@@ -13076,7 +13085,7 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
-react-dev-utils@^12.0.0:
+react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-12.0.1.tgz#ba92edb4a1f379bd46ccd6bcd4e7bc398df33e73"
   integrity sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==
@@ -13199,10 +13208,10 @@ react-refresh@^0.11.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
 
-react-scripts@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-5.0.0.tgz#6547a6d7f8b64364ef95273767466cc577cb4b60"
-  integrity sha512-3i0L2CyIlROz7mxETEdfif6Sfhh9Lfpzi10CtcGs1emDQStmZfWjJbAIMtRD0opVUjQuFWqHZyRZ9PPzKCFxWg==
+react-scripts@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-5.0.1.tgz#6285dbd65a8ba6e49ca8d651ce30645a6d980003"
+  integrity sha512-8VAmEm/ZAwQzJ+GOMLbBsTdDKOpuZh7RPs0UymvBR2vRk4iZWCskjbFnxqjrzoIvlNNRZ3QJFx6/qDSi6zSnaQ==
   dependencies:
     "@babel/core" "^7.16.0"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.5.3"
@@ -13220,7 +13229,7 @@ react-scripts@5.0.0:
     dotenv "^10.0.0"
     dotenv-expand "^5.1.0"
     eslint "^8.3.0"
-    eslint-config-react-app "^7.0.0"
+    eslint-config-react-app "^7.0.1"
     eslint-webpack-plugin "^3.1.1"
     file-loader "^6.2.0"
     fs-extra "^10.0.0"
@@ -13237,7 +13246,7 @@ react-scripts@5.0.0:
     postcss-preset-env "^7.0.1"
     prompts "^2.4.2"
     react-app-polyfill "^3.0.0"
-    react-dev-utils "^12.0.0"
+    react-dev-utils "^12.0.1"
     react-refresh "^0.11.0"
     resolve "^1.20.0"
     resolve-url-loader "^4.0.0"
@@ -15103,6 +15112,11 @@ tsafe@^1.4.3:
   resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.4.3.tgz#a98ce83616f0d9c01e3c6167a2ead45ba455b2ae"
   integrity sha512-KjCdgjIqsbKW9oeJGSMVC23jhWm/VXJwkaZ7jffo/WaTioLGTHJqliHe9dECEVzIACNVNs/fwtKwU8wWK4jY4g==
 
+tsafe@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.6.0.tgz#48a9bd0a4c43df43d289bdfc1d89f0d7fffbd612"
+  integrity sha512-wlUeRBnyN3EN2chXznpLm7vBEvJLEOziDU+MN6NRlD99AkwmXgtChNQhp+V97VyRa3Bp05IaL4Cocsc7JlyEUg==
+
 tsconfig-paths@^3.14.1:
   version "3.14.1"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
@@ -15223,10 +15237,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript@~4.8.0:
-  version "4.8.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
-  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
+typescript@~4.7.0:
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
+  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
 uglify-js@^3.1.4:
   version "3.17.4"

@@ -11,12 +11,13 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "build-keycloak-theme": "yarn build && keycloakify",
+        "eject-keycloak-page": "eject-keycloak-page",
         "download-builtin-keycloak-theme": "download-builtin-keycloak-theme",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook"
     },
     "keycloakify": {
-        "extraPages": [
+        "extraLoginPages": [
             "my-extra-page-1.ftl",
             "my-extra-page-2.ftl"
         ]
@@ -28,7 +29,7 @@
         "evt": "^2.4.15",
         "jwt-decode": "^3.1.2",
         "keycloak-js": "^21.0.1",
-        "keycloakify": "^6.13.1",
+        "keycloakify": "7.0.0-rc.6",
         "powerhooks": "^0.26.2",
         "react": "18.1.0",
         "react-dom": "18.1.0",
@@ -48,8 +49,8 @@
         "@types/node": "^15.3.1",
         "@types/react": "18.0.9",
         "@types/react-dom": "18.0.4",
-        "react-scripts": "5.0.0",
-        "typescript": "~4.8.0"
+        "react-scripts": "5.0.1",
+        "typescript": "~4.7.0"
     },
     "eslintConfig": {
         "extends": [

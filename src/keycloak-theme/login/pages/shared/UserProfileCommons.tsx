@@ -1,28 +1,22 @@
-//NOTE: Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/lib/pages/shared/UserProfileCommons.tsx
-
 import { useEffect, Fragment } from "react";
-import type { KcProps } from "keycloakify/lib/KcProps";
-import { clsx } from "keycloakify/lib/tools/clsx";
-import type { I18nBase } from "keycloakify/lib/i18n";
-import type { Attribute } from "keycloakify/lib/getKcContext";
-import { useFormValidation } from "keycloakify/lib/pages/shared/UserProfileCommons";
+import type { ClassKey } from "keycloakify/login/pages/PageProps";
+import { clsx } from "keycloakify/tools/clsx";
+import { useFormValidation } from "keycloakify/login/lib/useFormValidation";
+import type { Attribute } from "keycloakify/login/kcContext/KcContext";
+import type { I18n } from "../../i18n";
 
 export type UserProfileFormFieldsProps = {
     kcContext: Parameters<typeof useFormValidation>[0]["kcContext"];
-    i18n: I18nBase;
-} & KcProps &
-    Partial<Record<"BeforeField" | "AfterField", (props: { attribute: Attribute }) => JSX.Element | null>> & {
-        onIsFormSubmittableValueChange: (isFormSubmittable: boolean) => void;
-    };
+    i18n: I18n;
+    getClassName: (classKey: ClassKey) => string;
+    onIsFormSubmittableValueChange: (isFormSubmittable: boolean) => void;
+    BeforeField?: (props: { attribute: Attribute }) => JSX.Element | null;
+    AfterField?: (props: { attribute: Attribute }) => JSX.Element | null;
+};
 
-export function UserProfileFormFields({
-    kcContext,
-    onIsFormSubmittableValueChange,
-    i18n,
-    BeforeField,
-    AfterField,
-    ...props
-}: UserProfileFormFieldsProps) {
+export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
+    const { kcContext, onIsFormSubmittableValueChange, i18n, getClassName, BeforeField, AfterField } = props;
+
     const { advancedMsg } = i18n;
 
     const {
@@ -47,20 +41,23 @@ export function UserProfileFormFields({
 
                 const { value, displayableErrors } = fieldStateByAttributeName[attribute.name];
 
-                const formGroupClassName = clsx(props.kcFormGroupClass, displayableErrors.length !== 0 && props.kcFormGroupErrorClass);
+                const formGroupClassName = clsx(
+                    getClassName("kcFormGroupClass"),
+                    displayableErrors.length !== 0 && getClassName("kcFormGroupErrorClass")
+                );
 
                 return (
                     <Fragment key={i}>
                         {group !== currentGroup && (currentGroup = group) !== "" && (
                             <div className={formGroupClassName}>
-                                <div className={clsx(props.kcContentWrapperClass)}>
-                                    <label id={`header-${group}`} className={clsx(props.kcFormGroupHeader)}>
+                                <div className={getClassName("kcContentWrapperClass")}>
+                                    <label id={`header-${group}`} className={getClassName("kcFormGroupHeader")}>
                                         {advancedMsg(groupDisplayHeader) || currentGroup}
                                     </label>
                                 </div>
                                 {groupDisplayDescription !== "" && (
-                                    <div className={clsx(props.kcLabelWrapperClass)}>
-                                        <label id={`description-${group}`} className={`${clsx(props.kcLabelClass)}`}>
+                                    <div className={getClassName("kcLabelWrapperClass")}>
+                                        <label id={`description-${group}`} className={getClassName("kcLabelClass")}>
                                             {advancedMsg(groupDisplayDescription)}
                                         </label>
                                     </div>
@@ -71,13 +68,13 @@ export function UserProfileFormFields({
                         {BeforeField && <BeforeField attribute={attribute} />}
 
                         <div className={formGroupClassName}>
-                            <div className={clsx(props.kcLabelWrapperClass)}>
-                                <label htmlFor={attribute.name} className={clsx(props.kcLabelClass)}>
+                            <div className={getClassName("kcLabelWrapperClass")}>
+                                <label htmlFor={attribute.name} className={getClassName("kcLabelClass")}>
                                     {advancedMsg(attribute.displayName ?? "")}
                                 </label>
                                 {attribute.required && <>*</>}
                             </div>
-                            <div className={clsx(props.kcInputWrapperClass)}>
+                            <div className={getClassName("kcInputWrapperClass")}>
                                 {(() => {
                                     const { options } = attribute.validators;
 
@@ -137,7 +134,7 @@ export function UserProfileFormFields({
                                                     "name": attribute.name
                                                 })
                                             }
-                                            className={clsx(props.kcInputClass)}
+                                            className={getClassName("kcInputClass")}
                                             aria-invalid={displayableErrors.length !== 0}
                                             disabled={attribute.readOnly}
                                             autoComplete={attribute.autocomplete}
@@ -153,7 +150,7 @@ export function UserProfileFormFields({
                                                 <style>{`#${divId} > span: { display: block; }`}</style>
                                                 <span
                                                     id={divId}
-                                                    className={clsx(props.kcInputErrorMessageClass)}
+                                                    className={getClassName("kcInputErrorMessageClass")}
                                                     style={{
                                                         "position": displayableErrors.length === 1 ? "absolute" : undefined
                                                     }}
@@ -173,4 +170,3 @@ export function UserProfileFormFields({
         </>
     );
 }
-

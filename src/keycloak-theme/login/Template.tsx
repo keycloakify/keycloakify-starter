@@ -2,7 +2,7 @@
 import { assert } from "keycloakify/tools/assert";
 import { clsx } from "keycloakify/tools/clsx";
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
-import { type TemplateProps, defaultTemplateClasses } from "keycloakify/TemplateProps";
+import { type TemplateProps, defaultTemplateClasses } from "keycloakify/login/TemplateProps";
 import { useGetClassName } from "keycloakify/lib/useGetClassName";
 import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
@@ -16,12 +16,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         showAnotherWayIfPresent = true,
         headerNode,
         showUsernameNode = null,
-        formNode,
         infoNode = null,
         kcContext,
         i18n,
         doUseDefaultCss,
-        classes
+        classes,
+        children
     } = props;
 
     const { getClassName } = useGetClassName({
@@ -42,7 +42,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             "lib/zocial/zocial.css"
         ],
         "styles": ["css/login.css"],
-        "htmlClassName": getClassName("kcHtmlClass")
+        "htmlClassName": getClassName("kcHtmlClass"),
+        "bodyClassName": undefined
     });
 
     if (!isReady) {
@@ -153,7 +154,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 />
                             </div>
                         )}
-                        {formNode}
+                        {children}
                         {auth !== undefined && auth.showTryAnotherWayLink && showAnotherWayIfPresent && (
                             <form
                                 id="kc-select-try-another-way-form"

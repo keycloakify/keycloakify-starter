@@ -23,7 +23,7 @@ export declare namespace OidcClient {
 
     export type LoggedIn = {
         isUserLoggedIn: true;
-        getAccessToken: ()=> string;
+        getAccessToken: () => string;
         logout: (params: { redirectTo: "home" | "current page" }) => Promise<never>;
         //If we have sent a API request to change user's email for example
         //and we want that jwt_decode(oidcClient.getAccessToken()).email be the new email
@@ -36,8 +36,8 @@ type Params = {
     url: string;
     realm: string;
     clientId: string;
-    transformUrlBeforeRedirect: (url: string) => string;
-    getUiLocales: () => string;
+    transformUrlBeforeRedirect?: (url: string) => string;
+    getUiLocales?: () => string;
     log?: typeof console.log;
 };
 
@@ -65,14 +65,19 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
             checkLoginIframe: false,
             adapter: createKeycloakAdapter({
                 transformUrlBeforeRedirect: url =>
-                    [url].map(transformUrlBeforeRedirect).map(
-                        url =>
-                            addParamToUrl({
-                                url,
-                                "name": "ui_locales",
-                                "value": getUiLocales()
-                            }).newUrl
-                    )[0],
+                    [url]
+                        .map(transformUrlBeforeRedirect ?? (url => url))
+                        .map(
+                            getUiLocales === undefined ?
+                                (url => url) :
+                                url =>
+                                    addParamToUrl({
+                                        url,
+                                        "name": "ui_locales",
+                                        "value": getUiLocales()
+                                    }).newUrl
+                        )
+                    [0],
                 keycloakInstance,
                 getRedirectMethod: () => redirectMethod
             })
@@ -103,11 +108,11 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
         });
     }
 
-    let currentAccessToken= keycloakInstance.token!;
+    let currentAccessToken = keycloakInstance.token!;
 
     const oidcClient = id<OidcClient.LoggedIn>({
         "isUserLoggedIn": true,
-        "getAccessToken": ()=> currentAccessToken,
+        "getAccessToken": () => currentAccessToken,
         "logout": async ({ redirectTo }) => {
             await keycloakInstance.logout({
                 "redirectUri": (() => {
@@ -157,7 +162,7 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
             currentAccessToken = keycloakInstance.token!;
 
             callee();
-            
+
         }, msBeforeExpiration - minValiditySecond * 1000);
     })();
 

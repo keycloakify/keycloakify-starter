@@ -1,4 +1,4 @@
-import { createUseI18n } from "keycloakify";
+import { createUseI18n } from "keycloakify/login";
 
 export const { useI18n } = createUseI18n({
     // NOTE: Here you can override the default i18n messages
