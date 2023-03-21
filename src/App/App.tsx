@@ -5,13 +5,15 @@ import { createOidcClientProvider, useOidcClient } from "./oidc";
 import { addFooToQueryParams, addBarToQueryParams } from "../keycloak-theme/login/valuesTransferredOverUrl";
 import jwt_decode from "jwt-decode";
 
-const keycloakUrl = "https://auth.code.gouv.fr"
+//On older Keycloak version you need the /auth (e.g: http://localhost:8080/auth)
+//On newer version you must remove it (e.g: http://localhost:8080 )
+const keycloakUrl = "https://auth.code.gouv.fr/auth";
 const keycloakRealm = "keycloakify";
 
 const { OidcClientProvider } = createOidcClientProvider({
-    url: `${keycloakUrl}/auth`,
+    url: keycloakUrl,
     realm: keycloakRealm,
-    clientId: "starter",
+    clientId: "myclient",
     //This function will be called just before redirecting, 
     //it should return the current langue. 
     //kcContext.locale.currentLanguageTag will be what this function returned just before redirecting.  

@@ -33,6 +33,15 @@ yarn start # See the Hello World app
 yarn build-keycloak-theme
 # Read the instruction printed on the console to see how to test
 # your theme on a real Keycloak instance.
+
+# For customizing other pages at the component level
+npx eject-keycloak-page # Then select the page you want
+
+# For initializing your email theme
+npx initialize-email-theme
+
+# For downloading the default theme
+npx download-builtin-keycloak-theme
 ```
 
 # The CI workflow
@@ -94,22 +103,36 @@ rm -r src/keycloak-theme
 
 cat << EOF > src/index.tsx
 import { createRoot } from "react-dom/client";
-import { StrictMode } from "react";
-import { kcContext } from "./kcContext";
-import KcApp from "./KcApp";
+import { StrictMode, lazy, Suspense } from "react";
+import { kcContext as kcLoginThemeContext } from "./login/kcContext";
+import { kcContext as kcAccountThemeContext } from "./account/kcContext";
 
-if( kcContext === undefined ){
-    throw new Error(
-        "This app is a Keycloak theme" +
-        "It isn't meant to be deployed outside of Keycloak"
-    );
-}
+const KcLoginThemeApp = lazy(() => import("./login/KcApp"));
+const KcAccountThemeApp = lazy(() => import("./account/KcApp"));
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <KcApp kcContext={kcContext} />
+        <Suspense>
+            {(()=>{
+
+                if( kcLoginThemeContext !== undefined ){
+                    return <KcLoginThemeApp kcContext={kcLoginThemeContext} />;
+                }
+
+                if( kcAccountThemeContext !== undefined ){
+                    return <KcAccountThemeApp kcContext={kcAccountThemeContext} />;
+                }
+
+                throw new Error(
+                  "This app is a Keycloak theme" +
+                  "It isn't meant to be deployed outside of Keycloak"
+                );
+
+            })()}
+        </Suspense>
     </StrictMode>
 );
+
 EOF
 
 rm .dockerignore Dockerfile Dockerfile.ci nginx.conf
@@ -190,7 +213,7 @@ jobs:
         prerelease: \${{ needs.check_if_version_upgraded.outputs.is_release_beta == 'true' }}
       env:
         GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
-EOF
+#    - run: npx -y -p gh-pages@3.0.0 gh-pages -u "github-actions-bot <actions@github.com>" -d storybook-static --dest storybook --add  
 ```
 
-You can also remove `jwt-decode`, `keycloak-js` and `tsafe from your dependencies.  
+You can also remove `jwt-decode`, `keycloak-js`, `powerhooks` and `tsafe` from your dependencies.  
