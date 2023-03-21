@@ -1,6 +1,6 @@
 import "./KcApp.css";
 import { lazy, Suspense } from "react";
-import Fallback, { type PageProps } from "keycloakify/account";
+import type { PageProps } from "keycloakify/account";
 import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
 
@@ -10,6 +10,7 @@ const DefaultTemplate = lazy(() => import("keycloakify/account/Template"));
 const Password = lazy(() => import("./pages/Password"));
 const MyExtraPage1 = lazy(() => import("./pages/MyExtraPage1"));
 const MyExtraPage2 = lazy(() => import("./pages/MyExtraPage2"));
+const Fallback = lazy(()=> import("keycloakify/account"));
 
 const classes: PageProps<any, any>["classes"] = {
     "kcBodyClass": "my-root-class"

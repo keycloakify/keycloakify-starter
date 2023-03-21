@@ -10,13 +10,14 @@
     <a href="https://starter.keycloakify.dev/storybook">Keycloak theme Storybook</a>
 </p>
 
-
-
 # Introduction
 
 This repo constitutes an easily reusable setup for a standalone Keycloak theme project OR for a SPA React App that generates a
 Keycloak theme that goes along with it.  
 If you are only looking to create a theme (and not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
+
+❗️ WARNING ❗️: Don't waste time trying to setup Keycloakify in a [Vite](https://vitejs.dev/) project.  
+Currently Keycloakify only works with Webpack. If you want Vite support [join the conversation](https://github.com/InseeFrLab/keycloakify/issues/271#issuecomment-1478242786).  
 
 # Quick start
 
