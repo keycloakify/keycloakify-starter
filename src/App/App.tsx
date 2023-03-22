@@ -48,7 +48,7 @@ function ContextualizedApp() {
                         <>
                             <h1>You are authenticated !</h1>
                             {/* On older Keycloak version its /auth/realms instead of /realms */}
-                            <a href={`${keycloakUrl}/realms/${keycloakRealm}/account`} target="_blank">Link to your Keycloak account</a>
+                            <a href={`${keycloakUrl}/realms/${keycloakRealm}/account`} target="_blank" rel="noreferrer">Link to your Keycloak account</a>
                             <pre style={{ textAlign: "left" }}>{JSON.stringify(jwt_decode(oidcClient.getAccessToken()), null, 2)}</pre>
                             <button onClick={() => oidcClient.logout({ redirectTo: "home" })}>Logout</button>
                         </>

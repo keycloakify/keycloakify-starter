@@ -6152,10 +6152,10 @@ keycloak-js@^21.0.1:
     base64-js "^1.5.1"
     js-sha256 "^0.9.0"
 
-keycloakify@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.0.0.tgz#fa40ce5a45915179f769ffd17891f7f1d83049fb"
-  integrity sha512-LBqHjvurVXUAxzWvkdNQFtXJ2IbbzVZqbxIeeCLCk6NVuemgLhM6LmnR6IJRUhE5pTBZLkp9GoWl3jVPhBOPxg==
+keycloakify@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.0.1.tgz#7120ce5762517e40265939737e0bbffc8b70fc9c"
+  integrity sha512-gL2Lmdks1grrR5SJ/uMKV9S/o3gRh6CaOKCGG+k0/UX5EQCVfiH+FiS4IG3Gq9zYx/zoZd3x4wELiTLxG+kuPg==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"
