@@ -13,7 +13,7 @@ const keycloakRealm = "keycloakify";
 const { OidcClientProvider } = createOidcClientProvider({
     url: keycloakUrl,
     realm: keycloakRealm,
-    clientId: "myclient",
+    clientId: "starter",
     //This function will be called just before redirecting, 
     //it should return the current langue. 
     //kcContext.locale.currentLanguageTag will be what this function returned just before redirecting.  
