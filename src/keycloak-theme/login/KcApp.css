@@ -12,5 +12,5 @@
 }
 
 .my-root-class body {
-	background: url(./assets/background.svg) no-repeat center center fixed;
+	background: url("/favicon.ico") no-repeat center center fixed;
 }

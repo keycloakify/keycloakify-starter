@@ -84,7 +84,7 @@ export const { bar, addBarToQueryParams } = (() => {
 
 
 function read(params: { queryParamName: string }): string | undefined {
-    if (kcContext === undefined || process.env.NODE_ENV !== "production") {
+    if (kcContext === undefined || import.meta.env.MODE !== "production") {
         //NOTE: We do something only if we are really in Keycloak
         return undefined;
     }

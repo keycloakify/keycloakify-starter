@@ -4,6 +4,7 @@
 <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-regular-webfont.woff2" as="font" crossorigin="anonymous">
 <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-semibold-webfont.woff2" as="font" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/fonts/WorkSans/font.css">
+  <script type="module" src="%PUBLIC_URL%/src/index.tsx"></script>
 */
 
 @font-face {

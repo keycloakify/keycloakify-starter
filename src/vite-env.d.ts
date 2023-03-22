@@ -1,4 +1,4 @@
-/// <reference types="react-scripts" />
+/// <reference types="vite/client" />
 declare module "*.md" {
     const src: string;
     export default src;

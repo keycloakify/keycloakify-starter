@@ -8,8 +8,8 @@
         "url": "git://github.com/codegouvfr/keycloakify-starter.git"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
+        "start": "vite",
+        "build": "tsc&&vite build",
         "build-keycloak-theme": "yarn build && keycloakify",
         "eject-keycloak-page": "eject-keycloak-page",
         "download-builtin-keycloak-theme": "download-builtin-keycloak-theme"
@@ -28,21 +28,26 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "evt": "^2.4.15",
+        "evt": "^2.4.18",
         "jwt-decode": "^3.1.2",
         "keycloak-js": "^21.0.1",
         "keycloakify": "^7.0.2",
         "powerhooks": "^0.26.7",
         "react": "18.1.0",
         "react-dom": "18.1.0",
+        "rfc4648": "^1.5.2",
         "tsafe": "^1.6.0"
     },
     "devDependencies": {
         "@types/node": "^15.3.1",
         "@types/react": "18.0.9",
         "@types/react-dom": "18.0.4",
+        "@vitejs/plugin-react": "^3.1.0",
+        "cheerio": "^1.0.0-rc.12",
+        "crypto": "^1.0.1",
         "react-scripts": "5.0.1",
-        "typescript": "~4.7.0"
+        "typescript": "~4.7.0",
+        "vite": "^4.2.1"
     },
     "eslintConfig": {
         "extends": [
