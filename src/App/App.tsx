@@ -60,7 +60,8 @@ function ContextualizedApp() {
                 <img src={logo} className="App-logo" alt="logo" />
                 <img src={myimg} alt="test_image" />
                 <p style={{ "fontFamily": '"Work Sans"' }}>Hello world</p>
-                <p>Check out all keycloak pages in the <a href="https://starter.keycloakify.dev/storybook">Storybook</a>!</p>
+                <p>Check out all keycloak pages in the <a href="https://storybook.keycloakify.dev/storybook">Storybook</a>!</p>
+                <p>Once you've identified the ones you want to customize run <code>npx eject-keycloak-page</code></p>
             </header>
         </div>
     );
