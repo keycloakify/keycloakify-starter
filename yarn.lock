@@ -3025,9 +3025,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001370, caniuse-lite@^1.0.30001373:
-  version "1.0.30001374"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001374.tgz#3dab138e3f5485ba2e74bd13eca7fe1037ce6f57"
-  integrity sha512-mWvzatRx3w+j5wx/mpFN5v5twlPrabG8NqX2c6e45LCpymdoGqNvRkRutFUqpRTXKFQFNQJasvK0YT7suW6/Hw==
+  version "1.0.30001469"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001469.tgz"
+  integrity sha512-Rcp7221ScNqQPP3W+lVOYDyjdR6dC+neEQCttoNr5bAyz54AboB4iwpnWgyi8P4YUsPybVzT4LgWiBbI3drL4g==
 
 case-sensitive-paths-webpack-plugin@^2.4.0:
   version "2.4.0"
@@ -4383,15 +4383,6 @@ events@^3.2.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
   integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
-
-evt@^2.4.13:
-  version "2.4.13"
-  resolved "https://registry.yarnpkg.com/evt/-/evt-2.4.13.tgz#5ef873159ce62e099d58801a3e4b8e0f5b648017"
-  integrity sha512-haTVOsmjzk+28zpzvVwan9Zw2rLQF2izgi7BKjAPRzZAfcv+8scL0TpM8MzvGNKFYHiy+Bq3r6FYIIUPl9kt3A==
-  dependencies:
-    minimal-polyfills "^2.2.2"
-    run-exclusive "^2.2.18"
-    tsafe "^1.4.1"
 
 evt@^2.4.15:
   version "2.4.15"
@@ -6152,10 +6143,10 @@ keycloak-js@^21.0.1:
     base64-js "^1.5.1"
     js-sha256 "^0.9.0"
 
-keycloakify@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.0.1.tgz#7120ce5762517e40265939737e0bbffc8b70fc9c"
-  integrity sha512-gL2Lmdks1grrR5SJ/uMKV9S/o3gRh6CaOKCGG+k0/UX5EQCVfiH+FiS4IG3Gq9zYx/zoZd3x4wELiTLxG+kuPg==
+keycloakify@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.0.2.tgz#cb7335e1db07d554e54af49452f7491b1658ddc4"
+  integrity sha512-dvbqjy8gCqRQQXik1Pvcd66kbbc0bWB8SjbSd4+bcuPP2PJrX9VeQS3AmxWbMeI1bMIk0ObI/mXijAPfPonaTQ==
   dependencies:
     "@octokit/rest" "^18.12.0"
     cheerio "^1.0.0-rc.5"
@@ -7659,15 +7650,15 @@ postcss@^8.3.5, postcss@^8.4.14, postcss@^8.4.4, postcss@^8.4.7:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-powerhooks@^0.26.2:
-  version "0.26.2"
-  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.26.2.tgz#020056e8b35c5959bf7b28c47a1015cfafd81412"
-  integrity sha512-NOHpRXMCnPxjvQMt0rEtPjHrid+wEh567+xY6OR3sdy+XKA2TI0T3o+KlDcFxtixTvz/kO4/Ok430Dip9D/5TQ==
+powerhooks@^0.26.7:
+  version "0.26.7"
+  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.26.7.tgz#3c9709a6012207e073aa268a775b352905ea46f5"
+  integrity sha512-ghVMUbPj1Xxkiy6eOlCzMdFc70a6lvfLnM4MsPbTvSKuaAxSHn62sfKDJ3rYOFqVSxC4JwiOa2wCDwssKq1Glw==
   dependencies:
-    evt "^2.4.13"
+    evt "^2.4.18"
     memoizee "^0.4.15"
     resize-observer-polyfill "^1.5.1"
-    tsafe "^1.4.3"
+    tsafe "^1.6.0"
 
 prelude-ls@^1.2.1:
   version "1.2.1"
@@ -9002,11 +8993,6 @@ tryer@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
-
-tsafe@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.4.1.tgz#59cdad8ac41babf88e56dcd1a683ae2fb145d059"
-  integrity sha512-3IDBalvf6SyvHFS14UiwCWzqdSdo+Q0k2J7DZyJYaHW/iraW9DJpaBKDJpry3yQs3o/t/A+oGaRW3iVt2lKxzA==
 
 tsafe@^1.4.3:
   version "1.4.3"
