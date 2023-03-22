@@ -12,9 +12,7 @@
         "build": "react-scripts build",
         "build-keycloak-theme": "yarn build && keycloakify",
         "eject-keycloak-page": "eject-keycloak-page",
-        "download-builtin-keycloak-theme": "download-builtin-keycloak-theme",
-        "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "download-builtin-keycloak-theme": "download-builtin-keycloak-theme"
     },
     "keycloakify": {
         "extraLoginPages": [
@@ -37,19 +35,9 @@
         "powerhooks": "^0.26.2",
         "react": "18.1.0",
         "react-dom": "18.1.0",
-        "tsafe": "^1.4.3"
+        "tsafe": "^1.6.0"
     },
     "devDependencies": {
-        "@storybook/addon-actions": "^6.5.16",
-        "@storybook/addon-essentials": "^6.5.16",
-        "@storybook/addon-interactions": "^6.5.16",
-        "@storybook/addon-links": "^6.5.16",
-        "@storybook/builder-webpack5": "^6.5.16",
-        "@storybook/manager-webpack5": "^6.5.16",
-        "@storybook/node-logger": "^6.5.16",
-        "@storybook/preset-create-react-app": "^4.1.2",
-        "@storybook/react": "^6.5.16",
-        "@storybook/testing-library": "^0.0.13",
         "@types/node": "^15.3.1",
         "@types/react": "18.0.9",
         "@types/react-dom": "18.0.4",
