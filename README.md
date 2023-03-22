@@ -1,5 +1,5 @@
 <p align="center">
-    <i>🚀 A starter/demo project for <a href="https://keycloakify.dev">Keycloakify</a> 🚀</i>
+    <i>🚀 A starter/demo project for <a href="https://keycloakify.dev">Keycloakify</a> v7 🚀</i>
     <br/>
     <br/>
     <img src="https://github.com/codegouvfr/keycloakify-starter/workflows/ci/badge.svg?branch=main">
@@ -26,7 +26,7 @@ yarn
 yarn build-keycloak-theme # Build the theme one time (some assets will be copied to 
               # public/keycloak_static, they are needed to dev your page outside of Keycloak)
 yarn start # See the Hello World app
-# Uncomment line 15 of src/keycloak-theme/kcContext, reload https://localhost:3000
+# Uncomment line 15 of src/keycloak-theme/login/kcContext, reload https://localhost:3000
 # You can now develop your Login pages. (Don't forget to comment it back when you're done)
 
 # Think your theme is ready? Run
