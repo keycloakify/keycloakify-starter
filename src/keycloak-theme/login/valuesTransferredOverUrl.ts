@@ -1,32 +1,23 @@
 import { kcContext } from "./kcContext";
-import {
-    retrieveParamFromUrl,
-    addParamToUrl,
-    updateSearchBarUrl
-} from "powerhooks/tools/urlSearchParams";
+import { retrieveParamFromUrl, addParamToUrl, updateSearchBarUrl } from "powerhooks/tools/urlSearchParams";
 import { capitalize } from "tsafe/capitalize";
 
 export const { foo, addFooToQueryParams } = (() => {
     const queryParamName = "foo";
 
-    type Type = { foo: number; };
+    type Type = { foo: number };
 
-    const value = (()=> {
-
+    const value = (() => {
         const unparsedValue = read({ queryParamName });
 
-        if( unparsedValue === undefined ){
+        if (unparsedValue === undefined) {
             return undefined;
         }
 
         return JSON.parse(unparsedValue) as Type;
-
     })();
 
-    function addToUrlQueryParams(params: {
-        url: string;
-        value: Type;
-    }): string {
+    function addToUrlQueryParams(params: { url: string; value: Type }): string {
         const { url, value } = params;
 
         return addParamToUrl({
@@ -49,22 +40,17 @@ export const { bar, addBarToQueryParams } = (() => {
 
     type Type = string;
 
-    const value = (()=> {
-
+    const value = (() => {
         const unparsedValue = read({ queryParamName });
 
-        if( unparsedValue === undefined ){
+        if (unparsedValue === undefined) {
             return undefined;
         }
 
         return JSON.parse(unparsedValue) as Type;
-
     })();
 
-    function addToUrlQueryParams(params: {
-        url: string;
-        value: Type;
-    }): string {
+    function addToUrlQueryParams(params: { url: string; value: Type }): string {
         const { url, value } = params;
 
         return addParamToUrl({
@@ -81,7 +67,6 @@ export const { bar, addBarToQueryParams } = (() => {
 
     return out;
 })();
-
 
 function read(params: { queryParamName: string }): string | undefined {
     if (kcContext === undefined || process.env.NODE_ENV !== "production") {
@@ -114,9 +99,7 @@ function read(params: { queryParamName: string }): string | undefined {
     const serializedValue = localStorage.getItem(queryParamName);
 
     if (serializedValue === null) {
-        throw new Error(
-            `Missing ${queryParamName} in URL when redirecting to login page`
-        );
+        throw new Error(`Missing ${queryParamName} in URL when redirecting to login page`);
     }
 
     return serializedValue;

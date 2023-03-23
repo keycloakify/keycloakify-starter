@@ -16,7 +16,7 @@ export declare namespace OidcClient {
         isUserLoggedIn: false;
         login: (params: {
             //To prevent infinite loop if the user access a page that requires to
-            //be authenticated but cancel (clicks back). 
+            //be authenticated but cancel (clicks back).
             doesCurrentHrefRequiresAuth: boolean;
         }) => Promise<never>;
     };
@@ -42,20 +42,11 @@ type Params = {
 };
 
 async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
-    const {
-        url,
-        realm,
-        clientId,
-        transformUrlBeforeRedirect,
-        getUiLocales,
-        log
-    } = params;
+    const { url, realm, clientId, transformUrlBeforeRedirect, getUiLocales, log } = params;
 
     const keycloakInstance = new Keycloak_js({ url, realm, clientId });
 
-    let redirectMethod: ReturnType<
-        Param0<typeof createKeycloakAdapter>["getRedirectMethod"]
-    > = "overwrite location.href";
+    let redirectMethod: ReturnType<Param0<typeof createKeycloakAdapter>["getRedirectMethod"]> = "overwrite location.href";
 
     const isAuthenticated = await keycloakInstance
         .init({
@@ -65,19 +56,16 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
             checkLoginIframe: false,
             adapter: createKeycloakAdapter({
                 transformUrlBeforeRedirect: url =>
-                    [url]
-                        .map(transformUrlBeforeRedirect ?? (url => url))
-                        .map(
-                            getUiLocales === undefined ?
-                                (url => url) :
-                                url =>
-                                    addParamToUrl({
-                                        url,
-                                        "name": "ui_locales",
-                                        "value": getUiLocales()
-                                    }).newUrl
-                        )
-                    [0],
+                    [url].map(transformUrlBeforeRedirect ?? (url => url)).map(
+                        getUiLocales === undefined
+                            ? url => url
+                            : url =>
+                                  addParamToUrl({
+                                      url,
+                                      "name": "ui_locales",
+                                      "value": getUiLocales()
+                                  }).newUrl
+                    )[0],
                 keycloakInstance,
                 getRedirectMethod: () => redirectMethod
             })
@@ -89,16 +77,14 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
         throw isAuthenticated;
     }
 
-    const login: OidcClient.NotLoggedIn["login"] = async ({
-        doesCurrentHrefRequiresAuth
-    }) => {
+    const login: OidcClient.NotLoggedIn["login"] = async ({ doesCurrentHrefRequiresAuth }) => {
         if (doesCurrentHrefRequiresAuth) {
             redirectMethod = "location.replace";
         }
 
         await keycloakInstance.login({ "redirectUri": window.location.href });
 
-        return new Promise<never>(() => { });
+        return new Promise<never>(() => {});
     };
 
     if (!isAuthenticated) {
@@ -125,7 +111,7 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
                 })()
             });
 
-            return new Promise<never>(() => { });
+            return new Promise<never>(() => {});
         },
         "updateTokenInfos": async () => {
             await keycloakInstance.updateToken(-1);
@@ -138,13 +124,9 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
         const msBeforeExpiration = jwt_decode<{ exp: number }>(currentAccessToken)["exp"] * 1000 - Date.now();
 
         setTimeout(async () => {
-
             log?.(`OIDC access token will expire in ${minValiditySecond} seconds, waiting for user activity before renewing`);
 
-            await Evt.merge([
-                Evt.from(document, "mousemove"),
-                Evt.from(document, "keydown")
-            ]).waitFor();
+            await Evt.merge([Evt.from(document, "mousemove"), Evt.from(document, "keydown")]).waitFor();
 
             log?.("User activity detected. Refreshing access token now");
 
@@ -162,7 +144,6 @@ async function createKeycloakOidcClient(params: Params): Promise<OidcClient> {
             currentAccessToken = keycloakInstance.token!;
 
             callee();
-
         }, msBeforeExpiration - minValiditySecond * 1000);
     })();
 
@@ -174,36 +155,25 @@ const minValiditySecond = 25;
 const oidcClientContext = createContext<OidcClient | undefined>(undefined);
 
 export function createOidcClientProvider(params: Params) {
-
-
     const prOidcClient = createKeycloakOidcClient(params);
 
-    function OidcClientProvider(props: { children: React.ReactNode; }) {
-
+    function OidcClientProvider(props: { children: React.ReactNode }) {
         const { children } = props;
 
         const [oidcClient, setOidcClient] = useState<OidcClient | undefined>(undefined);
 
         useEffect(() => {
-
             prOidcClient.then(setOidcClient);
-
         }, []);
 
         if (oidcClient === undefined) {
             return null;
         }
 
-        return (
-            <oidcClientContext.Provider value={oidcClient}>
-                {children}
-            </oidcClientContext.Provider>
-        );
-
+        return <oidcClientContext.Provider value={oidcClient}>{children}</oidcClientContext.Provider>;
     }
 
     return { OidcClientProvider };
-
 }
 
 export function useOidcClient() {

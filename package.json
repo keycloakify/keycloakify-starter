@@ -13,7 +13,8 @@
         "build": "vite build",
         "build-keycloak-theme": "yarn build && keycloakify",
         "eject-keycloak-page": "eject-keycloak-page",
-        "download-builtin-keycloak-theme": "download-builtin-keycloak-theme"
+        "download-builtin-keycloak-theme": "download-builtin-keycloak-theme",
+        "format": "prettier --write ."
     },
     "keycloakify": {
         "extraLoginPages": [
@@ -44,6 +45,7 @@
         "@types/node": "^15.3.1",
         "@types/react": "18.0.9",
         "@types/react-dom": "18.0.4",
+        "prettier": "^2.8.6",
         "typescript": "~4.7.0"
     },
     "eslintConfig": {
