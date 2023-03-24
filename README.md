@@ -15,7 +15,7 @@ Keycloak theme that goes along with it.
 If you are only looking to create a theme (and not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
 
 > ❗️ WARNING ❗️: Don't waste time trying to setup Keycloakify in a [Vite](https://vitejs.dev/) project.  
-> Currently Keycloakify only works with Webpack. If Vite support is important for you [join the conversation](https://github.com/InseeFrLab/keycloakify/issues/271#issuecomment-1478242786).  
+> Currently Keycloakify only works with Webpack but [Vite support is comming soon](https://github.com/keycloakify/keycloakify/pull/275)!.  
 
 # Quick start
 
