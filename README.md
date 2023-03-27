@@ -15,7 +15,7 @@ Keycloak theme that goes along with it.
 If you are only looking to create a theme (and not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
 
 > ❗️ WARNING ❗️: Don't waste time trying to port this setup to [Vite](https://vitejs.dev/).  
-> Currently Keycloakify only works colocated with Webpack projects but [we a working toward enabeling collocation with Vite and Next.js projects](https://github.com/keycloakify/keycloakify/pull/275)!  
+> Currently Keycloakify only works colocated with Webpack projects but [we are working toward enabeling collocation with Vite and Next.js projects](https://github.com/keycloakify/keycloakify/pull/275)!  
 
 # Quick start
 
