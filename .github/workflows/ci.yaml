@@ -45,7 +45,7 @@ jobs:
     - uses: bahmutov/npm-install@v1
     - run: yarn build
     - run: npx keycloakify
-    - run: mv build_keycloak/target/*keycloak-theme*.jar keycloak-theme.jar
+    - run: mv build_keycloak/target/*.jar keycloak-theme.jar
     - uses: softprops/action-gh-release@v1
       with:
         name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
