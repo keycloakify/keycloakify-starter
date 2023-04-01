@@ -65,25 +65,14 @@ npx download-builtin-keycloak-theme
 
 If you want an example of an app that put that setup in production checkout onyxia-ui: [the repo](https://github.com/InseeFrLab/onyxia-ui), [the login](https://auth.lab.sspcloud.fr/auth/realms/sspcloud/protocol/openid-connect/auth?client_id=onyxia&redirect_uri=https%3A%2F%2Fonyxia.lab.sspcloud.fr), [the app](https://datalab.sspcloud.fr).
 
-# Standalone vs `--external-assets`
+# Docker  
 
-The CI creates two jars 
-- `keycloak-theme.jar`: Generated with `npx keycloakify --external-assets`, the assets, located `static/**/*`, like for example 
-  `static/js/main.<hash>.js` will be downloaded from `https://starter.keycloakify.dev/static/js/main.<hash>.js` (`starter.keycloakify.dev` is 
-  specified in the `package.json`.
-- `standalone-keycloak-theme.jar`: Generated with `npx keycloakify`, this theme is fully standalone, all assets will be served by the 
-  Keycloak server, for example `static/js/main.<hash>.js` will be downloaded from an url like `http://<your keycloak url>/resources/xxxx/login/keycloakify-starter/build/static/js/main.<hash>.js`.
-
-More info on the `--external-assets` build option [here](https://docs.keycloakify.dev/v/v6/build-options#external-assets).  
-
-# Docker
+Instructions for building and running the react app (`src/App`) that is collocated with our Keycloak theme. 
 
 ```bash
-docker build -f Dockerfile -t codegouvfr/keycloakify-starter:test .
-#OR (to reproduce how the image is built in the ci workflow):
-yarn && yarn build && tar -cvf build.tar ./build && docker build -f Dockerfile.ci -t codegouvfr/keycloakify-starter:test . && rm build.tar
-
-docker run -it -dp 8083:80 codegouvfr/keycloakify-starter:test
+docker build -f Dockerfile -t keycloakify/keycloakify-starter:main .
+docker run -it -dp 8083:80 keycloakify/keycloakify-starter:main
+# You can access the app at http://localhost:8083
 ```
 
 # Standalone keycloak theme

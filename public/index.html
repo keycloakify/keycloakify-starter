@@ -20,10 +20,7 @@
   <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-medium-webfont.woff2" as="font" crossorigin="anonymous">
   <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-regular-webfont.woff2" as="font" crossorigin="anonymous">
   <link rel="preload" href="%PUBLIC_URL%/fonts/WorkSans/worksans-semibold-webfont.woff2" as="font" crossorigin="anonymous">
-  <!-- 
-  	We need to put it plain in the html because of Keycloakify, in case we decide to remove --external-assets 
-  	SEE: https://github.com/InseeFrLab/keycloakify#font-face-importing-fonts-from-thesrc-dir 
-  -->
+  <!-- SEE: https://docs.keycloakify.dev/limitations#self-hosted-fonts -->
   <style>
     /* latin */
     @font-face {
