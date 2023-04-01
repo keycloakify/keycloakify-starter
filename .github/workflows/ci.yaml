@@ -79,17 +79,11 @@ jobs:
           OUT=$GITHUB_REPOSITORY:$TO_VERSION,$GITHUB_REPOSITORY:latest
           OUT=$(echo "$OUT" | awk '{print tolower($0)}') 
           echo ::set-output name=docker_tags::$OUT
-      - uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: build
-      - run: tar -cvf build.tar ./build
       - uses: docker/build-push-action@v2
         with:
           push: true
           context: .
           tags: ${{ steps.step1.outputs.docker_tags }}
-          file: Dockerfile.ci
 
   github_pages:
     runs-on: ubuntu-latest
