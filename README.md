@@ -199,6 +199,7 @@ jobs:
         prerelease: \${{ needs.check_if_version_upgraded.outputs.is_release_beta == 'true' }}
       env:
         GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+EOF
 ```
 
 You can also remove `jwt-decode`, `keycloak-js`, `powerhooks` and `tsafe` from your dependencies.  
