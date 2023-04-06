@@ -2183,6 +2183,13 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@types/yazl@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@types/yazl/-/yazl-2.4.2.tgz#d5f8a4752261badbf1a36e8b49e042dc18ec84bc"
+  integrity sha512-T+9JH8O2guEjXNxqmybzQ92mJUh2oCwDDMSSimZSe1P+pceZiFROZLYmcbqkzV5EUwz6VwcKXCO2S2yUpra6XQ==
+  dependencies:
+    "@types/node" "*"
+
 "@typescript-eslint/eslint-plugin@^5.5.0":
   version "5.57.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.57.1.tgz#d1ab162a3cd2671b8a1c9ddf6e2db73b14439735"
@@ -6352,12 +6359,13 @@ keycloak-js@^21.0.1:
     base64-js "^1.5.1"
     js-sha256 "^0.9.0"
 
-keycloakify@7.6.3:
-  version "7.6.3"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.6.3.tgz#a546ff819cac05d5a020c8b2924feb3a35aaabbc"
-  integrity sha512-3BPOxYv7ssqVsxkaD9AB6Cg+5n9Aos5bpW/uWvJC08ihGcYkSaQtU/ksjRAabaa11LRi6bQFI47sV/PpAUqqaQ==
+keycloakify@^7.6.5:
+  version "7.6.5"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.6.5.tgz#d120696edd50db7197da4acbc8c1671010f085e6"
+  integrity sha512-p1NJiGL/yDmOkAQcRrwP+NVoLcC9zKvrXtHn1zuJUEwsxgLA7B5NZA0n9Chiz0JNFxFOWVkKGNRoZcnjFyuVaA==
   dependencies:
     "@octokit/rest" "^18.12.0"
+    "@types/yazl" "^2.4.2"
     cheerio "^1.0.0-rc.5"
     cli-select "^1.1.2"
     evt "^2.4.18"
@@ -6369,6 +6377,7 @@ keycloakify@7.6.3:
     rfc4648 "^1.5.2"
     tsafe "^1.6.0"
     yauzl "^2.10.0"
+    yazl "^2.5.1"
     zod "^3.17.10"
 
 kind-of@^6.0.2:
@@ -10127,6 +10136,13 @@ yauzl@^2.10.0:
   dependencies:
     buffer-crc32 "~0.2.3"
     fd-slicer "~1.1.0"
+
+yazl@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/yazl/-/yazl-2.5.1.tgz#a3d65d3dd659a5b0937850e8609f22fffa2b5c35"
+  integrity sha512-phENi2PLiHnHb6QBVot+dJnaAZ0xosj7p3fWl+znIjBDlnMI2PsZCJZ306BPTFOaHf5qdDEI8x5qFrSOBN5vrw==
+  dependencies:
+    buffer-crc32 "~0.2.3"
 
 yocto-queue@^0.1.0:
   version "0.1.0"
