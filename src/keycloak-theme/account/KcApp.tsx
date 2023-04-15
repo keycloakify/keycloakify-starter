@@ -16,7 +16,7 @@ const classes: PageProps<any, any>["classes"] = {
     "kcBodyClass": "my-root-class"
 };
 
-export default function App(props: { kcContext: KcContext; }) {
+export default function KcApp(props: { kcContext: KcContext; }) {
 
     const { kcContext } = props;
 

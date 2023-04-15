@@ -28,7 +28,7 @@ const classes: PageProps<any, any>["classes"] = {
     "kcHeaderWrapperClass": "my-color my-font"
 };
 
-export default function App(props: { kcContext: KcContext; }) {
+export default function KcApp(props: { kcContext: KcContext; }) {
 
     const { kcContext } = props;
 
