@@ -32,6 +32,9 @@ yarn build-keycloak-theme
 # Read the instruction printed on the console to see how to test
 # your theme on a real Keycloak instance.
 
+# For launching the Storybook
+yarn storybook
+
 # For customizing other pages at the component level
 npx eject-keycloak-page # Then select the page you want
 

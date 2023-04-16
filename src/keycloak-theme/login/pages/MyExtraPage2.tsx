@@ -17,6 +17,7 @@ export default function MyExtraPage1(props: PageProps<Extract<KcContext, { pageI
         >
 
             <form>
+                {kcContext.someCustomValue}
                 {/*...*/}
             </form>
         </Template>

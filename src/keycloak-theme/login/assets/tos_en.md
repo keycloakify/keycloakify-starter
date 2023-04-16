@@ -2,13 +2,10 @@
 
 ## Presentation / Features
 
-[EC: continuation of today's meeting: this would deserve to differentiate the SSP Cloud from the Onyxia SSP Cloud instance]
-
 The SSP Cloud is a service (hereinafter referred to as "the service") implemented by the National Institute for Statistics and Economic Studies (hereinafter referred to as "Insee").
 
-The SSP Cloud is an implementation of free software [Onyxia] (https://github.com/InseeFrLab/onyxia) created and maintained by the innovation and technical instruction division of INSEE (information system management / innovation unit and information system strategy). The SSP Cloud is hosted by INSEE.
+The SSP Cloud is an implementation of free software [Onyxia](https://github.com/InseeFrLab/onyxia) created and maintained by the innovation and technical instruction division of INSEE (information system management / innovation unit and information system strategy). The SSP Cloud is hosted by INSEE.
 
-[EC: I will remove the "on open data", since the SSP Cloud can accommodate secure data under the appropriate conditions]
 The SSP Cloud is a platform offering a "datalab" intended for _data science_ experiments on open data in which users can orchestrate services dedicated to the practice of _data science_ (development environments, databases, etc.). This service offering thus aims to familiarize users with new collaborative working methods using _open source_ statistical languages ​​(R, python, Julia, etc.), _cloud computing_ type technologies, as well as to allow processing experiments. innovative statistics. The services offered are standard.
 
 The SSP Cloud is aimed at officials of the official statistical system as well as teachers and students of the Group of National Schools of Economics and Statistics, allowing inter-service collaboration and cooperation with their ecosystem. Access can thus be granted on request and after decision of the governance bodies of the Cloud SSP to external collaborators and involved in the realization of experimental projects of the official statistical system. Projects involving non-open data are also subject to the decision of the governing bodies.
@@ -22,7 +19,7 @@ The SSP Cloud allows:
 -   access to a code management service
 -   orchestration of data processing flows
 
-A user account is also used to connect to the service platform of the Inter-ministerial Mutualization Free Software community (<https://groupes.mim-libre.fr/>).
+A user account is also used to connect to the service platform of [the Inter-ministerial Mutualization Free Software community](https://groupes.mim-libre.fr/).
 
 ## Legal Notice
 
@@ -49,8 +46,8 @@ Internet. The use of a computer is recommended. Use of the datalab services is f
 
 The user community is accessible on:
 
--   Tchap, salon [SSP Cloud] (https://www.tchap.gouv.fr/#/room/#SSPCloudXDpAw6v:agent.finances.tchap.gouv.fr)
--   Rocket Chat at MIM Libre, [SSP Cloud] lounge (https://chat.mim-libre.fr/channel/sspcloud)
+-   Tchap, salon [SSP Cloud](https://www.tchap.gouv.fr/#/room/#SSPCloudXDpAw6v:agent.finances.tchap.gouv.fr)
+-   Rocket Chat at MIM Libre, [SSP Cloud lounge](https://chat.mim-libre.fr/channel/sspcloud)
 
 ## Limits of use of the Service
 
@@ -177,4 +174,4 @@ functionalities encountered on the platform, it is recommended, first of all
 time to solicit communities of peers in collaborative spaces
 provided for this purpose on Tchap and Rocket Chat-MIM Libre.
 
-CNIL right of access for: <innovation@insee.fr>
+CNIL right of access for: innovation@insee.fr
