@@ -20,7 +20,8 @@ If you are only looking to create a theme (and not a theme + an App) there are a
 # Quick start
 
 ```bash
-yarn
+yarn # install dependencies (it's like npm install)
+
 yarn build-keycloak-theme # Build the theme one time (some assets will be copied to 
                           # public/keycloak_static, they are needed to dev your page 
                           # outside of Keycloak)
