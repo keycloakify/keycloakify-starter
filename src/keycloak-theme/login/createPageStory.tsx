@@ -12,7 +12,7 @@ export function createPageStory<PageId extends KcContext["pageId"]>(params: {
 
         const { kcContext } = getKcContext({
             mockPageId: pageId,
-            storyParams: params.kcContext
+            storyPartialKcContext: params.kcContext
         });
 
         return <KcApp kcContext={kcContext} />;
