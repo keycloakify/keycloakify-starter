@@ -13,7 +13,7 @@ const MyExtraPage2 = lazy(() => import("./pages/MyExtraPage2"));
 const Fallback = lazy(()=> import("keycloakify/account"));
 
 const classes: PageProps<any, any>["classes"] = {
-    "kcBodyClass": "my-root-class"
+    "kcBodyClass": "my-root-account-class"
 };
 
 export default function KcApp(props: { kcContext: KcContext; }) {

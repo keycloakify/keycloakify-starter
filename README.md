@@ -22,27 +22,32 @@ If you are only looking to create a theme (and not a theme + an App) there are a
 ```bash
 yarn
 yarn build-keycloak-theme # Build the theme one time (some assets will be copied to 
-              # public/keycloak_static, they are needed to dev your page outside of Keycloak)
+                          # public/keycloak_static, they are needed to dev your page 
+                          # outside of Keycloak)
+
 yarn start # See the Hello World app
-# Uncomment line 15 of src/keycloak-theme/login/kcContext, reload https://localhost:3000
-# You can now develop your Login pages. (Don't forget to comment it back when you're done)
+           # Uncomment line 15 of src/keycloak-theme/login/kcContext, reload https://localhost:3000
+           # You can now develop your Login pages. (Don't forget to comment it back when you're done)
 
-# Think your theme is ready? Run
-yarn build-keycloak-theme
-# Read the instruction printed on the console to see how to test
-# your theme on a real Keycloak instance.
+yarn storybook # Start Storybook
+               # This is by far the best way to develop your theme
+               # This enable to quickly see your pages in isolation and in different states.  
+               # You can create stories even for pages that you haven't explicitly overloaded. See src/keycloak-theme/login/pages/LoginResetPassword.stories.tsx
+               # See Keycloakify's storybook for if you need a starting point for your stories: https://github.com/keycloakify/keycloakify/tree/main/stories
 
-# For launching the Storybook
-yarn storybook
+yarn build-keycloak-theme # Actually build the theme
+                          # Read the instruction printed on the console to see how to test
+                          # your theme on a real Keycloak instance.
 
-# For customizing other pages at the component level
-npx eject-keycloak-page # Then select the page you want
+npx eject-keycloak-page # Prompt that let you select the pages you want to customize
+                        # This CLI tools is not guarenty to work, you can always copy pase pages 
+                        # from the Keycloakify repo.
 
-# For initializing your email theme
-npx initialize-email-theme
+npx initialize-email-theme # For initializing your email theme
+                           # Note that Keycloakify does not feature React integration for email yet.
 
-# For downloading the default theme
-npx download-builtin-keycloak-theme
+npx download-builtin-keycloak-theme # For downloading the default theme (as a reference)
+                                    # Look for the files in build_keycloak/src/main/resources/theme/{base,keycloak}
 ```
 
 # The CI workflow
