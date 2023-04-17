@@ -74,6 +74,15 @@ npx download-builtin-keycloak-theme # For downloading the default theme (as a re
 
 If you want an example of an app that put that setup in production checkout onyxia-ui: [the repo](https://github.com/InseeFrLab/onyxia-ui), [the login](https://auth.lab.sspcloud.fr/auth/realms/sspcloud/protocol/openid-connect/auth?client_id=onyxia&redirect_uri=https%3A%2F%2Fonyxia.lab.sspcloud.fr), [the app](https://datalab.sspcloud.fr).
 
+# The storybook  
+
+![image](https://user-images.githubusercontent.com/6702424/232350420-1921af90-d33e-492e-9296-0083298a84fa.png)  
+
+```bash
+yarn
+yarn storybook
+```
+
 # Docker  
 
 Instructions for building and running the react app (`src/App`) that is collocated with our Keycloak theme. 
