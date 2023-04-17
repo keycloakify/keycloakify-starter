@@ -17,4 +17,4 @@ export const { kcContext } = getKcContext({
 	//mockPageId: "password.ftl",
 });
 
-export type KcContext = NonNullable<typeof kcContext>;
+export type KcContext = NonNullable<ReturnType<typeof getKcContext>["kcContext"]>;

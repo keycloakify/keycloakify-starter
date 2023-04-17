@@ -98,4 +98,4 @@ export const { kcContext } = getKcContext({
 });
 
 
-export type KcContext = NonNullable<typeof kcContext>;
+export type KcContext = NonNullable<ReturnType<typeof getKcContext>["kcContext"]>;
