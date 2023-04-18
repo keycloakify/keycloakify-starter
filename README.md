@@ -37,7 +37,7 @@ yarn build-keycloak-theme # Actually build the theme
                           # your theme on a real Keycloak instance.
 
 npx eject-keycloak-page # Prompt that let you select the pages you want to customize
-                        # This CLI tools is not guarenty to work, you can always copy pase pages 
+                        # This CLI tools is not guaranty to work, you can always copy pase pages 
                         # from the Keycloakify repo.
 
 npx initialize-email-theme # For initializing your email theme
