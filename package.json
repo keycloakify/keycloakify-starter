@@ -8,13 +8,16 @@
         "url": "git://github.com/codegouvfr/keycloakify-starter.git"
     },
     "scripts": {
+        "prestart": "yarn ensure-public-keycloak-static-exists",
         "start": "react-scripts start",
         "build": "react-scripts build",
         "build-keycloak-theme": "yarn build && keycloakify",
         "eject-keycloak-page": "eject-keycloak-page",
         "download-builtin-keycloak-theme": "download-builtin-keycloak-theme",
+        "prestorybook": "yarn ensure-public-keycloak-static-exists",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "build-storybook": "build-storybook",
+        "ensure-public-keycloak-static-exists": "[ ! -d 'public/keycloak_static' ] && yarn build-keycloak-theme || true"
     },
     "keycloakify": {
         "extraThemeProperties": [ 

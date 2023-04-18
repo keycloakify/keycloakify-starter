@@ -22,19 +22,15 @@ If you are only looking to create a theme (and not a theme + an App) there are a
 ```bash
 yarn # install dependencies (it's like npm install)
 
-yarn build-keycloak-theme # Build the theme one time (some assets will be copied to 
-                          # public/keycloak_static, they are needed to dev your page 
-                          # outside of Keycloak)
-
-yarn start # See the Hello World app
-           # Uncomment line 15 of src/keycloak-theme/login/kcContext, reload https://localhost:3000
-           # You can now develop your Login pages. (Don't forget to comment it back when you're done)
-
 yarn storybook # Start Storybook
                # This is by far the best way to develop your theme
                # This enable to quickly see your pages in isolation and in different states.  
                # You can create stories even for pages that you haven't explicitly overloaded. See src/keycloak-theme/login/pages/LoginResetPassword.stories.tsx
                # See Keycloakify's storybook for if you need a starting point for your stories: https://github.com/keycloakify/keycloakify/tree/main/stories
+
+yarn start # See the Hello World app
+           # Uncomment line 15 of src/keycloak-theme/login/kcContext, reload https://localhost:3000
+           # You can now develop your Login pages. (Don't forget to comment it back when you're done)
 
 yarn build-keycloak-theme # Actually build the theme
                           # Read the instruction printed on the console to see how to test
