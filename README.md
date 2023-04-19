@@ -15,7 +15,7 @@ Keycloak theme that goes along with it.
 If you are only looking to create a theme (and not a theme + an App) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
 
 > ❗️ WARNING ❗️: Don't waste time trying to port this setup to [Vite](https://vitejs.dev/).  
-> Currently Keycloakify only works colocated with Webpack projects but [we are working toward enabeling collocation with Vite and Next.js projects](https://github.com/keycloakify/keycloakify/pull/275)!  
+> Currently Keycloakify only works collocated with Webpack projects but [we are working toward enabling collocation with Vite and Next.js projects](https://github.com/keycloakify/keycloakify/pull/275)!  
 
 # Quick start
 
@@ -49,7 +49,7 @@ npx download-builtin-keycloak-theme # For downloading the default theme (as a re
 
 # The CI workflow
 
--   You need to manually allow GitHub Action to push on your repositroy.  For this reason the initial setup will fail.  You need to enabled permission and re-run failed job: [see video](https://user-images.githubusercontent.com/6702424/213480604-0aac0ea7-487f-491d-94ae-df245b2c7ee8.mov).  
+-   You need to manually allow GitHub Action to push on your repository.  For this reason the initial setup will fail.  You need to enabled permission and re-run failed job: [see video](https://user-images.githubusercontent.com/6702424/213480604-0aac0ea7-487f-491d-94ae-df245b2c7ee8.mov).  
 -   This CI is configured to publish [the app](https://starter.keycloakify.dev) on [GitHub Pages](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L51-L76) and on [DockerHub](https://github.com/codegouvfr/keycloakify-starter/blob/3617a71deb1a6544c3584aa8d6d2241647abd48c/.github/workflows/ci.yaml#L78-L123) (as a Ngnix based docker image). In practice you probably want one or the other but not both... or neither if you are just building a theme (and not a theme + an app).  
     If you want to enable the CI to publish on DockerHub on your behalf go to repository `Settings` tab, then `Secrets` you will need to add two new secrets:
     `DOCKERHUB_TOKEN`, you Dockerhub authorization token.  
