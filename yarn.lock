@@ -9697,10 +9697,10 @@ keycloak-js@^21.0.1:
     base64-js "^1.5.1"
     js-sha256 "^0.9.0"
 
-keycloakify@^7.9.2:
-  version "7.9.2"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.9.2.tgz#bf64ce616b6b955d0d2ab2f0c697d8c393a599eb"
-  integrity sha512-yARvJTsIjQCdT3GA3vh1ejcqlF9U8RYZ+wpEI8JNj0CI0viok/OxbLsI6fmeZL0n3PKYpCwMRj7uafdFOekrSQ==
+keycloakify@^7.9.4:
+  version "7.9.4"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.9.4.tgz#c458330ada1136ee80e627234f4536a101d77c7e"
+  integrity sha512-XoCEaSsHT0Ynp49KgK6qUSllEbpOzP1e0E2CpCcm32k18GA8w/oJokADnH5O1bf60jt5vUKW0lxIqvnPSCY/2Q==
   dependencies:
     "@octokit/rest" "^18.12.0"
     "@types/yazl" "^2.4.2"

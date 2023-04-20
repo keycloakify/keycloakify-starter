@@ -51,11 +51,18 @@ function ContextualizedApp() {
         value: "en"
     }).newUrl;
 
-    // Enable to redirect to the app from the account page we'll get kcContext.url.referrerURI
+    // Enable to redirect to the app from the account page we'll get the referrer_uri under kcContext.referrer.url
+    // It's useful to avoid hard coding the app url in the keycloak config
     accountUrl = addParamToUrl({
         url: accountUrl,
         name: "referrer",
         value: keycloakClient
+    }).newUrl;
+
+    accountUrl = addParamToUrl({
+        url: accountUrl,
+        name: "referrer_uri",
+        value: window.location.href
     }).newUrl;
 
     return (
@@ -66,7 +73,7 @@ function ContextualizedApp() {
                         <>
                             <h1>You are authenticated !</h1>
                             {/* On older Keycloak version its /auth/realms instead of /realms */}
-                            <a href={accountUrl} target="_blank" rel="noreferrer">Link to your Keycloak account</a>
+                            <a href={accountUrl}>Link to your Keycloak account</a>
                             <pre style={{ textAlign: "left" }}>{JSON.stringify(jwt_decode(oidcClient.getAccessToken()), null, 2)}</pre>
                             <button onClick={() => oidcClient.logout({ redirectTo: "home" })}>Logout</button>
                         </>
@@ -78,7 +85,7 @@ function ContextualizedApp() {
                 <img src={logo} className="App-logo" alt="logo" />
                 <img src={myimg} alt="test_image" />
                 <p style={{ "fontFamily": '"Work Sans"' }}>Hello world</p>
-                <p>Check out all keycloak pages in the <a href="https://storybook.keycloakify.dev">Storybook</a>!</p>
+                <p>Check out all keycloak pages in the <a href="https://storybook.keycloakify.dev/storybook">Storybook</a>!</p>
                 <p>Once you've identified the ones you want to customize run <code>npx eject-keycloak-page</code></p>
             </header>
         </div>
