@@ -46,23 +46,16 @@ function ContextualizedApp() {
 
     // Set the language the user will get on the account page
     accountUrl = addParamToUrl({
-        "url": accountUrl,
-        "name": "kc_locale",
-        "value": "en"
+        url: accountUrl,
+        name: "kc_locale",
+        value: "en"
     }).newUrl;
 
-    // Enable to redirect to the app from the account page we'll get the referrer_uri under kcContext.url.referrerUri
-    // see: https://technology.first8.nl/add-manage-account-link-keycloak-redhat-sso/
+    // Enable to redirect to the app from the account page we'll get kcContext.url.referrerURI
     accountUrl = addParamToUrl({
-        "url": accountUrl,
-        "name": "referrer",
-        "value": keycloakClient
-    }).newUrl;
-
-    accountUrl = addParamToUrl({
-        "url": accountUrl,
-        "name": "referrer_uri",
-        "value": window.location.href
+        url: accountUrl,
+        name: "referrer",
+        value: keycloakClient
     }).newUrl;
 
     return (
