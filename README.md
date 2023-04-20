@@ -20,6 +20,10 @@ If you are only looking to create a theme (and not a theme + an App) there are a
 # Quick start
 
 ```bash
+git clone https://github.com/keycloakify/keycloakify-starter
+
+cd keycloakify-starter
+
 yarn # install dependencies (it's like npm install)
 
 yarn storybook # Start Storybook
