@@ -9697,10 +9697,10 @@ keycloak-js@^21.0.1:
     base64-js "^1.5.1"
     js-sha256 "^0.9.0"
 
-keycloakify@7.9.0-rc.0:
-  version "7.9.0-rc.0"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.9.0-rc.0.tgz#60fce296a6e0b7cdf38ffe39fa6ef4914885a751"
-  integrity sha512-pTLDGhknPgBOYBLszrIsMRYj0D9KKM43RjXfQJpjP6oaSQCaMGU9qfqRFIkt5GefOISDLv5GpP3GC3sz9vR/Kg==
+keycloakify@^7.9.2:
+  version "7.9.2"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-7.9.2.tgz#bf64ce616b6b955d0d2ab2f0c697d8c393a599eb"
+  integrity sha512-yARvJTsIjQCdT3GA3vh1ejcqlF9U8RYZ+wpEI8JNj0CI0viok/OxbLsI6fmeZL0n3PKYpCwMRj7uafdFOekrSQ==
   dependencies:
     "@octokit/rest" "^18.12.0"
     "@types/yazl" "^2.4.2"
@@ -11943,10 +11943,10 @@ postcss@^8.0.9, postcss@^8.2.15, postcss@^8.3.5, postcss@^8.4.19, postcss@^8.4.4
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-powerhooks@^0.26.7:
-  version "0.26.7"
-  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.26.7.tgz#3c9709a6012207e073aa268a775b352905ea46f5"
-  integrity sha512-ghVMUbPj1Xxkiy6eOlCzMdFc70a6lvfLnM4MsPbTvSKuaAxSHn62sfKDJ3rYOFqVSxC4JwiOa2wCDwssKq1Glw==
+powerhooks@^0.26.8:
+  version "0.26.8"
+  resolved "https://registry.yarnpkg.com/powerhooks/-/powerhooks-0.26.8.tgz#fa93e6141e424c17c031a56f77fde1c75e128dbc"
+  integrity sha512-lXuxiZgAEtPP/FPRCLOncE2ibHrZH1UQ3RRYcWFIK4zd7Hbf54p4OjS8n3/6cKTf8BhbU0b1AUio1hEPWO10Gg==
   dependencies:
     evt "^2.4.18"
     memoizee "^0.4.15"
