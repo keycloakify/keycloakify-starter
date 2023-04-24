@@ -28,7 +28,8 @@
         ],
         "customUserAttributes": [
             "your-custom-attribute"
-        ]
+        ],
+        "bundler": "mvn"
     },
     "author": "u/garronej",
     "license": "MIT",
