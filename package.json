@@ -15,6 +15,7 @@
         "storybook": "start-storybook -p 6006"
     },
     "keycloakify": {
+        "bundler": "mvn",
         "extraThemeProperties": [ 
             "foo=bar"
         ],
@@ -28,7 +29,7 @@
         ],
         "customUserAttributes": [
             "your-custom-attribute"
-        ]
+        ],
     },
     "author": "u/garronej",
     "license": "MIT",
