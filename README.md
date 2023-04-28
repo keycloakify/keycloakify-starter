@@ -33,7 +33,7 @@ yarn storybook # Start Storybook
                # See Keycloakify's storybook for if you need a starting point for your stories: https://github.com/keycloakify/keycloakify/tree/main/stories
 
 yarn start # See the Hello World app
-           # Uncomment line 15 of src/keycloak-theme/login/kcContext, reload https://localhost:3000
+           # Uncomment line 97 of src/keycloak-theme/login/kcContext where it reads: `mockPageId: "login.ftl"`, reload https://localhost:3000
            # You can now develop your Login pages. (Don't forget to comment it back when you're done)
 
 yarn build-keycloak-theme # Actually build the theme
