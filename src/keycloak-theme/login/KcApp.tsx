@@ -35,7 +35,7 @@ export default function KcApp(props: { kcContext: KcContext; }) {
     const i18n = useI18n({ kcContext });
 
     if (i18n === null) {
-        //NOTE: Text resources in the correct language are still being downloaded, we can't display anything yet.
+        //NOTE: Text resources for the current language are still being downloaded, we can't display anything yet.
         //We could display a loading progress but it's usually a matter of milliseconds.
         return null;
     }
