@@ -40,9 +40,9 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
                 return tos_url;
             }
 
-            const tosRawMarkdown = fetch(tos_url).then(response => response.text());
+            const markdownString = await fetch(tos_url).then(response => response.text());
 
-            return tosRawMarkdown;
+            return markdownString;
 
         }
     });
