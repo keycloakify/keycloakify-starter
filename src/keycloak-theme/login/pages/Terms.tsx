@@ -26,21 +26,25 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
         kcContext,
         "downloadTermMarkdown": async ({currentLanguageTag}) => {
 
-            const resource = (() => {
+            const tos_url = (() => {
                 switch (currentLanguageTag) {
-                    case "fr":
-                        return tos_fr_url;
-                    default:
-                        return tos_en_url;
+                    case "fr": return tos_fr_url;
+                    default: return tos_en_url;
                 }
             })();
 
-            // webpack5 (used via storybook) loads markdown as string, not url
-            if (resource.includes("\n")) return resource
 
-            const response = await fetch(resource);
-            return response.text();
-        },
+            if ("__STORYBOOK_ADDONS" in window) {
+                // NOTE: In storybook, when you import a .md file you get the content of the file.
+                // In Create React App on the other hand you get an url to the file.
+                return tos_url;
+            }
+
+            const tosRawMarkdown = fetch(tos_url).then(response => response.text());
+
+            return tosRawMarkdown;
+
+        }
     });
 
     useRerenderOnStateChange(evtTermMarkdown);
