@@ -34,11 +34,6 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                         messagesPerField.printIfExists("firstName", getClassName("kcFormGroupErrorClass"))
                     )}
                 >
-                    <div className={getClassName("kcLabelWrapperClass")}>
-                        <label htmlFor="firstName" className={getClassName("kcLabelClass")}>
-                            {msg("firstName")}
-                        </label>
-                    </div>
                     <div className={getClassName("kcInputWrapperClass")}>
                         <input
                             type="text"
@@ -46,6 +41,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             className={getClassName("kcInputClass")}
                             name="firstName"
                             defaultValue={register.formData.firstName ?? ""}
+                            placeholder="First name"
                         />
                     </div>
                 </div>
@@ -56,11 +52,6 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                         messagesPerField.printIfExists("lastName", getClassName("kcFormGroupErrorClass"))
                     )}
                 >
-                    <div className={getClassName("kcLabelWrapperClass")}>
-                        <label htmlFor="lastName" className={getClassName("kcLabelClass")}>
-                            {msg("lastName")}
-                        </label>
-                    </div>
                     <div className={getClassName("kcInputWrapperClass")}>
                         <input
                             type="text"
@@ -68,6 +59,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             className={getClassName("kcInputClass")}
                             name="lastName"
                             defaultValue={register.formData.lastName ?? ""}
+                            placeholder="Last name"
                         />
                     </div>
                 </div>
@@ -75,11 +67,6 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                 <div
                     className={clsx(getClassName("kcFormGroupClass"), messagesPerField.printIfExists("email", getClassName("kcFormGroupErrorClass")))}
                 >
-                    <div className={getClassName("kcLabelWrapperClass")}>
-                        <label htmlFor="email" className={getClassName("kcLabelClass")}>
-                            {msg("email")}
-                        </label>
-                    </div>
                     <div className={getClassName("kcInputWrapperClass")}>
                         <input
                             type="text"
@@ -88,6 +75,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             name="email"
                             defaultValue={register.formData.email ?? ""}
                             autoComplete="email"
+                            placeholder="Email"
                         />
                     </div>
                 </div>
@@ -98,11 +86,6 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             messagesPerField.printIfExists("username", getClassName("kcFormGroupErrorClass"))
                         )}
                     >
-                        <div className={getClassName("kcLabelWrapperClass")}>
-                            <label htmlFor="username" className={getClassName("kcLabelClass")}>
-                                {msg("username")}
-                            </label>
-                        </div>
                         <div className={getClassName("kcInputWrapperClass")}>
                             <input
                                 type="text"
@@ -110,7 +93,8 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                                 className={getClassName("kcInputClass")}
                                 name="username"
                                 defaultValue={register.formData.username ?? ""}
-                                autoComplete="username"
+                                autoComplete="username"                                
+                                placeholder="Username"
                             />
                         </div>
                     </div>
@@ -123,11 +107,6 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                                 messagesPerField.printIfExists("password", getClassName("kcFormGroupErrorClass"))
                             )}
                         >
-                            <div className={getClassName("kcLabelWrapperClass")}>
-                                <label htmlFor="password" className={getClassName("kcLabelClass")}>
-                                    {msg("password")}
-                                </label>
-                            </div>
                             <div className={getClassName("kcInputWrapperClass")}>
                                 <input
                                     type="password"
@@ -135,6 +114,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                                     className={getClassName("kcInputClass")}
                                     name="password"
                                     autoComplete="new-password"
+                                    placeholder="Password"
                                 />
                             </div>
                         </div>
@@ -145,13 +125,9 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                                 messagesPerField.printIfExists("password-confirm", getClassName("kcFormGroupErrorClass"))
                             )}
                         >
-                            <div className={getClassName("kcLabelWrapperClass")}>
-                                <label htmlFor="password-confirm" className={getClassName("kcLabelClass")}>
-                                    {msg("passwordConfirm")}
-                                </label>
-                            </div>
                             <div className={getClassName("kcInputWrapperClass")}>
-                                <input type="password" id="password-confirm" className={getClassName("kcInputClass")} name="password-confirm" />
+                                <input type="password" id="password-confirm" className={getClassName("kcInputClass")} name="password-confirm" 
+                                    placeholder="Confirm Password" />
                             </div>
                         </div>
                     </>
@@ -174,7 +150,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                                 getClassName("kcButtonLargeClass")
                             )}
                             type="submit"
-                            value={msgStr("doRegister")}
+                            value="Create Account"
                         />
                     </div>
                     <div id="kc-form-options" className={getClassName("kcFormOptionsClass")} >

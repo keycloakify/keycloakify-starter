@@ -92,9 +92,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
                                         return (
                                             <>
-                                                <label htmlFor={autoCompleteHelper} className={getClassName("kcLabelClass")}>
-                                                    {msg(label)}
-                                                </label>
                                                 <input
                                                     tabIndex={1}
                                                     id={autoCompleteHelper}
@@ -105,17 +102,19 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     name={autoCompleteHelper}
                                                     defaultValue={login.username ?? ""}
                                                     type="text"
-                                                    autoFocus={true}
-                                                    autoComplete="off"
+                                                    placeholder="Email Address"
+                                                    {...(usernameEditDisabled
+                                                        ? { "disabled": true }
+                                                        : {
+                                                            "autoFocus": true,
+                                                            "autoComplete": "off"
+                                                        })}
                                                 />
                                             </>
                                         );
                                     })()}
                             </div>
                             <div className={getClassName("kcFormGroupClass")}>
-                                <label htmlFor="password" className={getClassName("kcLabelClass")}>
-                                    {msg("password")}
-                                </label>
                                 <input
                                     tabIndex={2}
                                     id="password"
@@ -123,6 +122,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     name="password"
                                     type="password"
                                     autoComplete="off"
+                                    placeholder="Password"
                                 />
                             </div>
                             <div className={clsx(getClassName("kcFormGroupClass"), getClassName("kcFormSettingClass"))}>

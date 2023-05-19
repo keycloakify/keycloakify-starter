@@ -48,15 +48,6 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
         >
             <form id="kc-reset-password-form" className={getClassName("kcFormClass")} action={url.loginAction} method="post">
                 <div className={getClassName("kcFormGroupClass")}>
-                    <div className={getClassName("kcLabelWrapperClass")}>
-                        <label htmlFor="username" className={getClassName("kcLabelClass")}>
-                            {!realm.loginWithEmailAllowed
-                                ? msg("username")
-                                : !realm.registrationEmailAsUsername
-                                ? msg("usernameOrEmail")
-                                : msg("email")}
-                        </label>
-                    </div>
                     <div className={getClassName("kcInputWrapperClass")}>
                         <input
                             type="text"
@@ -65,6 +56,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                             className={getClassName("kcInputClass")}
                             autoFocus
                             defaultValue={auth !== undefined && auth.showUsername ? auth.attemptedUsername : undefined}
+                            placeholder="Email Address"
                         />
                     </div>
                 </div>

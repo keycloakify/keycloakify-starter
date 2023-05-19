@@ -574,8 +574,10 @@ a {
 			!h-11 
 			px-4
 			border-[3px]
-			border-dark-300;
-		
+			border-dark-300 
+            placeholder:not-italic
+            placeholder:font-bold;
+            
 
 		&:hover {
             @apply border-dark-300;
