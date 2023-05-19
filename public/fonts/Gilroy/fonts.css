@@ -1,0 +1,27 @@
+@font-face {
+    font-family: "Gilroy";
+    src: url("./gilroy-semi-bold.woff2") format("woff2"),
+      url("./gilroy-semi-bold.woff") format("woff");
+    font-weight: 300;
+  }
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./gilroy-bold.woff2") format("woff2"),
+      url("./gilroy-bold.woff") format("woff");
+    font-weight: 500;
+  }
+  
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./gilroy-extra-bold.woff2") format("woff2"),
+      url("./gilroy-extra-bold.woff") format("woff");
+    font-weight: 700;
+  }
+  
+  @font-face {
+    font-family: "Gilroy";
+    src: url("./gilroy-black.woff2") format("woff2"),
+      url("./gilroy-black.woff") format("woff");
+    font-weight: 900;
+  }
+  
