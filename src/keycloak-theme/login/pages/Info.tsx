@@ -16,7 +16,11 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
         <Template
             {...{ kcContext, i18n, doUseDefaultCss, classes }}
             displayMessage={false}
-            headerNode={messageHeader !== undefined ? <>{messageHeader}</> : <>{message.summary}</>}
+            headerNode={
+                <div>       
+                    <h1 >{messageHeader !== undefined ? <>{messageHeader}</> : <>{message.summary}</>}</h1>
+                </div>
+            }
         >
             <div id="kc-info-message">
                 <p className="instruction">
@@ -26,21 +30,18 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                         <b>{requiredActions.map(requiredAction => msgStr(`requiredAction.${requiredAction}` as const)).join(",")}</b>
                     )}
                 </p>
+                <p className="instruction mt-3">
+                    
                 {!skipLink && pageRedirectUri !== undefined ? (
-                    <p>
-                        <a href={pageRedirectUri}>{msg("backToApplication")}</a>
-                    </p>
+                    <a href={pageRedirectUri}>{msg("backToApplication")}</a>
                 ) : actionUri !== undefined ? (
-                    <p>
-                        <a href={actionUri}>{msg("proceedWithAction")}</a>
-                    </p>
+                    <a href={actionUri}>{msg("proceedWithAction")}</a>
                 ) : (
                     client.baseUrl !== undefined && (
-                        <p>
-                            <a href={client.baseUrl}>{msg("backToApplication")}</a>
-                        </p>
+                        <a href={client.baseUrl}>{msg("backToApplication")}</a>
                     )
                 )}
+                </p>
             </div>
         </Template>
     );
