@@ -650,3 +650,13 @@ svg {
         @apply text-sm font-medium pb-3
     }
 }
+.instruction {
+    @apply text-center text-sm;
+    
+    a {
+        @apply !text-white;
+        &:hover {
+            @apply no-underline;
+        }
+    }
+}
