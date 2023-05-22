@@ -553,12 +553,11 @@ a {
 	}
 }
 .kcFormClass {
-	label, a {
+	label, a, p, span {
 		@apply text-brand-text text-sm
 	} 
 }
 .kcFormGroupClass, 
-.kcFormButtonsClass,
 .kcLabelWrapperClass,
 .kcInputWrapperClass  {
 	@apply !mx-0 !p-0;
