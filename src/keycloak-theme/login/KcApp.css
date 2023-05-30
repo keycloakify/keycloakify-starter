@@ -674,3 +674,11 @@ svg {
 #kc-update-profile-form div.form-group:last-of-type {
     @apply mb-0;
 }
+
+.input-error {
+    @apply block w-full mt-2 mb-1 !text-white;
+
+    svg {
+        @apply h-4 text-error-bg mr-2 mb-1
+    }
+}

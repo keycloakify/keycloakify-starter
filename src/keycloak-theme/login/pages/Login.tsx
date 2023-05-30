@@ -24,21 +24,54 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
     const { msg, msgStr } = i18n;
 
+    interface LoginFormValues {
+        email: string;
+        password: string;
+    }
+    interface LoginFormErrors {
+        email?: string | boolean;
+        password?: string | boolean;
+    }
+
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
     const [rememberMe, setRememberMe] = useState(login.rememberMe === "on");
+    const [errors, setErrors] = useState({} as LoginFormErrors);
 
+
+    const validate = (values: LoginFormValues): LoginFormErrors => {
+        debugger;
+        const errors = {} as LoginFormErrors;
+
+        if (!values.email) {
+            errors.email = "Required";
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,24}$/i.test(values.email)) {
+            errors.email = "Invalid email address";
+        }
+
+        return errors;
+    };
     const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement>>(e => {
         e.preventDefault();
 
-        setIsLoginButtonDisabled(true);
-
         const formElement = e.target as HTMLFormElement;
+        if ((e.target as HTMLFormElement).checkValidity() === true) {
+            setIsLoginButtonDisabled(true);
 
-        //NOTE: Even if we login with email Keycloak expect username and password in
-        //the POST request.
-        formElement.querySelector("input[name='email']")?.setAttribute("name", "username");
+            //NOTE: Even if we login with email Keycloak expect username and password in
+            //the POST request.
+            formElement.querySelector("input[name='email']")?.setAttribute("name", "username");
 
-        formElement.submit();
+            formElement.submit();
+
+        }
+        else {
+            const formValues = {
+                email: (formElement.querySelector("input[name='username']") as HTMLInputElement)?.value as string,
+                password: (formElement.querySelector("input[name='password']") as HTMLInputElement)?.value as string,
+            }
+
+            setErrors(validate(formValues));
+        }
 
     });
 
@@ -87,7 +120,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     )}
                 >
                     {realm.password && (
-                        <form id="kc-form-login" className={getClassName("kcFormClass")} onSubmit={onSubmit} action={url.loginAction} method="post">
+                        <form id="kc-form-login" className={getClassName("kcFormClass")} onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} action={url.loginAction} method="post" noValidate>
                             <div className={getClassName("kcFormGroupClass")}>
                                 {!usernameEditDisabled &&
                                     (() => {
@@ -118,7 +151,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                             "autoFocus": true,
                                                             "autoComplete": "off"
                                                         })}
+                                                    required
+                                                    pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,24}$"
                                                 />
+                                                {!!errors.email ? (
+                                                    <span className="input-error">
+                                                        <svg viewBox="0 0 22 21" focusable="false"><path d="M11 12.5C10.59 12.5 10.25 12.16 10.25 11.75V6.75C10.25 6.34 10.59 6 11 6C11.41 6 11.75 6.34 11.75 6.75V11.75C11.75 12.16 11.41 12.5 11 12.5Z" fill="currentColor"></path><path d="M11 16C10.73 16 10.48 15.9 10.29 15.71C10.2 15.61 10.13 15.5 10.08 15.38C10.03 15.26 10 15.13 10 15C10 14.87 10.03 14.74 10.08 14.62C10.13 14.49 10.2 14.39 10.29 14.29C10.66 13.92 11.34 13.92 11.71 14.29C11.8 14.39 11.87 14.49 11.92 14.62C11.97 14.74 12 14.87 12 15C12 15.13 11.97 15.26 11.92 15.38C11.87 15.5 11.8 15.61 11.71 15.71C11.52 15.9 11.27 16 11 16Z" fill="currentColor"></path><path d="M10.9901 20.9999C8.41006 20.9999 5.97006 20.0299 4.10006 18.2399C2.17006 16.3999 1.07006 13.9099 1.00006 11.2399C0.930057 8.56994 1.92006 6.03994 3.76006 4.09994C5.60006 2.16994 8.09006 1.06994 10.7601 0.99994C13.4201 0.93994 15.9701 1.90994 17.9001 3.75994C19.8301 5.59994 20.9301 8.08994 21.0001 10.7599C21.0601 13.4299 20.0901 15.9699 18.2401 17.8999C16.4001 19.8299 13.9101 20.9299 11.2401 20.9999C11.1601 20.9999 11.0801 20.9999 10.9901 20.9999ZM11.0101 2.49994C10.9401 2.49994 10.8701 2.49994 10.8001 2.49994C8.52006 2.55994 6.41006 3.48994 4.85006 5.13994C3.28006 6.77994 2.45006 8.93994 2.51006 11.2099C2.56006 13.4799 3.50006 15.5899 5.14006 17.1599C6.78006 18.7299 8.93006 19.5599 11.2101 19.4999C13.4801 19.4499 15.5901 18.5099 17.1601 16.8699C18.7301 15.2299 19.5601 13.0699 19.5001 10.7999C19.4501 8.52994 18.5101 6.41994 16.8701 4.84994C15.2701 3.32994 13.2001 2.49994 11.0101 2.49994Z" fill="currentColor"></path></svg>
+                                                        {errors.email}
+                                                    </span>
+                                                ) : null}
                                             </>
                                         );
                                     })()}
