@@ -374,9 +374,6 @@ a.zocial  {
     margin-left: 10px;
 }
 
-#kc-form-buttons {
-  margin-top: 40px;
-}
 
 .login-pf-page .login-pf-brand {
   margin-top: 20px;
@@ -669,4 +666,8 @@ svg {
             @apply no-underline;
         }
     }
+}
+
+#kc-form-buttons {
+    @apply mt-10 px-0;
 }
