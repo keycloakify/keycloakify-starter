@@ -98,7 +98,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             className={getClassName("kcInputClass")}
                             name="firstName"
                             placeholder="First name"
-                            value=" "
+                            value="*"
                         />
                     </div>
                 </div>
@@ -116,7 +116,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             className={getClassName("kcInputClass")}
                             name="lastName"
                             placeholder="Last name"
-                            value=" "
+                            value="*"
                         />
                     </div>
                 </div>
