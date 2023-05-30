@@ -1,11 +1,11 @@
-import { useState, type FormEventHandler } from "react";
+// ejected using 'npx eject-keycloak-page'
+import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { clsx } from "keycloakify/tools/clsx";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
-import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
-import type { KcContext } from "../kcContext";
+import { useEffect, useState, type FormEventHandler } from "react";
 import type { I18n } from "../i18n";
-import { useEffect } from "@storybook/addons";
+import type { KcContext } from "../kcContext";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -36,12 +36,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             setErrors("");
         }
     };
-    const handleChangeEmail = useConstCallback<FormEventHandler<HTMLInputElement>>(e => {
-        setEmail((e.target as HTMLInputElement).value);
-        if (wasSubmitted) {
-            validateEmail();
-        }
-    });
     const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement>>(e => {
         e.preventDefault();
         setWasSubmitted(true);
@@ -59,8 +53,13 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         else {
             validateEmail();
         }
-
     });
+
+    useEffect(() => {
+        if (wasSubmitted) {
+            validateEmail();
+        }
+    }, [email]);
     return (
         <Template
             {...{ kcContext, i18n, doUseDefaultCss, classes }}
