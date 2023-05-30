@@ -29,7 +29,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
     const validateEmail = () => {
         if (!email) {
             return "Required";
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,24}$/i.test(email)) {
+        } else if (!/^[\w.%+-]+@[^_\W.-]+\.[A-Za-z]{2,24}$/g.test(email)) {
             return "Invalid email address";
         }        
         return "";
@@ -134,7 +134,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             autoComplete="email"
                             placeholder="Email"
                             required                            
-                            pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,24}$"
+                            pattern="^[\w.%+-]+@[^_\W.-]+\.[A-Za-z]{2,24}$"
                             onChange={ (e) => setEmail((e.target as HTMLInputElement).value) }
                         />
                         {!!errors.email ? (                               
