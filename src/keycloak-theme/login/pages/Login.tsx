@@ -25,6 +25,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     const { msg, msgStr } = i18n;
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
+    const [rememberMe, setRememberMe] = useState(login.rememberMe === "on");
 
     const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement>>(e => {
         e.preventDefault();
@@ -38,6 +39,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         formElement.querySelector("input[name='email']")?.setAttribute("name", "username");
 
         formElement.submit();
+
     });
 
     return (
@@ -142,11 +144,10 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     id="rememberMe"
                                                     name="rememberMe"
                                                     type="checkbox"
-                                                    {...(login.rememberMe === "on"
-                                                        ? {
-                                                            "checked": true
-                                                        }
-                                                        : {})}
+                                                    checked={rememberMe}
+                                                    onChange={(e) => {
+                                                        setRememberMe(e.target.checked);
+                                                    }}
                                                 />
                                                 {msg("rememberMe")}
                                             </label>
