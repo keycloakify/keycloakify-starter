@@ -60,7 +60,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
         e.preventDefault();
         setWasSubmitted(true);
         const formElement = e.target as HTMLFormElement;
-        if ((e.target as HTMLFormElement).checkValidity() === true) {
+        if (formElement.checkValidity() === true) {
             formElement.submit();
         }
         else {

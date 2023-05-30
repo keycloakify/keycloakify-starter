@@ -40,7 +40,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         e.preventDefault();
         setWasSubmitted(true);
         const formElement = e.target as HTMLFormElement;
-        if ((e.target as HTMLFormElement).checkValidity() === true) {
+        if (formElement.checkValidity() === true) {
             setIsButtonDisabled(true);
 
             //NOTE: Even if we login with email Keycloak expect username and password in
