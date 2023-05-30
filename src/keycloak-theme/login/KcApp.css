@@ -611,6 +611,17 @@ a {
 				bg-accent-800 ;
 		}
 	}
+    .btn {
+		@apply 
+			mt-0 
+			bg-none
+			border-none
+			rounded-lg
+			!outline-none 
+			h-11
+			text-sm
+			font-extrabold;
+	}
 }
 .kcFormOptionsClass,
 .kcFormSettingClass,
