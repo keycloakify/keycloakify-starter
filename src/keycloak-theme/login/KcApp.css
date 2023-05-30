@@ -428,12 +428,6 @@ a.zocial  {
 }
 
 
-#kc-form-login div.form-group:last-of-type,
-#kc-register-form div.form-group:last-of-type,
-#kc-update-profile-form div.form-group:last-of-type {
-    margin-bottom: 0px;
-}
-
 #kc-back {
     margin-top: 5px;
 }
@@ -670,4 +664,13 @@ svg {
 
 #kc-form-buttons {
     @apply mt-10 px-0;
+}
+
+.form-group {
+    @apply mb-2;
+}
+#kc-form-login div.form-group:last-of-type,
+#kc-register-form div.form-group:last-of-type,
+#kc-update-profile-form div.form-group:last-of-type {
+    @apply mb-0;
 }
