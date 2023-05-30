@@ -55,7 +55,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         <img src={require("./../assets/logo-dark.png")} className="h-12 w-12" />
                     </div>
                     <h1 >Meet BuildBetter</h1>
-                    <p className="text-center">Give your product operations superpowers.</p>
+                    <p className="text-center">Make better product decisions, 5x faster.</p>
                 </div>
             }
             infoNode={

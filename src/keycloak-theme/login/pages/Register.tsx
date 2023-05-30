@@ -24,7 +24,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                         <img src={require("./../assets/logo-dark.png") } className="h-12 w-12"/>
                     </div>
                     <h1 >Join BuildBetter</h1>
-                    <p className="text-center">Give your product operations superpowers.</p>
+                    <p className="text-center">Make better product decisions, 5x faster.</p>
                 </div>
             }>
             <form id="kc-register-form" className={getClassName("kcFormClass")} action={url.registrationAction} method="post">
