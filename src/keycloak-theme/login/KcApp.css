@@ -445,7 +445,8 @@ a {
     @apply !outline-none;
 }
 .checkbox {
-    @apply !pt-0;
+    @apply !pt-0 !mb-1;
+    min-height: auto !important; 
 
     input {
         top: -1px;
