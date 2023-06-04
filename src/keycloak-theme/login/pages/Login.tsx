@@ -1,11 +1,12 @@
 // ejected using 'npx eject-keycloak-page'
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { useState, useEffect, type FormEventHandler, useMemo } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
-import { useEffect, useState, type FormEventHandler } from "react";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
+import { FormInputError } from "./shared/FormInputError";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -19,9 +20,18 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
     const { msg, msgStr } = i18n;
 
+    const [paramEmail, paramTempPassword] = useMemo(() => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const paramEmail = urlParams.get("email");
+        const paramTempPassword = urlParams.get("password");
+        return [paramEmail, paramTempPassword];
+    }, [window.location.search]);
+
+
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [rememberMe, setRememberMe] = useState(login.rememberMe === "on");
-    const [email, setEmail] = useState(login.username ?? "");
+    const [email, setEmail] = useState(paramEmail ?? login.username ?? "");
     const [errors, setErrors] = useState("");
     const [wasSubmitted, setWasSubmitted] = useState(false);
 
@@ -156,6 +166,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     type="password"
                                     autoComplete="off"
                                     placeholder="Password"
+                                    value={paramTempPassword ?? undefined}
                                 />
                             </div>
                             <div className={clsx(getClassName("kcFormGroupClass"), getClassName("kcFormSettingClass"))}>
