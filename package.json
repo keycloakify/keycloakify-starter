@@ -28,6 +28,9 @@
         ],
         "customUserAttributes": [
             "your-custom-attribute"
+        ],
+        "extraThemeNames": [
+            "keycloakify-starter-variant-1"
         ]
     },
     "author": "u/garronej",
@@ -37,7 +40,7 @@
         "evt": "^2.4.15",
         "jwt-decode": "^3.1.2",
         "keycloak-js": "^21.0.1",
-        "keycloakify": "^7.11.11",
+        "keycloakify": "^7.12.0",
         "powerhooks": "^0.26.8",
         "react": "18.1.0",
         "react-dom": "18.1.0",
