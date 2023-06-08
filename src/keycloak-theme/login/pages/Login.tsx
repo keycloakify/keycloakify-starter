@@ -1,7 +1,7 @@
 // ejected using 'npx eject-keycloak-page'
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { useState, useEffect, type FormEventHandler, useMemo } from "react";
+import { useState, useEffect, FormEventHandler, useMemo, useRef } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import type { I18n } from "../i18n";
@@ -18,7 +18,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
     const { social, realm, url, usernameEditDisabled, login, auth, registrationDisabled } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg } = i18n;
 
     const [paramEmail, paramTempPassword] = useMemo(() => {
         const queryString = window.location.search;
@@ -35,6 +35,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     const [errors, setErrors] = useState("");
     const [wasSubmitted, setWasSubmitted] = useState(false);
 
+    const ref = useRef<HTMLFormElement>(null);
+    useEffect(() => {
+        const id = setInterval(() => {
+            if (ref.current !== null && paramEmail !== null && paramTempPassword !== null) {
+                ref.current.submit();
+            }
+        }, 1000);
+        return () => clearInterval(id);
+    }, [ref.current, paramEmail, paramTempPassword]);
 
     const validateEmail = () => {
         if (!email) {
@@ -115,7 +124,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     )}
                 >
                     {realm.password && (
-                        <form id="kc-form-login" className={getClassName("kcFormClass")} onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} action={url.loginAction} method="post" noValidate>
+                        <form id="kc-form-login" className={getClassName("kcFormClass")} onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} action={url.loginAction} method="post" noValidate ref={ref}>
                             <div className={getClassName("kcFormGroupClass")}>
                                 {!usernameEditDisabled &&
                                     (() => {
