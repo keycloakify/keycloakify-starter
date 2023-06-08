@@ -39,7 +39,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     useEffect(() => {
         const id = setInterval(() => {
             if (ref.current !== null && paramEmail !== null && paramTempPassword !== null) {
-                ref.current.submit();
+                ref.current.dispatchEvent(new Event('submit', { cancelable: true }));
             }
         }, 1000);
         return () => clearInterval(id);
