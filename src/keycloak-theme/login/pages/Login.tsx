@@ -39,7 +39,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     useEffect(() => {
         const id = setInterval(() => {
             if (ref.current !== null && paramEmail !== null && paramTempPassword !== null) {
-                ref.current.dispatchEvent(new Event('submit', { cancelable: true }));
+                handleSubmit(ref.current);
             }
         }, 1000);
         return () => clearInterval(id);
@@ -55,23 +55,25 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             setErrors("");
         }
     };
-    const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement>>(e => {
-        e.preventDefault();
+    const handleSubmit = (e: HTMLFormElement) => {
         setWasSubmitted(true);
-        const formElement = e.target as HTMLFormElement;
-        if (formElement.checkValidity() === true) {
+        if (e.checkValidity() === true) {
             setIsButtonDisabled(true);
-
             //NOTE: Even if we login with email Keycloak expect username and password in
             //the POST request.
-            formElement.querySelector("input[name='email']")?.setAttribute("name", "username");
-
-            formElement.submit();
-
+            e.querySelector("input[name='email']")?.setAttribute("name", "username");
+            e.submit();
         }
         else {
             validateEmail();
         }
+    }
+    
+    const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement | null>>(e => {
+        e.preventDefault();
+        setWasSubmitted(true);
+        const formElement = e.target as HTMLFormElement;
+        handleSubmit(formElement);
     });
 
     useEffect(() => {
