@@ -1,7 +1,7 @@
 {
     "name": "keycloakify-starter",
     "homepage": "https://starter.keycloakify.dev",
-    "version": "4.5.2",
+    "version": "4.5.3",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
