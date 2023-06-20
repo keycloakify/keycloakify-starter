@@ -1,7 +1,7 @@
 {
     "name": "b2pconnect",
     "homepage": "https://starter.keycloakify.dev",
-    "version": "4.4.14",
+    "version": "4.5.3",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
@@ -26,8 +26,8 @@
             "my-extra-page-1.ftl",
             "my-extra-page-2.ftl"
         ],
-        "customUserAttributes": [
-            "your-custom-attribute"
+        "extraThemeNames": [
+            "keycloakify-starter-variant-1"
         ]
     },
     "author": "u/garronej",
@@ -37,7 +37,7 @@
         "evt": "^2.4.15",
         "jwt-decode": "^3.1.2",
         "keycloak-js": "^21.0.1",
-        "keycloakify": "^7.11.8",
+        "keycloakify": "^7.13.1",
         "powerhooks": "^0.26.8",
         "react": "18.1.0",
         "react-dom": "18.1.0",

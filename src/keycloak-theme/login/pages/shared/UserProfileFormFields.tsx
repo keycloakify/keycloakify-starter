@@ -98,11 +98,14 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                                                 }
                                                 value={value}
                                             >
-                                                {options.options.map(option => (
-                                                    <option key={option} value={option}>
-                                                        {option}
-                                                    </option>
-                                                ))}
+                                                <>
+                                                    <option value="" selected disabled hidden>Select an option</option>
+                                                    {options.options.map(option => (
+                                                        <option key={option} value={option}>
+                                                            {option}
+                                                        </option>
+                                                    ))}
+                                                </>
                                             </select>
                                         );
                                     }
