@@ -1,0 +1,31 @@
+<mjml version="3.3.3">
+  <mj-body background-color="#F4F4F4"> 
+    
+        <mj-section background-color="#F4F4F4" padding="20px 0px 20px 0px">
+    </mj-section>
+    
+    <mj-section background-color="#313F50" background-repeat="repeat" padding="20px 0" text-align="center">
+      <mj-column>
+        <mj-image align="center" padding="10px 25px 10px 10px" src="https://www.b2pconnect.com/wp-content/uploads/2021/06/B2PConnect.com_fondfonceai.png" width="267px"></mj-image>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" background-repeat="repeat" background-size="auto" padding="20px 0px 20px 0px" text-align="center">
+      <mj-column>
+        <mj-text align="center" color="#55575d" font-family="Arial, sans-serif" font-size="14px" line-height="28px" padding="0px 25px 0px 25px">
+        <#nested/>
+          </mj-text>
+      </mj-column>
+    </mj-section>
+      
+    <mj-section background-color="#313F50" background-repeat="repeat" text-align="center">
+      <mj-column>
+        <mj-text align="center" color="#ffffff" font-family="Arial, sans-serif" font-size="13px" line-height="22px">Nos solutions sont sur <a style="color:#ffffff" href="https://www.b2pconnect.com/"><b>https://www.b2pconnect.com/</b></a></mj-text>
+      </mj-column>
+    </mj-section>
+    
+        <mj-section background-color="#F4F4F4" padding="20px 0px 20px 0px">
+    </mj-section>
+
+  </mj-body>
+</mjml>

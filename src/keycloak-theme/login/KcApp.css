@@ -12,5 +12,6 @@
 }
 
 .my-root-class body {
-	background: url(./assets/background.svg) no-repeat center center fixed;
+	background: unset;
+	background-color: #313F50;
 }
