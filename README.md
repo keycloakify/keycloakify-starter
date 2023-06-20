@@ -139,7 +139,7 @@ createRoot(document.getElementById("root")!).render(
 
 EOF
 
-rm .dockerignore Dockerfile Dockerfile.ci nginx.conf
+rm .dockerignore Dockerfile nginx.conf
 
 cat << EOF > .github/workflows/ci.yaml
 name: ci
