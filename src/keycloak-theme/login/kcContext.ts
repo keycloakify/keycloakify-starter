@@ -1,9 +1,6 @@
 import { createGetKcContext } from "keycloakify/login";
 
 export type KcContextExtension =
-	// NOTE: A 'keycloakify' field must be added 
-	// in the package.json to generate theses extra pages
-	// https://docs.keycloakify.dev/build-options#keycloakify.extrapages
 	| { pageId: "my-extra-page-1.ftl"; }
 	| { pageId: "my-extra-page-2.ftl"; someCustomValue: string; }
 	// NOTE: register.ftl is deprecated in favor of register-user-profile.ftl
