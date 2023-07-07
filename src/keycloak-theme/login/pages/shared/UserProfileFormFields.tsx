@@ -25,7 +25,17 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
         attributesWithPassword
     } = useFormValidation({
         kcContext,
-        i18n
+        i18n,
+        // Unfortunately, the password policies that you might have defined on the server
+        // are not made available by Keycloak on the client side.  See: https://keycloak.discourse.group/t/make-password-policies-available-to-freemarker/11632  
+        // Therefore, we have to hardcode the password policies here if we want real-time validation.
+        // Don't worry, the server will still validate the password when the form is submitted.
+        "passwordValidators": {
+            "length": {
+                "ignore.empty.value": true,
+                "min": "4"
+            }
+        }
     });
 
     useEffect(() => {
