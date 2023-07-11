@@ -17,7 +17,7 @@ export type UserProfileFormFieldsProps = {
 export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
     const { kcContext, onIsFormSubmittableValueChange, i18n, getClassName, BeforeField, AfterField } = props;
 
-    const { advancedMsg } = i18n;
+    const { advancedMsg, msg } = i18n;
 
     const {
         formValidationState: { fieldStateByAttributeName, isFormSubmittable },
@@ -99,7 +99,9 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                                                 value={value}
                                             >
                                                 <>
-                                                    <option value="" selected disabled hidden>Select an option</option>
+                                                    <option value="" selected disabled hidden>
+                                                        {msg("selectAnOption")}
+                                                    </option>
                                                     {options.options.map(option => (
                                                         <option key={option} value={option}>
                                                             {option}
