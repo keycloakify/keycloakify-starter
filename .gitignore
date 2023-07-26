@@ -33,6 +33,16 @@ jspm_packages
 # Optional npm cache directory
 .npm
 
+# yarn cache directory
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+
 # Optional REPL history
 .node_repl_history
 
