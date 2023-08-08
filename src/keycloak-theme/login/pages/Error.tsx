@@ -21,7 +21,7 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
                 {client !== undefined && client.baseUrl !== undefined && (
                     <p className="instruction">
                         <a id="backToApplication" href={client.baseUrl}>
-                            {msg("backToApplication")}
+                            Back to BuildBetter
                         </a>
                     </p>
                 )}

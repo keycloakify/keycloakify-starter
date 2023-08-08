@@ -33,12 +33,12 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                 <p className="instruction mt-3">
                     
                 {!skipLink && pageRedirectUri !== undefined ? (
-                    <a href={pageRedirectUri}>{msg("backToApplication")}</a>
+                    <a href={pageRedirectUri}>Back to BuildBetter</a>
                 ) : actionUri !== undefined ? (
                     <a href={actionUri}>{msg("proceedWithAction")}</a>
                 ) : (
                     client.baseUrl !== undefined && (
-                        <a href={client.baseUrl}>{msg("backToApplication")}</a>
+                        <a href={client.baseUrl}>Back to BuildBetter</a>
                     )
                 )}
                 </p>
