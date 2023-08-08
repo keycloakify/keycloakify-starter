@@ -18,13 +18,19 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
 
     const { url, messagesPerField, register, realm, passwordRequired, recaptchaRequired, recaptchaSiteKey } = kcContext;
 
-    
-
+    const [firstName, setFirstName] = useState(register.formData.firstName ?? "");
+    const [lastName, setLastName] = useState(register.formData.lastName ?? "");
     const [email, setEmail] = useState(register.formData.email ?? "");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [errors, setErrors] = useState({} as {email: string, password: string, passwordConfirm: string});
+    const [errors, setErrors] = useState({} as {firstName: string, lastName: string, email: string, password: string, passwordConfirm: string});
     const [wasSubmitted, setWasSubmitted] = useState(false);
+
+    const validateNames = (names: string)  => {
+        if (!names)
+            return "Required";
+        return "";
+    }
 
     const validateEmail = () => {
         if (!email) {
@@ -33,7 +39,6 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
             return "Invalid email address";
         }        
         return "";
-        
     };
 
     const validatePassword = () => {
@@ -53,7 +58,13 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
         return "";      
     };
     const validateForm = () => {
-        setErrors({email: validateEmail(), password: validatePassword(), passwordConfirm: validatePasswordConfirm()});
+        setErrors({
+            firstName: validateNames(firstName),
+            lastName: validateNames(lastName),
+            email: validateEmail(), 
+            password: validatePassword(), 
+            passwordConfirm: validatePasswordConfirm()
+        });
     }
 
     const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement>>(e => {
@@ -72,7 +83,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
         if (wasSubmitted) {
             validateForm();
         }
-    }, [email, password, passwordConfirm]);
+    }, [firstName, lastName, email, password, passwordConfirm]);
     return (
         <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} headerNode={
                 <div>                    
@@ -93,13 +104,19 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                 >
                     <div className={getClassName("kcInputWrapperClass")}>
                         <input
-                            type="hidden"
+                            type="text"
                             id="firstName"
                             className={getClassName("kcInputClass")}
                             name="firstName"
+                            defaultValue={ firstName }
                             placeholder="First name"
-                            value="*"
+                            autoComplete="given-name"                      
+                            onChange={ (e) => setFirstName((e.target as HTMLInputElement).value) }
+                            required
                         />
+                        {!!errors.firstName ? (                               
+                            <FormInputError message={errors.firstName} />   
+                        ) : null}
                     </div>
                 </div>
 
@@ -111,13 +128,19 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                 >
                     <div className={getClassName("kcInputWrapperClass")}>
                         <input
-                            type="hidden"
+                            type="text"
                             id="lastName"
                             className={getClassName("kcInputClass")}
                             name="lastName"
+                            defaultValue={ lastName }
+                            autoComplete="family-name"
                             placeholder="Last name"
-                            value="*"
+                            onChange={ (e) => setLastName((e.target as HTMLInputElement).value) }
+                            required
                         />
+                        {!!errors.lastName ? (                               
+                            <FormInputError message={errors.lastName} />   
+                        ) : null}
                     </div>
                 </div>
 
@@ -243,3 +266,4 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
         </Template>
     );
 }
+
