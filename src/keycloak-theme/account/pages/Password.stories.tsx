@@ -11,4 +11,8 @@ export default {
     component: PageStory,
 } as ComponentMeta<typeof PageStory>;
 
-export const Default: ComponentStory<typeof PageStory> = () => <PageStory />;
+export const Default: ComponentStory<typeof PageStory> = () => <PageStory
+    kcContext={{
+        message: { type: "success", summary: "This is a test message" }
+    }}
+/>;
