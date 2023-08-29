@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #VERSION="20.0.1"
-VERSION="21.1.1"
+VERSION="21.1.2"
 ADMIN_USER="admin"
 echo $PWD
 
