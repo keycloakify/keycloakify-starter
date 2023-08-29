@@ -1,4 +1,10 @@
-.PHONY: start-server save-server-realm
+.PHONY: help start-server save-server-realm
+
+help: 
+	@echo "Available commands :"
+	@echo "start-server"
+	@echo "save-server-realm"
+	@echo "test"
 
 start-server:
 	@echo "Starting server..."
@@ -10,8 +16,10 @@ save-server-realm:
 
 URL := https://keycloak.org/app
 
-open-url:
+test:
 	@echo "Opening URL in Chrome..."
+	@echo "User : user@example.com / Password : user"
+
 	@if [ "$(shell uname)" = "Darwin" ]; then \
 		open -a "Google Chrome" "$(URL)"; \
 	else \
