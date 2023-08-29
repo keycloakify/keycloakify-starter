@@ -1,7 +1,7 @@
 {
     "name": "b2pconnect",
     "homepage": "https://starter.keycloakify.dev",
-    "version": "4.6.3",
+    "version": "4.7.0",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
@@ -29,7 +29,7 @@
         "evt": "^2.4.15",
         "jwt-decode": "^3.1.2",
         "keycloak-js": "^21.0.1",
-        "keycloakify": "^7.14.3",
+        "keycloakify": "8.0.0-rc.2",
         "powerhooks": "^0.26.8",
         "react": "18.1.0",
         "react-dom": "18.1.0",
