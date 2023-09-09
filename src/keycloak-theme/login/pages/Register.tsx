@@ -8,6 +8,12 @@ import type { I18n } from "../i18n";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import { FormInputError } from "./shared/FormInputError";
 
+declare global {
+    interface Window {
+        gr: (...args: any[]) => void;
+    }
+}
+
 export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
@@ -74,6 +80,12 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
         setWasSubmitted(true);
         const formElement = e.target as HTMLFormElement;
         if (formElement.checkValidity() === true) {
+
+            if (typeof window.gr === 'function') {
+                // Call the 'gr' function if it exists
+                debugger;
+                window.gr('track', 'conversion', { email });
+            }
             formElement.submit();
         }
         else {
@@ -86,6 +98,33 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
             validateForm();
         }
     }, [firstName, lastName, email, password, passwordConfirm]);
+
+    useEffect(() => {
+        // Create a script element and add your script content to it
+        const script = document.createElement('script');
+        script.innerHTML = `
+          (function(w, d, s, p, t) {
+            w.gr = w.gr || function() {
+              w.gr.q = w.gr.q || [];
+              w.gr.q.push(arguments);
+            };
+            p = d.getElementsByTagName(s)[0];
+            t = d.createElement(s);
+            t.async = true;
+            t.src = "https://app.getreditus.com/gr.js?_ce=60";
+            p.parentNode.insertBefore(t, p);
+          })(window, document, "script");
+          gr("track", "pageview");
+        `;
+    
+        // Append the script element to the document's body
+        document.body.appendChild(script);
+    
+        // Remove the script element when the component unmounts
+        return () => {
+          document.body.removeChild(script);
+        };
+      }, []);
     return (
         <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} headerNode={
                 <div>                    
@@ -159,7 +198,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                             autoComplete="email"
                             placeholder="Email"
                             required                            
-                            pattern="^[\w.%+-]+@[^_\W.-]+\.[A-Za-z]{2,24}$"
+                            pattern="[\w.%+\-]+@[^_\W.\-]+\.[A-Za-z]{2,24}"
                             onChange={ (e) => setEmail((e.target as HTMLInputElement).value) }
                         />
                         {!!errors.email ? (                               
