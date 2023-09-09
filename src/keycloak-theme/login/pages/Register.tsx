@@ -18,9 +18,11 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
 
     const { url, messagesPerField, register, realm, passwordRequired, recaptchaRequired, recaptchaSiteKey } = kcContext;
 
+    const queryParameters = new URLSearchParams(window.location.search);
+    
+    const [email, setEmail] = useState(register.formData.email ?? (queryParameters.get("email") ?? ""));
     const [firstName, setFirstName] = useState(register.formData.firstName ?? "");
     const [lastName, setLastName] = useState(register.formData.lastName ?? "");
-    const [email, setEmail] = useState(register.formData.email ?? "");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [errors, setErrors] = useState({} as {firstName: string, lastName: string, email: string, password: string, passwordConfirm: string});
