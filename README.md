@@ -1,5 +1,5 @@
 <p align="center">
-    <i>🚀 A starter/demo project for <a href="https://keycloakify.dev">Keycloakify</a> v7 🚀</i>
+    <i>🚀 A starter/demo project for <a href="https://keycloakify.dev">Keycloakify</a> v8 🚀</i>
     <br/>
     <br/>
     <img src="https://github.com/codegouvfr/keycloakify-starter/workflows/ci/badge.svg?branch=main">
