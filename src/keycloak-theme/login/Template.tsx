@@ -40,7 +40,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             `${url.resourcesPath}/css/login.css`
         ],
         "htmlClassName": getClassName("kcHtmlClass"),
-        "bodyClassName": undefined
+        "bodyClassName": getClassName("kcBodyClass")
     });
 
     if (!isReady) {
