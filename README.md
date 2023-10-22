@@ -220,4 +220,4 @@ jobs:
 EOF
 ```
 
-You can also remove `jwt-decode`, `keycloak-js`, `powerhooks` and `tsafe` from your dependencies.  
+You can also remove `oidc-spa`, `powerhooks` and `tsafe` from your dependencies.  
