@@ -3,7 +3,6 @@ import logo from "./logo.svg";
 import myimg from "./myimg.png";
 import { useMemo } from "react";
 import { createOidcProvider, useOidc } from "oidc-spa/react";
-import { addQueryParamToUrl } from "oidc-spa/tools/urlQueryParams";
 import { decodeJwt } from "oidc-spa";
 import { assert } from "tsafe/assert";
 
@@ -16,31 +15,29 @@ const keycloakClientId= "starter";
 const { OidcProvider } = createOidcProvider({
     issuerUri: `${keycloakUrl}/realms/${keycloakRealm}`,
     clientId: keycloakClientId,
-    transformUrlBeforeRedirect: url => {
-
+    // NOTE: You can also pass queries params when calling oidc.login()
+    getExtraQueryParams: () => ({
         // This adding ui_locales to the url will ensure the consistency of the language between the app and the login pages
         // If your app implements a i18n system (like i18nifty.dev for example) you should use this and replace "en" by the 
         // current language of the app.
         // On the other side you will find kcContext.locale.currentLanguageTag to be whatever you set here.  
-        url = addQueryParamToUrl({
-            url,
-            "name": "ui_locales",
-            "value": "en",
-        }).newUrl;
-
-        // If you want to pass some custom state to the login pages...
-        // See in src/keycloak-theme/pages/Login.tsx how it's retrieved.
-        url = addQueryParamToUrl({
-            url,
-            "name": "my_custom_param",
-            "value": "value of foo transferred to login page",
-        }).newUrl;
-
-        return url;
-
-    },
-    // Uncomment if your app is not hosted at the origin and update /foo/bar/baz.
-    //silentSsoUrl: `${window.location.origin}/foo/bar/baz/silent-sso.html`,
+        "ui_locales": "en",
+        "my_custom_param": "value of foo transferred to login page"
+    }),
+    /*
+     * This parameter have to be provided provide if your App is not hosted at the origin of the subdomain.
+     * For example if your site is hosted by navigating to `https://www.example.com`
+     * you don't have to provide this parameter.
+     * On the other end if your site is hosted by navigating to `https://www.example.com/my-app`
+     * Then you want to set publicUrl to `/my-app`
+     *
+     * Be mindful that `${window.location.origin}${publicUrl}/silent-sso.html` must return the `silent-sso.html` that
+     * you are supposed to have created in your `public/` directory.
+     *
+     * If your are still using `create-react-app` (like we are for now) you can just set
+     * publicUrl to `process.env.PUBLIC_URL` and don't have to think about it further.
+     */
+    publicUrl: process.env.PUBLIC_URL
 });
 
 export default function App() {
@@ -63,7 +60,13 @@ function ContextualizedApp() {
                     oidc.isUserLoggedIn ?
                         <AuthenticatedRoute logout={() => oidc.logout({ redirectTo: "home" })} />
                         :
-                        <button onClick={() => oidc.login({ doesCurrentHrefRequiresAuth: false })}>Login</button>
+                        <button 
+                            onClick={() => oidc.login({ 
+                                doesCurrentHrefRequiresAuth: false,
+                                //extraQueryParams: { kc_idp_hint: "google" }
+                            })}>
+                                Login
+                        </button>
                 }
                 <img src={logo} className="App-logo" alt="logo" />
                 <img src={myimg} alt="test_image" />
@@ -126,32 +129,17 @@ function buildAccountUrl(
         locale: string;
     }
 ){
-
     const { locale } = params;
 
-    let accountUrl = `${keycloakUrl}/realms/${keycloakRealm}/account`;
+    const accountUrl = new URL(`${keycloakUrl}/realms/${keycloakRealm}/account`);
 
-    // Set the language the user will get on the account page
-    accountUrl = addQueryParamToUrl({
-        url: accountUrl,
-        name: "kc_locale",
-        value: locale
-    }).newUrl;
+    const searchParams = new URLSearchParams();
 
-    // Enable to redirect to the app from the account page we'll get the referrer_uri under kcContext.referrer.url
-    // It's useful to avoid hard coding the app url in the keycloak config
-    accountUrl = addQueryParamToUrl({
-        url: accountUrl,
-        name: "referrer",
-        value: keycloakClientId
-    }).newUrl;
+    searchParams.append("kc_locale", locale);
+    searchParams.append("referrer", keycloakClientId);
+    searchParams.append("referrer_uri", window.location.href);
 
-    accountUrl = addQueryParamToUrl({
-        url: accountUrl,
-        name: "referrer_uri",
-        value: window.location.href
-    }).newUrl;
+    accountUrl.search = searchParams.toString();
 
-    return accountUrl;
-
+    return accountUrl.toString();
 }
