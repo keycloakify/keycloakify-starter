@@ -50,8 +50,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     return (
         <div className={getClassName("kcLoginClass")}>
             <div id="kc-header" className={getClassName("kcHeaderClass")}>
-                <div id="kc-header-wrapper" className={getClassName("kcHeaderWrapperClass")}>
-                    {msg("loginTitleHtml", realm.displayNameHtml)}
+                <div 
+                    id="kc-header-wrapper" 
+                    className={getClassName("kcHeaderWrapperClass")}
+                    style={{ "fontFamily": '"Work Sans"' }}
+                >
+                    {msg("loginTitleHtml", realm.displayNameHtml)}!!!
                 </div>
             </div>
 
