@@ -9760,19 +9760,10 @@ jwt-decode@^3.1.2:
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
-keycloak-js@^21.0.1:
-  version "21.0.2"
-  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-21.0.2.tgz#1d3c2079d3c23850df4f253a868926861c51c488"
-  integrity sha512-i05i3VBPhQ867EgjA+OYPlf8YUPiUwtrU2zv4j8tvZIdRvhJY8f+mp1ZvRJl/GMRb+XhJs9BDknyBMrIspwDkw==
-  dependencies:
-    base64-js "^1.5.1"
-    js-sha256 "^0.9.0"
-
-keycloakify@9.0.0-rc.0:
-  version "9.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-9.0.0-rc.0.tgz#8982f96ef8fc0ce33b6d3aff7b1225a1f4baeeec"
-  integrity sha512-z+D1NQIpWN20i8D3h2IHBSZKpuVMWNjRmKFJMjTOHh5uIeHiPJm/yAT7PtqOw/hRGH/xgNk5J1q2hZf+sFCfiw==
-
+keycloakify@9.0.0-rc.1:
+  version "9.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-9.0.0-rc.1.tgz#6d618d856c8fe61af777b04c84446d9c72ab8570"
+  integrity sha512-r1tWS5ivCm7/yVoOTI3Gl5JT4YmxUkvaelicQA8m8xYxgWqSmcJJrJ7RmlB5WfcpLPTJbJNRQiFSw4FCCxDxmw==
   dependencies:
     "@babel/generator" "^7.22.9"
     "@babel/parser" "^7.22.7"
