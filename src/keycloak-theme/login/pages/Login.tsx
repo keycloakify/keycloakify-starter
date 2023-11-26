@@ -5,6 +5,17 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
+import { retrieveQueryParamFromUrl } from "oidc-spa/tools/urlQueryParams";
+
+const result = retrieveQueryParamFromUrl({
+    "url": window.location.href,
+    "name": "my_custom_param",
+});
+
+if (result.wasPresent) {
+    console.log("my_custom_param", result.value);
+}
+
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -60,7 +71,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     id="kc-form-wrapper"
                     className={clsx(
                         realm.password &&
-                            social.providers && [getClassName("kcFormSocialAccountContentClass"), getClassName("kcFormSocialAccountClass")]
+                        social.providers && [getClassName("kcFormSocialAccountContentClass"), getClassName("kcFormSocialAccountClass")]
                     )}
                 >
                     {realm.password && (
@@ -71,8 +82,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         const label = !realm.loginWithEmailAllowed
                                             ? "username"
                                             : realm.registrationEmailAsUsername
-                                            ? "email"
-                                            : "usernameOrEmail";
+                                                ? "email"
+                                                : "usernameOrEmail";
 
                                         const autoCompleteHelper: typeof label = label === "usernameOrEmail" ? "username" : label;
 
@@ -123,8 +134,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     type="checkbox"
                                                     {...(login.rememberMe === "on"
                                                         ? {
-                                                              "checked": true
-                                                          }
+                                                            "checked": true
+                                                        }
                                                         : {})}
                                                 />
                                                 {msg("rememberMe")}
@@ -149,8 +160,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     name="credentialId"
                                     {...(auth?.selectedCredential !== undefined
                                         ? {
-                                              "value": auth.selectedCredential
-                                          }
+                                            "value": auth.selectedCredential
+                                        }
                                         : {})}
                                 />
                                 <input

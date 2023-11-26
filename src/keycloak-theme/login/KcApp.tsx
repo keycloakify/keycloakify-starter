@@ -7,10 +7,6 @@ import { useI18n } from "./i18n";
 const Template = lazy(() => import("./Template"));
 const DefaultTemplate = lazy(() => import("keycloakify/login/Template"));
 
-// You can uncomment this to see the values passed by the main app before redirecting.  
-//import { foo, bar } from "./valuesTransferredOverUrl";
-//console.log(`Values passed by the main app in the URL parameter:`, { foo, bar });
-
 const Login = lazy(() => import("./pages/Login"));
 // If you can, favor register-user-profile.ftl over register.ftl, see: https://docs.keycloakify.dev/realtime-input-validation
 const Register = lazy(() => import("./pages/Register"));
