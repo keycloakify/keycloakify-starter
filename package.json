@@ -18,8 +18,7 @@
         "themeName": [
             "keycloakify-starter",
             "keycloakify-starter-variant-1"
-        ],
-        "doCreateJar": true
+        ]
     },
     "author": "u/garronej",
     "license": "MIT",
