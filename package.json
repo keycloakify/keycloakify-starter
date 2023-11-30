@@ -1,7 +1,7 @@
 {
     "name": "keycloakify-starter",
     "homepage": "https://starter.keycloakify.dev",
-    "version": "5.0.0",
+    "version": "5.0.1",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
@@ -15,8 +15,10 @@
         "storybook": "start-storybook -p 6006"
     },
     "keycloakify": {
-        "themeName": [
-            "keycloakify-starter",
+        "extraThemeProperties": [ 
+            "foo=bar"
+        ],
+        "extraThemeNames": [
             "keycloakify-starter-variant-1"
         ]
     },
@@ -26,7 +28,7 @@
     "dependencies": {
         "evt": "^2.4.15",
         "oidc-spa": "^2.0.2",
-        "keycloakify": "^9.1.1",
+        "keycloakify": "^8.4.1",
         "powerhooks": "^0.26.8",
         "react": "18.1.0",
         "react-dom": "18.1.0",
