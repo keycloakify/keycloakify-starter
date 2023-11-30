@@ -15,11 +15,12 @@
         "storybook": "start-storybook -p 6006"
     },
     "keycloakify": {
+        "themeName": [
+            "keycloakify-starter",
+            "keycloakify-starter-variant-1"
+        ],
         "extraThemeProperties": [ 
             "foo=bar"
-        ],
-        "extraThemeNames": [
-            "keycloakify-starter-variant-1"
         ]
     },
     "author": "u/garronej",
@@ -28,7 +29,7 @@
     "dependencies": {
         "evt": "^2.4.15",
         "oidc-spa": "^2.0.2",
-        "keycloakify": "^8.4.1",
+        "keycloakify": "^9.1.2",
         "powerhooks": "^0.26.8",
         "react": "18.1.0",
         "react-dom": "18.1.0",
