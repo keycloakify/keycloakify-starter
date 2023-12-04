@@ -169,13 +169,13 @@ jobs:
     outputs:
       from_version: ${{ steps.step1.outputs.from_version }}
       to_version: ${{ steps.step1.outputs.to_version }}
-      is_upgraded_version: ${{ steps.step1.outputs.is_upgraded_version }}
+      is_upgraded_version: \${{ steps.step1.outputs.is_upgraded_version }}
     steps:
     - uses: garronej/ts-ci@v2.1.0
       id: step1
       with: 
         action_name: is_package_json_version_upgraded
-        branch: ${{ github.head_ref || github.ref }}
+        branch: \${{ github.head_ref || github.ref }}
 
   create_github_release:
     runs-on: ubuntu-latest
@@ -194,16 +194,16 @@ jobs:
     - run: mv build_keycloak/target/*.jar keycloak-theme.jar
     - uses: softprops/action-gh-release@v1
       with:
-        name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
-        tag_name: v${{ needs.check_if_version_upgraded.outputs.to_version }}
-        target_commitish: ${{ github.head_ref || github.ref }}
+        name: Release v\${{ needs.check_if_version_upgraded.outputs.to_version }}
+        tag_name: v\${{ needs.check_if_version_upgraded.outputs.to_version }}
+        target_commitish: \${{ github.head_ref || github.ref }}
         generate_release_notes: true
         draft: false
         files: |
           retrocompat-keycloak-theme.jar
           keycloak-theme.jar
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
 
 EOF
 ```
