@@ -167,8 +167,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     outputs:
-      from_version: ${{ steps.step1.outputs.from_version }}
-      to_version: ${{ steps.step1.outputs.to_version }}
+      from_version: \${{ steps.step1.outputs.from_version }}
+      to_version: \${{ steps.step1.outputs.to_version }}
       is_upgraded_version: \${{ steps.step1.outputs.is_upgraded_version }}
     steps:
     - uses: garronej/ts-ci@v2.1.0
