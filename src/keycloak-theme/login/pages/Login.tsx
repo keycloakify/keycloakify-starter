@@ -5,17 +5,12 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import { retrieveQueryParamFromUrl } from "oidc-spa/tools/urlQueryParams";
 
-const result = retrieveQueryParamFromUrl({
-    "url": window.location.href,
-    "name": "my_custom_param",
-});
+const my_custom_param= new URL(window.location.href).searchParams.get("my_custom_param");
 
-if (result.wasPresent) {
-    console.log("my_custom_param", result.value);
+if (my_custom_param !== null) {
+    console.log("my_custom_param:", my_custom_param);
 }
-
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
