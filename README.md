@@ -36,7 +36,7 @@ yarn start # See the Hello World app
            # Uncomment line 97 of src/keycloak-theme/login/kcContext where it reads: `mockPageId: "login.ftl"`, reload https://localhost:3000
            # You can now develop your Login pages. (Don't forget to comment it back when you're done)
           
-# Install mvn (Maven) if not already done. On mac it's 'brew install maven'
+# Install mvn (Maven) if not already done. On mac it's 'brew install maven', on Ubuntu/Debian it's 'sudo apt-get install maven'
 
 yarn build-keycloak-theme # Actually build the theme
                           # Read the instruction printed on the console to see how to test
