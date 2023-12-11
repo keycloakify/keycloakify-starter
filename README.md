@@ -38,7 +38,7 @@ yarn start # See the Hello World app
           
 # Install mvn (Maven) if not already done. On mac it's 'brew install maven', on Ubuntu/Debian it's 'sudo apt-get install maven'
 
-yarn build-keycloak-theme # Actually build the theme
+yarn build-keycloak-theme # Actually build the theme (generates the .jar to be imported in Keycloak)
                           # Read the instruction printed on the console to see how to test
                           # your theme on a real Keycloak instance.
 
