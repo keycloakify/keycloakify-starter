@@ -1,5 +1,6 @@
 // Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/login/Template.tsx
 
+import { useState } from "react";
 import { assert } from "keycloakify/tools/assert";
 import { clsx } from "keycloakify/tools/clsx";
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
@@ -42,6 +43,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         "htmlClassName": getClassName("kcHtmlClass"),
         "bodyClassName": getClassName("kcBodyClass")
     });
+
+    useState(()=> { document.title = i18n.msgStr("loginTitle", kcContext.realm.displayName); });
 
     if (!isReady) {
         return null;
