@@ -10,7 +10,7 @@
 
 # Introduction
 
-This repo constitutes an easily reusable setup for a standalone Keycloak theme project OR for a SPA React App that generates a
+This repo constitutes an easily reusable setup for a Keycloak theme project OR for a SPA React App that generates a
 Keycloak theme that goes along with it.  
 If you are only looking to create a Keycloak theme (and not a Keycloak theme and an App that share the same codebase) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
 
@@ -103,9 +103,9 @@ docker run -it -dp 8083:80 keycloakify/keycloakify-starter:main
 # You can access the app at http://localhost:8083
 ```
 
-# Standalone keycloak theme
+# I only want a Keycloak theme
 
-If you are only looking to create a keycloak theme, you can run theses few commands
+If you are only looking to create a Keycloak theme and not a Theme + a React app, you can run theses few commands
 after clicking ![image](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) to refactor the template 
 and remove unnecessary files.  
 

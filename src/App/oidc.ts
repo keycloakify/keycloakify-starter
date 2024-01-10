@@ -13,7 +13,7 @@ const keycloakClientId= "starter";
 export const { OidcProvider } = createOidcProvider({
     issuerUri: `${keycloakUrl}/realms/${keycloakRealm}`,
     clientId: keycloakClientId,
-    // NOTE: You can also pass queries params when calling oidc.login()
+    // NOTE: You can also pass queries params when calling login()
     getExtraQueryParams: () => ({
         // This adding ui_locales to the url will ensure the consistency of the language between the app and the login pages
         // If your app implements a i18n system (like i18nifty.dev for example) you should use this and replace "en" by the 
