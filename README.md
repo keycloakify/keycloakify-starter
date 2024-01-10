@@ -53,6 +53,16 @@ npx download-builtin-keycloak-theme # For downloading the default theme (as a re
                                     # Look for the files in build_keycloak/src/main/resources/theme/{base,keycloak}
 ```
 
+# Theme variant  
+
+Keycloakify enables you to create different variant for a single theme.  
+This enable you to have a single jar that embed two or more theme variant.  
+
+![Theme variant](https://content.gitbook.com/content/FcBKODbZbNDgm0rc6a9K/blobs/9iKgs2rv2Kfb2pbs4dRz/image.png)  
+
+You can enable this feature by providing multiple theme name in the Keycloakify build option.  
+[See documentation](https://docs.keycloakify.dev/build-options#themename)  
+
 # The CI workflow
 
 -   You need to manually allow GitHub Action to push on your repository.  For this reason the initial setup will fail.  You need to enabled permission and re-run failed job: [see video](https://user-images.githubusercontent.com/6702424/213480604-0aac0ea7-487f-491d-94ae-df245b2c7ee8.mov).  

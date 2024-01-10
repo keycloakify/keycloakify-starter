@@ -15,10 +15,7 @@
         "storybook": "start-storybook -p 6006"
     },
     "keycloakify": {
-        "themeName": [
-            "keycloakify-starter",
-            "keycloakify-starter-variant-1"
-        ],
+        "themeName": "keycloakify-starter",
         "extraThemeProperties": [ 
             "foo=bar"
         ]
