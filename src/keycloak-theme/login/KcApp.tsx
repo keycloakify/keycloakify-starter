@@ -3,9 +3,7 @@ import { lazy, Suspense } from "react";
 import Fallback, { type PageProps } from "keycloakify/login";
 import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
-
-const Template = lazy(() => import("./Template"));
-const DefaultTemplate = lazy(() => import("keycloakify/login/Template"));
+import Template from "./Template";
 
 const Login = lazy(() => import("./pages/Login"));
 // If you can, favor register-user-profile.ftl over register.ftl, see: https://docs.keycloakify.dev/realtime-input-validation
@@ -50,10 +48,20 @@ export default function KcApp(props: { kcContext: KcContext; }) {
                     case "register.ftl": return <Register {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "register-user-profile.ftl": return <RegisterUserProfile {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />
                     case "terms.ftl": return <Terms {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
+                    // Removes those pages in you project. They are included to show you how to implement keycloak pages
+                    // that are not yes implemented by Keycloakify. 
+                    // See: https://docs.keycloakify.dev/limitations#some-pages-still-have-the-default-theme.-why
                     case "my-extra-page-1.ftl": return <MyExtraPage1 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     case "my-extra-page-2.ftl": return <MyExtraPage2 {...{ kcContext, i18n, Template, classes }} doUseDefaultCss={true} />;
                     // We choose to use the default Template for the Info page and to download the theme resources.
-                    case "info.ftl": return <Info {...{ kcContext, i18n, classes }} Template={DefaultTemplate} doUseDefaultCss={true} />;
+                    // This is just an example to show you what is possible. You likely don't want to keep this as is. 
+                    case "info.ftl": return (
+                        <Info
+                            {...{ kcContext, i18n, classes }}
+                            Template={lazy(() => import("keycloakify/login/Template"))}
+                            doUseDefaultCss={true}
+                        />
+                    );
                     default: return <Fallback {...{ kcContext, i18n, classes }} Template={Template} doUseDefaultCss={true} />;
                 }
             })()}

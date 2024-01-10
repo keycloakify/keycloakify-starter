@@ -3,8 +3,7 @@ import { lazy, Suspense } from "react";
 import type { PageProps } from "keycloakify/account";
 import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
-
-const Template = lazy(() => import("./Template"));
+import Template from "./Template";
 
 const Password = lazy(() => import("./pages/Password"));
 const MyExtraPage1 = lazy(() => import("./pages/MyExtraPage1"));
