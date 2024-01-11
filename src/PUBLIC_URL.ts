@@ -6,7 +6,7 @@ import { kcContext as kcAccountThemeContext } from "keycloak-theme/login/kcConte
  * If you need to use process.env.PUBLIC_URL, use this variable instead.  
  * If you can, import your assets using the import statement.
  * 
- * See: https://docs.keycloakify.dev/importing-assets#importing-custom-assets
+ * See: https://docs.keycloakify.dev/importing-assets#importing-custom-assets-that-arent-fonts
  */
 export const PUBLIC_URL = (()=>{
 
