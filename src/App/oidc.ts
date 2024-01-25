@@ -1,7 +1,7 @@
 // See documentation of oidc-spa for more details:
 // https://docs.oidc-spa.dev
 
-import { createOidcProvider, createUseOidc } from "oidc-spa/react";
+import { createReactOidc } from "oidc-spa/react";
 import { z } from "zod";
 
 //On older Keycloak version you need the /auth (e.g: http://localhost:8080/auth)
@@ -10,11 +10,11 @@ const keycloakUrl = "https://auth.code.gouv.fr/auth";
 const keycloakRealm = "keycloakify";
 const keycloakClientId= "starter";
 
-export const { OidcProvider } = createOidcProvider({
+export const { OidcProvider, useOidc } = createReactOidc({
     issuerUri: `${keycloakUrl}/realms/${keycloakRealm}`,
     clientId: keycloakClientId,
     // NOTE: You can also pass queries params when calling login()
-    getExtraQueryParams: () => ({
+    extraQueryParams: () => ({
         // This adding ui_locales to the url will ensure the consistency of the language between the app and the login pages
         // If your app implements a i18n system (like i18nifty.dev for example) you should use this and replace "en" by the 
         // current language of the app.
@@ -22,10 +22,7 @@ export const { OidcProvider } = createOidcProvider({
         "ui_locales": "en",
         "my_custom_param": "value of foo transferred to login page"
     }),
-    publicUrl: process.env.PUBLIC_URL
-});
-
-export const { useOidc } = createUseOidc({
+    publicUrl: process.env.PUBLIC_URL,
     decodedIdTokenSchema: z.object({
         // Use https://jwt.io/ to tell what's in your idToken
         // It will depend of your Keycloak configuration.
