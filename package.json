@@ -18,7 +18,8 @@
         "themeName": "keycloakify-starter",
         "extraThemeProperties": [ 
             "foo=bar"
-        ]
+        ],
+        "doBuildRetrocompatAccountTheme": false
     },
     "author": "u/garronej",
     "license": "MIT",
