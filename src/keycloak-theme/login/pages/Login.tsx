@@ -43,13 +43,14 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     return (
         <Template
             {...{ kcContext, i18n, doUseDefaultCss, classes }}
-            displayInfo={social.displayInfo}
+            displayInfo={
+realm.password &&
+                realm.registrationAllowed &&
+                !registrationDisabled
+            }
             displayWide={realm.password && social.providers !== undefined}
             headerNode={msg("doLogIn")}
             infoNode={
-                realm.password &&
-                realm.registrationAllowed &&
-                !registrationDisabled && (
                     <div id="kc-registration">
                         <span>
                             {msg("noAccount")}
@@ -58,7 +59,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             </a>
                         </span>
                     </div>
-                )
             }
         >
             <div id="kc-form" className={clsx(realm.password && social.providers !== undefined && getClassName("kcContentWrapperClass"))}>
