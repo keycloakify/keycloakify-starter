@@ -6,7 +6,7 @@ import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 
-const my_custom_param= new URL(window.location.href).searchParams.get("my_custom_param");
+const my_custom_param = new URL(window.location.href).searchParams.get("my_custom_param");
 
 if (my_custom_param !== null) {
     console.log("my_custom_param:", my_custom_param);
@@ -44,21 +44,21 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         <Template
             {...{ kcContext, i18n, doUseDefaultCss, classes }}
             displayInfo={
-realm.password &&
+                realm.password &&
                 realm.registrationAllowed &&
                 !registrationDisabled
             }
             displayWide={realm.password && social.providers !== undefined}
             headerNode={msg("doLogIn")}
             infoNode={
-                    <div id="kc-registration">
-                        <span>
-                            {msg("noAccount")}
-                            <a tabIndex={6} href={url.registrationUrl}>
-                                {msg("doRegister")}
-                            </a>
-                        </span>
-                    </div>
+                <div id="kc-registration">
+                    <span>
+                        {msg("noAccount")}
+                        <a tabIndex={6} href={url.registrationUrl}>
+                            {msg("doRegister")}
+                        </a>
+                    </span>
+                </div>
             }
         >
             <div id="kc-form" className={clsx(realm.password && social.providers !== undefined && getClassName("kcContentWrapperClass"))}>
