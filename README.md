@@ -8,6 +8,8 @@
     <a href="https://starter.keycloakify.dev">Authenticated React SPA</a>
 </p>
 
+> WARNING: This work in progress!  
+
 # Introduction
 
 This repo constitutes an easily reusable setup for a Keycloak theme project OR for a SPA React App that generates a
