@@ -22,7 +22,7 @@ export const { OidcProvider, useOidc } = createReactOidc({
         "ui_locales": "en",
         "my_custom_param": "value of foo transferred to login page"
     }),
-    publicUrl: process.env.PUBLIC_URL,
+    publicUrl: import.meta.env.BASE_URL,
     decodedIdTokenSchema: z.object({
         // Use https://jwt.io/ to tell what's in your idToken
         // It will depend of your Keycloak configuration.

@@ -1,6 +1,6 @@
 
-import { kcContext as kcLoginThemeContext } from "keycloak-theme/login/kcContext";
-import { kcContext as kcAccountThemeContext } from "keycloak-theme/login/kcContext";
+import { kcContext as kcLoginThemeContext } from "./keycloak-theme/login/kcContext";
+import { kcContext as kcAccountThemeContext } from "./keycloak-theme/login/kcContext";
 
 /**
  * If you need to use import.meta.env.BASE_URL, use this variable instead.  
@@ -24,7 +24,7 @@ export const BASE_URL = (()=>{
 
     })();
 
-    return (kcContext === undefined || process.env.NODE_ENV === "development")
+    return (kcContext === undefined || import.meta.env.MODE === 'development')
         ? import.meta.env.BASE_URL
         : `${kcContext.url.resourcesPath}/build`;
 

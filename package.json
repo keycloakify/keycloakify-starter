@@ -7,6 +7,7 @@
         "type": "git",
         "url": "git://github.com/codegouvfr/keycloakify-starter.git"
     },
+    "type": "module",
     "scripts": {
         "postinstall": "copy-keycloak-resources-to-public",
         "dev": "vite",
@@ -43,6 +44,7 @@
         "eslint-plugin-react-refresh": "^0.4.5",
         "typescript": "^5.2.2",
         "vite": "^5.0.8",
-        "vite-plugin-commonjs": "^0.10.1"
+        "vite-plugin-commonjs": "^0.10.1",
+        "@storybook/react": "^7.6.10"
     }
 }

@@ -9,7 +9,7 @@ import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
 import keycloakifyLogoPngUrl from "./assets/keycloakify-logo.png";
-import { PUBLIC_URL } from "../../PUBLIC_URL";
+import { BASE_URL } from "../../BASE_URL";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -64,7 +64,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         This is just to show you how it can be done but this is not the best option for importing assets.
                         See: https://docs.keycloakify.dev/importing-assets#importing-custom-assets
                     */}
-                    <img src={`${PUBLIC_URL}/keycloakify-logo.png`} alt="Keycloakify logo" width={50} />
+                    <img src={`${BASE_URL}keycloakify-logo.png`} alt="Keycloakify logo" width={50} />
                     {msg("loginTitleHtml", realm.displayNameHtml)}!!!
                     {/* This is the preferred way to use assets */}
                     <img src={keycloakifyLogoPngUrl} alt="Keycloakify logo" width={50} />
@@ -77,14 +77,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         <div id="kc-locale">
                             <div id="kc-locale-wrapper" className={getClassName("kcLocaleWrapperClass")}>
                                 <div className="kc-dropdown" id="kc-locale-dropdown">
-                                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                     <a href="#" id="kc-current-locale-link">
                                         {labelBySupportedLanguageTag[currentLanguageTag]}
                                     </a>
                                     <ul>
                                         {locale.supported.map(({ languageTag }) => (
                                             <li key={languageTag} className="kc-dropdown-item">
-                                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                                 <a href="#" onClick={() => changeLocale(languageTag)}>
                                                     {labelBySupportedLanguageTag[languageTag]}
                                                 </a>
@@ -182,7 +180,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 >
                                     <div className={getClassName("kcFormGroupClass")}>
                                         <input type="hidden" name="tryAnotherWay" value="on" />
-                                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                         <a
                                             href="#"
                                             id="try-another-way"
