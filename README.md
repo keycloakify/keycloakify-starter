@@ -15,7 +15,7 @@ Keycloak theme that goes along with it.
 If you are only looking to create a Keycloak theme (and not a Keycloak theme and an App that share the same codebase) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
 
 > ❗️ WARNING ❗️: Don't waste time trying to port this setup to [Vite](https://vitejs.dev/).  
-> Vite support is comming in a matter of hours!  
+> Vite support is comming in a matter of days. There will be a comprehensive migration guide.  
 
 # Quick start
 
