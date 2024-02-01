@@ -26,6 +26,6 @@ export const BASE_URL = (()=>{
 
     return (kcContext === undefined || import.meta.env.MODE === 'development')
         ? import.meta.env.BASE_URL
-        : `${kcContext.url.resourcesPath}/build`;
+        : `${kcContext.url.resourcesPath}/build/`;
 
 })();

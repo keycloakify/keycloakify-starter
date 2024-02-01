@@ -26,7 +26,7 @@
     "dependencies": {
         "evt": "^2.5.7",
         "oidc-spa": "^4.0.0",
-        "keycloakify": "^9.2.0",
+        "keycloakify": "9.3.0-rc.0",
         "powerhooks": "^1.0.8",
         "tsafe": "^1.6.6",
         "zod": "^3.22.4",
