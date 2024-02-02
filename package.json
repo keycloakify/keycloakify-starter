@@ -24,7 +24,7 @@
     "keywords": [],
     "dependencies": {
         "evt": "^2.5.7",
-        "oidc-spa": "^4.0.0",
+        "oidc-spa": "^4.1.0",
         "keycloakify": "^9.3.0",
         "powerhooks": "^1.0.8",
         "react": "18.1.0",
