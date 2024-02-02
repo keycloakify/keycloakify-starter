@@ -45,6 +45,9 @@ yarn build-keycloak-theme # Actually build the theme (generates the .jar to be i
 npx eject-keycloak-page # Prompt that let you select the pages you want to customize
                         # This CLI tools is not guaranty to work, you can always copy pase pages 
                         # from the Keycloakify repo.
+                        # After you ejected a page you need to edit the src/keycloak-theme/login(or admin)/KcApp.tsx file
+                        # You need to add a case in the switch for the page you just imported in your project.  
+                        # Look how it's done for the Login page and replicate for your new page.  
 
 npx initialize-email-theme # For initializing your email theme
                            # Note that Keycloakify does not feature React integration for email yet.
