@@ -16,11 +16,11 @@ const Info = lazy(() => import("keycloakify/login/pages/Info"));
 
 // This is like adding classes to theme.properties 
 // https://github.com/keycloak/keycloak/blob/11.0.3/themes/src/main/resources/theme/keycloak/login/theme.properties
-const classes: PageProps<any, any>["classes"] = {
+const classes = {
     // NOTE: The classes are defined in ./KcApp.css
     "kcHtmlClass": "my-root-class",
     "kcHeaderWrapperClass": "my-color my-font"
-};
+} satisfies PageProps["classes"];
 
 export default function KcApp(props: { kcContext: KcContext; }) {
 
