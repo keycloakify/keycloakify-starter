@@ -49,8 +49,8 @@ jobs:
     - run: npx keycloakify
       env:
         XDG_CACHE_HOME: "/home/runner/.cache/yarn"
-    - run: mv build_keycloak/target/retrocompat-*.jar retrocompat-keycloak-theme.jar
-    - run: mv build_keycloak/target/*.jar keycloak-theme.jar
+    - run: mv dist_keycloak/target/retrocompat-*.jar retrocompat-keycloak-theme.jar
+    - run: mv dist_keycloak/target/*.jar keycloak-theme.jar
     - uses: softprops/action-gh-release@v1
       with:
         name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
