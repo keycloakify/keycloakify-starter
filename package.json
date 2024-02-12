@@ -9,7 +9,6 @@
     },
     "type": "module",
     "scripts": {
-        "postinstall": "copy-keycloak-resources-to-public",
         "dev": "vite",
         "build": "tsc && vite build",
         "build-keycloak-theme": "yarn build && keycloakify"
@@ -26,7 +25,7 @@
     "dependencies": {
         "evt": "^2.5.7",
         "oidc-spa": "^4.0.0",
-        "keycloakify": "9.3.0-rc.0",
+        "keycloakify": "9.4.0-rc.15",
         "powerhooks": "^1.0.8",
         "tsafe": "^1.6.6",
         "zod": "^3.22.4",
@@ -45,6 +44,6 @@
         "typescript": "^5.2.2",
         "vite": "^5.0.8",
         "vite-plugin-commonjs": "^0.10.1",
-        "@storybook/react": "^7.6.10"
+        "@storybook/react": "^7.6.14"
     }
 }

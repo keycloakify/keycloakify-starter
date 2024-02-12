@@ -52,6 +52,6 @@ jspm_packages
 
 /dist
 
-/build_keycloak
+/dist_keycloak
 /build
 /storybook-static

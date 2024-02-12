@@ -9,7 +9,6 @@ import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
 import keycloakifyLogoPngUrl from "./assets/keycloakify-logo.png";
-import { BASE_URL } from "../../BASE_URL";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -64,7 +63,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         This is just to show you how it can be done but this is not the best option for importing assets.
                         See: https://docs.keycloakify.dev/importing-assets#importing-custom-assets
                     */}
-                    <img src={`${BASE_URL}keycloakify-logo.png`} alt="Keycloakify logo" width={50} />
+                    <img src={`${import.meta.env.BASE_URL}keycloakify-logo.png`} alt="Keycloakify logo" width={50} />
                     {msg("loginTitleHtml", realm.displayNameHtml)}!!!
                     {/* This is the preferred way to use assets */}
                     <img src={keycloakifyLogoPngUrl} alt="Keycloakify logo" width={50} />
