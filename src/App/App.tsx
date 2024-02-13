@@ -1,6 +1,6 @@
 import "./App.css";
-import logo from "./logo.svg";
-import myimg from "./myimg.png";
+import reactSvgUrl from "./assets/react.svg";
+import viteSvgUrl from "./assets/vite.svg";
 import { OidcProvider, useOidc, getKeycloakAccountUrl } from "./oidc";
 
 export default function App() {
@@ -24,49 +24,52 @@ function ContextualizedApp() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                {isUserLoggedIn ?
-                    (
-                        <>
+            <div>
+            <div className="App-payload">
+            {isUserLoggedIn ?
+                (
+                    <>
 
-                            <h1>Hello {oidcTokens.decodedIdToken.name} !</h1>
-                            <a
-                                href={getKeycloakAccountUrl({ locale: "en" })}
-                            >
-                                Link to your Keycloak account
-                            </a>
-                            <button
-                                onClick={() => logout({ redirectTo: "home" })}
-                            >
-                                Logout
-                            </button>
-                            <Jwt />
-                        </>
-                    )
-                    :
-                    (
-                        <button
-                            onClick={() => login({
-                                doesCurrentHrefRequiresAuth: false,
-                                //extraQueryParams: { kc_idp_hint: "google" }
-                            })}
+                        <h1>Hello {oidcTokens.decodedIdToken.name} !</h1>
+                        <a
+                            href={getKeycloakAccountUrl({ locale: "en" })}
                         >
-                            Login
+                            Link to your Keycloak account
+                        </a>
+                        &nbsp;&nbsp;&nbsp;
+                        <button
+                            onClick={() => logout({ redirectTo: "home" })}
+                        >
+                            Logout
                         </button>
-                    )
-                }
-                <img src={logo} className="App-logo" alt="logo" />
-                <img src={myimg} alt="test_image" />
-                <p style={{ "fontFamily": '"Work Sans"' }}>Hello world</p>
-                <p>Check out all keycloak pages in the <a href="https://storybook.keycloakify.dev">Storybook</a>!</p>
-                <p>Once you've identified the ones you want to customize run <code>npx eject-keycloak-page</code></p>
-            </header>
+                        <Jwt />
+                    </>
+                )
+                :
+                (
+                    <button
+                        onClick={() => login({
+                            doesCurrentHrefRequiresAuth: false,
+                            //extraQueryParams: { kc_idp_hint: "google" }
+                        })}
+                    >
+                        Login
+                    </button>
+                )
+            }
+            </div>
+            <div className="App-logo-wrapper">
+            <img src={reactSvgUrl} className="App-logo rotate" alt="logo" />
+            &nbsp;&nbsp;&nbsp;
+            <img src={viteSvgUrl} className="App-logo" alt="logo" />
+            </div>
+            </div>
         </div>
     );
 
 }
 
-function Jwt(){
+function Jwt() {
 
     const { oidcTokens } = useOidc({
         assertUserLoggedIn: true
