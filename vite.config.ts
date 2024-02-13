@@ -11,7 +11,5 @@ export default defineConfig({
     react(), 
     commonjs(), 
     keycloakify()
-  ],
-  assetsInclude: ["**/*.md"],
-  //base: '/foo/'
+  ]
 })
