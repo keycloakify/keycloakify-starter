@@ -98,7 +98,9 @@ jobs:
     - uses: bahmutov/npm-install@v1
     - run: yarn build
     # We tell GitHub pages that our package.json["homepage"] field is our domain name.  
-    - run: echo $(node -e 'console.log(require("url").parse(require("./package.json").homepage).host)') > build/CNAME
+    # If you wish to use the default GitHub pages domain name, like https://<username>.github.io/<repo>,
+    # you'll have to use base: "/repo/" in your vite.config.ts.
+    - run: echo $(node -e 'console.log(require("url").parse(require("./package.json").homepage).host)') > dist/CNAME
     - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

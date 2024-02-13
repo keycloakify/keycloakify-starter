@@ -11,5 +11,12 @@ export default defineConfig({
     react(), 
     commonjs(), 
     keycloakify()
-  ]
+  ],
+  /* 
+   * Uncomment this if you want to use the default domain provided by GitHub Pages
+   * replace "keycloakify-starter" with your repository name.  
+   * This is only relevent if you are building an Wep App + A Keycloak theme.
+   * If you are only building a Keycloak theme, you can ignore this.  
+   */
+  //base: "/keycloakify-starter/"
 })
