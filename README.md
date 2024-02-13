@@ -170,8 +170,6 @@ jobs:
     - uses: bahmutov/npm-install@v1
     - run: yarn build
     - run: npx keycloakify
-      env:
-        XDG_CACHE_HOME: "/home/runner/.cache/yarn"
 
   check_if_version_upgraded:
     name: Check if version upgrade
@@ -200,8 +198,6 @@ jobs:
     - uses: bahmutov/npm-install@v1
     - run: yarn build
     - run: npx keycloakify
-      env:
-        XDG_CACHE_HOME: "/home/runner/.cache/yarn"
     - run: mv dist_keycloak/target/retrocompat-*.jar retrocompat-keycloak-theme.jar
     - run: mv dist_keycloak/target/*.jar keycloak-theme.jar
     - uses: softprops/action-gh-release@v1
