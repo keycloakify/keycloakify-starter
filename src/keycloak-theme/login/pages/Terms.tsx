@@ -7,8 +7,6 @@ import { evtTermMarkdown } from "keycloakify/login/lib/useDownloadTerms";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 import { useDownloadTerms } from "keycloakify/login";
-import tos_en_url from "../assets/tos_en.md";
-import tos_fr_url from "../assets/tos_fr.md";
 
 export default function Terms(props: PageProps<Extract<KcContext, { pageId: "terms.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -28,17 +26,10 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
 
             const tos_url = (() => {
                 switch (currentLanguageTag) {
-                    case "fr": return tos_fr_url;
-                    default: return tos_en_url;
+                    case "fr": return `${import.meta.env.BASE_URL}terms/fr.md`;
+                    default: return `${import.meta.env.BASE_URL}terms/en.md`;
                 }
             })();
-
-
-            if ("__STORYBOOK_ADDONS" in window) {
-                // NOTE: In storybook, when you import a .md file you get the content of the file.
-                // In Create React App on the other hand you get an url to the file.
-                return tos_url;
-            }
 
             const markdownString = await fetch(tos_url).then(response => response.text());
 

@@ -60,12 +60,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     style={{ "fontFamily": '"Work Sans"' }}
                 >
                     {/* 
-                        This is just to show you how it can be done but this is not the best option for importing assets.
-                        See: https://docs.keycloakify.dev/importing-assets#importing-custom-assets
+                        Here we are referencing the `keycloakify-logo.png` in the `public` directory.  
+                        When possible don't use this approach, instead ...
                     */}
                     <img src={`${import.meta.env.BASE_URL}keycloakify-logo.png`} alt="Keycloakify logo" width={50} />
                     {msg("loginTitleHtml", realm.displayNameHtml)}!!!
-                    {/* This is the preferred way to use assets */}
+                    {/* ...rely on the bundler to import your assets, it's more efficient */}
                     <img src={keycloakifyLogoPngUrl} alt="Keycloakify logo" width={50} />
                 </div>
             </div>
