@@ -114,7 +114,7 @@ rm -r src/App
 mv src/keycloak-theme/* src/
 rm -r src/keycloak-theme
 
-cat << EOF > src/index.tsx
+cat << EOF > src/main.tsx
 import { createRoot } from "react-dom/client";
 import { StrictMode, lazy, Suspense } from "react";
 import { kcContext as kcLoginThemeContext } from "./login/kcContext";
