@@ -1,18 +1,22 @@
 
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from '@storybook/react';
 import { createPageStory } from "../createPageStory";
 
 const { PageStory } = createPageStory({
     pageId: "password.ftl"
 });
 
-export default {
+const meta = {
     title: "account/Password",
     component: PageStory,
-} as ComponentMeta<typeof PageStory>;
+} satisfies Meta<typeof PageStory>;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const Default: ComponentStory<typeof PageStory> = () => <PageStory
-    kcContext={{
-        message: { type: "success", summary: "This is a test message" }
-    }}
-/>;
+export const Default: Story = {
+    render: () => <PageStory
+        kcContext={{
+            message: { type: "success", summary: "This is a test message" }
+        }}
+    />
+};

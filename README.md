@@ -10,12 +10,9 @@
 
 # Introduction
 
-This repo constitutes an easily reusable setup for a Keycloak theme project OR for a SPA React App that generates a
+This repo constitutes an easily reusable setup for a Keycloak theme project OR for a Vite SPA React App that generates a
 Keycloak theme that goes along with it.  
 If you are only looking to create a Keycloak theme (and not a Keycloak theme and an App that share the same codebase) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).
-
-> ❗️ WARNING ❗️: Don't waste time trying to port this setup to [Vite](https://vitejs.dev/).  
-> Vite support is comming in a matter of days. There will be a comprehensive migration guide.  
 
 # Quick start
 
@@ -32,7 +29,7 @@ yarn storybook # Start Storybook
                # You can create stories even for pages that you haven't explicitly overloaded. See src/keycloak-theme/login/pages/LoginResetPassword.stories.tsx
                # See Keycloakify's storybook for if you need a starting point for your stories: https://github.com/keycloakify/keycloakify/tree/main/stories
 
-yarn start # See the Hello World app
+yarn dev # See the Hello World app
            # Uncomment line 97 of src/keycloak-theme/login/kcContext where it reads: `mockPageId: "login.ftl"`, reload https://localhost:3000
            # You can now see the login.ftl page with the mock data. (Don't forget to comment it back when you're done)
           
@@ -53,7 +50,7 @@ npx initialize-email-theme # For initializing your email theme
                            # Note that Keycloakify does not feature React integration for email yet.
 
 npx download-builtin-keycloak-theme # For downloading the default theme (as a reference)
-                                    # Look for the files in build_keycloak/src/main/resources/theme/{base,keycloak}
+                                    # Look for the files in dist_keycloak/src/main/resources/theme/{base,keycloak}
 ```
 
 # Theme variant  
@@ -205,8 +202,8 @@ jobs:
     - run: npx keycloakify
       env:
         XDG_CACHE_HOME: "/home/runner/.cache/yarn"
-    - run: mv build_keycloak/target/retrocompat-*.jar retrocompat-keycloak-theme.jar
-    - run: mv build_keycloak/target/*.jar keycloak-theme.jar
+    - run: mv dist_keycloak/target/retrocompat-*.jar retrocompat-keycloak-theme.jar
+    - run: mv dist_keycloak/target/*.jar keycloak-theme.jar
     - uses: softprops/action-gh-release@v1
       with:
         name: Release v\${{ needs.check_if_version_upgraded.outputs.to_version }}

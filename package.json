@@ -1,86 +1,64 @@
 {
-    "name": "keycloakify-starter",
-    "homepage": "https://starter.keycloakify.dev",
-    "version": "5.3.3",
-    "description": "A starter/demo project for keycloakify",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
-    },
-    "scripts": {
-        "start": "copy-keycloak-resources-to-public && react-scripts start",
-        "storybook": "copy-keycloak-resources-to-public && start-storybook -p 6006",
-        "build": "react-scripts build && rimraf build/keycloak-resources",
-        "build-keycloak-theme": "yarn build && keycloakify"
-    },
-    "keycloakify": {
-        "themeName": "keycloakify-starter",
-        "extraThemeProperties": [ 
-            "foo=bar"
-        ]
-    },
-    "author": "u/garronej",
-    "license": "MIT",
-    "keywords": [],
-    "dependencies": {
-        "evt": "^2.5.7",
-        "oidc-spa": "^4.2.0",
-        "keycloakify": "^9.3.0",
-        "powerhooks": "^1.0.8",
-        "react": "18.1.0",
-        "react-dom": "18.1.0",
-        "tsafe": "^1.6.6",
-        "zod": "^3.22.4"
-    },
-    "devDependencies": {
-        "@types/node": "^15.3.1",
-        "@types/react": "18.0.9",
-        "@types/react-dom": "18.0.4",
-        "react-scripts": "5.0.1",
-        "typescript": "~4.7.0",
-        "@storybook/addon-actions": "^6.5.16",
-        "@storybook/addon-essentials": "^6.5.16",
-        "@storybook/addon-interactions": "^6.5.16",
-        "@storybook/addon-links": "^6.5.16",
-        "@storybook/builder-webpack5": "^6.5.16",
-        "@storybook/manager-webpack5": "^6.5.16",
-        "@storybook/node-logger": "^6.5.16",
-        "@storybook/preset-create-react-app": "^4.1.2",
-        "@storybook/react": "^6.5.16",
-        "@storybook/testing-library": "^0.0.13",
-        "rimraf": "^5.0.5"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ],
-        "rules": {
-            "react-hooks/exhaustive-deps": "off",
-            "@typescript-eslint/no-redeclare": "off",
-            "no-labels": "off"
-        },
-        "overrides": [
-            {
-                "files": [
-                    "**/*.stories.*"
-                ],
-                "rules": {
-                    "import/no-anonymous-default-export": "off"
-                }
-            }
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    }
+  "name": "keycloakify-starter",
+  "homepage": "https://starter.keycloakify.dev",
+  "version": "5.2.0",
+  "description": "A starter/demo project for keycloakify",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codegouvfr/keycloakify-starter.git"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build-keycloak-theme": "yarn build && keycloakify",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "keycloakify": {
+    "themeName": "keycloakify-starter",
+    "extraThemeProperties": [
+      "foo=bar"
+    ]
+  },
+  "author": "u/garronej",
+  "license": "MIT",
+  "keywords": [],
+  "dependencies": {
+    "evt": "^2.5.7",
+    "keycloakify": "^9.4.1",
+    "oidc-spa": "^4.2.1",
+    "powerhooks": "^1.0.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsafe": "^1.6.6",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.14",
+    "@storybook/addon-interactions": "^7.6.14",
+    "@storybook/addon-links": "^7.6.14",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.14",
+    "@storybook/react": "^7.6.14",
+    "@storybook/react-vite": "^7.6.14",
+    "@storybook/test": "^7.6.14",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^0.6.15",
+    "storybook": "^7.6.14",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vite-plugin-commonjs": "^0.10.1"
+  },
+  "_comment": "See https://github.com/storybookjs/storybook/issues/22431#issuecomment-1630086092",
+  "resolutions": {
+    "jackspeak": "2.1.1"
+  }
 }
