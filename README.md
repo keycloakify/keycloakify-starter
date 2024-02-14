@@ -107,8 +107,7 @@ docker run -it -dp 8083:80 keycloakify/keycloakify-starter:main
 
 # I only want a Keycloak theme
 
-If you are only looking to create a Keycloak theme and not a Theme + a React app, you can run theses few commands
-after clicking ![image](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) to refactor the template 
+If you are only looking to create a Keycloak theme and not a Theme + a React app, you can run theses few commands to refactor the template 
 and remove unnecessary files.  
 
 ```bash
