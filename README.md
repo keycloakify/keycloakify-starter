@@ -88,7 +88,7 @@ You can enable this feature by providing multiple theme name in the Keycloakify 
 
 # The storybook  
 
-![image](https://user-images.githubusercontent.com/6702424/232350420-1921af90-d33e-492e-9296-0083298a84fa.png)  
+![image](https://github.com/keycloakify/keycloakify/assets/6702424/a18ac1ff-dcfd-4b8c-baed-dcda5aa1d762)  
 
 ```bash
 yarn
