@@ -111,6 +111,7 @@ If you are only looking to create a Keycloak theme and not a Theme + a React app
 and remove unnecessary files.  
 
 ```bash
+cd path/to/keycloakify-starter
 rm -r src/App
 mv src/keycloak-theme/* src/
 rm -r src/keycloak-theme
