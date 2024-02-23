@@ -15,18 +15,12 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "keycloakify": {
-    "themeName": "keycloakify-starter",
-    "extraThemeProperties": [
-      "foo=bar"
-    ]
-  },
   "author": "u/garronej",
   "license": "MIT",
   "keywords": [],
   "dependencies": {
     "evt": "^2.5.7",
-    "keycloakify": "^9.4.2",
+    "keycloakify": "^9.5.0",
     "oidc-spa": "^4.2.1",
     "powerhooks": "^1.0.8",
     "react": "^18.2.0",
