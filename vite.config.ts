@@ -49,4 +49,7 @@ export default defineConfig({
    * If you are only building a Keycloak theme, you can ignore this.  
    */
   //base: "/keycloakify-starter/"
+  build: {
+    sourcemap: true
+  }
 })
