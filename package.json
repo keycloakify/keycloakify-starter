@@ -20,7 +20,7 @@
   "keywords": [],
   "dependencies": {
     "evt": "^2.5.7",
-    "keycloakify": "^9.5.5",
+    "keycloakify": "^9.5.6",
     "oidc-spa": "^4.2.1",
     "powerhooks": "^1.0.8",
     "react": "^18.2.0",
