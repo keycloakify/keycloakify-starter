@@ -12,9 +12,11 @@ export default defineConfig({
     react(), 
     commonjs(), 
     keycloakify({
+      // See: https://docs.keycloakify.dev/build-options#themename
       themeName: "keycloakify-starter",
+      // See: https://docs.keycloakify.dev/environnement-variables
       extraThemeProperties: [
-        "foo=bar"
+        "MY_ENV_VARIABLE=${env.MY_ENV_VARIABLE:}"
       ],
       // This is a hook that will be called after the build is done
       // but before the jar is created.  

@@ -10,7 +10,10 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
 			pageId: "my-extra-page-2.ftl",
 			someCustomValue: "foo bar"
 		}
-	]
+	],
+	mockProperties: {
+		MY_ENV_VARIABLE: "Mocked value"
+	}
 });
 
 export const { kcContext } = getKcContext({

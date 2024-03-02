@@ -1,8 +1,7 @@
 import { createGetKcContext } from "keycloakify/login";
 
 export type KcContextExtension =
-	// WARNING: It's important to keep in sync the extraThemeProperties declared in the package.json and this type definition.
-	| { pageId: "login.ftl"; extraThemeProperties: { foo: string; }; }
+	| { pageId: "login.ftl";  }
 	| { pageId: "my-extra-page-1.ftl"; }
 	| { pageId: "my-extra-page-2.ftl"; someCustomValue: string; }
 	// NOTE: register.ftl is deprecated in favor of register-user-profile.ftl
@@ -30,7 +29,7 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
 		},
 		{
 			pageId: "my-extra-page-2.ftl",
-			someCustomValue: "foo bar baz"
+			someCustomValue: "foo bar baz",
 		},
 		{
 			//NOTE: You will either use register.ftl (legacy) or register-user-profile.ftl, not both
@@ -88,7 +87,12 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
 			},
 
 		}
-	]
+	],
+	// Defined in vite.config.ts
+	// See: https://docs.keycloakify.dev/environnement-variables
+	mockProperties: {
+		MY_ENV_VARIABLE: "Mocked value"
+	}
 });
 
 export const { kcContext } = getKcContext({

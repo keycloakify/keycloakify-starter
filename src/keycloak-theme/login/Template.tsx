@@ -1,6 +1,6 @@
 // Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/login/Template.tsx
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { assert } from "keycloakify/tools/assert";
 import { clsx } from "keycloakify/tools/clsx";
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
@@ -46,6 +46,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     });
 
     useState(()=> { document.title = i18n.msgStr("loginTitle", kcContext.realm.displayName); });
+
+    useEffect(() => {
+        console.log(`Value of MY_ENV_VARIABLE on the Keycloak server: "${kcContext.properties.MY_ENV_VARIABLE}"`);
+    }, []);
 
     if (!isReady) {
         return null;
