@@ -6,8 +6,7 @@ import { z } from "zod";
 
 //On older Keycloak version you need the /auth (e.g: http://localhost:8080/auth)
 //On newer version you must remove it (e.g: http://localhost:8080 )
-const keycloakUrl = "https://keycloakify.cloud-iam.com/";
-//const keycloakUrl = "https://auth.code.gouv.fr/auth";
+const keycloakUrl = "https://cloud-iam.keycloakify.dev/";
 const keycloakRealm = "keycloakify";
 const keycloakClientId= "starter";
 
