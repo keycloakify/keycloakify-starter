@@ -1,18 +1,18 @@
 // Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/login/Template.tsx
 
-import { clsx } from "keycloakify/tools/clsx";
+import { ArrowRightIcon } from '@chakra-ui/icons'; // Assuming use of an arrow icon for the reset flow, customize as necessary
+import { Alert, AlertIcon, Box, Button, Flex, FormControl, FormLabel, IconButton, Link, Text, Tooltip } from '@chakra-ui/react';
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
 import { type TemplateProps } from "keycloakify/login/TemplateProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
-import type { KcContext } from "./kcContext";
 import type { I18n } from "./i18n";
+import type { KcContext } from "./kcContext";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
   const {
     displayInfo = false,
     displayMessage = true,
     displayRequiredFields = false,
-    displayWide = false,
     showAnotherWayIfPresent = true,
     headerNode,
     showUsernameNode = null,
@@ -32,12 +32,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   const { auth, url, message, isAppInitiatedAction } = kcContext;
 
   const { isReady } = usePrepareTemplate({
-    doFetchDefaultThemeResources: doUseDefaultCss,
-    styles: [
-      "node_modules/patternfly/dist/css/patternfly.min.css",
-      "node_modules/patternfly/dist/css/patternfly-additions.min.css",
-      "lib/zocial/zocial.css",
-    ],
+    doFetchDefaultThemeResources: false,
     htmlClassName: getClassName("kcHtmlClass"),
     bodyClassName: undefined,
   });
@@ -47,172 +42,84 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   }
 
   return (
-    <div className="flex draggable items-center h-screen">
-      <div className="bg-transparent mx-auto sm:px-5 sm:py-7 sm:w-[32rem] lg:mb-3 lg:pt-0 px-5"
-      >
-        <header className="mb-2">
-          {!(
-            auth !== undefined &&
-            auth.showUsername &&
-            !auth.showResetCredentials
-          ) ? (
+    <Flex align="center" justify="center" className="draggable" h="100vh">
+      <Box bg="transparent" mx="auto" p={{ base: "5", sm: "5", lg: "7" }} w={{ sm: "32rem" }} mb={{ lg: "3" }} pt={{ lg: "0" }}>
+        <Box mb="2">
+          {!(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
             displayRequiredFields ? (
-              <div className={getClassName("kcContentWrapperClass")}>
-                <div
-                  className={clsx(
-                    getClassName("kcLabelWrapperClass"),
-                    "subtitle"
-                  )}
-                >
-                  <span className="subtitle">
-                    <span className="required">*</span>
-                    {msg("requiredFields")}
-                  </span>
-                </div>
-                <div className="text-3xl text-white">{headerNode}</div>
-              </div>
+              <Flex direction="column">
+                <Text className="subtitle">
+                  <span className="required">*</span>
+                  {msg("requiredFields")}
+                </Text>
+                <Text fontSize="3xl" color="white">{headerNode}</Text>
+              </Flex>
             ) : (
-              <div>{headerNode}</div>
+              <Box>{headerNode}</Box>
             )
           ) : displayRequiredFields ? (
-            <div className={getClassName("kcContentWrapperClass")}>
-              <div
-                className={clsx(
-                  getClassName("kcLabelWrapperClass"),
-                  "subtitle"
-                )}
-              >
-                <span className="subtitle">
-                  <span className="required">*</span> {msg("requiredFields")}
-                </span>
-              </div>
-              <div className="col-md-10">
+            <Flex direction="column">
+              <Text className="subtitle">
+                <span className="required">*</span> {msg("requiredFields")}
+              </Text>
+              <Box>
                 {showUsernameNode}
-                <div className={getClassName("kcFormGroupClass")}>
-                  <div id="kc-username">
-                    <label id="kc-attempted-username">
-                      {auth?.attemptedUsername}
-                    </label>
-                    <a id="reset-login" href={url.loginRestartFlowUrl}>
-                      <div className="kc-login-tooltip">
-                        <i className={getClassName("kcResetFlowIcon")}></i>
-                        <span className="kc-tooltip-text">
-                          {msg("restartLoginTooltip")}
-                        </span>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+                <FormControl>
+                  <FormLabel htmlFor="kc-username" id="kc-attempted-username">
+                    {auth?.attemptedUsername}
+                  </FormLabel>
+                  <Link id="reset-login" href={url.loginRestartFlowUrl}>
+                    <Tooltip label={msg("restartLoginTooltip")}>
+                      <IconButton aria-label="Reset" icon={<ArrowRightIcon />} />
+                    </Tooltip>
+                  </Link>
+                </FormControl>
+              </Box>
+            </Flex>
           ) : (
             <>
               {showUsernameNode}
-              <div className={getClassName("kcFormGroupClass")}>
-                <div id="kc-username">
-                  <label id="kc-attempted-username">
-                    {auth?.attemptedUsername}
-                  </label>
-                  <a id="reset-login" href={url.loginRestartFlowUrl}>
-                    <div className="kc-login-tooltip">
-                      <i className={getClassName("kcResetFlowIcon")}></i>
-                      <span className="kc-tooltip-text">
-                        {msg("restartLoginTooltip")}
-                      </span>
-                    </div>
-                  </a>
-                </div>
-              </div>
+              <FormControl>
+                <FormLabel htmlFor="kc-username" id="kc-attempted-username">
+                  {auth?.attemptedUsername}
+                </FormLabel>
+                <Link id="reset-login" href={url.loginRestartFlowUrl}>
+                  <Tooltip label={msg("restartLoginTooltip")}>
+                    <IconButton aria-label="Reset" icon={<ArrowRightIcon />} />
+                  </Tooltip>
+                </Link>
+              </FormControl>
             </>
           )}
-        </header>
-        <div id="kc-content">
-          <div id="kc-content-wrapper">
-            {/* App-initiated actions should not see warning messages about the need to complete the action during login. */}
-            {displayMessage &&
-              message !== undefined &&
-              (message.type !== "warning" || !isAppInitiatedAction) && (
-                <div className={clsx("alert", `alert-${message.type}`)}>
-                  {message.type === "success" && (
-                    <span
-                      className={getClassName("kcFeedbackSuccessIcon")}
-                    ></span>
-                  )}
-                  {message.type === "warning" && (
-                    <span
-                      className={getClassName("kcFeedbackWarningIcon")}
-                    ></span>
-                  )}
-                  {message.type === "error" && (
-                    <span
-                      className={getClassName("kcFeedbackErrorIcon")}
-                    ></span>
-                  )}
-                  {message.type === "info" && (
-                    <span className={getClassName("kcFeedbackInfoIcon")}></span>
-                  )}
-                  <span
-                    className="kc-feedback-text"
-                    dangerouslySetInnerHTML={{
-                      __html: message.summary,
-                    }}
-                  />
-                </div>
-              )}
-            {children}
-            {auth !== undefined &&
-              auth.showTryAnotherWayLink &&
-              showAnotherWayIfPresent && (
-                <form
-                  id="kc-select-try-another-way-form"
-                  action={url.loginAction}
-                  method="post"
-                  className={clsx(
-                    displayWide && getClassName("kcContentWrapperClass")
-                  )}
-                >
-                  <div
-                    className={clsx(
-                      displayWide && [
-                        getClassName("kcFormSocialAccountContentClass"),
-                        getClassName("kcFormSocialAccountClass"),
-                      ]
-                    )}
-                  >
-                    <div className={getClassName("kcFormGroupClass")}>
-                      <input type="hidden" name="tryAnotherWay" value="on" />
-                      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                      <a
-                        href="#"
-                        id="try-another-way"
-                        onClick={() => {
-                          document.forms[
-                            "kc-select-try-another-way-form" as never
-                          ].submit();
-                          return false;
-                        }}
-                      >
-                        {msg("doTryAnotherWay")}
-                      </a>
-                    </div>
-                  </div>
-                </form>
-              )}
-            {displayInfo && (
-              <div id="kc-info" className={getClassName("kcSignUpClass")}>
-                <div
-                  id="kc-info-wrapper"
-                  className={getClassName("kcInfoAreaWrapperClass")}
-                >
-                  {infoNode}
-                </div>
-              </div>
+        </Box>
+        <Box id="kc-content">
+          <Box id="kc-content-wrapper">
+            {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
+              <Alert status={message.type}>
+                <AlertIcon />
+                <Box dangerouslySetInnerHTML={{ __html: message.summary }} />
+              </Alert>
             )}
-          </div>
-        </div>
-      </div>
-      <div className="text-[10px] text-white text-opacity-50 fixed bottom-6 w-full text-center">
-        <svg
+            {children}
+            {auth !== undefined && auth.showTryAnotherWayLink && showAnotherWayIfPresent && (
+              <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
+                <Button onClick={(e) => {
+                  e.preventDefault();
+                  const form = document.getElementById('kc-select-try-another-way-form') as HTMLFormElement | null;
+                  form && form.submit();
+                }}>
+                  {msg("doTryAnotherWay")}
+                </Button>
+              </form>
+            )}
+            {displayInfo && (
+              <Box mt={3}>{infoNode}</Box>
+            )}
+          </Box>
+        </Box>
+      </Box>
+      <Text fontSize="10px" color="white" opacity="0.5" position="fixed" bottom="6" w="full" textAlign="center">
+        {/* SVG and Links here */}        <svg
           viewBox="0 0 24 24"
           focusable="false"
           className="text-yellow-200 font-medium h-6 mr-2"
@@ -224,25 +131,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             fill="currentColor"
           ></path>
         </svg>
-        By using BuildBetter, you agree to our&nbsp;
-        <a
-          href="https://sites.buildbetter.ai/terms"
-          className="text-accent-900 hover:no-underline hover:!text-accent-800"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Terms of Service
-        </a>
-        &nbsp;and&nbsp;
-        <a
-          href="https://sites.buildbetter.ai/privacy"
-          className="text-accent-900 hover:no-underline  hover:!text-accent-800"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Privacy Policy
-        </a>
-      </div>
-    </div>
+
+        By using BuildBetter, you agree to our <Link href="https://sites.buildbetter.ai/terms" isExternal>Terms of Service</Link> and <Link href="https://sites.buildbetter.ai/privacy" isExternal>Privacy Policy</Link>.
+      </Text>
+    </Flex>
+
   );
 }

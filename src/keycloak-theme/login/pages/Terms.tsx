@@ -22,7 +22,7 @@ export default function Terms(props: PageProps<Extract<KcContext, { pageId: "ter
     // KcApp.tsx, see: https://docs.keycloakify.dev/terms-and-conditions
     useDownloadTerms({
         kcContext,
-        "downloadTermMarkdown": async ({currentLanguageTag}) => {
+        "downloadTermMarkdown": async ({ currentLanguageTag }) => {
 
             const tos_url = (() => {
                 switch (currentLanguageTag) {

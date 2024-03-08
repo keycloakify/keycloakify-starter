@@ -1,11 +1,11 @@
 {
-    "name": "keycloakify-starter",
+    "name": "buildbetter-keycloak-theme",
     "homepage": "https://starter.keycloakify.dev",
     "version": "6.1.2",
     "description": "A starter/demo project for keycloakify",
     "repository": {
         "type": "git",
-        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
+        "url": "git://github.com/buildbetter-app/keycloakify-theme.git"
     },
     "type": "module",
     "scripts": {
@@ -19,8 +19,13 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
+        "@chakra-ui/icons": "^2.1.1",
+        "@chakra-ui/react": "^2.8.2",
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.0",
         "autoprefixer": "^10.4.18",
         "evt": "^2.5.7",
+        "framer-motion": "^11.0.8",
         "keycloakify": "^9.5.8",
         "oidc-spa": "^4.2.1",
         "postcss": "^8.4.35",

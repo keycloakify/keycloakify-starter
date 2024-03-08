@@ -26,6 +26,23 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
       //"message": undefined
       //Uncomment the following line for showing an Error message
       //message: { type: "error", summary: "This is an error" }
+      social: {
+        displayInfo: true,
+        providers: [
+          {
+            loginUrl: "/testing",
+            alias: "google",
+            providerId: "Google",
+            displayName: "Google",
+          },
+          {
+            loginUrl: "/testing",
+            alias: "microsoft",
+            providerId: "Microsoft",
+            displayName: "Microsoft",
+          },
+        ],
+      },
     },
     {
       pageId: "my-extra-page-2.ftl",

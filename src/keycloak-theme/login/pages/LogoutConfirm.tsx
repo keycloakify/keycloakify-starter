@@ -14,14 +14,13 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
 
     const { url, client, logoutConfirm } = kcContext;
 
-    const { msg, msgStr } = i18n;
 
     return (
         <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} displayMessage={false} headerNode={
-            <div>       
+            <div>
                 <h1 >Log Out</h1>
             </div>
-            }>
+        }>
             <div id="kc-logout-confirm" className="content-area">
                 <p className="instruction">Are you sure you want to log out?</p>
                 <form className="form-actions" action={url.logoutConfirmAction} method="POST">
