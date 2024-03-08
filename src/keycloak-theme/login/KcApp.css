@@ -1,91 +1,82 @@
-
-
-
-
 #kc-locale ul {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    list-style: none;
-    right: 0;
-    top: 20px;
-    min-width: 100px;
-    padding: 2px 0;
-    border: solid 1px #bbb;
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  list-style: none;
+  right: 0;
+  top: 20px;
+  min-width: 100px;
+  padding: 2px 0;
+  border: solid 1px #bbb;
 }
-
-
-
-
 
 a#kc-current-locale-link {
-    display: block;
-    padding: 0 5px;
+  display: block;
+  padding: 0 5px;
 }
 
-
 .login-pf .container {
-    padding-top: 40px;
+  padding-top: 40px;
 }
 
 .login-pf a:hover {
-    color: #0099d3;
+  color: #0099d3;
 }
 
 #kc-logo {
-    width: 100%;
+  width: 100%;
 }
 
 #kc-logo-wrapper {
-    background-repeat: no-repeat;
-    height: 63px;
-    width: 300px;
-    margin: 62px auto 0;
+  background-repeat: no-repeat;
+  height: 63px;
+  width: 300px;
+  margin: 62px auto 0;
 }
 
 div.kc-logo-text {
-    background-repeat: no-repeat;
-    height: 63px;
-    width: 300px;
-    margin: 0 auto;
+  background-repeat: no-repeat;
+  height: 63px;
+  width: 300px;
+  margin: 0 auto;
 }
 
 div.kc-logo-text span {
-    display: none;
+  display: none;
 }
 
 #kc-header {
-    color: #ededed;
-    overflow: visible;
-    white-space: nowrap;
+  color: #ededed;
+  overflow: visible;
+  white-space: nowrap;
 }
 
 #kc-header-wrapper {
-    font-size: 29px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    line-height: 1.2em;
-    padding: 62px 10px 20px;
-    white-space: normal;
+  font-size: 29px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.2em;
+  padding: 62px 10px 20px;
+  white-space: normal;
 }
 
 #kc-content {
-    width: 100%;
+  width: 100%;
 }
 
-#kc-attempted-username{
-    font-size: 20px;
-    font-family:inherit;
-    font-weight: normal;
-    padding-right:10px;
+#kc-attempted-username {
+  font-size: 20px;
+  font-family: inherit;
+  font-weight: normal;
+  padding-right: 10px;
 }
 
-#kc-username{
-    text-align: center;
+#kc-username {
+  text-align: center;
 }
 
-#kc-webauthn-settings-form{
-    padding-top:8px;
+#kc-webauthn-settings-form {
+  padding-top: 8px;
 }
 
 /* #kc-content-wrapper {
@@ -93,38 +84,37 @@ div.kc-logo-text span {
 } */
 
 #kc-info {
-    padding-bottom: 200px;
-    margin-bottom: -200px;
+  padding-bottom: 200px;
+  margin-bottom: -200px;
 }
 
 #kc-info-wrapper {
-    font-size: 13px;
+  font-size: 13px;
 }
 
-
 #kc-terms-text {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 #kc-registration {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 /* TOTP */
 
 .subtitle {
-    text-align: right;
-    margin-top: 30px;
-    color: #909090;
+  text-align: right;
+  margin-top: 30px;
+  color: #909090;
 }
 
 .required {
-    color: #CB2915;
+  color: #cb2915;
 }
 
 ol#kc-totp-settings {
-    margin: 0;
-    padding-left: 20px;
+  margin: 0;
+  padding-left: 20px;
 }
 
 ul#kc-totp-supported-apps {
@@ -132,127 +122,127 @@ ul#kc-totp-supported-apps {
 }
 
 #kc-totp-secret-qr-code {
-    max-width:150px;
-    max-height:150px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 #kc-totp-secret-key {
-    background-color: #fff;
-    color: #333333;
-    font-size: 16px;
-    padding: 10px 0;
+  background-color: #fff;
+  color: #333333;
+  font-size: 16px;
+  padding: 10px 0;
 }
 
 /* OAuth */
 
 #kc-oauth h3 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 #kc-oauth ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 #kc-oauth ul li {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 12px;
-    padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  padding: 10px 0;
 }
 
 #kc-oauth ul li:first-of-type {
-    border-top: 0;
+  border-top: 0;
 }
 
 #kc-oauth .kc-role {
-    display: inline-block;
-    width: 50%;
+  display: inline-block;
+  width: 50%;
 }
 
 /* Code */
 #kc-code textarea {
-    width: 100%;
-    height: 8em;
+  width: 100%;
+  height: 8em;
 }
 
 /* Social */
 
 #kc-social-providers ul {
-    padding: 0;
+  padding: 0;
 }
 
 #kc-social-providers li {
-    display: block;
+  display: block;
 }
 
 #kc-social-providers li:first-of-type {
-    margin-top: 0;
+  margin-top: 0;
 }
 
-.kc-login-tooltip{
-    position:relative;
-    display: inline-block;
+.kc-login-tooltip {
+  position: relative;
+  display: inline-block;
 }
 
-.kc-login-tooltip .kc-tooltip-text{
-    top:-3px;
-    left:160%;
-    background-color: black;
-    visibility: hidden;
-    color: #fff;
+.kc-login-tooltip .kc-tooltip-text {
+  top: -3px;
+  left: 160%;
+  background-color: black;
+  visibility: hidden;
+  color: #fff;
 
-    min-width:130px;
-    text-align: center;
-    border-radius: 2px;
-    box-shadow:0 1px 8px rgba(0,0,0,0.6);
-    padding: 5px;
+  min-width: 130px;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  padding: 5px;
 
-    position: absolute;
-    opacity:0;
-    transition:opacity 0.5s;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
 
 /* Show tooltip */
 .kc-login-tooltip:hover .kc-tooltip-text {
-    visibility: visible;
-    opacity:0.7;
+  visibility: visible;
+  opacity: 0.7;
 }
 
 /* Arrow for tooltip */
 .kc-login-tooltip .kc-tooltip-text::after {
-    content: " ";
-    position: absolute;
-    top: 15px;
-    right: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent black transparent transparent;
+  content: " ";
+  position: absolute;
+  top: 15px;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
 }
 
 .zocial,
-a.zocial  {
-    width: 100%;
-    font-weight: normal;
-    font-size: 14px;
-    text-shadow: none;
-    border: 0;
-    background: #f5f5f5;
-    color: #72767b;
-    border-radius: 0;
-    white-space: normal;
+a.zocial {
+  width: 100%;
+  font-weight: normal;
+  font-size: 14px;
+  text-shadow: none;
+  border: 0;
+  background: #f5f5f5;
+  color: #72767b;
+  border-radius: 0;
+  white-space: normal;
 }
 .zocial:before {
   border-right: 0;
   margin-right: 0;
 }
 .zocial span:before {
-    padding: 7px 10px;
-    font-size: 14px;
+  padding: 7px 10px;
+  font-size: 14px;
 }
 .zocial:hover {
-    background: #ededed !important;
+  background: #ededed !important;
 }
 
 .zocial.facebook,
@@ -262,126 +252,123 @@ a.zocial  {
 .zocial.stackoverflow,
 .zocial.linkedin,
 .zocial.twitter {
-    background-image: none;
-    border: 0;
+  background-image: none;
+  border: 0;
 
-    box-shadow: none;
-    text-shadow: none;
+  box-shadow: none;
+  text-shadow: none;
 }
 
 /* Copy of zocial windows classes to be used for microsoft's social provider button */
-.zocial.microsoft:before{ content: "\f15d"; }
-.zocial.stackoverflow:before{ color: inherit; }
-
+.zocial.microsoft:before {
+  content: "\f15d";
+}
+.zocial.stackoverflow:before {
+  color: inherit;
+}
 
 @media (min-width: 768px) {
-    #kc-container-wrapper {
-        position: absolute;
-        width: 100%;
-    }
+  #kc-container-wrapper {
+    position: absolute;
+    width: 100%;
+  }
 
-    .login-pf .container {
-        padding-right: 80px;
-    }
+  .login-pf .container {
+    padding-right: 80px;
+  }
 
-    #kc-locale {
-        position: relative;
-        text-align: right;
-        z-index: 9999;
-    }
+  #kc-locale {
+    position: relative;
+    text-align: right;
+    z-index: 9999;
+  }
 }
 
 @media (max-width: 767px) {
+  #kc-header {
+    padding-left: 15px;
+    padding-right: 15px;
+    float: none;
+    text-align: left;
+  }
 
+  #kc-header-wrapper {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 60px 0 0;
+    color: #72767b;
+    letter-spacing: 0;
+  }
 
-    #kc-header {
-        padding-left: 15px;
-        padding-right: 15px;
-        float: none;
-        text-align: left;
-    }
+  div.kc-logo-text {
+    margin: 0;
+    width: 150px;
+    height: 32px;
+    background-size: 100%;
+  }
 
-    #kc-header-wrapper {
-      font-size: 16px;
-      font-weight: bold;
-      padding: 20px 60px 0 0;
-      color: #72767b;
-      letter-spacing: 0;
-    }
+  #kc-form {
+    float: none;
+  }
 
-    div.kc-logo-text {
-        margin: 0;
-        width: 150px;
-        height: 32px;
-        background-size: 100%;
-    }
+  #kc-info-wrapper {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-left: 0px;
+    padding-right: 15px;
+  }
 
-    #kc-form {
-        float: none;
-    }
+  #kc-social-providers li {
+    display: block;
+    margin-right: 5px;
+  }
 
-    #kc-info-wrapper {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        margin-top: 15px;
-        padding-top: 15px;
-        padding-left: 0px;
-        padding-right: 15px;
-    }
+  .login-pf .container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 
-    #kc-social-providers li {
-        display: block;
-        margin-right: 5px;
-    }
+  #kc-locale {
+    position: absolute;
+    width: 200px;
+    top: 20px;
+    right: 20px;
+    text-align: right;
+    z-index: 9999;
+  }
 
-    .login-pf .container {
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    #kc-locale {
-        position: absolute;
-        width: 200px;
-        top: 20px;
-        right: 20px;
-        text-align: right;
-        z-index: 9999;
-    }
-
-    #kc-logo-wrapper {
-        background-size: 100px 21px;
-        height: 21px;
-        width: 100px;
-        margin: 20px 0 0 20px;
-    }
-
+  #kc-logo-wrapper {
+    background-size: 100px 21px;
+    height: 21px;
+    width: 100px;
+    margin: 20px 0 0 20px;
+  }
 }
 
 @media (min-height: 646px) {
-    #kc-container-wrapper {
-        bottom: 12%;
-    }
+  #kc-container-wrapper {
+    bottom: 12%;
+  }
 }
 
 @media (max-height: 645px) {
-    #kc-container-wrapper {
-        padding-top: 50px;
-        top: 20%;
-    }
+  #kc-container-wrapper {
+    padding-top: 50px;
+    top: 20%;
+  }
 }
 
 .card-pf form.form-actions .btn {
-    float: right;
-    margin-left: 10px;
+  float: right;
+  margin-left: 10px;
 }
-
 
 .login-pf-page .login-pf-brand {
   margin-top: 20px;
   max-width: 360px;
   width: 40%;
 }
-
-
 
 .login-pf-page .login-pf-signup {
   font-size: 15px;
@@ -418,23 +405,21 @@ a.zocial  {
   margin-right: auto;
 }
 
-
 .login-pf-page .list-view-pf .list-group-item {
-    border-bottom: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
 }
 
 .login-pf-page .list-view-pf-description {
-    width: 100%;
+  width: 100%;
 }
 
-
 #kc-back {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 form#kc-select-back-form div.login-pf-social-section {
-    padding-left: 0px;
-    border-left: 0px;
+  padding-left: 0px;
+  border-left: 0px;
 }
 
 /* Here starts the tailwind custom styles... 
@@ -442,63 +427,49 @@ Let's try to... instead of overriding styles, remove styles that were in the dem
 and add new rules at the bottom.
 */
 a {
-    @apply !outline-none;
+  @apply !outline-none;
 }
 .checkbox {
-    @apply !pt-0 !mb-1;
-    min-height: auto !important; 
+  @apply !pt-0 !mb-1;
+  min-height: auto !important;
 
-    input {
-        top: -1px;
-    }
+  input {
+    top: -1px;
+  }
 }
 .kcHtmlClass {
-	font-size: 16px;
-	@apply bg-none bg-dark-900 ;
+  font-size: 16px;
+  @apply bg-none bg-dark-900;
 
-	body {
-		@apply bg-none bg-transparent font-primary h-full;
+  body {
+    @apply bg-none bg-transparent font-primary h-screen;
 
-        #root {
-            @apply h-full;
-        }
-	}
+    #root {
+      @apply h-screen;
+    }
+  }
 }
-.kcLoginClass  {
-    @apply 
-        flex
+.kcLoginClass {
+  @apply flex
         items-center h-full;
-}
-.kcFormCardClass {
-	@apply 
-        bg-transparent 
-        mx-auto
-        sm:px-5
-        sm:py-7
-        sm:w-[32rem]
-        lg:mb-3
-        lg:pt-0
-        px-5;
 }
 
 #kc-locale {
-	@apply h-5;
+  @apply h-5;
 
-	&:hover ul {
-		@apply block m-0;
-	}
+  &:hover ul {
+    @apply block m-0;
+  }
 }
 #kc-locale-wrapper {
-
-	#kc-current-locale-link {
-		@apply 
-		text-brand-text 
+  #kc-current-locale-link {
+    @apply text-brand-text 
 		font-medium
 		mr-2
 		no-underline;
 
-		&:after {
-			@apply content-['']
+    &:after {
+      @apply content-['']
 				absolute
 				top-1/3
 				w-0 
@@ -511,85 +482,88 @@ a {
 				border-l-4 
 				border-r-4 
 				border-t-4
-				clear-both
-		}		
-	}
-	ul {
-		@apply 
-			bg-dark-500
+				clear-both;
+    }
+  }
+  ul {
+    @apply bg-dark-500
 			rounded-xl
 			border-none;
 
-		& li {
-			&:first-child a {
-				@apply rounded-t-xl
-			}
-			&:last-child a{
-				@apply rounded-b-xl
-			}
-			& > a {
-				@apply 
-				text-white
+    & li {
+      &:first-child a {
+        @apply rounded-t-xl;
+      }
+      &:last-child a {
+        @apply rounded-b-xl;
+      }
+      & > a {
+        @apply text-white
 				block
 				no-underline
 				leading-5
 				py-1
-				px-2
-				;
+				px-2;
 
-				&:hover {
-                    @apply bg-dark-200
-                }
-			}
-		}
-	}
+        &:hover {
+          @apply bg-dark-200;
+        }
+      }
+    }
+  }
 }
 .kcFormClass {
-	label, a, p, span {
-		@apply text-brand-text text-sm
-	} 
+  label,
+  a,
+  p,
+  span {
+    @apply text-brand-text text-sm;
+  }
 }
-.kcFormGroupClass, 
+.kcFormGroupClass,
 .kcLabelWrapperClass,
-.kcInputWrapperClass  {
-	@apply !mx-0 !p-0;
+.kcInputWrapperClass {
+  @apply !mx-0 !p-0;
+}
+.kcFormOptionsWrapperClass {
+  & > * {
+    @apply text-white text-sm;
+  }
 }
 .kcFormGroupClass {
-	.form-control {
-		@apply 
-			bg-dark-300 
+  .form-control {
+    @apply bg-dark-300 
 			text-white
 			text-base
 			relative 
 			rounded-lg 
 			!h-11 
+      w-full
 			px-4
 			border-[3px]
 			border-dark-300 
             placeholder:not-italic
             placeholder:font-bold;
-            
 
-		&:hover {
-            @apply border-dark-300;
-        }
-		&:focus {
-            @apply bg-dark-400 border-accent-800 border-opacity-60 !shadow-none;
-        }
-	}
-	&.has-error {
-		label {
-			@apply text-error-bg;
-		}
-		.form-control {
-			@apply !border-error-bg border-opacity-40;
-		}
-	}
+    &:hover {
+      @apply border-dark-300;
+    }
+    &:focus {
+      @apply bg-dark-400 border-accent-800 border-opacity-60 !shadow-none;
+    }
+  }
+  &.has-error {
+    label {
+      @apply text-error-bg;
+    }
+    .form-control {
+      @apply !border-error-bg border-opacity-40;
+    }
+  }
 }
 .kcFormButtonsClass {
-	.btn-primary {
-		@apply 
-			mt-0 
+  .btn-primary {
+    @apply mt-0 
 			bg-none
 			bg-accent-900 
 			border-none
@@ -598,14 +572,12 @@ a {
 			h-11
 			text-sm
 			font-extrabold;
-		&:hover {
-			@apply 
-				bg-accent-800 ;
-		}
-	}
-    .btn {
-		@apply 
-			mt-0 
+    &:hover {
+      @apply bg-accent-800;
+    }
+  }
+  .btn {
+    @apply mt-0 
 			bg-none
 			border-none
 			rounded-lg
@@ -613,73 +585,65 @@ a {
 			h-11
 			text-sm
 			font-extrabold;
-	}
+  }
 }
 .kcFormOptionsClass,
 .kcFormSettingClass,
 .kcInfoAreaWrapperClass {
-	a {
-		@apply no-underline;
+  a {
+    @apply no-underline;
 
-		&:hover {
-			@apply text-white;
-		}
-	}
+    &:hover {
+      @apply text-white;
+    }
+  }
 }
 .kcFormOptionsClass {
-    @apply !p-0 text-center mt-10;
+  @apply !p-0 text-center mt-10;
 
-    svg {
-        @apply mr-2;
-    }
+  svg {
+    @apply mr-2;
+  }
 }
 .alert {
-	@apply border-none rounded-lg text-dark-300;
+  @apply border-none rounded-lg text-dark-300;
 
-    &.alert-error {
-        @apply  bg-red-100 ;
-    }
+  &.alert-error {
+    @apply bg-red-100;
+  }
 }
 svg {
-	@apply inline-block fill-current
+  @apply inline-block fill-current;
 }
 
-.login-pf-page .login-pf-header {
-    h1 {
-        @apply text-3xl text-white mb-3 font-bold;
-    }
-    p {
-        @apply text-sm font-medium pb-3
-    }
-}
 .instruction {
-    @apply text-center text-sm;
-    
-    a {
-        @apply !text-white;
-        &:hover {
-            @apply no-underline;
-        }
+  @apply text-center text-sm;
+
+  a {
+    @apply !text-white;
+    &:hover {
+      @apply no-underline;
     }
+  }
 }
 
 #kc-form-buttons {
-    @apply mt-10 px-0;
+  @apply mt-10 px-0;
 }
 
 .form-group {
-    @apply mb-2;
+  @apply mb-2;
 }
 #kc-form-login div.form-group:last-of-type,
 #kc-register-form div.form-group:last-of-type,
 #kc-update-profile-form div.form-group:last-of-type {
-    @apply mb-0;
+  @apply mb-0;
 }
 
 .input-error {
-    @apply block w-full mt-2 mb-1 !text-white;
+  @apply block w-full mt-2 mb-1 !text-white;
 
-    svg {
-        @apply h-4 text-error-bg mr-2 mb-1
-    }
+  svg {
+    @apply h-4 text-error-bg mr-2 mb-1;
+  }
 }

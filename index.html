@@ -15,51 +15,48 @@
     <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%favicon-32x32.png">
 
     <title>Keycloakify starter</title>
-
-    <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-bold-webfont.woff2" as="font" crossorigin="anonymous">
-    <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-medium-webfont.woff2" as="font" crossorigin="anonymous">
-    <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-regular-webfont.woff2" as="font" crossorigin="anonymous">
-    <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-semibold-webfont.woff2" as="font" crossorigin="anonymous">
-    <!-- SEE: https://docs.keycloakify.dev/limitations#self-hosted-fonts -->
+    <link rel="preload" href="%BASE_URL%fonts/Gilroy/gilroy-medium.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%BASE_URL%fonts/Gilroy/gilroy-semi-bold.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%BASE_URL%fonts/Gilroy/gilroy-bold.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%BASE_URL%fonts/Gilroy/gilroy-extra-bold.woff2" as="font" crossorigin="anonymous">
+    <link rel="preload" href="%BASE_URL%fonts/Gilroy/gilroy-black.woff2" as="font" crossorigin="anonymous">
+   <!-- SEE: https://docs.keycloakify.dev/limitations#self-hosted-fonts -->
     <!-- Don't forget to import your custom fonts in Storybook as well: https://github.com/keycloakify/keycloakify-starter/blob/bb019e66fb09166cb9af1e24e230994f59daa420/src/keycloak-theme/login/createPageStory.tsx#L21 -->
     <style>
-      /* latin */
-      @font-face {
-      	font-family: 'Work Sans';
-      	font-style: normal;
-      	font-weight: normal;
-      	/*400*/
-      	font-display: swap;
-      	src: url("%BASE_URL%fonts/WorkSans/worksans-regular-webfont.woff2") format("woff2");
-      }
+    @font-face {
+      font-family: "Gilroy";
+      src: url("%BASE_URL%fonts/Gilroy/gilroy-medium.woff2") format("woff2"),
+        url("%BASE_URL%fonts/Gilroy/gilroy-medium.woff") format("woff");
+      font-weight: 500;
+    }
     
-      /* latin */
-      @font-face {
-      	font-family: 'Work Sans';
-      	font-style: normal;
-      	font-weight: 500;
-      	font-display: swap;
-      	src: url("%BASE_URL%fonts/WorkSans/worksans-medium-webfont.woff2") format("woff2");
-      }
+    @font-face {
+      font-family: "Gilroy";
+      src: url("%BASE_URL%fonts/Gilroy/gilroy-semi-bold.woff2") format("woff2"),
+        url("%BASE_URL%fonts/Gilroy/gilroy-semi-bold.woff") format("woff");
+      font-weight: 600;
+    }
+    @font-face {
+      font-family: "Gilroy";
+      src: url("%BASE_URL%fonts/Gilroy/gilroy-bold.woff2") format("woff2"),
+        url("%BASE_URL%fonts/Gilroy/gilroy-bold.woff") format("woff");
+      font-weight: 700;
+    }
     
-      /* latin */
-      @font-face {
-      	font-family: 'Work Sans';
-      	font-style: normal;
-      	font-weight: 600;
-      	font-display: swap;
-      	src: url("%BASE_URL%fonts/WorkSans/worksans-semibold-webfont.woff2") format("woff2");
-      }
+    @font-face {
+      font-family: "Gilroy";
+      src: url("%BASE_URL%fonts/Gilroy/gilroy-extra-bold.woff2") format("woff2"),
+        url("%BASE_URL%fonts/Gilroy/gilroy-extra-bold.woff") format("woff");
+      font-weight: 800;
+    }
     
-      /* latin */
-      @font-face {
-      	font-family: 'Work Sans';
-      	font-style: normal;
-      	font-weight: bold;
-      	/*700*/
-      	font-display: swap;
-      	src: url("%BASE_URL%fonts/WorkSans/worksans-bold-webfont.woff2") format("woff2");
-      }
+    @font-face {
+      font-family: "Gilroy";
+      src: url("%BASE_URL%fonts/Gilroy/gilroy-black.woff2") format("woff2"),
+        url("%BASE_URL%fonts/Gilroy/gilroy-black.woff") format("woff");
+      font-weight: 900;
+    }
+
     </style>
 
     <meta name="keycloakify-ignore-start">

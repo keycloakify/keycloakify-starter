@@ -20,7 +20,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
     const { url, messagesPerField, isAppInitiatedAction, username } = kcContext;
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
-    const [errors, setErrors] = useState({} as {password: string, passwordConfirm: string});
+    const [errors, setErrors] = useState({} as { password: string, passwordConfirm: string });
     const [wasSubmitted, setWasSubmitted] = useState(false);
 
     const validatePassword = () => {
@@ -34,13 +34,13 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
     const validatePasswordConfirm = () => {
         if (!passwordConfirm) {
             return "Required";
-        } else if (password!== passwordConfirm) {
+        } else if (password !== passwordConfirm) {
             return "Passwords do not match";
         }
-        return "";      
+        return "";
     };
     const validateForm = () => {
-        setErrors({password: validatePassword(), passwordConfirm: validatePasswordConfirm()});
+        setErrors({ password: validatePassword(), passwordConfirm: validatePasswordConfirm() });
     }
     const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement>>(e => {
         e.preventDefault();
@@ -61,17 +61,17 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
     }, [password, passwordConfirm]);
 
     return (
-        <Template {...{ kcContext, i18n, doUseDefaultCss, classes }} 
+        <Template {...{ kcContext, i18n, doUseDefaultCss, classes }}
             headerNode={
-                <div>                    
+                <div>
                     <div className="flex justify-center pb-8">
-                        <img src={require("./../assets/resetpassword.png")}/>
+                        <img src={require("./../assets/resetpassword.png")} />
                     </div>
                     <h1>Set New Password</h1>
                     <p className="text-center">Create your new strong password</p>
                 </div>
             }>
-            <form id="kc-passwd-update-form" className={getClassName("kcFormClass")} action={url.loginAction} method="post"  onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} noValidate>
+            <form id="kc-passwd-update-form" className={getClassName("kcFormClass")} action={url.loginAction} method="post" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} noValidate>
                 <input
                     type="text"
                     id="username"
@@ -98,12 +98,12 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                             autoFocus
                             autoComplete="new-password"
                             className={getClassName("kcInputClass")}
-                            onChange={ (e) => setPassword((e.target as HTMLInputElement).value) }
+                            onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
                             required
                             minLength={8}
                         />
-                        {!!errors.password ? (                              
-                            <FormInputError message={errors.password} />   
+                        {!!errors.password ? (
+                            <FormInputError message={errors.password} />
                         ) : null}
                     </div>
                 </div>
@@ -122,12 +122,12 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                             autoComplete="new-password"
                             placeholder="Confirm Password"
                             className={getClassName("kcInputClass")}
-                            onChange={ (e) => setPasswordConfirm((e.target as HTMLInputElement).value) }
+                            onChange={(e) => setPasswordConfirm((e.target as HTMLInputElement).value)}
                             required
                             minLength={8}
                         />
-                        {!!errors.passwordConfirm ? (                               
-                            <FormInputError message={errors.passwordConfirm} /> 
+                        {!!errors.passwordConfirm ? (
+                            <FormInputError message={errors.passwordConfirm} />
                         ) : null}
                     </div>
                 </div>

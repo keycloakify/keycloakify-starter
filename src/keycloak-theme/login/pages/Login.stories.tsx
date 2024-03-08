@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { createPageStory } from "../createPageStory";
+import '../../../main.css'
 
 const { PageStory } = createPageStory({
     pageId: "login.ftl"

@@ -1,6 +1,5 @@
 // Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/login/Template.tsx
 
-import { assert } from "keycloakify/tools/assert";
 import { clsx } from "keycloakify/tools/clsx";
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
 import { type TemplateProps } from "keycloakify/login/TemplateProps";
@@ -27,15 +26,14 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
   const { getClassName } = useGetClassName({ doUseDefaultCss, classes });
 
-  const { msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag } =
+  const { msg } =
     i18n;
 
-  const { realm, locale, auth, url, message, isAppInitiatedAction } = kcContext;
+  const { auth, url, message, isAppInitiatedAction } = kcContext;
 
   const { isReady } = usePrepareTemplate({
     doFetchDefaultThemeResources: doUseDefaultCss,
-    url,
-    stylesCommon: [
+    styles: [
       "node_modules/patternfly/dist/css/patternfly.min.css",
       "node_modules/patternfly/dist/css/patternfly-additions.min.css",
       "lib/zocial/zocial.css",
@@ -49,15 +47,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   }
 
   return (
-    <div className={clsx(getClassName("kcLoginClass"), "draggable")}>
-      <div
-        className={clsx(
-          getClassName("kcFormCardClass"),
-          displayWide && getClassName("kcFormCardAccountClass"),
-          "not-draggable"
-        )}
+    <div className="flex draggable items-center h-screen">
+      <div className="bg-transparent mx-auto sm:px-5 sm:py-7 sm:w-[32rem] lg:mb-3 lg:pt-0 px-5"
       >
-        <header className={getClassName("kcFormHeaderClass")}>
+        <header className="mb-2">
           {!(
             auth !== undefined &&
             auth.showUsername &&
@@ -76,10 +69,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     {msg("requiredFields")}
                   </span>
                 </div>
-                <div className="col-md-10">{headerNode}</div>
+                <div className="text-3xl text-white">{headerNode}</div>
               </div>
             ) : (
-              <>{headerNode}</>
+              <div>{headerNode}</div>
             )
           ) : displayRequiredFields ? (
             <div className={getClassName("kcContentWrapperClass")}>
@@ -132,33 +125,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
               </div>
             </>
           )}
-          {realm.internationalizationEnabled &&
-            (assert(locale !== undefined), true) &&
-            locale.supported.length > 1 && (
-              <div id="kc-locale">
-                <div
-                  id="kc-locale-wrapper"
-                  className={getClassName("kcLocaleWrapperClass")}
-                >
-                  <div className="kc-dropdown" id="kc-locale-dropdown">
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#" id="kc-current-locale-link">
-                      {labelBySupportedLanguageTag[currentLanguageTag]}
-                    </a>
-                    <ul>
-                      {locale.supported.map(({ languageTag }) => (
-                        <li key={languageTag} className="kc-dropdown-item">
-                          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                          <a href="#" onClick={() => changeLocale(languageTag)}>
-                            {labelBySupportedLanguageTag[languageTag]}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            )}
         </header>
         <div id="kc-content">
           <div id="kc-content-wrapper">

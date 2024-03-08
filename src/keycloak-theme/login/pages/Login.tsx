@@ -7,6 +7,8 @@ import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
 import { FormInputError } from "./shared/FormInputError";
+import { Form } from "../components/form";
+import { FormControl } from "../components/form-control";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -16,7 +18,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         classes
     });
 
-    const { social, realm, url, usernameEditDisabled, login, auth, registrationDisabled } = kcContext;
+    const { social, realm, url, usernameHidden, login, auth, registrationDisabled } = kcContext;
 
     const { msg } = i18n;
 
@@ -68,7 +70,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             validateEmail();
         }
     }
-    
+
     const onSubmit = useConstCallback<FormEventHandler<HTMLFormElement | null>>(e => {
         e.preventDefault();
         setWasSubmitted(true);
@@ -91,12 +93,12 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             }
             displayWide={realm.password && social.providers !== undefined}
             headerNode={
-                <div>
+                <div className="text-white flex flex-col space-y-2">
                     <div className="flex justify-center pb-8">
                         <img src={require("./../assets/logo-dark.png")} className="h-12 w-12" />
                     </div>
-                    <h1 >Meet BuildBetter</h1>
-                    <p className="text-center">Make better product decisions, 5x faster.</p>
+                    <h1 className="text-3xl text-white self-center font-bold">Meet BuildBetter</h1>
+                    <p className="text-center text-dark-175">Make better product decisions, 5x faster.</p>
                 </div>
             }
             infoNode={
@@ -118,17 +120,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             }
         >
             <div id="kc-form" className={clsx(realm.password && social.providers !== undefined && getClassName("kcContentWrapperClass"))}>
-                <div
-                    id="kc-form-wrapper"
-                    className={clsx(
-                        realm.password &&
-                        social.providers && [getClassName("kcFormSocialAccountContentClass"), getClassName("kcFormSocialAccountClass")]
-                    )}
-                >
+                <div>
                     {realm.password && (
-                        <form id="kc-form-login" className={getClassName("kcFormClass")} onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} action={url.loginAction} method="post" noValidate ref={ref}>
-                            <div className={getClassName("kcFormGroupClass")}>
-                                {!usernameEditDisabled &&
+                        <Form id="kc-form-login" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} action={url.loginAction} method="post" noValidate ref={ref}>
+                            <FormControl>
+                                {!usernameHidden &&
                                     (() => {
                                         const label = !realm.loginWithEmailAllowed
                                             ? "username"
@@ -143,7 +139,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                 <input
                                                     tabIndex={1}
                                                     id={autoCompleteHelper}
-                                                    className={getClassName("kcInputClass")}
+                                                    className="form-control"
                                                     //NOTE: This is used by Google Chrome auto fill so we use it to tell
                                                     //the browser how to pre fill the form but before submit we put it back
                                                     //to username because it is what keycloak expects.
@@ -152,7 +148,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
                                                     type="text"
                                                     placeholder="Email Address"
-                                                    {...(usernameEditDisabled
+                                                    {...(usernameHidden
                                                         ? { "disabled": true }
                                                         : {
                                                             "autoFocus": true,
@@ -167,22 +163,22 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                             </>
                                         );
                                     })()}
-                            </div>
-                            <div className={getClassName("kcFormGroupClass")}>
+                            </FormControl>
+                            <FormControl>
                                 <input
                                     tabIndex={2}
                                     id="password"
-                                    className={getClassName("kcInputClass")}
+                                    className="form-control"
                                     name="password"
                                     type="password"
                                     autoComplete="off"
                                     placeholder="Password"
                                     value={paramTempPassword ?? undefined}
                                 />
-                            </div>
+                            </FormControl>
                             <div className={clsx(getClassName("kcFormGroupClass"), getClassName("kcFormSettingClass"))}>
                                 <div className={getClassName("kcFormOptionsWrapperClass")}>
-                                    {realm.rememberMe && !usernameEditDisabled && (
+                                    {realm.rememberMe && !usernameHidden && (
                                         <div className="checkbox">
                                             <label>
                                                 <input
@@ -202,7 +198,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     <div className="mb-1">
                                         {realm.resetPasswordAllowed && (
                                             <span>
-                                                <svg viewBox="0 0 20 19" focusable="false" className="h-4 mr-1"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.29749 8.56792C8.29749 7.50738 9.09098 6.73624 9.94018 6.73624C10.8284 6.73624 11.5829 7.54841 11.5829 8.36145V9.58237H8.29749V8.56792ZM6.79749 9.70692V8.56792C6.79749 6.78837 8.15722 5.23624 9.94018 5.23624C11.6839 5.23624 13.0829 6.74734 13.0829 8.36145V9.70677C14.5313 10.1094 15.6007 11.4422 15.6007 13.0156V15.4841C15.6007 17.3738 14.0576 18.9173 12.1675 18.9173H7.71348C5.82335 18.9173 4.28027 17.374 4.28027 15.4841V13.0156C4.28027 11.4424 5.34922 10.1097 6.79749 9.70692ZM5.78027 13.0156C5.78027 11.9539 6.65181 11.0824 7.71348 11.0824H12.1675C13.229 11.0824 14.1007 11.9539 14.1007 13.0156V15.4841C14.1007 16.5455 13.2291 17.4173 12.1675 17.4173H7.71348C6.65184 17.4173 5.78027 16.5456 5.78027 15.4841V13.0156Z" fill="currentColor"></path><path d="M18.8084 7.91959C17.8455 3.94868 14.2671 1 10.0004 1C5.73318 1 2.15495 3.94892 1.19238 7.91967V2.04475" fill="None" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                                <svg viewBox="0 0 20 19" focusable="false" className="h-4 mr-1"><path fillRule="evenodd" clipRule="evenodd" d="M8.29749 8.56792C8.29749 7.50738 9.09098 6.73624 9.94018 6.73624C10.8284 6.73624 11.5829 7.54841 11.5829 8.36145V9.58237H8.29749V8.56792ZM6.79749 9.70692V8.56792C6.79749 6.78837 8.15722 5.23624 9.94018 5.23624C11.6839 5.23624 13.0829 6.74734 13.0829 8.36145V9.70677C14.5313 10.1094 15.6007 11.4422 15.6007 13.0156V15.4841C15.6007 17.3738 14.0576 18.9173 12.1675 18.9173H7.71348C5.82335 18.9173 4.28027 17.374 4.28027 15.4841V13.0156C4.28027 11.4424 5.34922 10.1097 6.79749 9.70692ZM5.78027 13.0156C5.78027 11.9539 6.65181 11.0824 7.71348 11.0824H12.1675C13.229 11.0824 14.1007 11.9539 14.1007 13.0156V15.4841C14.1007 16.5455 13.2291 17.4173 12.1675 17.4173H7.71348C6.65184 17.4173 5.78027 16.5456 5.78027 15.4841V13.0156Z" fill="currentColor"></path><path d="M18.8084 7.91959C17.8455 3.94868 14.2671 1 10.0004 1C5.73318 1 2.15495 3.94892 1.19238 7.91967V2.04475" fill="None" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                                                 <a tabIndex={5} href={url.loginResetCredentialsUrl}>
                                                     Forgot Password?
                                                 </a>
@@ -228,24 +224,25 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                             }
                                             : {})}
                                     />
-                                    <input
-                                        tabIndex={4}
-                                        className={clsx(
-                                            getClassName("kcButtonClass"),
-                                            getClassName("kcButtonPrimaryClass"),
-                                            getClassName("kcButtonBlockClass"),
-                                            getClassName("kcButtonLargeClass"),
-                                            '!mt-0 !h-11 px-6'
-                                        )}
-                                        name="login"
-                                        id="kc-login"
-                                        type="submit"
-                                        value="Log In"
-                                        disabled={isButtonDisabled}
-                                    />
+
                                 </div>
                             </div>
-                        </form>
+                            <input
+                                tabIndex={4}
+                                className={clsx(
+                                    getClassName("kcButtonClass"),
+                                    getClassName("kcButtonPrimaryClass"),
+                                    getClassName("kcButtonBlockClass"),
+                                    getClassName("kcButtonLargeClass"),
+                                    '!mt-0 !h-11 px-6 text-white'
+                                )}
+                                name="login"
+                                id="kc-login"
+                                type="submit"
+                                value="Log In"
+                                disabled={isButtonDisabled}
+                            />
+                        </Form>
                     )}
                 </div>
                 {realm.password && social.providers !== undefined && (
