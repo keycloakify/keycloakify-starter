@@ -5886,10 +5886,10 @@ jwt-decode@^3.1.2:
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
-keycloakify@^9.5.8:
-  version "9.5.8"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-9.5.8.tgz#aa6b3cb12f35bd6ec022d15e45ad6b46f4a920ed"
-  integrity sha512-8qPiQOQu+b+/Ql04pq8Tlv924ReBS9YJDC28IXRih/XLuM1M0tOU7L6WW/fcNpzWmXZ4X1j2vHxiPjqEoWyo1g==
+keycloakify@^9.6.1:
+  version "9.6.1"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-9.6.1.tgz#4ba91a8518410696a40d2889d2d0b5e4de028c96"
+  integrity sha512-9mcWkq5rhm1z4yNMb3cTlmyi8dFhcrM90um3ZIQtNedMgm+Ljp9xlKi1ywkrEALQWnYTK5waZZsbs0HLpR3OnQ==
   dependencies:
     "@babel/generator" "^7.22.9"
     "@babel/parser" "^7.22.7"
