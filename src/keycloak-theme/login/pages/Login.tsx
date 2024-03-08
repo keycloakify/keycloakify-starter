@@ -8,6 +8,8 @@ import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
 import { Button, Checkbox, Divider, Flex, FormControl, FormErrorMessage, Input, Text, VStack } from '@chakra-ui/react'
 import { SocialProvider } from "../components/social-provider";
+import { HeaderNode } from "../components/header-node";
+import { SubmitInput } from "../components/submit-input";
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
@@ -89,13 +91,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             }
             displayWide={realm.password && social.providers !== undefined}
             headerNode={
-                <div className="text-white flex flex-col space-y-2">
-                    <div className="flex justify-center pb-8">
-                        <img src={require("./../assets/logo-dark.png")} className="h-12 w-12" />
-                    </div>
-                    <h1 className="text-3xl text-white self-center font-bold">Meet BuildBetter</h1>
-                    <Text color="GrayText" textAlign="center">Make better product decisions, 5x faster.</Text>
-                </div>
+                <HeaderNode title="Meet BuildBetter" subtitle="Make better product decisions, 5x faster." />
             }
             infoNode={
                 realm.password &&
@@ -197,19 +193,17 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 : {})}
                         />
                     </div>
-                    <Input
+                    <SubmitInput
                         bgColor="purple.700"
                         border="none"
                         _hover={{
                             bgColor: "purple.600"
                         }}
-                        colorScheme="purple"
                         tabIndex={4}
                         name="login"
                         id="kc-login"
                         type="submit"
                         value="Log In"
-                        disabled={isButtonDisabled}
                     />
                 </form>
                 )}

@@ -1,4 +1,4 @@
-import { Button, HStack, Text } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { GoogleIcon } from "./icons/google";
 import { MicrosoftIcon } from "./icons/microsoft";
 
