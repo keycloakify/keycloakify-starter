@@ -2,8 +2,6 @@ import { createGetKcContext } from "keycloakify/login";
 
 export type KcContextExtension =
   | { pageId: "login.ftl" }
-  | { pageId: "my-extra-page-1.ftl" }
-  | { pageId: "my-extra-page-2.ftl"; someCustomValue: string }
   // NOTE: register.ftl is deprecated in favor of register-user-profile.ftl
   // but let's say we use it anyway and have this plugin enabled: https://github.com/micedre/keycloak-mail-whitelisting
   // keycloak-mail-whitelisting define the non standard ftl global authorizedMailDomains, we declare it here.
@@ -16,6 +14,15 @@ export type KcContextExtension =
 // - You want to add support for extra pages that are not yey featured by default, see: https://docs.keycloakify.dev/contributing#adding-support-for-a-new-page
 export const { getKcContext } = createGetKcContext<KcContextExtension>({
   mockData: [
+    {
+      pageId: "info.ftl",
+      messageHeader: "Testing Header",
+      message: {
+        type: "error",
+        summary: "Testing summary",
+      },
+      requiredActions: ["CONFIGURE_RECOVERY_AUTHN_CODES", "VERIFY_EMAIL"],
+    },
     {
       pageId: "login.ftl",
       // locale: {
@@ -45,55 +52,6 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
       },
     },
     {
-      pageId: "my-extra-page-2.ftl",
-      someCustomValue: "foo bar baz",
-    },
-    {
-      //NOTE: You will either use register.ftl (legacy) or register-user-profile.ftl, not both
-      pageId: "register-user-profile.ftl",
-      locale: {
-        currentLanguageTag: "fr",
-      },
-      profile: {
-        attributes: [
-          {
-            validators: {
-              pattern: {
-                pattern: "^[a-zA-Z0-9]+$",
-                "ignore.empty.value": true,
-                // eslint-disable-next-line no-template-curly-in-string
-                "error-message": "${alphanumericalCharsOnly}",
-              },
-            },
-            //NOTE: To override the default mock value
-            value: undefined,
-            name: "username",
-          },
-          {
-            validators: {
-              options: {
-                options: [
-                  "male",
-                  "female",
-                  "non-binary",
-                  "transgender",
-                  "intersex",
-                  "non_communicated",
-                ],
-              },
-            },
-            // eslint-disable-next-line no-template-curly-in-string
-            displayName: "${gender}",
-            annotations: {},
-            required: true,
-            groupAnnotations: {},
-            readOnly: false,
-            name: "gender",
-          },
-        ],
-      },
-    },
-    {
       pageId: "register.ftl",
       authorizedMailDomains: [
         "example.com",
@@ -112,13 +70,30 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
         get: (fieldName: string) => `Fake error for ${fieldName}`,
         exists: (fieldName: string) => fieldName === "email",
       },
+      social: {
+        displayInfo: true,
+        providers: [
+          {
+            loginUrl: "/testing",
+            alias: "google",
+            providerId: "Google",
+            displayName: "Google",
+          },
+          {
+            loginUrl: "/testing",
+            alias: "microsoft",
+            providerId: "Microsoft",
+            displayName: "Microsoft",
+          },
+        ],
+      },
     },
   ],
 });
 
 export const { kcContext } = getKcContext({
   // Uncomment to test the login page for development.
-  mockPageId: "register.ftl",
+  mockPageId: "logout-confirm.ftl",
 });
 
 export type KcContext = NonNullable<

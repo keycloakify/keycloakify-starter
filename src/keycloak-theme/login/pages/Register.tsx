@@ -5,14 +5,15 @@ import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import { HeaderNode } from "../components/header-node";
-import { Center, FormErrorMessage, Input, Spacer, background } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, Divider, Flex, FormErrorMessage, Input, Spacer, } from "@chakra-ui/react";
 import { SubmitInput } from "../components/submit-input";
-import { BackToLogin } from "../components/icons/back";
+import { BackTo } from "../components/back-to-login";
+import { SocialProvider } from "../components/social-provider";
 
 export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { url, messagesPerField, register, realm, passwordRequired, recaptchaRequired, recaptchaSiteKey } = kcContext;
+    const { url, register, realm, passwordRequired, recaptchaRequired, recaptchaSiteKey, social } = kcContext;
 
     const queryParameters = new URLSearchParams(window.location.search);
 
@@ -168,15 +169,17 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                 <Spacer />
                 <SubmitInput value="Create Account" />
                 <Spacer />
-                <Center>
-                    <a href={url.loginUrl}>
-                        <BackToLogin color="white" mr={2} />
-                        back to <span className="text-white">Log in</span>
-                    </a>
-                </Center>
-
-
             </form>
+            <Box position='relative' py={4}>
+                <Divider />
+                <AbsoluteCenter opacity={0.5}>
+                    or
+                </AbsoluteCenter>
+            </Box>
+            <Flex direction='column' className='space-y-4 mt-4'>
+                {social && social.providers && social.providers.map((p) => <SocialProvider {...p} prefix="Sign up with " key={p.providerId} />)}
+                <BackTo loginUrl={url.loginUrl} target="Login" />
+            </Flex>
         </Template >
     );
 }

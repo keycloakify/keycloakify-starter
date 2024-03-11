@@ -1,11 +1,13 @@
-import { clsx } from "keycloakify/tools/clsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { KcContext } from "../kcContext";
 import type { I18n } from "../i18n";
-import { FormInputError } from "./shared/FormInputError";
 import { useState, useEffect, FormEventHandler } from "react";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
+import { HeaderNode } from "../components/header-node";
+import { PasswordIcon } from "../components/icons/password";
+import { FormErrorMessage, Input } from "@chakra-ui/react";
+import { SubmitInput } from "../components/submit-input";
 
 export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, { pageId: "login-update-password.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -17,7 +19,7 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
 
     const { msg, msgStr } = i18n;
 
-    const { url, messagesPerField, isAppInitiatedAction, username } = kcContext;
+    const { url, isAppInitiatedAction, } = kcContext;
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [errors, setErrors] = useState({} as { password: string, passwordConfirm: string });
@@ -63,74 +65,43 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
     return (
         <Template {...{ kcContext, i18n, doUseDefaultCss, classes }}
             headerNode={
-                <div>
-                    <div className="flex justify-center pb-8">
-                        <img src={require("./../assets/resetpassword.png")} />
-                    </div>
-                    <h1>Set New Password</h1>
-                    <p className="text-center">Create your new strong password</p>
-                </div>
+                <HeaderNode title="Set New Password" subtitle="Create your new strong password" asset={
+                    <div className="flex justify-center">
+                        <PasswordIcon w='60px' h='28px' />
+                    </div>} />
             }>
-            <form id="kc-passwd-update-form" className={getClassName("kcFormClass")} action={url.loginAction} method="post" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} noValidate>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    value={username}
-                    readOnly={true}
-                    autoComplete="username"
-                    style={{ display: "none" }}
+            <form id="kc-passwd-up-form" className="space-y-4" action={url.loginAction} method="post" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} noValidate>
+                <Input type="password" id="password" name="password" autoComplete="current-password" style={{ display: "none" }} />
+                <Input
+                    type="password"
+                    id="password-new"
+                    name="password-new"
+                    placeholder="New Password"
+                    autoFocus
+                    autoComplete="new-password"
+                    className={getClassName("kcInputClass")}
+                    onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
+                    required
+                    minLength={8}
                 />
-                <input type="password" id="password" name="password" autoComplete="current-password" style={{ display: "none" }} />
+                {!!errors.password ? (
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                ) : null}
 
-                <div
-                    className={clsx(
-                        getClassName("kcFormGroupClass"),
-                        messagesPerField.printIfExists("password", getClassName("kcFormGroupErrorClass"))
-                    )}
-                >
-                    <div className={getClassName("kcInputWrapperClass")}>
-                        <input
-                            type="password"
-                            id="password-new"
-                            name="password-new"
-                            placeholder="New Password"
-                            autoFocus
-                            autoComplete="new-password"
-                            className={getClassName("kcInputClass")}
-                            onChange={(e) => setPassword((e.target as HTMLInputElement).value)}
-                            required
-                            minLength={8}
-                        />
-                        {!!errors.password ? (
-                            <FormInputError message={errors.password} />
-                        ) : null}
-                    </div>
-                </div>
-
-                <div
-                    className={clsx(
-                        getClassName("kcFormGroupClass"),
-                        messagesPerField.printIfExists("password-confirm", getClassName("kcFormGroupErrorClass"))
-                    )}
-                >
-                    <div className={getClassName("kcInputWrapperClass")}>
-                        <input
-                            type="password"
-                            id="password-confirm"
-                            name="password-confirm"
-                            autoComplete="new-password"
-                            placeholder="Confirm Password"
-                            className={getClassName("kcInputClass")}
-                            onChange={(e) => setPasswordConfirm((e.target as HTMLInputElement).value)}
-                            required
-                            minLength={8}
-                        />
-                        {!!errors.passwordConfirm ? (
-                            <FormInputError message={errors.passwordConfirm} />
-                        ) : null}
-                    </div>
-                </div>
+                <Input
+                    type="password"
+                    id="password-confirm"
+                    name="password-confirm"
+                    autoComplete="new-password"
+                    placeholder="Confirm Password"
+                    className={getClassName("kcInputClass")}
+                    onChange={(e) => setPasswordConfirm((e.target as HTMLInputElement).value)}
+                    required
+                    minLength={8}
+                />
+                {!!errors.passwordConfirm ? (
+                    <FormErrorMessage>{errors.passwordConfirm}</FormErrorMessage>
+                ) : null}
 
                 <div className={getClassName("kcFormGroupClass")}>
                     <div id="kc-form-options" className={getClassName("kcFormOptionsClass")}>
@@ -149,21 +120,11 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                     <div id="kc-form-buttons" className={getClassName("kcFormButtonsClass")}>
                         {isAppInitiatedAction ? (
                             <>
-                                <input
-                                    className={clsx(
-                                        getClassName("kcButtonClass"),
-                                        getClassName("kcButtonPrimaryClass"),
-                                        getClassName("kcButtonLargeClass")
-                                    )}
+                                <SubmitInput
                                     type="submit"
                                     defaultValue={msgStr("doSubmit")}
                                 />
                                 <button
-                                    className={clsx(
-                                        getClassName("kcButtonClass"),
-                                        getClassName("kcButtonDefaultClass"),
-                                        getClassName("kcButtonLargeClass")
-                                    )}
                                     type="submit"
                                     name="cancel-aia"
                                     value="true"
@@ -172,15 +133,8 @@ export default function LoginUpdatePassword(props: PageProps<Extract<KcContext, 
                                 </button>
                             </>
                         ) : (
-                            <input
-                                className={clsx(
-                                    getClassName("kcButtonClass"),
-                                    getClassName("kcButtonPrimaryClass"),
-                                    getClassName("kcButtonBlockClass"),
-                                    getClassName("kcButtonLargeClass")
-                                )}
+                            <SubmitInput
                                 type="submit"
-                                defaultValue={msgStr("doSubmit")}
                             />
                         )}
                     </div>

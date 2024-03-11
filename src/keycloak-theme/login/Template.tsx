@@ -42,27 +42,43 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   }
 
   return (
-    <Flex align="center" justify="center" className="draggable" h="100vh">
-      <Box bg="transparent" mx="auto" p={{ base: "5", sm: "5", lg: "7" }} w={{ sm: "32rem" }} mb={{ lg: "3" }} pt={{ lg: "0" }}>
-        <Box mb="2">
-          {!(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
-            displayRequiredFields ? (
+    <Flex direction='column' h='full'>
+      <Flex align='center' justify="center" className="draggable" m={{ base: 8, sm: 8, lg: 16 }} h='full'>
+        <Box bg="transparent" mx="auto" p={{ base: "5", sm: "5", lg: "7" }} w={{ sm: "32rem" }} mb={{ lg: "3" }} pt={{ lg: "0" }}>
+          <Box mb="2">
+            {!(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
+              displayRequiredFields ? (
+                <Flex direction="column">
+                  <Text className="subtitle">
+                    <span className="required">*</span>
+                    {msg("requiredFields")}
+                  </Text>
+                  <Text fontSize="3xl" color="white">{headerNode}</Text>
+                </Flex>
+              ) : (
+                <Box pb={8}>{headerNode}</Box>
+              )
+            ) : displayRequiredFields ? (
               <Flex direction="column">
                 <Text className="subtitle">
-                  <span className="required">*</span>
-                  {msg("requiredFields")}
+                  <span className="required">*</span> {msg("requiredFields")}
                 </Text>
-                <Text fontSize="3xl" color="white">{headerNode}</Text>
+                <Box>
+                  {showUsernameNode}
+                  <FormControl>
+                    <FormLabel htmlFor="kc-username" id="kc-attempted-username">
+                      {auth?.attemptedUsername}
+                    </FormLabel>
+                    <Link id="reset-login" href={url.loginRestartFlowUrl}>
+                      <Tooltip label={msg("restartLoginTooltip")}>
+                        <IconButton aria-label="Reset" icon={<ArrowRightIcon />} />
+                      </Tooltip>
+                    </Link>
+                  </FormControl>
+                </Box>
               </Flex>
             ) : (
-              <Box>{headerNode}</Box>
-            )
-          ) : displayRequiredFields ? (
-            <Flex direction="column">
-              <Text className="subtitle">
-                <span className="required">*</span> {msg("requiredFields")}
-              </Text>
-              <Box>
+              <>
                 {showUsernameNode}
                 <FormControl>
                   <FormLabel htmlFor="kc-username" id="kc-attempted-username">
@@ -74,55 +90,51 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </Tooltip>
                   </Link>
                 </FormControl>
-              </Box>
-            </Flex>
-          ) : (
-            <>
-              {showUsernameNode}
-              <FormControl>
-                <FormLabel htmlFor="kc-username" id="kc-attempted-username">
-                  {auth?.attemptedUsername}
-                </FormLabel>
-                <Link id="reset-login" href={url.loginRestartFlowUrl}>
-                  <Tooltip label={msg("restartLoginTooltip")}>
-                    <IconButton aria-label="Reset" icon={<ArrowRightIcon />} />
-                  </Tooltip>
-                </Link>
-              </FormControl>
-            </>
-          )}
-        </Box>
-        <Box id="kc-content">
-          <Box id="kc-content-wrapper">
-            {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-              <Alert status={message.type}>
-                <AlertIcon />
-                <Box dangerouslySetInnerHTML={{ __html: message.summary }} />
-              </Alert>
-            )}
-            {children}
-            {auth !== undefined && auth.showTryAnotherWayLink && showAnotherWayIfPresent && (
-              <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
-                <Button onClick={(e) => {
-                  e.preventDefault();
-                  const form = document.getElementById('kc-select-try-another-way-form') as HTMLFormElement | null;
-                  form && form.submit();
-                }}>
-                  {msg("doTryAnotherWay")}
-                </Button>
-              </form>
-            )}
-            {displayInfo && (
-              <Box mt={3}>{infoNode}</Box>
+              </>
             )}
           </Box>
+          <Box id="kc-content">
+            <Box id="kc-content-wrapper">
+              {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
+                <Alert status={message.type}>
+                  <AlertIcon />
+                  <Box dangerouslySetInnerHTML={{ __html: message.summary }} />
+                </Alert>
+              )}
+              {children}
+              {auth !== undefined && auth.showTryAnotherWayLink && showAnotherWayIfPresent && (
+                <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
+                  <Button onClick={(e) => {
+                    e.preventDefault();
+                    const form = document.getElementById('kc-select-try-another-way-form') as HTMLFormElement | null;
+                    form && form.submit();
+                  }}>
+                    {msg("doTryAnotherWay")}
+                  </Button>
+                </form>
+              )}
+              {displayInfo && (
+                <Box mt={3}>{infoNode}</Box>
+              )}
+            </Box>
+          </Box>
         </Box>
-      </Box>
-      <Text fontSize="10px" color="white" opacity="0.5" position="fixed" bottom="6" w="full" textAlign="center">
-        {/* SVG and Links here */}        <svg
+      </Flex >
+      <Flex
+        as="footer"
+        justifyContent="center" // center horizontally
+        alignItems="center" // center vertically
+        // position="absolute"
+        bottom={6}
+        w="full" // take full width of the screen
+      >
+        <svg
+          width="16px"
+          height="16px"
           viewBox="0 0 24 24"
           focusable="false"
-          className="text-yellow-200 font-medium h-6 mr-2"
+          className="text-yellow-200 font-medium h-6 mr-1"
+          opacity={0.5}
         >
           <path
             fillRule="evenodd"
@@ -131,10 +143,21 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             fill="currentColor"
           ></path>
         </svg>
-
-        By using BuildBetter, you agree to our <Link href="https://sites.buildbetter.ai/terms" isExternal>Terms of Service</Link> and <Link href="https://sites.buildbetter.ai/privacy" isExternal>Privacy Policy</Link>.
-      </Text>
+        <Text fontSize="10px" opacity={0.5}>
+          By using BuildBetter, you agree to our
+          {' '}
+          <Link href="https://sites.buildbetter.ai/terms" isExternal>
+            Terms of Service
+          </Link>
+          {' '}
+          and
+          {' '}
+          <Link href="https://sites.buildbetter.ai/privacy" isExternal>
+            Privacy Policy
+          </Link>
+          .
+        </Text>
+      </Flex>
     </Flex>
-
   );
 }

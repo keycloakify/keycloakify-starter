@@ -6,7 +6,7 @@ import { clsx } from "keycloakify/tools/clsx";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
-import { Button, Checkbox, Divider, Flex, FormControl, FormErrorMessage, Input, Text, VStack } from '@chakra-ui/react'
+import { AbsoluteCenter, Box, Button, Checkbox, Divider, Flex, FormControl, FormErrorMessage, Input, Text, VStack } from '@chakra-ui/react'
 import { SocialProvider } from "../components/social-provider";
 import { HeaderNode } from "../components/header-node";
 import { SubmitInput } from "../components/submit-input";
@@ -108,7 +108,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             }
         >
             <Flex direction="column" className="space-y-4">
-                {realm.password && (<form id="kc-form-login" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} action={url.loginAction} method="post" noValidate ref={ref} className="space-y-4 mt-10">
+                {realm.password && (<form id="kc-form-login" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); onSubmit(e) }} action={url.loginAction} method="post" noValidate ref={ref} className="space-y-4">
                     <FormControl>
                         {!usernameHidden &&
                             (() => {
@@ -194,6 +194,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         />
                     </div>
                     <SubmitInput
+                        isDisabled={isButtonDisabled}
                         bgColor="purple.700"
                         border="none"
                         _hover={{
@@ -210,11 +211,16 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 {realm.password && social.providers !== undefined && (
                     social.providers.map((p) => {
                         return (
-                            <SocialProvider {...p} prefix="Sign in with " />
+                            <SocialProvider {...p} prefix="Sign in with " key={p.providerId} />
                         )
                     })
                 )}</Flex>
-            <Divider padding={2} width="100h" />
+            <Box position='relative' py={4}>
+                <Divider />
+                <AbsoluteCenter opacity={0.5}>
+                    or
+                </AbsoluteCenter>
+            </Box>
         </Template >
     );
 }
