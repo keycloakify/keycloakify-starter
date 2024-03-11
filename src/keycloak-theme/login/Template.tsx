@@ -96,7 +96,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
           <Box id="kc-content">
             <Box id="kc-content-wrapper">
               {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                <Alert status={message.type}>
+                <Alert status={message.type} mb={4}>
                   <AlertIcon />
                   <Box dangerouslySetInnerHTML={{ __html: message.summary }} />
                 </Alert>
