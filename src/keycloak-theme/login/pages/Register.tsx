@@ -9,6 +9,7 @@ import { AbsoluteCenter, Box, Divider, Flex, FormErrorMessage, Input, Spacer, } 
 import { SubmitInput } from "../components/submit-input";
 import { BackTo } from "../components/back-to-login";
 import { SocialProvider } from "../components/social-provider";
+import { SectionDivider } from "../components/divider";
 
 export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -170,12 +171,7 @@ export default function Register(props: PageProps<Extract<KcContext, { pageId: "
                 <SubmitInput value="Create Account" />
                 <Spacer />
             </form>
-            <Box position='relative' py={4}>
-                <Divider />
-                <AbsoluteCenter opacity={0.5}>
-                    or
-                </AbsoluteCenter>
-            </Box>
+            <SectionDivider text="or" />
             <Flex direction='column' className='space-y-4 mt-4'>
                 {social && social.providers && social.providers.map((p) => <SocialProvider {...p} prefix="Sign up with " key={p.providerId} />)}
                 <BackTo loginUrl={url.loginUrl} target="Login" />
