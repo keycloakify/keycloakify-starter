@@ -1,16 +1,16 @@
 // ejected using 'npx eject-keycloak-page'
+import { Button, Checkbox, Flex, FormControl, FormErrorMessage, Input, Link, Text, VStack } from '@chakra-ui/react';
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { useState, useEffect, FormEventHandler, useMemo, useRef } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
+import { FormEventHandler, useEffect, useMemo, useRef, useState } from "react";
+import { SectionDivider } from "../components/divider";
+import { HeaderNode } from "../components/header-node";
+import { SocialProvider } from "../components/social-provider";
+import { SubmitInput } from "../components/submit-input";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
-import { AbsoluteCenter, Box, Button, Checkbox, Divider, Flex, FormControl, FormErrorMessage, Input, Link, Text, VStack } from '@chakra-ui/react'
-import { SocialProvider } from "../components/social-provider";
-import { HeaderNode } from "../components/header-node";
-import { SubmitInput } from "../components/submit-input";
-import { SectionDivider } from "../components/divider";
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 

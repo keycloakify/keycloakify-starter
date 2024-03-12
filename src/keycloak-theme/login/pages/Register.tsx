@@ -1,15 +1,15 @@
 // ejected using 'npx eject-keycloak-page'
-import { useState, useEffect, type FormEventHandler } from "react";
+import { Flex, FormErrorMessage, Input, Spacer } from "@chakra-ui/react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import type { KcContext } from "../kcContext";
-import type { I18n } from "../i18n";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
-import { HeaderNode } from "../components/header-node";
-import { AbsoluteCenter, Box, Divider, Flex, FormErrorMessage, Input, Spacer, } from "@chakra-ui/react";
-import { SubmitInput } from "../components/submit-input";
+import { useEffect, useState, type FormEventHandler } from "react";
 import { BackTo } from "../components/back-to-login";
-import { SocialProvider } from "../components/social-provider";
 import { SectionDivider } from "../components/divider";
+import { HeaderNode } from "../components/header-node";
+import { SocialProvider } from "../components/social-provider";
+import { SubmitInput } from "../components/submit-input";
+import type { I18n } from "../i18n";
+import type { KcContext } from "../kcContext";
 
 export default function Register(props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
