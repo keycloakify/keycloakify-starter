@@ -53,6 +53,9 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
     },
     {
       pageId: "register.ftl",
+      realm: {
+        registrationEmailAsUsername: true,
+      },
       authorizedMailDomains: [
         "example.com",
         "another-example.com",

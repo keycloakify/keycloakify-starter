@@ -1,5 +1,5 @@
 // ejected using 'npx eject-keycloak-page'
-import { Flex, FormErrorMessage, Input, Spacer } from "@chakra-ui/react";
+import { Flex, FormControl, FormErrorMessage, Input, Spacer } from "@chakra-ui/react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import { useEffect, useState, type FormEventHandler } from "react";
@@ -27,7 +27,6 @@ export default function Register(
   } = kcContext;
 
   const queryParameters = new URLSearchParams(window.location.search);
-
   const [email, setEmail] = useState(
     register.formData.email ?? queryParameters.get("email") ?? ""
   );
@@ -65,6 +64,7 @@ export default function Register(
   };
 
   const validatePassword = () => {
+    console.log({ password })
     if (!password) {
       return "Required";
     } else if (password.length < 8) {
@@ -127,87 +127,98 @@ export default function Register(
         }}
         noValidate
       >
-        <Input
-          type="text"
-          id="firstName"
-          name="firstName"
-          defaultValue={firstName}
-          placeholder="First name"
-          autoComplete="given-name"
-          onChange={(e) => setFirstName((e.target as HTMLInputElement).value)}
-          required
-        />
-        {!!errors.firstName ? (
-          <FormErrorMessage>{errors.firstName}</FormErrorMessage>
-        ) : null}
-
-        <Input
-          type="text"
-          id="lastName"
-          name="lastName"
-          defaultValue={lastName}
-          autoComplete="family-name"
-          placeholder="Last name"
-          onChange={(e) => setLastName((e.target as HTMLInputElement).value)}
-          required
-        />
-        {!!errors.lastName ? (
-          <FormErrorMessage>{errors.lastName}</FormErrorMessage>
-        ) : null}
-
-        <Input
-          type="email"
-          id="email"
-          name="email"
-          defaultValue={email}
-          autoComplete="email"
-          placeholder="Email"
-          required
-          onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
-        />
-        {!!errors.email ? (
-          <FormErrorMessage>{errors.email}</FormErrorMessage>
-        ) : null}
-        {!realm.registrationEmailAsUsername && (
+        <FormControl isInvalid={!!errors.firstName}>
           <Input
             type="text"
-            id="username"
-            name="username"
-            defaultValue={register.formData.username ?? ""}
-            autoComplete="username"
-            placeholder="Username"
+            id="firstName"
+            name="firstName"
+            defaultValue={firstName}
+            placeholder="First name"
+            autoComplete="given-name"
+            onChange={(e) => setFirstName((e.target as HTMLInputElement).value)}
+            required
           />
+          {!!errors.firstName && (
+            <FormErrorMessage>{errors.firstName}</FormErrorMessage>
+          )}
+        </FormControl>
+
+        <FormControl isInvalid={!!errors.lastName}>
+          <Input
+            type="text"
+            id="lastName"
+            name="lastName"
+            defaultValue={lastName}
+            autoComplete="family-name"
+            placeholder="Last name"
+            onChange={(e) => setLastName((e.target as HTMLInputElement).value)}
+            required
+          />
+          {!!errors.lastName && (
+            <FormErrorMessage>{errors.lastName}</FormErrorMessage>
+          )}
+        </FormControl>
+
+        <FormControl isInvalid={!!errors.email}>
+          <Input
+            type="email"
+            id="email"
+            name="email"
+            defaultValue={email}
+            autoComplete="email"
+            placeholder="Email"
+            required
+            onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
+          />
+          {!!errors.email && (
+            <FormErrorMessage>{errors.email}</FormErrorMessage>
+          )}
+        </FormControl>
+        {!realm.registrationEmailAsUsername && (
+          <FormControl isInvalid={!!errors.email}>
+            <Input
+              type="text"
+              id="username"
+              name="username"
+              defaultValue={register.formData.username ?? ""}
+              autoComplete="username"
+              placeholder="Username"
+            />
+          </FormControl>
         )}
         {passwordRequired && (
           <>
-            <Input
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="new-password"
-              placeholder="Password"
-              onChange={(e) =>
-                setPassword((e.target as HTMLInputElement).value)
-              }
-              required
-              minLength={8}
-            />
-            {!!errors.password ? (
-              <FormErrorMessage>{errors.password}</FormErrorMessage>
-            ) : null}
-            <Input
-              type="password"
-              id="password-confirm"
-              name="password-confirm"
-              onChange={(e) =>
-                setPasswordConfirm((e.target as HTMLInputElement).value)
-              }
-              placeholder="Confirm Password"
-              required
-            />
-            {!!errors.passwordConfirm ? (
-              <FormErrorMessage>{errors.passwordConfirm}</FormErrorMessage>
-            ) : null}
+            <FormControl isInvalid={!!errors.password}>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                autoComplete="new-password"
+                placeholder="Password"
+                onChange={(e) =>
+                  setPassword((e.target as HTMLInputElement).value)
+                }
+                required
+                minLength={8}
+              />
+              {!!errors.password && <FormErrorMessage>{errors.password}</FormErrorMessage>}
+            </FormControl>
+
+            <FormControl isInvalid={!!errors.passwordConfirm}>
+              <Input
+                type="password"
+                id="password-confirm"
+                name="password-confirm"
+                onChange={(e) =>
+                  setPasswordConfirm((e.target as HTMLInputElement).value)
+                }
+                placeholder="Confirm Password"
+                required
+              />
+              {!!errors.passwordConfirm ? (
+                <FormErrorMessage>{errors.passwordConfirm}</FormErrorMessage>
+              ) : null}
+            </FormControl>
           </>
         )}
         {recaptchaRequired && (
