@@ -1,7 +1,19 @@
 // Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/login/Template.tsx
 
-import { ArrowRightIcon } from '@chakra-ui/icons'; // Assuming use of an arrow icon for the reset flow, customize as necessary
-import { Alert, AlertIcon, Box, Button, Flex, FormControl, FormLabel, IconButton, Link, Text, Tooltip } from '@chakra-ui/react';
+import { ArrowRightIcon } from "@chakra-ui/icons"; // Assuming use of an arrow icon for the reset flow, customize as necessary
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  IconButton,
+  Link,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
 import { type TemplateProps } from "keycloakify/login/TemplateProps";
 import { useGetClassName } from "keycloakify/login/lib/useGetClassName";
@@ -26,8 +38,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
   const { getClassName } = useGetClassName({ doUseDefaultCss, classes });
 
-  const { msg } =
-    i18n;
+  const { msg } = i18n;
 
   const { auth, url, message, isAppInitiatedAction } = kcContext;
 
@@ -42,18 +53,37 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   }
 
   return (
-    <Flex direction='column' h='full'>
-      <Flex align='center' justify="center" className="draggable" m={{ base: 8, sm: 8, lg: 16 }} h='full'>
-        <Box bg="transparent" mx="auto" p={{ base: "5", sm: "5", lg: "7" }} w={{ sm: "32rem" }} mb={{ lg: "3" }} pt={{ lg: "0" }}>
+    <Flex direction="column" h="full">
+      <Flex
+        align="center"
+        justify="center"
+        className="draggable"
+        m={{ base: 8, sm: 8, lg: 16 }}
+        h="full"
+      >
+        <Box
+          bg="transparent"
+          mx="auto"
+          p={{ base: "5", sm: "5", lg: "7" }}
+          w={{ sm: "32rem" }}
+          mb={{ lg: "3" }}
+          pt={{ lg: "0" }}
+        >
           <Box mb="2">
-            {!(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
+            {!(
+              auth !== undefined &&
+              auth.showUsername &&
+              !auth.showResetCredentials
+            ) ? (
               displayRequiredFields ? (
                 <Flex direction="column">
                   <Text className="subtitle">
                     <span className="required">*</span>
                     {msg("requiredFields")}
                   </Text>
-                  <Text fontSize="3xl" color="white">{headerNode}</Text>
+                  <Text fontSize="3xl" color="white">
+                    {headerNode}
+                  </Text>
                 </Flex>
               ) : (
                 <Box pb={8}>{headerNode}</Box>
@@ -71,7 +101,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </FormLabel>
                     <Link id="reset-login" href={url.loginRestartFlowUrl}>
                       <Tooltip label={msg("restartLoginTooltip")}>
-                        <IconButton aria-label="Reset" icon={<ArrowRightIcon />} />
+                        <IconButton
+                          aria-label="Reset"
+                          icon={<ArrowRightIcon />}
+                        />
                       </Tooltip>
                     </Link>
                   </FormControl>
@@ -86,7 +119,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                   </FormLabel>
                   <Link id="reset-login" href={url.loginRestartFlowUrl}>
                     <Tooltip label={msg("restartLoginTooltip")}>
-                      <IconButton aria-label="Reset" icon={<ArrowRightIcon />} />
+                      <IconButton
+                        aria-label="Reset"
+                        icon={<ArrowRightIcon />}
+                      />
                     </Tooltip>
                   </Link>
                 </FormControl>
@@ -95,31 +131,43 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
           </Box>
           <Box id="kc-content">
             <Box id="kc-content-wrapper">
-              {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                <Alert status={message.type} mb={4}>
-                  <AlertIcon />
-                  <Box dangerouslySetInnerHTML={{ __html: message.summary }} />
-                </Alert>
-              )}
+              {displayMessage &&
+                message !== undefined &&
+                (message.type !== "warning" || !isAppInitiatedAction) && (
+                  <Alert status={message.type} mb={4}>
+                    <AlertIcon />
+                    <Box
+                      dangerouslySetInnerHTML={{ __html: message.summary }}
+                    />
+                  </Alert>
+                )}
               {children}
-              {auth !== undefined && auth.showTryAnotherWayLink && showAnotherWayIfPresent && (
-                <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
-                  <Button onClick={(e) => {
-                    e.preventDefault();
-                    const form = document.getElementById('kc-select-try-another-way-form') as HTMLFormElement | null;
-                    form && form.submit();
-                  }}>
-                    {msg("doTryAnotherWay")}
-                  </Button>
-                </form>
-              )}
-              {displayInfo && (
-                <Box mt={3}>{infoNode}</Box>
-              )}
+              {auth !== undefined &&
+                auth.showTryAnotherWayLink &&
+                showAnotherWayIfPresent && (
+                  <form
+                    id="kc-select-try-another-way-form"
+                    action={url.loginAction}
+                    method="post"
+                  >
+                    <Button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const form = document.getElementById(
+                          "kc-select-try-another-way-form"
+                        ) as HTMLFormElement | null;
+                        form && form.submit();
+                      }}
+                    >
+                      {msg("doTryAnotherWay")}
+                    </Button>
+                  </form>
+                )}
+              {displayInfo && <Box mt={3}>{infoNode}</Box>}
             </Box>
           </Box>
         </Box>
-      </Flex >
+      </Flex>
       <Flex
         as="footer"
         justifyContent="center" // center horizontally
@@ -144,14 +192,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
           ></path>
         </svg>
         <Text fontSize="10px" opacity={0.5}>
-          By using BuildBetter, you agree to our
-          {' '}
+          By using BuildBetter, you agree to our{" "}
           <Link href="https://sites.buildbetter.ai/terms" isExternal>
             Terms of Service
-          </Link>
-          {' '}
-          and
-          {' '}
+          </Link>{" "}
+          and{" "}
           <Link href="https://sites.buildbetter.ai/privacy" isExternal>
             Privacy Policy
           </Link>

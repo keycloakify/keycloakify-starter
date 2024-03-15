@@ -1,5 +1,5 @@
 Your theme source files should be located in a keycloak-theme directory somewhere in your src directory OR at the root of your directory.  
-Acceptable directory strucuture:  
+Acceptable directory strucuture:
 
 ```txt
 src/
@@ -7,7 +7,7 @@ src/
     login/
     account/
     email/
-    
+
 ===OR===
 
 src/
@@ -26,4 +26,4 @@ src/
   email/
 ```
 
-You don't need to have all three variant of the theme. If you only need the login theme for example you can have only the login directory.  
+You don't need to have all three variant of the theme. If you only need the login theme for example you can have only the login directory.
