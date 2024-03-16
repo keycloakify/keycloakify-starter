@@ -11,7 +11,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build-keycloak-theme": "yarn build && keycloakify",
+    "prebuild": "rm -rf dist dist_keycloak",
+    "postbuild": "node ./post-vite-build.mjs",
+    "build-keycloak-theme": "npm run build && keycloakify",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -26,6 +28,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsafe": "^1.6.6",
+    "vike": "^0.4.165",
+    "vike-react": "^0.4.6",
     "zod": "^3.22.4"
   },
   "devDependencies": {
