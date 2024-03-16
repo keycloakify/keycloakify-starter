@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 // to a local version of the keycloakify package. This is not needed for normal usage.
 import commonjs from "vite-plugin-commonjs";
 import { keycloakify } from "keycloakify/vite-plugin";
+import vike from 'vike/plugin'
 
 
 // https://vitejs.dev/config/
@@ -11,6 +12,7 @@ export default defineConfig({
   plugins: [
     react(), 
     commonjs(), 
+    vike({ prerender: true }),
     keycloakify({
       // See: https://docs.keycloakify.dev/build-options#themename
       themeName: "keycloakify-starter",
@@ -22,24 +24,6 @@ export default defineConfig({
       // but before the jar is created.  
       // You can use it to add/remove/edit your theme files.  
       postBuild: async keycloakifyBuildOptions => {
-
-        const fs = await import("fs/promises");
-        const path = await import("path");
-
-        await fs.writeFile(
-          path.join(keycloakifyBuildOptions.keycloakifyBuildDirPath, "foo.txt"),
-          Buffer.from(
-            [
-            "This file was created by the postBuild hook of the keycloakify vite plugin", 
-            "",
-            "Resolved keycloakifyBuildOptions:",
-            "",
-            JSON.stringify(keycloakifyBuildOptions, null, 2),
-            ""
-            ].join("\n"),
-            "utf8"
-          )
-        );
 
       }
     })
