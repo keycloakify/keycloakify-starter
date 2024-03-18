@@ -1,27 +1,18 @@
-import { Flex, FormControl, FormErrorMessage, Input, Text } from "@chakra-ui/react";
+import { Flex, FormControl, FormErrorMessage, Input } from "@chakra-ui/react";
+import { useFormik } from 'formik';
 import type { PageProps } from "keycloakify/login/pages/PageProps";
-import { BackTo } from "../components/back-to-login";
+import { FormEvent } from "react";
+import * as Yup from 'yup';
 import { HeaderNode } from "../components/header-node";
 import { SubmitInput } from "../components/submit-input";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { FormEvent, SyntheticEvent } from "react";
 
 export default function LoginUpdateProfile(
   props: PageProps<Extract<KcContext, { pageId: "login-update-profile.ftl" }>, I18n>
 ) {
   const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-  const { url, client, user } = kcContext;
-
-  function setFirstName(value: string): void {
-    throw new Error("Function not implemented.");
-  }
-  const firstName = ""
-  const errors = {
-    firstName: "",
-  }
+  const { user } = kcContext;
 
   const formValidation = useFormik({
     initialValues: {
@@ -34,10 +25,7 @@ export default function LoginUpdateProfile(
       lastName: Yup.string().required('Required'),
       email: Yup.string().email('Invalid email address').required('Required'),
     }),
-    onSubmit: values => {
-      // Normally Formik's onSubmit isn't used for traditional POST submissions
-      // But you can perform actions here if needed before a manual submission
-    },
+    onSubmit: () => { },
   });
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

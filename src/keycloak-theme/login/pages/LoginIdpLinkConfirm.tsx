@@ -1,19 +1,14 @@
 import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
   Button,
   Center,
-  Flex,
   Link,
   Text
 } from "@chakra-ui/react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { assert } from "keycloakify/tools/assert";
 import { HeaderNode } from "../components/header-node";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
-import { SectionDivider } from "../components/divider";
-import { assert } from "keycloakify/tools/assert";
 
 export default function LoginIdpLinkConfirm(
   props: PageProps<Extract<KcContext, { pageId: "login-idp-link-confirm.ftl" }>, I18n>
