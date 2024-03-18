@@ -11,6 +11,7 @@ const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm"));
 const Register = lazy(() => import("./pages/Register"));
 const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 const LoginUpdatePassword = lazy(() => import("./pages/LoginUpdatePassword"));
+const LoginUpdateProfile = lazy(() => import("./pages/LoginUpdateProfile"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
 const Info = lazy(() => import("./pages/Info"));
 const Error = lazy(() => import("./pages/Error"));
@@ -103,6 +104,11 @@ export default function KcApp(props: { kcContext: KcContext }) {
                 doUseDefaultCss={true}
               />
             );
+          case "login-update-profile.ftl":
+            return <LoginUpdateProfile
+              {...{ kcContext, i18n, classes, Template }}
+              doUseDefaultCss={true}
+            />;
           default:
             return (
               <Fallback
