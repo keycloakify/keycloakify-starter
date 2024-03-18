@@ -1,7 +1,6 @@
 import {
   Button,
   Center,
-  Link,
   Text
 } from "@chakra-ui/react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -36,21 +35,24 @@ export default function LoginIdpLinkConfirm(
       <div className="space-y-4">
         <Center>
           <Text fontSize='md'>
-            Confirm adding your {idpAlias} account as a login method to
+            Confirm linking your {idpAlias} account as a login method to
             your {kcContext.realm.displayName} account
           </Text>
         </Center>
         <Center>
-          <Link href={kcContext.url.loginAction}>
+          <form action={kcContext.url.loginAction} method="post">
             <Button fontSize='md'
               bgColor="purple.700"
               _hover={{ bgColor: "purple.600" }}
+              type="submit"
+              name='submitAction'
+              value='linkAccount'
             >
               Confirm
             </Button>
-          </Link>
+          </form>
         </Center>
       </div>
-    </Template>
+    </Template >
   );
 }

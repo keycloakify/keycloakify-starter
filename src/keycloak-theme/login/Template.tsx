@@ -5,14 +5,13 @@ import {
   Alert,
   AlertIcon,
   Box,
-  Button,
   Flex,
   FormControl,
   FormLabel,
   IconButton,
   Link,
   Text,
-  Tooltip,
+  Tooltip
 } from "@chakra-ui/react";
 import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
 import { type TemplateProps } from "keycloakify/login/TemplateProps";
@@ -25,7 +24,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     displayInfo = false,
     displayMessage = true,
     displayRequiredFields = false,
-    showAnotherWayIfPresent = true,
     headerNode,
     showUsernameNode = null,
     infoNode = null,
@@ -142,7 +140,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                   </Alert>
                 )}
               {children}
-              {auth !== undefined &&
+              {/* {auth !== undefined &&
                 auth.showTryAnotherWayLink &&
                 showAnotherWayIfPresent && (
                   <form
@@ -162,7 +160,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                       {msg("doTryAnotherWay")}
                     </Button>
                   </form>
-                )}
+                )} */}
               {displayInfo && <Box mt={3}>{infoNode}</Box>}
             </Box>
           </Box>

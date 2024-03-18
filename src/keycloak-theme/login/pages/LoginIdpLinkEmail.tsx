@@ -44,10 +44,10 @@ export default function LoginIdpLinkEmail(
           </Alert>
         </Center>
         <Text fontSize='sm'>
-          An email has been sent to link your {idpAlias} account {kcContext.brokerContext.username} with your {kcContext.realm.displayName} account has been sent to you.
+          An email has been sent to link your {idpAlias} account {kcContext.brokerContext.username} with your {kcContext.realm.displayName} account.
         </Text>
         <Text fontSize='sm'>
-          Didn't receive an email? <Link href={kcContext.url.loginRestartFlowUrl} textColor='gray'>Click here to send another one</Link>
+          Didn't receive an email? <Link href={kcContext.url.loginAction} textColor='gray'>Click here to send another one</Link>
         </Text>
         <Text fontSize='sm'>
           Already verified? <Link href={kcContext.url.loginAction} textColor='gray'>Click here to continue</Link>
