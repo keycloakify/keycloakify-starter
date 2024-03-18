@@ -5,9 +5,9 @@ export const SectionDivider = ({ text }: { text?: string }) => {
     <>
       <Box position="relative" py={4}>
         <Divider />
-        <AbsoluteCenter px={4} className="bg-dark-900">
+        {text && <AbsoluteCenter px={4} className="bg-dark-900">
           {text}
-        </AbsoluteCenter>
+        </AbsoluteCenter>}
       </Box>
     </>
   );

@@ -170,8 +170,8 @@ export default function Login(
                   const label = !realm.loginWithEmailAllowed
                     ? "username"
                     : realm.registrationEmailAsUsername
-                    ? "email"
-                    : "usernameOrEmail";
+                      ? "email"
+                      : "usernameOrEmail";
 
                   const autoCompleteHelper: typeof label =
                     label === "usernameOrEmail" ? "username" : label;
@@ -195,9 +195,9 @@ export default function Login(
                         {...(usernameHidden
                           ? { disabled: true }
                           : {
-                              autoFocus: true,
-                              autoComplete: "off",
-                            })}
+                            autoFocus: true,
+                            autoComplete: "off",
+                          })}
                         required
                         pattern="^[\w.%+-]+@[^_\W.-]+\.[A-Za-z]{2,24}$"
                       />
@@ -288,8 +288,8 @@ export default function Login(
                 name="credentialId"
                 {...(auth?.selectedCredential !== undefined
                   ? {
-                      value: auth.selectedCredential,
-                    }
+                    value: auth.selectedCredential,
+                  }
                   : {})}
               />
             </div>

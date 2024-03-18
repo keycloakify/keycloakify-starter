@@ -4,6 +4,8 @@ import Fallback, { type PageProps } from "keycloakify/login";
 import type { KcContext } from "./kcContext";
 import { useI18n } from "./i18n";
 import Template from "./Template";
+import LoginIdpLinkEmail from "./pages/LoginIdpLinkEmail";
+import LoginIdpLinkConfirm from "./pages/LoginIdpLinkConfirm";
 
 const Login = lazy(() => import("./pages/Login"));
 const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm"));
@@ -106,6 +108,16 @@ export default function KcApp(props: { kcContext: KcContext }) {
             );
           case "login-update-profile.ftl":
             return <LoginUpdateProfile
+              {...{ kcContext, i18n, classes, Template }}
+              doUseDefaultCss={true}
+            />;
+          case "login-idp-link-email.ftl":
+            return <LoginIdpLinkEmail
+              {...{ kcContext, i18n, classes, Template }}
+              doUseDefaultCss={true}
+            />;
+          case "login-idp-link-confirm.ftl":
+            return <LoginIdpLinkConfirm
               {...{ kcContext, i18n, classes, Template }}
               doUseDefaultCss={true}
             />;

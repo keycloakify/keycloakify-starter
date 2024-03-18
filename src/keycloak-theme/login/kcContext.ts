@@ -91,12 +91,28 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
         ],
       },
     },
+    {
+      pageId: "login-idp-link-email.ftl",
+      message: {
+        type: "warning",
+        summary:
+          "You need to verify your email address to link your account with Google",
+      },
+    },
+    {
+      pageId: "login-idp-link-confirm.ftl",
+      message: {
+        type: "error",
+        summary:
+          "User with email nikhil@buildbetter.app already exists. How do you want to continue?",
+      },
+    },
   ],
 });
 
 export const { kcContext } = getKcContext({
   // Uncomment to test the login page for development.
-  mockPageId: "login-update-profile.ftl",
+  mockPageId: "login-idp-link-confirm.ftl",
 });
 
 export type KcContext = NonNullable<
