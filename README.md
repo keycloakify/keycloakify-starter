@@ -55,6 +55,10 @@ npx download-builtin-keycloak-theme # For downloading the default theme (as a re
                                     # Look for the files in dist_keycloak/src/main/resources/theme/{base,keycloak}
 ```
 
+## Using a development container
+
+This starter supports [development containers](https://containers.dev/). You can customize the configuatuation file [`.devcontainer.json`](./.devcontainer/devcontainer.json) to your liking.
+
 # Theme variant  
 
 Keycloakify enables you to create different variant for a single theme.  
