@@ -16,6 +16,9 @@ If you are only looking to create a Keycloak theme (and not a Keycloak theme and
 
 This starter is based on Vite. There is also [a Webpack based starter](https://github.com/keycloakify/keycloakify-starter-cra).  
 
+> 📣 Looking for a library for redirecting your user to Keycloak when they click on the 'Login' button?  
+> Check out [oidc-spa](https://oidc-spa.dev) It's made by us and it's used in the [src/App](https://github.com/keycloakify/keycloakify-starter/tree/main/src/App) of this starter.  
+
 # Quick start
 
 ```bash
