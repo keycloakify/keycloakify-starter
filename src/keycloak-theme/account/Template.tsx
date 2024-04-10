@@ -25,7 +25,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             `${url.resourcesPath}/css/account.css`
         ],
         "htmlClassName": getClassName("kcHtmlClass"),
-        "bodyClassName": clsx("admin-console", "user", getClassName("kcBodyClass"))
+        "bodyClassName": clsx("admin-console", "user", getClassName("kcBodyClass")),
+        "htmlLangProperty": locale?.currentLanguageTag,
+        "documentTitle": i18n.msgStr("accountManagementTitle")
     });
 
     if (!isReady) {
@@ -47,14 +49,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 {realm.internationalizationEnabled && (assert(locale !== undefined), true) && locale.supported.length > 1 && (
                                     <li>
                                         <div className="kc-dropdown" id="kc-locale-dropdown">
-                                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                             <a href="#" id="kc-current-locale-link">
                                                 {labelBySupportedLanguageTag[currentLanguageTag]}
                                             </a>
                                             <ul>
                                                 {locale.supported.map(({ languageTag }) => (
                                                     <li key={languageTag} className="kc-dropdown-item">
-                                                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                                         <a href="#" onClick={() => changeLocale(languageTag)}>
                                                             {labelBySupportedLanguageTag[languageTag]}
                                                         </a>
