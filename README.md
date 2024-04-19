@@ -60,7 +60,8 @@ npx download-builtin-keycloak-theme # For downloading the default theme (as a re
 
 ## Using a development container
 
-This starter supports [development containers](https://containers.dev/). You can customize the configuatuation file [`.devcontainer.json`](./.devcontainer/devcontainer.json) to your liking.
+This starter supports [development containers](https://containers.dev/). You can customize the configuration file [`.devcontainer.json`](./.devcontainer/devcontainer.json) to your liking.  
+Checkout [this video](https://www.youtube.com/watch?v=cB86HE_HIDc) to understand dev containers and how to set up your environment.  
 
 # Theme variant  
 
