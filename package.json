@@ -1,7 +1,7 @@
 {
   "name": "keycloakify-starter",
   "homepage": "https://starter.keycloakify.dev",
-  "version": "6.1.7",
+  "version": "6.1.8",
   "description": "A starter/demo project for keycloakify",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "dependencies": {
     "evt": "^2.5.7",
     "keycloakify": "^9.6.6",
-    "oidc-spa": "^4.5.0",
+    "oidc-spa": "4.5.1-rc.0",
     "powerhooks": "^1.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
