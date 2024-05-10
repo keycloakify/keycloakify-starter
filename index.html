@@ -16,12 +16,14 @@
 
     <title>Keycloakify starter</title>
 
+    <!-- NOTE: Here we import the WorkSans font as an example of how to import self hosted custom fonts. Don't keep it in your actual theme!    
+         SEE: https://docs.keycloakify.dev/limitations#self-hosted-fonts
+         Don't forget to import your custom fonts in Storybook as well: https://github.com/keycloakify/keycloakify-starter/blob/bb019e66fb09166cb9af1e24e230994f59daa420/src/keycloak-theme/login/createPageStory.tsx#L21  
+    -->  
     <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-bold-webfont.woff2" as="font" crossorigin="anonymous">
     <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-medium-webfont.woff2" as="font" crossorigin="anonymous">
     <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-regular-webfont.woff2" as="font" crossorigin="anonymous">
     <link rel="preload" href="%BASE_URL%fonts/WorkSans/worksans-semibold-webfont.woff2" as="font" crossorigin="anonymous">
-    <!-- SEE: https://docs.keycloakify.dev/limitations#self-hosted-fonts -->
-    <!-- Don't forget to import your custom fonts in Storybook as well: https://github.com/keycloakify/keycloakify-starter/blob/bb019e66fb09166cb9af1e24e230994f59daa420/src/keycloak-theme/login/createPageStory.tsx#L21 -->
     <style>
       /* latin */
       @font-face {
