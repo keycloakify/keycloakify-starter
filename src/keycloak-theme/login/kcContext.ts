@@ -5,7 +5,8 @@ export type KcContextExtension =
   // NOTE: register.ftl is deprecated in favor of register-user-profile.ftl
   // but let's say we use it anyway and have this plugin enabled: https://github.com/micedre/keycloak-mail-whitelisting
   // keycloak-mail-whitelisting define the non standard ftl global authorizedMailDomains, we declare it here.
-  | { pageId: "register.ftl"; authorizedMailDomains: string[] };
+  | { pageId: "register.ftl"; authorizedMailDomains: string[] }
+  | { pageId: "org-select-form.ftl"; organizations: Organization };
 
 //NOTE: In most of the cases you do not need to overload the KcContext, you can
 // just call createGetKcContext(...) without type arguments.
@@ -107,14 +108,34 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
           "User with email nikhil@buildbetter.app already exists. How do you want to continue?",
       },
     },
+    {
+      pageId: "org-select-form.ftl",
+      organizations: {
+        "0": {
+            segment_identifier: "39790f16-5083-4ea9-ad2a-50da583c8e95",
+            name: "BB HQ"
+        },
+        "1": {
+          segment_identifier: "39790f16-5083-4ea9-ad2a-50da583c8e92",
+          name: "Test Org"
+        },
+      },
+    },
   ],
 });
 
 export const { kcContext } = getKcContext({
   // Uncomment to test the login page for development.
-  mockPageId: "login-idp-link-confirm.ftl",
+  mockPageId: "org-select-form.ftl",
 });
 
 export type KcContext = NonNullable<
   ReturnType<typeof getKcContext>["kcContext"]
 >;
+
+export type Organization = {
+  [key: string]: {
+      name: string;
+      segment_identifier: string;
+  };
+};

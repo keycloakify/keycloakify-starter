@@ -17,6 +17,7 @@ const LoginUpdateProfile = lazy(() => import("./pages/LoginUpdateProfile"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
 const Info = lazy(() => import("./pages/Info"));
 const Error = lazy(() => import("./pages/Error"));
+const OrgSelectPage = lazy(() => import("./pages/OrgSelect"));
 
 // This is like adding classes to theme.properties
 // https://github.com/keycloak/keycloak/blob/11.0.3/themes/src/main/resources/theme/keycloak/login/theme.properties
@@ -121,6 +122,13 @@ export default function KcApp(props: { kcContext: KcContext }) {
               {...{ kcContext, i18n, classes, Template }}
               doUseDefaultCss={true}
             />;
+          case "org-select-form.ftl":
+            return (
+              <OrgSelectPage
+                {...{ kcContext, i18n, classes, Template }}
+                doUseDefaultCss={true}
+              />
+            );
           default:
             return (
               <Fallback
