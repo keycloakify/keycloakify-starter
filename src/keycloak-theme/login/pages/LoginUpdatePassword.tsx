@@ -6,7 +6,7 @@ import { useState, useEffect, FormEventHandler } from "react";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import { HeaderNode } from "../components/header-node";
 import { PasswordIcon } from "../components/icons/password";
-import { FormErrorMessage, Input } from "@chakra-ui/react";
+import { Button, FormErrorMessage, Input } from "@chakra-ui/react";
 import { SubmitInput } from "../components/submit-input";
 
 export default function LoginUpdatePassword(
@@ -167,9 +167,14 @@ export default function LoginUpdatePassword(
             {isAppInitiatedAction ? (
               <>
                 <SubmitInput type="submit" defaultValue={msgStr("doSubmit")} />
-                <button type="submit" name="cancel-aia" value="true">
+                <Button
+                  type="submit" name="cancel-aia" value="true"
+                  className={"h-11 w-full m-0 mt-4 text-bold"}
+                  size="md"
+                  colorScheme="gray"
+                >  
                   {msg("doCancel")}
-                </button>
+                </Button>
               </>
             ) : (
               <SubmitInput type="submit" />
