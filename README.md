@@ -12,7 +12,7 @@
 
 This repo constitutes an easily reusable setup for a Keycloak theme project OR for a Vite SPA React App that generates a
 Keycloak theme that goes along with it.  
-If you are only looking to create a Keycloak theme (and not a Keycloak theme and an App that share the same codebase) there are a lot of things that you can remove from this starter: [Please read this section of the README](#standalone-keycloak-theme).  
+If you are only looking to create a Keycloak theme (and not a Keycloak theme and an App that share the same codebase) there are a lot of things that you can remove from this starter: [Please read this section of the README](#i-only-want-a-keycloak-theme).  
 
 This starter is based on Vite. There is also [a Webpack based starter](https://github.com/keycloakify/keycloakify-starter-cra).  
 
