@@ -55,7 +55,7 @@ export const { getKcContext } = createGetKcContext<KcContextExtension>({
 					{
 						validators: {
 							options: {
-								options: ["male", "female", "non-binary", "transgender", "intersex", "non_communicated"]
+								options: ["male", "female", "non_binary", "prefer_not_to_say"]
 							}
 						},
 						// eslint-disable-next-line no-template-curly-in-string
