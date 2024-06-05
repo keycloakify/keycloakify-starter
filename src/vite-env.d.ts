@@ -1,6 +1,11 @@
 /// <reference types="vite/client" />
 
-declare module "*.md" {
-    const src: string;
-    export default src;
+import type { KcContext as KcContextLogin } from "./login/kcContext";
+import type { KcContext as KcContextAccount } from "./account/kcContext";
+
+
+declare global {
+	interface Window {
+		kcContext?: KcContextLogin | KcContextAccount;
+	}
 }

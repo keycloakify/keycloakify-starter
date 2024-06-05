@@ -1,36 +1,62 @@
-// Copy pasted from: https://github.com/InseeFrLab/keycloakify/blob/main/src/login/Template.tsx
+// Copy pasted from: https://github.com/keycloakify/keycloakify/blob/main/src/account/Template.tsx
 
-import { clsx } from "keycloakify/tools/clsx";
-import { usePrepareTemplate } from "keycloakify/lib/usePrepareTemplate";
-import { type TemplateProps } from "keycloakify/account/TemplateProps";
-import { useGetClassName } from "keycloakify/account/lib/useGetClassName";
-import type { KcContext } from "./kcContext";
-import type { I18n } from "./i18n";
+import { useEffect } from "react";
 import { assert } from "keycloakify/tools/assert";
+import { clsx } from "keycloakify/tools/clsx";
+import { useGetClassName } from "keycloakify/account/lib/useGetClassName";
+import { useInsertLinkTags } from "keycloakify/tools/useInsertLinkTags";
+import { useSetClassName } from "keycloakify/tools/useSetClassName";
+import type { TemplateProps } from "keycloakify/account/TemplateProps";
+import type { KcContext } from "./KcContext";
+import type { I18n } from "./i18n";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, active, classes, children } = props;
 
     const { getClassName } = useGetClassName({ doUseDefaultCss, classes });
 
-    const { msg, changeLocale, labelBySupportedLanguageTag, currentLanguageTag } = i18n;
+    const { msg, msgStr, getChangeLocalUrl, labelBySupportedLanguageTag, currentLanguageTag } = i18n;
 
     const { locale, url, features, realm, message, referrer } = kcContext;
 
-    const { isReady } = usePrepareTemplate({
-        "doFetchDefaultThemeResources": doUseDefaultCss,
-        "styles": [
-            `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`,
-            `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`,
-            `${url.resourcesPath}/css/account.css`
-        ],
-        "htmlClassName": getClassName("kcHtmlClass"),
-        "bodyClassName": clsx("admin-console", "user", getClassName("kcBodyClass")),
-        "htmlLangProperty": locale?.currentLanguageTag,
-        "documentTitle": i18n.msgStr("accountManagementTitle")
+    useEffect(() => {
+        document.title = msgStr("accountManagementTitle");
+    }, []);
+
+    useSetClassName({
+        qualifiedName: "html",
+        className: getClassName("kcHtmlClass")
     });
 
-    if (!isReady) {
+    useSetClassName({
+        qualifiedName: "body",
+        className: clsx("admin-console", "user", getClassName("kcBodyClass"))
+    });
+
+    useEffect(() => {
+        const { currentLanguageTag } = locale ?? {};
+
+        if (currentLanguageTag === undefined) {
+            return;
+        }
+
+        const html = document.querySelector("html");
+        assert(html !== null);
+        html.lang = currentLanguageTag;
+    }, []);
+
+    const { areAllStyleSheetsLoaded } = useInsertLinkTags({
+        componentOrHookName: "Template",
+        hrefs: !doUseDefaultCss
+            ? []
+            : [
+                  `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`,
+                  `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`,
+                  `${url.resourcesPath}/css/account.css`
+              ]
+    });
+
+    if (!areAllStyleSheetsLoaded) {
         return null;
     }
 
@@ -55,9 +81,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                             <ul>
                                                 {locale.supported.map(({ languageTag }) => (
                                                     <li key={languageTag} className="kc-dropdown-item">
-                                                        <a href="#" onClick={() => changeLocale(languageTag)}>
-                                                            {labelBySupportedLanguageTag[languageTag]}
-                                                        </a>
+                                                        <a href={getChangeLocalUrl(languageTag)}>{labelBySupportedLanguageTag[languageTag]}</a>
                                                     </li>
                                                 ))}
                                             </ul>
