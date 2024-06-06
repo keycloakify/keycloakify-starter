@@ -1,11 +1,13 @@
 import { Suspense, lazy } from "react";
+import type { PageProps } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
 import { useDownloadTerms } from "keycloakify/login";
-
+import Template from "keycloakify/login/Template";
 const Fallback = lazy(() => import("keycloakify/login/Fallback"));
-const Template = lazy(() => import("./Template"));
-const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
+const UserProfileFormFields = lazy(() => import("keycloakify/login/UserProfileFormFields"));
+
+const classes = {} satisfies PageProps["classes"];
 
 export default function KcApp(props: { kcContext: KcContext }) {
     const { kcContext } = props;
@@ -15,12 +17,14 @@ export default function KcApp(props: { kcContext: KcContext }) {
     useDownloadTerms({
         kcContext,
         downloadTermMarkdown: async ({ currentLanguageTag }) => {
-
             const termsFileName = (() => {
                 switch (currentLanguageTag) {
-                    case "fr": return "fr.md";
-                    case "es": return "es.md";
-                    default: return "en.md";
+                    case "fr":
+                        return "fr.md";
+                    case "es":
+                        return "es.md";
+                    default:
+                        return "en.md";
                 }
             })();
 
@@ -28,7 +32,6 @@ export default function KcApp(props: { kcContext: KcContext }) {
             const response = await fetch(`${import.meta.env}terms/${termsFileName}`);
 
             return response.text();
-
         }
     });
 
@@ -41,15 +44,18 @@ export default function KcApp(props: { kcContext: KcContext }) {
             {(() => {
                 switch (kcContext.pageId) {
                     default:
-                        return <Fallback
-                            {...{
-                                kcContext,
-                                i18n,
-                                Template,
-                                UserProfileFormFields
-                            }}
-                            doUseDefaultCss={true}
-                        />
+                        return (
+                            <Fallback
+                                {...{
+                                    kcContext,
+                                    i18n,
+                                    classes,
+                                    Template,
+                                    UserProfileFormFields
+                                }}
+                                doUseDefaultCss={true}
+                            />
+                        );
                 }
             })()}
         </Suspense>

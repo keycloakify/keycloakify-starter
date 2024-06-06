@@ -5011,10 +5011,10 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-keycloakify@10.0.0-rc.31:
-  version "10.0.0-rc.31"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0-rc.31.tgz#4ccd4887de0f759ff91f5765a9011c77fbc2230f"
-  integrity sha512-UMDtVq4jxlihKPnp2OMo2FXTlAEl0PpdN8Bbk0yBxvxgvPuDXazWM2smi4tr48aTLGhx/fWdiyw1mvsOlcFvPA==
+keycloakify@10.0.0-rc.33:
+  version "10.0.0-rc.33"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0-rc.33.tgz#2a522facaf3138e7c9b699e95ef45cfc73ab0296"
+  integrity sha512-rByUFHqsSQ1P9ZsnbCtB02rHfF38J4+dV0gr/oArAviLt6NauO2r3KoRKMtkeT/1OKCvkthvK7cloFWEjBDiBQ==
   dependencies:
     react-markdown "^5.0.3"
     tsafe "^1.6.6"
@@ -5773,6 +5773,11 @@ prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
+
+prettier@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.3.1.tgz#e68935518dd90bb7ec4821ba970e68f8de16e1ac"
+  integrity sha512-7CAwy5dRsxs8PHXT3twixW9/OEll8MLE0VRPCJyl7CkS6VHGPSlsVaWTiASPTyGyYRyApxlaWTzwUxVNrhcwDg==
 
 prettier@^3.1.1:
   version "3.2.5"

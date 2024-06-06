@@ -1,11 +1,11 @@
 import type { DeepPartial } from "keycloakify/tools/DeepPartial";
-import type { KcContext } from "./kcContext";
+import type { KcContext } from "./KcContext";
 import KcApp from "./KcApp";
 import { createGetKcContextMock } from "keycloakify/login";
 import type {
     KcContextExtraProperties,
     KcContextExtraPropertiesPerPage
-} from "./kcContext";
+} from "./KcContext";
 
 const kcContextExtraProperties: KcContextExtraProperties = {};
 const kcContextExtraPropertiesPerPage: KcContextExtraPropertiesPerPage = {};
@@ -17,10 +17,14 @@ export const { getKcContextMock } = createGetKcContextMock({
     overridesPerPage: {}
 });
 
-export function createPageStory<PageId extends KcContext["pageId"]>(params: { pageId: PageId }) {
+export function createPageStory<PageId extends KcContext["pageId"]>(params: {
+    pageId: PageId;
+}) {
     const { pageId } = params;
 
-    function PageStory(props: { kcContext?: DeepPartial<Extract<KcContext, { pageId: PageId }>> }) {
+    function PageStory(props: {
+        kcContext?: DeepPartial<Extract<KcContext, { pageId: PageId }>>;
+    }) {
         const { kcContext: overrides } = props;
 
         const kcContextMock = getKcContextMock({
@@ -37,4 +41,3 @@ export function createPageStory<PageId extends KcContext["pageId"]>(params: { pa
 
     return { PageStory };
 }
-
