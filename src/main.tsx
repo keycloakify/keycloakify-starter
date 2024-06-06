@@ -2,17 +2,19 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode, lazy, Suspense } from "react";
 
-const KcLoginThemeApp = lazy(() => import("./login/KcApp"));
-const KcAccountThemeApp = lazy(() => import("./account/KcApp"));
+// The following block can be uncommented to test a specific page with `yarn dev`
+/*
+import { getKcContextMock } from "./login/PageStory";
 
-
-// NOTE: This is just to test a specific page when you run `yarn dev`
-// however the recommended way to develope is to use the Storybook
-if (window.kcContext === undefined) {
-    window.kcContext = (await import("./login/PageStory")).getKcContextMock({
+if (import.meta.env.DEV) {
+    window.kcContext = getKcContextMock({
         pageId: "register.ftl"
     });
 }
+*/
+
+const KcLoginThemeApp = lazy(() => import("./login/KcApp"));
+const KcAccountThemeApp = lazy(() => import("./account/KcApp"));
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
@@ -30,3 +32,4 @@ createRoot(document.getElementById("root")!).render(
         </Suspense>
     </StrictMode>
 );
+

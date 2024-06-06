@@ -28,8 +28,9 @@ export default function KcApp(props: { kcContext: KcContext }) {
                 }
             })();
 
-            // The files are in the public directory.
-            const response = await fetch(`${import.meta.env}terms/${termsFileName}`);
+            // Dynamically downloading Markdown files from public/terms/[currentLanguage].md
+            // Replace theses files by your organization's terms of service.
+            const response = await fetch(`${import.meta.env.BASE_URL}terms/${termsFileName}`);
 
             return response.text();
         }
