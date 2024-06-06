@@ -37,3 +37,12 @@ export function createPageStory<PageId extends KcContext["pageId"]>(params: {
 
     return { PageStory };
 }
+
+export const parameters = {
+    viewMode: "story",
+    previewTabs: {
+        "storybook/docs/panel": {
+            hidden: true
+        }
+    }
+};

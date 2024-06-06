@@ -32,12 +32,11 @@ export function createPageStory<PageId extends KcContext["pageId"]>(params: {
             overrides
         });
 
-        return (
-            <>
-                <KcApp kcContext={kcContextMock} />
-            </>
-        );
+        return <KcApp kcContext={kcContextMock} />;
     }
 
     return { PageStory };
 }
+
+export const parameters = {
+};
