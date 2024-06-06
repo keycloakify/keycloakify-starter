@@ -37,6 +37,3 @@ export function createPageStory<PageId extends KcContext["pageId"]>(params: {
 
     return { PageStory };
 }
-
-export const parameters = {
-};

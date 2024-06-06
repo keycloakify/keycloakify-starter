@@ -40,3 +40,24 @@ of some pages use the command:
 ```bash
 npx keycloakify eject-page
 ```
+
+# GitHub Actions
+
+The starter comes with a GitHub Actions workflow that builds the theme and publishes 
+the jars [as GitHub releases artifacts](https://github.com/keycloakify/keycloakify-starter/releases/tag/v7.1.0).  
+
+# Removing the account theme
+
+If you don't need to customize [the account theme pages](https://storybook.keycloakify.dev/?path=/story/account-account--default).  
+You can remove the `src/account` directory and make the necessary changes in `src/main.tsx` and `src/vite-env.d.ts`.  
+This will significantly reduce the the size of the jar and the build time.  
+
+# Email theme
+
+Keycloakify lets you bundle an email theme however customization can't be made with React yet.  
+It's just a regular Keycloak theme.  
+
+```bash
+npx keycloakify initialize-email-theme
+```
+

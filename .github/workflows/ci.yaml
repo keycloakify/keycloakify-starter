@@ -11,11 +11,10 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
             - uses: bahmutov/npm-install@v1
-            - run: yarn build
-            - run: npx keycloakify
+            - run: yarn build-keycloak-theme
 
     check_if_version_upgraded:
         name: Check if version upgrade
@@ -39,14 +38,11 @@ jobs:
         # We create a release only if the version have been upgraded and we are on a default branch
         if: needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true' && github.event_name == 'push'
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
             - uses: bahmutov/npm-install@v1
-            - run: yarn build
-            - run: npx keycloakify
-            - run: mv dist_keycloak/target/retrocompat-*.jar retrocompat-keycloak-theme.jar
-            - run: mv dist_keycloak/target/*.jar keycloak-theme.jar
-            - uses: softprops/action-gh-release@v1
+            - run: yarn build-keycloak-theme
+            - uses: softprops/action-gh-release@v2
               with:
                   name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
                   tag_name: v${{ needs.check_if_version_upgraded.outputs.to_version }}
@@ -54,7 +50,8 @@ jobs:
                   generate_release_notes: true
                   draft: false
                   files: |
-                      retrocompat-keycloak-theme.jar
-                      keycloak-theme.jar
+                      dist_keycloak/keycloak-theme-for-kc-21-and-below.jar
+                      dist_keycloak/keycloak-theme-for-kc-23.jar
+                      dist_keycloak/keycloak-theme-for-kc-24-and-above.jar
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

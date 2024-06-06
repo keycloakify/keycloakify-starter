@@ -10,7 +10,7 @@
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
-        "build-keycloak-theme": "yarn build && keycloakify",
+        "build-keycloak-theme": "yarn build && keycloakify build",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
         "format": "npx prettier . --write"
@@ -18,7 +18,7 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "keycloakify": "10.0.0-rc.33",
+        "keycloakify": "10.0.0-rc.34",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
