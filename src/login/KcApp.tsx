@@ -16,23 +16,26 @@ export default function KcApp(props: { kcContext: KcContext }) {
 
     useDownloadTerms({
         kcContext,
-        downloadTermMarkdown: async ({ currentLanguageTag }) => {
-            const termsFileName = (() => {
-                switch (currentLanguageTag) {
-                    case "fr":
-                        return "fr.md";
-                    case "es":
-                        return "es.md";
-                    default:
-                        return "en.md";
-                }
-            })();
+        downloadTermsMarkdown: async ({ currentLanguageTag }) => {
+            let termsLanguageTag = currentLanguageTag;
+            let termsFileName: string;
 
-            // Dynamically downloading Markdown files from public/terms/[currentLanguage].md
-            // Replace theses files by your organization's terms of service.
-            const response = await fetch(`${import.meta.env.BASE_URL}terms/${termsFileName}`);
+            switch (currentLanguageTag) {
+                case "fr":
+                    termsFileName = "fr.md";
+                    break;
+                case "es":
+                    termsFileName = "es.md";
+                    break;
+                default:
+                    termsFileName = "en.md";
+                    termsLanguageTag = "en";
+                    break;
+            }
 
-            return response.text();
+            const termsMarkdown = await fetch(`${import.meta.env.BASE_URL}terms/${termsFileName}`).then(r => r.text());
+
+            return { termsMarkdown, termsLanguageTag };
         }
     });
 

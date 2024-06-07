@@ -33,4 +33,3 @@ createRoot(document.getElementById("root")!).render(
         </Suspense>
     </StrictMode>
 );
-

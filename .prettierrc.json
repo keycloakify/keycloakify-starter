@@ -14,7 +14,8 @@
                 "**/account/pages/*.tsx",
                 "**/login/Template.tsx",
                 "**/account/Template.tsx",
-                "**/login/UserProfileFormFields.tsx"
+                "**/login/UserProfileFormFields.tsx",
+                "KcApp.tsx"
             ],
             "options": {
                 "printWidth": 150
