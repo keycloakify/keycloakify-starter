@@ -76,9 +76,8 @@ You'll need to apply theses changes to the `src/main.tsx` file:
                          return <KcLoginThemeApp kcContext={window.kcContext} />;
 -                    case "account":
 -                        return <KcAccountThemeApp kcContext={window.kcContext} />;
-                     case undefined:
-                         return <h1>No Keycloak Context</h1>;
                  }
+                 return <h1>No Keycloak Context</h1>;
              })()}
          </Suspense>
      </StrictMode>
