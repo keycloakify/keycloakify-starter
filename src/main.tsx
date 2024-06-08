@@ -27,9 +27,8 @@ createRoot(document.getElementById("root")!).render(
                         return <KcLoginThemeApp kcContext={window.kcContext} />;
                     case "account":
                         return <KcAccountThemeApp kcContext={window.kcContext} />;
-                    case undefined:
-                        return <h1>No Keycloak Context</h1>;
                 }
+                return <h1>No Keycloak Context</h1>;
             })()}
         </Suspense>
     </StrictMode>
