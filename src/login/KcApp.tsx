@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import type { PageProps } from "keycloakify/login";
+import type { ClassKey } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
 import { useDownloadTerms } from "keycloakify/login";
@@ -7,7 +7,7 @@ import Template from "keycloakify/login/Template";
 const Fallback = lazy(() => import("keycloakify/login/Fallback"));
 const UserProfileFormFields = lazy(() => import("keycloakify/login/UserProfileFormFields"));
 
-const classes = {} satisfies PageProps["classes"];
+const classes = {} satisfies { [key in ClassKey]?: string };
 
 export default function KcApp(props: { kcContext: KcContext }) {
     const { kcContext } = props;
