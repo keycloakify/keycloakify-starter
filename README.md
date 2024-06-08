@@ -13,7 +13,7 @@ git clone https://github.com/keycloakify/keycloakify-starter
 cd keycloakify-starter
 yarn install
 # Generate the dist_keycloak/.jar file that you can import in Keycloak
-yarn build-keycloak-theme 
+yarn build-keycloak-theme
 ```
 
 # Storybook
@@ -44,23 +44,53 @@ npx keycloakify eject-page
 
 The starter comes with a generic GitHub Actions workflow that builds the theme and publishes
 the jars [as GitHub releases artifacts](https://github.com/keycloakify/keycloakify-starter/releases/tag/v7.1.0).  
-To release a new version **just update the `package.json` version and push**.  
+To release a new version **just update the `package.json` version and push**.
 
 To enable the workflow go to your fork of this repository on GitHub then navigate to:
-`Settings` > `Actions` > `Workflow permissions`, select `Read and write permissions`.  
+`Settings` > `Actions` > `Workflow permissions`, select `Read and write permissions`.
+
+# Email theme
+
+Keycloakify lets you bundle an email theme however customization can't be made with React yet.  
+To initialize the email theme run:
+
+```bash
+npx keycloakify initialize-email-theme
+```
 
 # Removing the account theme
 
 If you don't need to customize [the account theme pages](https://storybook.keycloakify.dev/?path=/story/account-account--default).  
 You can remove the `src/account` directory.  
-This will significantly reduce the the size of the jar and the build time.  
-Don't forget to update `src/main.tsx` and `src/vite-env.d.ts`.
+This will significantly reduce the the size of the jar and the build time.
 
-# Email theme
+You'll need to apply theses changes to the `src/main.tsx` file:
 
-Keycloakify lets you bundle an email theme however customization can't be made with React yet.  
-To initialize the email theme run:  
-
-```bash
-npx keycloakify initialize-email-theme
+```diff
+ createRoot(document.getElementById("root")!).render(
+     <StrictMode>
+         <Suspense>
+             {(() => {
+                 switch (window.kcContext?.themeType) {
+                     case "login":
+                         return <KcLoginThemeApp kcContext={window.kcContext} />;
+-                    case "account":
+-                        return <KcAccountThemeApp kcContext={window.kcContext} />;
+                     case undefined:
+                         return <h1>No Keycloak Context</h1>;
+                 }
+             })()}
+         </Suspense>
+     </StrictMode>
+ );
+ 
+ declare global {
+     interface Window {
+         kcContext?:
+             | import("./login/KcContext").KcContext
+-            | import("./account/KcContext").KcContext;
+     }
+ }
 ```
+
+Don't forget to update `src/main.tsx` and `src/vite-env.d.ts`.

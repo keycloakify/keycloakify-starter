@@ -9,7 +9,8 @@ import { getKcContextMock } from "./login/PageStory";
 
 if (import.meta.env.DEV) {
     window.kcContext = getKcContextMock({
-        pageId: "register.ftl"
+        pageId: "register.ftl",
+        overrides: {}
     });
 }
 */
@@ -33,3 +34,11 @@ createRoot(document.getElementById("root")!).render(
         </Suspense>
     </StrictMode>
 );
+
+declare global {
+    interface Window {
+        kcContext?:
+            | import("./login/KcContext").KcContext
+            | import("./account/KcContext").KcContext;
+    }
+}
