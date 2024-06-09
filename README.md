@@ -18,6 +18,8 @@ yarn build-keycloak-theme
 
 # Storybook
 
+Spin up a test environment for your Keycloak pages.  
+
 ```bash
 npx keycloakify add-story # Select the pages you want to add stories for
 yarn storybook # Start Storybook
@@ -25,7 +27,8 @@ yarn storybook # Start Storybook
 
 # Test in a real Keycloak environment
 
-Test your theme in a local Keycloak docker container.
+Test your theme in a local Keycloak docker container.  
+You need to have Docker running. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) if you don't have it.  
 
 ```bash
 npx keycloakify start-keycloak
