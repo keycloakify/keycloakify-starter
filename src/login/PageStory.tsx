@@ -3,16 +3,22 @@ import type { KcContext } from "./KcContext";
 import KcApp from "./KcApp";
 import { createGetKcContextMock } from "keycloakify/login/KcContext";
 import type {
-    KcContextExtraProperties,
-    KcContextExtraPropertiesPerPage
+    KcContextExtension,
+    KcContextExtensionPerPage
 } from "./KcContext";
+import { themeNames, kcEnvDefaults } from "../kc.gen";
 
-const kcContextExtraProperties: KcContextExtraProperties = {};
-const kcContextExtraPropertiesPerPage: KcContextExtraPropertiesPerPage = {};
+const kcContextExtension: KcContextExtension = {
+    themeName: themeNames[0],
+    properties: {
+        ...kcEnvDefaults
+    }
+};
+const kcContextExtensionPerPage: KcContextExtensionPerPage = {};
 
 export const { getKcContextMock } = createGetKcContextMock({
-    kcContextExtraProperties,
-    kcContextExtraPropertiesPerPage,
+    kcContextExtension,
+    kcContextExtensionPerPage,
     overrides: {},
     overridesPerPage: {}
 });

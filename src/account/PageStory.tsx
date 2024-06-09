@@ -2,17 +2,23 @@ import type { DeepPartial } from "keycloakify/tools/DeepPartial";
 import type { KcContext } from "./KcContext";
 import { createGetKcContextMock } from "keycloakify/account/KcContext";
 import type {
-    KcContextExtraProperties,
-    KcContextExtraPropertiesPerPage
+    KcContextExtension,
+    KcContextExtensionPerPage
 } from "./KcContext";
 import KcApp from "./KcApp";
+import { themeNames, kcEnvDefaults } from "../kc.gen";
 
-const kcContextExtraProperties: KcContextExtraProperties = {};
-const kcContextExtraPropertiesPerPage: KcContextExtraPropertiesPerPage = {};
+const kcContextExtension: KcContextExtension = {
+    themeName: themeNames[0],
+    properties: {
+        ...kcEnvDefaults
+    }
+};
+const kcContextExtensionPerPage: KcContextExtensionPerPage = {};
 
 export const { getKcContextMock } = createGetKcContextMock({
-    kcContextExtraProperties,
-    kcContextExtraPropertiesPerPage,
+    kcContextExtension,
+    kcContextExtensionPerPage,
     overrides: {},
     overridesPerPage: {}
 });

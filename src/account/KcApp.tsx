@@ -1,20 +1,11 @@
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import type { ClassKey } from "keycloakify/account";
 import type { KcContext } from "./KcContext";
-import { useI18n } from "./i18n";
+import Fallback from "keycloakify/account/Fallback";
 import Template from "keycloakify/account/Template";
-const Fallback = lazy(() => import("keycloakify/account/Fallback"));
-
-const classes = {} satisfies { [key in ClassKey]?: string };
 
 export default function KcApp(props: { kcContext: KcContext }) {
     const { kcContext } = props;
-
-    const i18n = useI18n({ kcContext });
-
-    if (i18n === null) {
-        return null;
-    }
 
     return (
         <Suspense>
@@ -23,12 +14,9 @@ export default function KcApp(props: { kcContext: KcContext }) {
                     default:
                         return (
                             <Fallback
-                                {...{
-                                    kcContext,
-                                    i18n,
-                                    classes,
-                                    Template
-                                }}
+                                kcContext={kcContext}
+                                classes={classes}
+                                Template={Template}
                                 doUseDefaultCss={true}
                             />
                         );
@@ -37,3 +25,5 @@ export default function KcApp(props: { kcContext: KcContext }) {
         </Suspense>
     );
 }
+
+const classes = {} satisfies { [key in ClassKey]?: string };

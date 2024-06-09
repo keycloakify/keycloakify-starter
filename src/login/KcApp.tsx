@@ -1,18 +1,15 @@
 import { Suspense, lazy } from "react";
 import type { ClassKey } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
-import { useI18n } from "./i18n";
 import { useDownloadTerms } from "keycloakify/login";
+import Fallback from "keycloakify/login/Fallback";
 import Template from "keycloakify/login/Template";
-const Fallback = lazy(() => import("keycloakify/login/Fallback"));
 const UserProfileFormFields = lazy(() => import("keycloakify/login/UserProfileFormFields"));
 
-const classes = {} satisfies { [key in ClassKey]?: string };
+const doMakeUserConfirmPassword = true;
 
 export default function KcApp(props: { kcContext: KcContext }) {
     const { kcContext } = props;
-
-    const i18n = useI18n({ kcContext });
 
     useDownloadTerms({
         kcContext,
@@ -39,10 +36,6 @@ export default function KcApp(props: { kcContext: KcContext }) {
         }
     });
 
-    if (i18n === null) {
-        return null;
-    }
-
     return (
         <Suspense>
             {(() => {
@@ -50,14 +43,12 @@ export default function KcApp(props: { kcContext: KcContext }) {
                     default:
                         return (
                             <Fallback
-                                {...{
-                                    kcContext,
-                                    i18n,
-                                    classes,
-                                    Template,
-                                    UserProfileFormFields
-                                }}
+                                kcContext={kcContext}
+                                classes={classes}
+                                Template={Template}
                                 doUseDefaultCss={true}
+                                UserProfileFormFields={UserProfileFormFields}
+                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                             />
                         );
                 }
@@ -65,3 +56,5 @@ export default function KcApp(props: { kcContext: KcContext }) {
         </Suspense>
     );
 }
+
+const classes = {} satisfies { [key in ClassKey]?: string };
