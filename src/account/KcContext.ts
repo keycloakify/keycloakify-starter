@@ -9,7 +9,4 @@ export type KcContextExtension = {
 
 export type KcContextExtensionPerPage = {};
 
-export type KcContext = ExtendKcContext<
-    KcContextExtension,
-    KcContextExtensionPerPage
->;
+export type KcContext = ExtendKcContext<KcContextExtension, KcContextExtensionPerPage>;

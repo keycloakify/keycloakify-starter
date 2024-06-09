@@ -5,7 +5,9 @@ import { useDownloadTerms } from "keycloakify/login";
 import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "keycloakify/login/Template";
-const UserProfileFormFields = lazy(() => import("keycloakify/login/UserProfileFormFields"));
+const UserProfileFormFields = lazy(
+    () => import("keycloakify/login/UserProfileFormFields")
+);
 
 const doMakeUserConfirmPassword = true;
 
@@ -31,7 +33,9 @@ export default function KcApp(props: { kcContext: KcContext }) {
                     break;
             }
 
-            const termsMarkdown = await fetch(`${import.meta.env.BASE_URL}terms/${termsFileName}`).then(r => r.text());
+            const termsMarkdown = await fetch(
+                `${import.meta.env.BASE_URL}terms/${termsFileName}`
+            ).then(r => r.text());
 
             return { termsMarkdown, termsLanguageTag };
         }
