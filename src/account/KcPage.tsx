@@ -1,11 +1,14 @@
 import { Suspense } from "react";
 import type { ClassKey } from "keycloakify/account";
 import type { KcContext } from "./KcContext";
-import Fallback from "keycloakify/account/Fallback";
+import { useI18n } from "./i18n";
+import DefaultPage from "keycloakify/account/DefaultPage";
 import Template from "keycloakify/account/Template";
 
 export default function KcApp(props: { kcContext: KcContext }) {
     const { kcContext } = props;
+
+    const { i18n } = useI18n({ kcContext });
 
     return (
         <Suspense>
@@ -13,8 +16,9 @@ export default function KcApp(props: { kcContext: KcContext }) {
                 switch (kcContext.pageId) {
                     default:
                         return (
-                            <Fallback
+                            <DefaultPage
                                 kcContext={kcContext}
+                                i18n={i18n}
                                 classes={classes}
                                 Template={Template}
                                 doUseDefaultCss={true}

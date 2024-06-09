@@ -15,8 +15,8 @@ if (import.meta.env.DEV) {
 }
 */
 
-const KcLoginThemeApp = lazy(() => import("./login/KcApp"));
-const KcAccountThemeApp = lazy(() => import("./account/KcApp"));
+const KcLoginThemePage = lazy(() => import("./login/KcPage"));
+const KcAccountThemePage = lazy(() => import("./account/KcPage"));
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
@@ -24,9 +24,9 @@ createRoot(document.getElementById("root")!).render(
             {(() => {
                 switch (window.kcContext?.themeType) {
                     case "login":
-                        return <KcLoginThemeApp kcContext={window.kcContext} />;
+                        return <KcLoginThemePage kcContext={window.kcContext} />;
                     case "account":
-                        return <KcAccountThemeApp kcContext={window.kcContext} />;
+                        return <KcAccountThemePage kcContext={window.kcContext} />;
                 }
                 return <h1>No Keycloak Context</h1>;
             })()}
