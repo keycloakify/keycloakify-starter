@@ -24,7 +24,6 @@
     },
     "devDependencies": {
         "storybook": "^8.1.6",
-        "@storybook/blocks": "^8.1.6",
         "@storybook/react": "^8.1.6",
         "@storybook/react-vite": "^8.1.6",
         "@types/react": "^18.2.43",
