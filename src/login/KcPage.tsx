@@ -11,7 +11,7 @@ const UserProfileFormFields = lazy(
 
 const doMakeUserConfirmPassword = true;
 
-export default function KcApp(props: { kcContext: KcContext }) {
+export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
 
     useDownloadTerms({
