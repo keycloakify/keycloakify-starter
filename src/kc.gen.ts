@@ -14,7 +14,7 @@ export const themeNames: ThemeName[] = ["keycloakify-starter"];
 
 export type KcEnvName = never;
 
-export const KcEnvNames: KcEnvName[] = [];
+export const kcEnvNames: KcEnvName[] = [];
 
 export const kcEnvDefaults: Record<KcEnvName, string> = {};
 
