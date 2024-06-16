@@ -4139,10 +4139,10 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-keycloakify@10.0.0-rc.67:
-  version "10.0.0-rc.67"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0-rc.67.tgz#0796d0bd9a69df47b3994e738aa8ae66ae0db14d"
-  integrity sha512-NpsbVbGqynyd35awZ7bYHMPF+4RVf7MhztqIDy1AMpjP54ZJjm4xENuM/jD93HspRb2q5gHLr7wM3TdDCkCbkQ==
+keycloakify@10.0.0-rc.70:
+  version "10.0.0-rc.70"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0-rc.70.tgz#4d502fa7f1bb69bb9ba5da00fc3e9bcdc4ac0c20"
+  integrity sha512-MIXBP/g1OrL8tzX+DeCfyBExHbF4ZvhOhkckx1BIHAV/FKe1lcenKyikQsVHLLw6Hbayg5Dzq61J8greakgj5A==
   dependencies:
     react-markdown "^5.0.3"
     tsafe "^1.6.6"
