@@ -25,6 +25,11 @@ yarn install
 
 # Building the theme
 
+You need to have Maven installed to build the theme (The `mvn` command must be in the PATH).
+- On macOS: `brew install maven`
+- On Debian/Ubuntu: `sudo apt-get install maven`
+- On Windows: `choco install openjdk` and `choco install maven` (Or download from [here](https://maven.apache.org/download.cgi))
+
 ```bash
 npm run build-keycloak-theme
 ```
