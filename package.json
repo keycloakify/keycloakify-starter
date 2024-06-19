@@ -1,58 +1,42 @@
 {
-  "name": "keycloakify-starter",
-  "homepage": "https://starter.keycloakify.dev",
-  "version": "6.1.10",
-  "description": "A starter/demo project for keycloakify",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/codegouvfr/keycloakify-starter.git"
-  },
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "build-keycloak-theme": "yarn build && keycloakify",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
-  },
-  "author": "u/garronej",
-  "license": "MIT",
-  "keywords": [],
-  "dependencies": {
-    "evt": "^2.5.7",
-    "keycloakify": "^9.6.6",
-    "oidc-spa": "^4.6.2",
-    "powerhooks": "^1.0.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tsafe": "^1.6.6",
-    "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "@storybook/addon-essentials": "^8.0.2",
-    "@storybook/addon-interactions": "^8.0.2",
-    "@storybook/addon-links": "^8.0.2",
-    "@storybook/addon-onboarding": "^8.0.2",
-    "@storybook/blocks": "^8.0.2",
-    "@storybook/react": "^8.0.2",
-    "@storybook/react-vite": "^8.0.2",
-    "@storybook/test": "^8.0.2",
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "eslint-plugin-storybook": "^0.8.0",
-    "storybook": "^8.0.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8",
-    "vite-plugin-commonjs": "^0.10.1"
-  },
-  "_comment": "See https://github.com/storybookjs/storybook/issues/22431#issuecomment-1630086092",
-  "resolutions": {
-    "jackspeak": "2.1.1"
-  }
+    "name": "keycloakify-starter",
+    "version": "6.1.10",
+    "description": "Starter for Keycloakify 10",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
+    },
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "build-keycloak-theme": "npm run build && keycloakify build",
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "storybook build",
+        "format": "npx prettier . --write"
+    },
+    "license": "MIT",
+    "keywords": [],
+    "dependencies": {
+        "keycloakify": "10.0.0-rc.72",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "storybook": "^8.1.6",
+        "@storybook/react": "^8.1.6",
+        "@storybook/react-vite": "^8.1.6",
+        "@types/react": "^18.2.43",
+        "@types/react-dom": "^18.2.17",
+        "@typescript-eslint/eslint-plugin": "^6.14.0",
+        "@typescript-eslint/parser": "^6.14.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "eslint": "^8.55.0",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.5",
+        "eslint-plugin-storybook": "^0.8.0",
+        "prettier": "3.3.1",
+        "typescript": "^5.2.2",
+        "vite": "^5.0.8"
+    }
 }
