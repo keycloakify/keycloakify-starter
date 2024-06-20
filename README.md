@@ -39,7 +39,7 @@ You can customize this behavior, see documentation [here](https://docs.keycloaki
 # GitHub Actions
 
 The starter comes with a generic GitHub Actions workflow that builds the theme and publishes
-the jars [as GitHub releases artifacts](https://github.com/keycloakify/keycloakify-starter/releases/tag/v7.1.0).  
+the jars [as GitHub releases artifacts](https://github.com/keycloakify/keycloakify-starter/releases/tag/v7.0.1).  
 To release a new version **just update the `package.json` version and push**.
 
 To enable the workflow go to your fork of this repository on GitHub then navigate to:
