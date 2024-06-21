@@ -13,7 +13,7 @@
         "build-keycloak-theme": "npm run build && keycloakify build",
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
-        "format": "npx prettier . --write"
+        "format": "prettier . --write"
     },
     "license": "MIT",
     "keywords": [],
