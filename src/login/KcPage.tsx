@@ -17,27 +17,25 @@ export default function KcPage(props: { kcContext: KcContext }) {
     useDownloadTerms({
         kcContext,
         downloadTermsMarkdown: async ({ currentLanguageTag }) => {
-            let termsLanguageTag = currentLanguageTag;
-            let termsFileName: string;
+            for (const languageTag of [currentLanguageTag, "en"]) {
+                const response = await fetch(
+                    `${import.meta.env.BASE_URL}terms/${languageTag}.md`
+                );
 
-            switch (currentLanguageTag) {
-                case "fr":
-                    termsFileName = "fr.md";
-                    break;
-                case "es":
-                    termsFileName = "es.md";
-                    break;
-                default:
-                    termsFileName = "en.md";
-                    termsLanguageTag = "en";
-                    break;
+                if (!response.ok) {
+                    continue;
+                }
+
+                return {
+                    termsMarkdown: await response.text(),
+                    termsLanguageTag: languageTag
+                };
             }
 
-            const termsMarkdown = await fetch(
-                `${import.meta.env.BASE_URL}terms/${termsFileName}`
-            ).then(r => r.text());
-
-            return { termsMarkdown, termsLanguageTag };
+            return {
+                termsMarkdown: "No terms found",
+                termsLanguageTag: "en"
+            };
         }
     });
 
