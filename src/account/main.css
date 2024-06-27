@@ -1,0 +1,37 @@
+body.kcBodyClass {
+    background: #F5F5F5;
+}
+
+.kcHeaderWrapperClass {
+    color: #b76142;
+    font-weight: bolder;
+}
+
+.kcFormCardClass {
+    border-top-color: #F5F5F5;
+    box-shadow: none;
+    background-color: #F5F5F5;
+}
+
+.kcInputClass {
+    border-radius: 2px;
+}
+
+.kcLabelClass {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.kcButtonClass {
+    height: 40px;
+    border-radius: 6px;
+}
+
+.pf-c-button.pf-m-primary {
+    background-color: #B76142;
+    color: white;
+}
+
+a {
+    color: #1677FF;
+}
