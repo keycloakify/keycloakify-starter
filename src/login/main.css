@@ -1,0 +1,89 @@
+body.kcBodyClass {
+    background: #F5F5F5;
+}
+
+.kcHeaderWrapperClass {
+    color: #b76142;
+    font-weight: bolder;
+}
+
+.kcFormCardClass {
+    border-top-color: #F5F5F5;
+    box-shadow: none;
+    background-color: #F5F5F5;
+}
+
+.kcInputClass {
+    border-radius: 2px;
+    border-color: #d9d9d9;
+    border-radius: 6px;
+    outline-color: #B76142;
+}
+
+.kcInputClass:hover {
+    border-color: #B76142;
+}
+
+.kcLabelClass {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.kcButtonClass {
+    height: 40px;
+    border-radius: 6px;
+}
+
+.pf-c-button:after {
+    border-bottom-color: #d9d9d9;
+    border-right-color: #d9d9d9;
+    border-top-color: #d9d9d9;
+    border-left: none;
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+}
+
+input[type="password"] {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+a {
+    color: #1677FF;
+}
+
+#kc-register {
+    background-color: #B76142;
+    height: 40px;
+    color: white;
+    border-radius: 6px;
+}
+
+.kcFormOptionsClass {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.kcFormOptionsClass a {
+    font-size: 14px;
+}
+
+#kc-info-wrapper {
+    background-color: #F5F5F5;
+    background: #F5F5F5;
+}
+
+.kcFormPasswordVisibilityIconShow {
+    color: #72767b;
+}
+
+a {
+    color: #1677FF;
+}
+
+.kcButtonPrimaryClass {
+    background-color: #b76142 !important;
+    color: white !important;
+}
