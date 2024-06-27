@@ -34,6 +34,7 @@ jobs:
                   branch: ${{ github.head_ref || github.ref }}
 
     create_github_release:
+        permissions: write-all
         runs-on: ubuntu-latest
         needs: check_if_version_upgraded
         if: needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true'
