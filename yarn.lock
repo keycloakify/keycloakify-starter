@@ -4441,6 +4441,11 @@ ohash@^1.1.3:
   resolved "https://registry.yarnpkg.com/ohash/-/ohash-1.1.3.tgz#f12c3c50bfe7271ce3fd1097d42568122ccdcf07"
   integrity sha512-zuHHiGTYTA1sYJ/wZN+t5HKZaH23i4yI1HMwbuXm24Nid7Dv0KcuRlKoNKS9UNfAVSBlnGLcuQrnOKWOZoEGaw==
 
+oidc-spa@^4.11.1:
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/oidc-spa/-/oidc-spa-4.11.1.tgz#f1c4ca9814d6b45d3166523c906771c6144f6eb5"
+  integrity sha512-JSG+ntXGrCtfEDkAgoDHxpL9XKisktX0N635m67oJCkuRJSEy/aJ3yP3vVanfOD0g64FdewicZf0DFwMKv+Mcg==
+
 on-finished@2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.4.1.tgz#58c8c44116e54845ad57f14ab10b03533184ac3f"
