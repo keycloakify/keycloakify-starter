@@ -9,8 +9,12 @@ import { getKcContextMock } from "./login/KcPageStory";
 
 if (import.meta.env.DEV) {
     window.kcContext = getKcContextMock({
-        pageId: "register.ftl",
-        overrides: {}
+        pageId: "login.ftl",
+        overrides: {
+            locale: {
+                currentLanguageTag: "ja"
+            }
+        }
     });
 }
 */

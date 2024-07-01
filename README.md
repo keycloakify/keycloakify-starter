@@ -1,3 +1,5 @@
+<img width="723" alt="image" src="https://github.com/user-attachments/assets/1b0dfad6-e6d8-448d-88e8-a18403ed4d7e">
+
 <p align="center">
     <i>🚀 <a href="https://keycloakify.dev">Keycloakify</a> v10 starter 🚀</i>
     <br/>
