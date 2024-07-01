@@ -4015,10 +4015,10 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-keycloakify@10.0.0-rc.97:
-  version "10.0.0-rc.97"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0-rc.97.tgz#7f76932d1a62a0558a3975ebfe7e35fa6fe20f1c"
-  integrity sha512-Ak5V2jGK1LzSMitdU9AWgEkhmnjrwrdrosWLcF8fjUBoDqxRhCVfCsZ9sIXMvHE8iknGeY6pCyyojbS5G/t7xw==
+keycloakify@10.0.0-rc.99:
+  version "10.0.0-rc.99"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0-rc.99.tgz#67f9d0f49d1efe1cc409ca29499017308a8bf1ea"
+  integrity sha512-h0lBcy9+GwgFaXsZ8Tx0XHapwQwkdLJCUscY40BqLfGeCnXTapWbJ5lcNfjgljYj68jCN409PtK965hvCvRSog==
   dependencies:
     tsafe "^1.6.6"
 
