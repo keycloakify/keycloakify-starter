@@ -1,0 +1,14 @@
+@import url(./assets/fonts/geist/index.css);
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body.kcBodyClass {
+    @apply bg-[url(./assets/img/background.jpg)] bg-no-repeat bg-center bg-fixed;
+    @apply font-geist;
+}
+
+.kcHeaderWrapperClass{
+    @apply text-3xl font-bold underline;
+}
