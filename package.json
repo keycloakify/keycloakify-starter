@@ -1,10 +1,10 @@
 {
-    "name": "keycloakify-starter",
+    "name": "keycloakify",
     "version": "0.0.0",
-    "description": "Starter for Keycloakify 10",
+    "description": "Wellcare Keycloak Theme",
     "repository": {
         "type": "git",
-        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
+        "url": "git://github.com/wellcare/keycloakify.git"
     },
     "type": "module",
     "scripts": {
