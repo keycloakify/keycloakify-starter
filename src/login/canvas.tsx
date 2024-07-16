@@ -3,8 +3,9 @@ import { useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import { MeshBasicMaterial, MirroredRepeatWrapping, PlaneGeometry, Texture } from 'three';
 import { DEG2RAD } from 'three/src/math/MathUtils.js';
+import warpTexture from "./assets/odessey1.jpg";
 
-const warp0 = '/img/odessey1.jpg';
+const warp0 = warpTexture;
 
 const MyComponent = ({  }) => {
   const warpTexture = useTexture(warp0);

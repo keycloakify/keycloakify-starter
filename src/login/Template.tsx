@@ -96,14 +96,14 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                               `);`
                           ].join("\n")
                       } as const
-                  ])
-            //...scripts.map(
-            //    script =>
-            //        ({
-            //            type: "text/javascript",
-            //            src: script
-            //        }) as const
-            //)
+                  ]),
+            ...scripts.map(
+                script =>
+                    ({
+                        type: "text/javascript",
+                        src: script
+                    }) as const
+            )
         ]
     });
 

@@ -17,7 +17,6 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "@react-spring/three": "^9.7.3",
         "@react-three/drei": "^9.108.4",
         "@react-three/fiber": "^8.16.8",
         "@react-three/postprocessing": "^2.16.2",
@@ -27,7 +26,6 @@
         "three": "^0.166.1"
     },
     "devDependencies": {
-        "storybook": "^8.1.10",
         "@storybook/react": "^8.1.10",
         "@storybook/react-vite": "^8.1.10",
         "@types/react": "^18.2.43",
@@ -40,6 +38,7 @@
         "eslint-plugin-react-refresh": "^0.4.5",
         "eslint-plugin-storybook": "^0.8.0",
         "prettier": "3.3.1",
+        "storybook": "^8.1.10",
         "typescript": "^5.2.2",
         "vite": "^5.0.8"
     }
