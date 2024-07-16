@@ -1,17 +1,40 @@
 body.kcBodyClass {
     background-image: none;
-    background: transparent;
+    background: black;
 }
 
 .kcLoginClass {
     padding: 0;
     position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#kc-header-wrapper {
+    padding: 0;
+    margin: 0;
+}
+
+#kc-form-login button {
+    background-color: hsl(0, 0%, 13%);
+    color: #fff;
+}
+
+.kcFormPasswordVisibilityButtonClass {
+
+    &::after {
+        border: none;
+        border: 1px solid #313131;
+    }
 }
 
 .d3 {
     position: absolute !important;
-    height: 100dvh !important;
-    width: 100dvh !important;
+    /*height: 100dvh !important;
+    width: 100dvh !important;*/
     z-index: -1 !important;
 }
 
