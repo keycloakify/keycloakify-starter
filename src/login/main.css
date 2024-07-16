@@ -1,0 +1,83 @@
+body.kcBodyClass {
+    background-image: none;
+    background: transparent;
+}
+
+.kcLoginClass {
+    padding: 0;
+    position: absolute;
+}
+
+.d3 {
+    position: absolute !important;
+    height: 100dvh !important;
+    width: 100dvh !important;
+    z-index: -1 !important;
+}
+
+div.kcFormCardClass.card-pf {
+    color: hsl(0, 0%, 85%);
+    border-radius: 8px;
+    border-color: orangered;
+    background-color: hsl(0, 0%, 13%);
+    /*border: 1px solid #525252;*/
+}
+
+.kcLocaleListItemClass {
+    background-color: hsl(0, 0%, 13%);
+
+    & a:hover {
+        background-color: hsl(0, 0%, 15%);
+    }
+}
+
+.pf-c-input-group {
+    --pf-c-input-group--BackgroundColor: none !important;
+}
+
+input.kcInputClass {
+    background-color: hsl(0, 0%, 13%);
+    color: hsl(0, 0%, 85%);
+    border: 1px solid #313131;
+    border-radius: 4px;
+}
+
+#kc-form-buttons {
+    & input[type="submit"] {
+        background-color: rgb(255, 94, 36);
+        color: #fff;
+        border: 0;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px 0;
+        width: 100%;
+
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: orangered;
+        }
+    }
+}
+
+#kc-info-wrapper {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+    border-radius: 8px;
+    background-color: #333333;
+}
+
+a.kc-social-item {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #e00000;
+    color: #3b3b3b;
+    text-decoration: none;
+    font-size: 16px;
+}
