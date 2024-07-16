@@ -1,35 +1,25 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useFrame, Canvas } from '@react-three/fiber';
-import { OrbitControls, useTexture } from '@react-three/drei';
+import { useEffect, useMemo, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
+import { useTexture } from '@react-three/drei';
 import { MeshBasicMaterial, MirroredRepeatWrapping, PlaneGeometry, Texture } from 'three';
-//import { DEG2RAD } from 'three/src/math/MathUtils';
-import { useSpring, animated } from '@react-spring/three';
 import { DEG2RAD } from 'three/src/math/MathUtils.js';
 
-//import PostProcessing from './post-processing';
-
 const warp0 = '/img/odessey1.jpg';
-//const warp1 = '/path/to/odessey1.jpg';
 
 const MyComponent = ({  }) => {
-  const [opacity, setOpacity] = useSpring(() => ({ value: 0 }));
   const warpTexture = useTexture(warp0);
   const [clonedTexture, setClonedTexture] = useState<Texture | undefined>(undefined);
-
+  
+  warpTexture.colorSpace = 'srgb';
+  warpTexture.wrapS = MirroredRepeatWrapping;
+  warpTexture.wrapT = MirroredRepeatWrapping;
   useEffect(() => {
-    if (warpTexture) {
-      warpTexture.colorSpace = 'srgb';
-      warpTexture.wrapS = MirroredRepeatWrapping;
-      warpTexture.wrapT = MirroredRepeatWrapping;
 
       const cloned = warpTexture.clone();
       cloned.colorSpace = 'srgb';
       cloned.wrapS = MirroredRepeatWrapping;
       cloned.wrapT = MirroredRepeatWrapping;
       setClonedTexture(cloned);
-
-      setOpacity({ value: 1, config: { duration: 750 } });
-    }
   }, [warpTexture]);
 
   const getWarpTexture = () => warpTexture;
@@ -84,7 +74,7 @@ const MyComponent = ({  }) => {
           {Array.from({ length: heightIterations }).map((_, i) => {
             const isOdd = i % 2 === 0;
             return (
-              <animated.mesh
+              <mesh
                 key={`left-${i}`}
                 position={[-gap + offset, height * i, 0]}
                 rotation-y={rotationInDegrees * DEG2RAD}
@@ -92,13 +82,13 @@ const MyComponent = ({  }) => {
               >
                 <primitive object={MyGeometry} />
                 <primitive object={LeftMaterial} opacity={1} />
-              </animated.mesh>
+              </mesh>
             );
           })}
           {Array.from({ length: heightIterations }).map((_, i) => {
             const isOdd = i % 2 === 0;
             return (
-              <animated.mesh
+              <mesh
                 key={`right-${i}`}
                 position={[gap - offset, height * i, 0]}
                 rotation-y={-rotationInDegrees * DEG2RAD}
@@ -107,8 +97,7 @@ const MyComponent = ({  }) => {
               >
                 <primitive object={MyGeometry} />
                 <primitive object={RightMaterial} opacity={1} />
-                {/*<meshBasicMaterial map={warpTexture} transparent opacity={opacity.value.get()} />*/}
-              </animated.mesh>
+              </mesh>
             );
           })}
         </group>

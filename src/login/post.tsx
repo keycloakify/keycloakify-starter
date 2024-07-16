@@ -28,7 +28,7 @@ const Scene = () => {
                 radialModulation={true}
                 modulationOffset={0}
             />
-            <BrightnessContrast brightness={-0.1} contrast={0.1} />
+            <BrightnessContrast brightness={0.05} contrast={0.3} />
             <DepthOfField
                 focusDistance={0}
                 focalLength={0.02}
