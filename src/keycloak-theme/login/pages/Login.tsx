@@ -65,6 +65,7 @@ export default function Login(
       const formattedDomain =
         "." + currentDomain.split(".").slice(-2).join(".");
       Cookies.set("invite_code", code, { domain: formattedDomain });
+      window.location.href = url.registrationUrl;
     }
   }, [window.location.search]);
 
