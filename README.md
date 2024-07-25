@@ -37,6 +37,18 @@ npm run build-keycloak-theme
 Note that by default Keycloakify generates multiple .jar files for different versions of Keycloak.  
 You can customize this behavior, see documentation [here](https://docs.keycloakify.dev/v/v10/targetting-specific-keycloak-versions).
 
+# Initializing the account theme
+
+```bash
+npx keycloakify initialize-account-theme
+```
+
+# Initializing the email theme
+
+```bash
+npx keycloakify initialize-email-theme
+```
+
 # GitHub Actions
 
 The starter comes with a generic GitHub Actions workflow that builds the theme and publishes
