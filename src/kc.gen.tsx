@@ -20,7 +20,9 @@ export const kcEnvNames: KcEnvName[] = [];
 
 export const kcEnvDefaults: Record<KcEnvName, string> = {};
 
-type KcContext = import("./login/KcContext").KcContext;
+type KcContext =
+    | import("./login/KcContext").KcContext
+    ;
 
 declare global {
     interface Window {
@@ -30,18 +32,22 @@ declare global {
 
 export const KcLoginPage = lazy(() => import("./login/KcPage"));
 
-export function KcPage(props: { kcContext: KcContext; fallback?: ReactNode }) {
+export function KcPage(
+    props: {
+        kcContext: KcContext;
+        fallback?: ReactNode;
+    }
+) {
     const { kcContext, fallback } = props;
     return (
         <Suspense fallback={fallback}>
             {(() => {
                 switch (kcContext.themeType) {
-                    case "login":
-                        return <KcLoginPage kcContext={kcContext} />;
+                    case "login": return <KcLoginPage kcContext={kcContext} />;
                 }
             })()}
         </Suspense>
-    );
+    )
 }
 
 /* prettier-ignore-end */
