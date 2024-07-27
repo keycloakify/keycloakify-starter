@@ -20,7 +20,7 @@ export const kcEnvNames: KcEnvName[] = [];
 
 export const kcEnvDefaults: Record<KcEnvName, string> = {};
 
-type KcContext =
+export type KcContext =
     | import("./login/KcContext").KcContext
     ;
 
@@ -47,7 +47,7 @@ export function KcPage(
                 }
             })()}
         </Suspense>
-    )
+    );
 }
 
 /* prettier-ignore-end */
