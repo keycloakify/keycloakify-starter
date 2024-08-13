@@ -1,9 +1,0 @@
-/* 
-If you use global CSS like we do here(not recommended) 
-Be mindful that the CSS of the login theme may clash with the CSS of the account theme in Storybook (and only in storybook).
-This is why I made sure to use .my-root-account-class instead of .my-root-class that is already used in the login theme.
-*/
-
-.my-root-account-class {
-	background: url(./assets/background.svg) no-repeat center center fixed;
-}
