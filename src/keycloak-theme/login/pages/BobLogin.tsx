@@ -105,14 +105,6 @@ export default function BobLogin(
             getClassName("kcButtonPrimaryClass")
           )}
         >
-          Logg inn med <b>sms</b>
-        </button>
-        <button
-          className={clsx(
-            getClassName("kcFormGroupClass"),
-            getClassName("kcButtonPrimaryClass")
-          )}
-        >
           Logg inn med <b>epost</b>
         </button>
       </div>

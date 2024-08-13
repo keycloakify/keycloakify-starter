@@ -25,7 +25,7 @@ export const Default: Story = {
               displayName: "Vipps",
               providerId: "vipps",
               loginUrl:
-                "http://localhost:8080/auth/realms/master/broker/vipps/endpoint",
+                "http://localhost:8080/auth/realms/BOB/broker/vipps/endpoint",
             },
           ],
         },

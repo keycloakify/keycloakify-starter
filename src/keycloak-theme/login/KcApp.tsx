@@ -32,6 +32,9 @@ const classes = {
   kcSignUpClass: "bob-signup",
   kcInfoAreaWrapperClass: "bob-info-area-wrapper",
   kcFormSocialAccountListLinkClass: "bob-link",
+  kcContainerClass: "bob-background",
+  kcFormSocialAccountContentClass: "bob-form-content-wrapper",
+  kcInputClass: "bob-input",
 } satisfies PageProps["classes"];
 
 export default function KcApp(props: { kcContext: KcContext }) {

@@ -67,18 +67,19 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
   return (
     <div className={getClassName("kcLoginClass")}>
+      <div className={getClassName("kcContainerClass")} />
       <div
         className={clsx(
           getClassName("kcFormCardClass")
           // displayWide && getClassName("kcFormCardAccountClass")
         )}
       >
-        <header className={getClassName("kcFormHeaderClass")}>
-          <div id="kc-header" className={getClassName("kcHeaderClass")}>
-            <img src={bobLogoSvgUrl} alt="BOB logo" height={60} />
-          </div>
-        </header>
         <div id="kc-content" className={getClassName("kcContentClass")}>
+          <header className={getClassName("kcFormHeaderClass")}>
+            <div id="kc-header" className={getClassName("kcHeaderClass")}>
+              <img src={bobLogoSvgUrl} alt="BOB logo" height={60} />
+            </div>
+          </header>
           <div
             id="kc-content-wrapper"
             className={getClassName("kcContentWrapperClass")}
