@@ -1,0 +1,191 @@
+.kcHtmlClass {
+    background: white;
+    * {
+        box-sizing: border-box;
+    }
+}
+
+.kcHtmlClass body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    background: none;
+}
+
+.kcButtonPrimaryClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre-wrap;
+    background-color: #582483;
+    background-image: none;
+    color: #fff;
+    border-radius: 3rem;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.15rem;
+    height: 44px;
+    padding: 0;
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+        background-color: #320e3b;
+    }
+}
+
+.kcContainerClass {
+    width: 100%;
+    background: url("./assets/bob-logo-vertical.svg"),
+        url("./assets/bob-background-city.svg"),
+        linear-gradient(to bottom, #af4fff, #67299b, #582483);
+
+    background-repeat: no-repeat, repeat-x, no-repeat;
+    background-size: calc(min(250px, 20vw)), 600px, cover;
+    background-position:
+        center,
+        0 90%,
+        center;
+}
+
+.kcFormCardClass {
+    width: 40%;
+    max-width: 623px;
+    /* border-radius: 6px; */
+    box-shadow: none;
+    border: none;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.kcLoginClass {
+    display: flex;
+    justify-content: end;
+    height: 100%;
+    min-height: 98svh;
+    padding: 0;
+}
+
+.kcFormHeaderClass {
+    border-radius: 6px 6px 0 0;
+    padding: 16px;
+    background-color: transparent;
+    width: 100%;
+}
+
+.kcHeaderClass {
+    padding: 20px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.kcContentWrapperClass {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 !important;
+    max-width: none;
+    row-gap: 10px;
+
+    .kcFormSocialAccountContentClass {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 !important;
+        max-width: none;
+        width: 100%;
+        padding: 0 !important;
+        border: none !important;
+    }
+}
+
+.kcContentClass {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    flex-grow: 1;
+    padding: 16px;
+    margin: 0 !important;
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+}
+
+.kcSignUpClass {
+    background-color: #eee;
+    border-radius: 0 0 6px 6px;
+    width: 100%;
+    height: 100px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#kc-info-wrapper {
+    font-size: 1rem;
+}
+
+.kcInfoAreaWrapperClass {
+    padding: 12px 16px;
+    margin: 0;
+    text-align: center;
+    display: block;
+}
+
+.kcFormSocialAccountLinkClass {
+    display: inline-block;
+    color: #582483;
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 !important;
+
+    &:hover {
+        color: #582483 !important;
+        outline: #582483;
+    }
+}
+
+.kcInputClass {
+    border-radius: 0.5rem;
+    height: 30px;
+    width: 100%;
+    border: 1px solid #888;
+    outline: none;
+
+    &:focus-visible {
+        border-color: #582483;
+        outline-color: #582483;
+        --webkit-tap-highlight-color: transparent;
+        --webkit-focus-ring-color: #582483;
+    }
+}
+
+.kcLocaleMainClass {
+    padding: 1rem;
+    color: #fff;
+}
+
+.kcFormSocialAccountSectionClass {
+    z-index: 3;
+    > hr,
+    h2 {
+        display: none;
+    }
+    .kcFormSocialAccountListClass {
+        padding: 0;
+        margin: 0;
+        > li {
+            list-style: none;
+        }
+    }
+
+    .kcFormSocialAccountListButtonClass {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        background: url("./assets/vipps-login.svg") no-repeat;
+    }
+}
