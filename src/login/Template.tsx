@@ -109,11 +109,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         }
     }, [areAllStyleSheetsLoaded]);
 
+    // const [loginClicked, setLoginClicked] = useState(true);
+
     if (!areAllStyleSheetsLoaded) {
         return null;
     }
-
-    console.log("#  Template  socialProvidersNode:", socialProvidersNode);
 
     return (
         <div className={kcClsx("kcLoginClass")}>
@@ -194,7 +194,15 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 />
                             </div>
                         )}
+                        {/* {socialProvidersNode && !loginClicked && socialProvidersNode}
+                        {!loginClicked && (
+                            <button className={kcClsx("kcButtonDefaultClass")} onClick={() => setLoginClicked(true)}>
+                                {msg("loginWithEmail")}
+                            </button>
+                        )}
+                        {loginClicked && children} */}
                         {children}
+                        {socialProvidersNode && socialProvidersNode}
                         {auth !== undefined && auth.showTryAnotherWayLink && (
                             <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
                                 <div className={kcClsx("kcFormGroupClass")}>
@@ -214,7 +222,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 </div>
                             </form>
                         )}
-                        {socialProvidersNode && socialProvidersNode}
                     </div>
                 </div>
                 <div id="kc-inf" className={kcClsx("kcSignUpClass")}>

@@ -33,6 +33,29 @@
     }
 }
 
+.kcButtonDefaultClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: pre-wrap;
+    background-color: #fff;
+    background-image: none;
+    color: #582483;
+    border-radius: 3rem;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.15rem;
+    height: 44px;
+    padding: 0;
+    border: 2px solid #582483;
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+        border: 4px solid #582483;
+    }
+}
+
 .kcContainerClass {
     width: 100%;
     background: url("./assets/bob-logo-vertical.svg"),
@@ -53,7 +76,7 @@
     /* border-radius: 6px; */
     box-shadow: none;
     border: none;
-    padding: 0 !important;
+    padding: 0;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -81,24 +104,16 @@
     margin: 0;
 }
 
+#kc-content-wrapper {
+    margin: 0;
+}
 .kcContentWrapperClass {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 !important;
+    margin: 0;
     max-width: none;
     row-gap: 10px;
-
-    .kcFormSocialAccountContentClass {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 !important;
-        max-width: none;
-        width: 100%;
-        padding: 0 !important;
-        border: none !important;
-    }
 }
 
 .kcContentClass {
@@ -108,10 +123,10 @@
     align-self: center;
     flex-grow: 1;
     padding: 16px;
-    margin: 0 !important;
+    margin: 0;
     width: 100%;
     height: 100%;
-    max-width: 300px;
+    max-width: 282px;
 }
 
 .kcSignUpClass {
@@ -119,8 +134,8 @@
     border-radius: 0 0 6px 6px;
     width: 100%;
     height: 100px;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
 }
 
 #kc-info-wrapper {
@@ -140,20 +155,22 @@
     text-decoration: underline;
     font-weight: bold;
     cursor: pointer;
-    margin: 0 !important;
+    margin: 0;
 
     &:hover {
-        color: #582483 !important;
+        color: #582483;
         outline: #582483;
     }
 }
 
 .kcInputClass {
     border-radius: 0.5rem;
-    height: 30px;
+    height: 40px;
     width: 100%;
     border: 1px solid #888;
     outline: none;
+    padding: 0 0.5rem;
+    font-size: 1rem;
 
     &:focus-visible {
         border-color: #582483;
@@ -185,7 +202,8 @@
     .kcFormSocialAccountListButtonClass {
         display: flex;
         width: 100%;
-        height: 50px;
-        background: url("./assets/vipps-login.svg") no-repeat;
+        height: 44px;
+        background: url("./assets/vipps-login.svg") left no-repeat;
+        font-size: 0;
     }
 }
