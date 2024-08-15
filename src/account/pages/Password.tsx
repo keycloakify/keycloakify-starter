@@ -20,7 +20,7 @@ export default function Password(props: PageProps<Extract<KcContext, { pageId: "
 
     const { msg } = i18n;
 
-    const { goToAuthServer } = useOidc();
+    const { goToAuthServer, backFromAuthServer } = useOidc();
 
     return (
         <Template
@@ -44,24 +44,34 @@ export default function Password(props: PageProps<Extract<KcContext, { pageId: "
                     <h2>{msg("changePasswordHtmlTitle")}</h2>
                 </div>
             </div>
-            <form className="form-horizontal">
+            <div className="form-horizontal">
 
                 <div className="form-group">
                     <div id="kc-form-buttons" className="col-md-offset-2 col-md-10 submit">
-                        <div>
-                            <button
-                                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                                onClick={() => goToAuthServer({
-                                    extraQueryParams: { kc_action: "UPDATE_PASSWORD" }
-                                })}
-                            >
-                                {msg("changePasswordHtmlTitle")}
-                            </button>
-                        </div>
+                        <button
+                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                            onClick={() => goToAuthServer({
+                                extraQueryParams: { kc_action: "UPDATE_PASSWORD" }
+                            })}
+                        >
+                            {msg("changePasswordHtmlTitle")}
+                        </button>
+                        {backFromAuthServer?.extraQueryParams.kc_action === "UPDATE_PASSWORD" && (
+                            <p>
+                                {(() => {
+                                    switch (backFromAuthServer.result.kc_action_status) {
+                                        case "success":
+                                            return "Password successfully updated";
+                                        case "cancelled":
+                                            return "Password unchanged";
+                                    }
+                                })()}
+                            </p>
+                        )}
                     </div>
                 </div>
 
-            </form>
+            </div>
 
 
         </Template>

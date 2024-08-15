@@ -4,6 +4,7 @@ import { getKcClsx } from "keycloakify/account/lib/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { useUserProfile, useI18nMessages } from "../api";
+import { useOidc } from "../oidc";
 
 export default function Account(props: PageProps<Extract<KcContext, { pageId: "account.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template } = props;
@@ -18,11 +19,11 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
         classes
     });
 
-    const { 
-        url, 
-        realm, 
-        messagesPerField, 
-        stateChecker, 
+    const {
+        url,
+        realm,
+        messagesPerField,
+        stateChecker,
         /*account,*/ // NOTE: We don't need the account object since we are fetching more detailed information from the API (userProfile)
         referrer
     } = kcContext;
@@ -30,10 +31,12 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
 
     const { msg } = i18n;
 
+    const { goToAuthServer, backFromAuthServer } = useOidc();
+
     const { userProfile } = useUserProfile();
     const { i18nMessages } = useI18nMessages();
 
-    if( userProfile === undefined || i18nMessages === undefined ){
+    if (userProfile === undefined || i18nMessages === undefined) {
         return null;
     }
 
@@ -143,6 +146,39 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                     </div>
                 </div>
             </form>
+            <button
+                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                onClick={() => goToAuthServer({
+                    extraQueryParams: { kc_action: "delete_account" }
+                })}
+            >
+                Delete Account
+            </button>
+            <br />
+            <br />
+            -- OR --
+            <br />
+            <br />
+            <button
+                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                onClick={() => goToAuthServer({
+                    extraQueryParams: { kc_action: "UPDATE_PROFILE" }
+                })}
+            >
+                Update profile (via Login theme)
+            </button>
+            {backFromAuthServer?.extraQueryParams.kc_action === "UPDATE_PROFILE" && (
+                <p>
+                    {(() => {
+                        switch (backFromAuthServer.result.kc_action_status) {
+                            case "success":
+                                return "Profile successfully updated";
+                            case "cancelled":
+                                return "Profile unchanged";
+                        }
+                    })()}
+                </p>
+            )}
         </Template>
     );
 }
