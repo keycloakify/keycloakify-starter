@@ -4,14 +4,16 @@ import { createMockReactOidc } from "oidc-spa/mock/react";
 const publicUrl = undefined;
 const isAuthGloballyRequired = true;
 
-export const { OidcProvider, useOidc } = import.meta.env.DEV ?
+export const realm = import.meta.env.DEV ? "" : window.location.pathname.split("/")[2];
+
+export const { OidcProvider, useOidc, getOidc } = import.meta.env.DEV ?
     createMockReactOidc({
         isUserInitiallyLoggedIn: true,
         publicUrl,
         isAuthGloballyRequired
     }) :
     createReactOidc({
-        issuerUri: `${window.location.origin}${window.location.pathname.split("/").slice(0, 3).join("/")}`,
+        issuerUri: `${window.location.origin}/realms/${realm}`,
         clientId: "account-console",
         publicUrl,
         isAuthGloballyRequired

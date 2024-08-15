@@ -1,11 +1,12 @@
-import { useEffect, Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import type { ClassKey } from "keycloakify/account";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/account/DefaultPage";
 import Template from "keycloakify/account/Template";
-import { OidcProvider, useOidc } from "./oidc";
+import { OidcProvider } from "./oidc";
 const Password = lazy(() => import("./pages/Password"));
+const Account = lazy(() => import("./pages/Account"));
 
 export default function KcPage(props: { kcContext: KcContext }) {
     return (
@@ -20,31 +21,17 @@ function ContextualizedKcPage(props: { kcContext: KcContext }) {
 
     const { i18n } = useI18n({ kcContext });
 
-    const { oidcTokens, params } = useOidc();
-
-    useEffect(() => {
-
-        if( import.meta.env.DEV ){
-            return;
-        }
-
-        fetch(`${params.issuerUri}/account/?userProfileMetadata=true`, {
-            headers: {
-                Authorization: `Bearer ${oidcTokens.accessToken}`,
-                "Content-Type": "application/json"
-            },
-
-        })
-            .then(response => response.json())
-            .then(console.log);
-
-    }, []);
-
-
     return (
         <Suspense>
             {(() => {
                 switch (kcContext.pageId) {
+                    case "account.ftl": return (
+                        <Account
+                            {...{ kcContext, i18n, classes }}
+                            Template={Template}
+                            doUseDefaultCss={true}
+                        />
+                    );
                     case "password.ftl": return (
                         <Password
                             {...{ kcContext, i18n, classes }}
