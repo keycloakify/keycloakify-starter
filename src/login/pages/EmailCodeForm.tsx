@@ -12,7 +12,7 @@ export default function EmailCodeForm(props: PageProps<Extract<KcContext, { page
         classes
     });
 
-    const { messagesPerField } = kcContext;
+    const { url, messagesPerField } = kcContext;
 
     const { msg, msgStr } = i18n;
 
@@ -27,7 +27,7 @@ export default function EmailCodeForm(props: PageProps<Extract<KcContext, { page
             displayMessage={!messagesPerField.existsError("totp")}
             headerNode={msg("doLogIn")}
         >
-            <form id="kc-otp-login-form" className={kcClsx("kcFormClass")} action="${url.loginAction}" method="post">
+            <form id="kc-otp-login-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                 <div className={kcClsx("kcFormGroupClass")}>
                     <div className={kcClsx("kcLabelWrapperClass")}>
                         <label id="emailCodeLabel" htmlFor="emailCode" className={kcClsx("kcLabelClass")} hidden aria-hidden>
