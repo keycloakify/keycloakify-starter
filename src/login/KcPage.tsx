@@ -5,9 +5,8 @@ import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "./Template";
 import "./KcBobStyles.css";
-const UserProfileFormFields = lazy(
-    () => import("./UserProfileFormFields")
-);
+import EmailCodeForm from "./pages/EmailCodeForm";
+const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 
 const doMakeUserConfirmPassword = true;
 
@@ -20,6 +19,15 @@ export default function KcPage(props: { kcContext: KcContext }) {
         <Suspense>
             {(() => {
                 switch (kcContext.pageId) {
+                    case "email-code-form.ftl":
+                        return (
+                            <EmailCodeForm
+                                Template={Template}
+                                kcContext={kcContext}
+                                i18n={i18n}
+                                doUseDefaultCss={true}
+                            />
+                        );
                     default:
                         return (
                             <DefaultPage

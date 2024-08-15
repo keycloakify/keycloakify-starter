@@ -3,12 +3,31 @@
     * {
         box-sizing: border-box;
     }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1rem;
+        background: none;
+        margin: 0;
+    }
 }
 
-.kcHtmlClass body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
-    background: none;
+.kcLoginClass {
+    display: flex;
+    justify-content: end;
+    height: 100%;
+    min-height: 100svh;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.kcFormButtonsWrapperClass {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 .kcButtonPrimaryClass {
@@ -80,14 +99,6 @@
     display: flex;
     flex-direction: column;
     margin: 0;
-}
-
-.kcLoginClass {
-    display: flex;
-    justify-content: end;
-    height: 100%;
-    min-height: 98svh;
-    padding: 0;
 }
 
 .kcFormHeaderClass {
@@ -183,6 +194,31 @@
 .kcLocaleMainClass {
     padding: 1rem;
     color: #fff;
+
+    .kcLocaleDropDownClass {
+        display: flex !important;
+        flex-direction: column;
+        align-items: end;
+
+        button#kc-current-locale-link {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        button#kc-current-locale-link::after {
+            content: url("./assets/chevronDown.svg");
+        }
+
+        ul.kcLocaleListClass {
+            list-style: none;
+            margin: 0.5rem 0;
+            > li {
+                padding: 0.1rem;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .kcFormSocialAccountSectionClass {

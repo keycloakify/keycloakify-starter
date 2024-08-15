@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { createKcPageStory } from "./KcPageStory";
+import { createKcPageStory } from "../KcPageStory";
 
 const { KcPageStory } = createKcPageStory({ pageId: "login-username.ftl" });
 
@@ -30,8 +30,7 @@ export const WithEmailAsUsername: Story = {
                             alias: "vipps",
                             displayName: "Vipps",
                             providerId: "vipps",
-                            loginUrl:
-                                "http://localhost:8080/auth/realms/BOB/broker/vipps/endpoint"
+                            loginUrl: "http://localhost:8080/auth/realms/BOB/broker/vipps/endpoint"
                         }
                     ]
                 }
