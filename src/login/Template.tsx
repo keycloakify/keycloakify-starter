@@ -115,56 +115,65 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         return null;
     }
 
+    const languageDropdown = (
+        <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
+            <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>
+                <div id="kc-locale-dropdown" className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"))}>
+                    <button
+                        tabIndex={1}
+                        id="kc-current-locale-link"
+                        aria-label={msgStr("languages")}
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        aria-controls="language-switch1"
+                    >
+                        {labelBySupportedLanguageTag[currentLanguageTag]}
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18.5 8.5L12.3536 14.6464C12.1583 14.8417 11.8417 14.8417 11.6464 14.6464L5.5 8.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                            />
+                        </svg>
+                    </button>
+                    <ul
+                        role="menu"
+                        tabIndex={-1}
+                        aria-labelledby="kc-current-locale-link"
+                        aria-activedescendant=""
+                        id="language-switch1"
+                        className={kcClsx("kcLocaleListClass")}
+                    >
+                        {locale?.supported.map(({ languageTag }, i) => (
+                            <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
+                                <a
+                                    role="menuitem"
+                                    id={`language-${i + 1}`}
+                                    className={kcClsx("kcLocaleItemClass")}
+                                    href={getChangeLocaleUrl(languageTag)}
+                                >
+                                    {labelBySupportedLanguageTag[languageTag]}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+
     return (
         <div className={kcClsx("kcLoginClass")}>
             <div className={kcClsx("kcContainerClass")}>
-                {realm.internationalizationEnabled && (assert(locale !== undefined), locale.supported.length > 1) && (
-                    <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
-                        <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>
-                            <div id="kc-locale-dropdown" className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"))}>
-                                <button
-                                    tabIndex={1}
-                                    id="kc-current-locale-link"
-                                    aria-label={msgStr("languages")}
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    aria-controls="language-switch1"
-                                >
-                                    {labelBySupportedLanguageTag[currentLanguageTag]}
-                                </button>
-                                <ul
-                                    role="menu"
-                                    tabIndex={-1}
-                                    aria-labelledby="kc-current-locale-link"
-                                    aria-activedescendant=""
-                                    id="language-switch1"
-                                    className={kcClsx("kcLocaleListClass")}
-                                >
-                                    {locale.supported.map(({ languageTag }, i) => (
-                                        <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
-                                            <a
-                                                role="menuitem"
-                                                id={`language-${i + 1}`}
-                                                className={kcClsx("kcLocaleItemClass")}
-                                                href={getChangeLocaleUrl(languageTag)}
-                                            >
-                                                {labelBySupportedLanguageTag[languageTag]}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                <div className="hidden md:block">
+                    {realm.internationalizationEnabled && (assert(locale !== undefined), locale.supported.length > 1) && languageDropdown}
+                </div>
             </div>
-            <div
-                className={clsx(
-                    kcClsx("kcFormCardClass")
-                    // displayWide && kcClsx("kcFormCardAccountClass")
-                )}
-            >
+            <div className={clsx(kcClsx("kcFormCardClass"))}>
                 <div id="kc-content" className={kcClsx("kcContentClass")}>
+                    <div className="block md:hidden">
+                        {realm.internationalizationEnabled && (assert(locale !== undefined), locale.supported.length > 1) && languageDropdown}
+                    </div>
                     <header className={kcClsx("kcFormHeaderClass")}>
                         <div id="kc-header" className={kcClsx("kcHeaderClass")}>
                             <img src={bobLogoSvgUrl} alt="BOB logo" height={60} />
@@ -226,9 +235,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 </div>
                 <div id="kc-inf" className={kcClsx("kcSignUpClass")}>
                     <div id="kc-info-wrapper" className={kcClsx("kcInfoAreaWrapperClass")}>
-                        Ved å gå videre godtar du BOBs{" "}
+                        {msgStr("bobTermsMessage1")}{" "}
                         <a href="https://bob.no/personvern-og-cookies/" className={kcClsx("kcFormSocialAccountLinkClass")}>
-                            personvernsregler og vilkår for bruk.
+                            {msgStr("bobTermsMessage2")}
                         </a>
                     </div>
                 </div>
