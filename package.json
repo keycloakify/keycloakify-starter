@@ -18,7 +18,7 @@
     "keywords": [],
     "dependencies": {
         "autoprefixer": "^10.4.19",
-        "keycloakify": "10.0.0-rc.136",
+        "keycloakify": "10.0.0-rc.144",
         "postcss": "^8.4.39",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
