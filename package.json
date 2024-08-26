@@ -17,8 +17,8 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "keycloakify": "10.0.0-rc.147",
-        "oidc-spa": "^5.1.2",
+        "keycloakify": "^10.0.0",
+        "oidc-spa": "^5.2.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },

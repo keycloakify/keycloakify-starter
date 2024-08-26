@@ -4015,10 +4015,10 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-keycloakify@10.0.0-rc.147:
-  version "10.0.0-rc.147"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0-rc.147.tgz#30339f06ce7885da6c2aded8efdd70a8c141e366"
-  integrity sha512-zC9UHchkctvh5EMs2jf9W5TK9q51N2OTPAt5UkQEbtl6X84m8gzoQ4nUlmMlsUoGgr/lfD8UsFA/oGczCtrDPw==
+keycloakify@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-10.0.0.tgz#41844587666bc2281bdd7254472c296637f3f3cd"
+  integrity sha512-ZuiVFQarWS1/UfasuCqWgGGTGzO1dIeQzEPoEu8vtI5won+i0UED0VlJkO13fyXWGQ57xYMUq6OAt+QzzHMpoQ==
   dependencies:
     tsafe "^1.6.6"
 
@@ -4441,10 +4441,10 @@ ohash@^1.1.3:
   resolved "https://registry.yarnpkg.com/ohash/-/ohash-1.1.3.tgz#f12c3c50bfe7271ce3fd1097d42568122ccdcf07"
   integrity sha512-zuHHiGTYTA1sYJ/wZN+t5HKZaH23i4yI1HMwbuXm24Nid7Dv0KcuRlKoNKS9UNfAVSBlnGLcuQrnOKWOZoEGaw==
 
-oidc-spa@^5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/oidc-spa/-/oidc-spa-5.1.2.tgz#32c48a9932777e4f231dd83cecb5a41430bdac1b"
-  integrity sha512-iHAOwPYHgFMPNAEjJxkEjUEtDE8YPx8bP6eniKd+L3JRQpj27kWP25xpH40enb7DQgJ+gPdU6Ft8TvUByWcpjQ==
+oidc-spa@^5.2.4:
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/oidc-spa/-/oidc-spa-5.2.4.tgz#2d26581281f1c480431fafe18267ec1a6418a5e9"
+  integrity sha512-tGvZVsRKB5c1mpsN7I5fN+FmO3y4NwV0XaEDAlBKw4PtGRdlCR0o4LbOnP9BcRM8Cb4kFa9Q/hPtq1Up/cqdnw==
 
 on-finished@2.4.1:
   version "2.4.1"
