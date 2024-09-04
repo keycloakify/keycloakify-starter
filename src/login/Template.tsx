@@ -109,8 +109,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         }
     }, [areAllStyleSheetsLoaded]);
 
-    // const [loginClicked, setLoginClicked] = useState(true);
-
     if (!areAllStyleSheetsLoaded) {
         return null;
     }
@@ -175,9 +173,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         {realm.internationalizationEnabled && (assert(locale !== undefined), locale.supported.length > 1) && languageDropdown}
                     </div>
                     <header className={kcClsx("kcFormHeaderClass")}>
-                        <div id="kc-header" className={kcClsx("kcHeaderClass")}>
-                            <img src={bobLogoSvgUrl} alt="BOB logo" height={60} />
-                        </div>
+                        <img src={bobLogoSvgUrl} alt="BOB logo" height={60} />
                     </header>
                     <div id="kc-content-wrapper" className={kcClsx("kcContentWrapperClass")}>
                         {/* App-initiated actions should not see warning messages about the need to complete the action during login. */}
@@ -203,15 +199,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 />
                             </div>
                         )}
-                        {/* {socialProvidersNode && !loginClicked && socialProvidersNode}
-                        {!loginClicked && (
-                            <button className={kcClsx("kcButtonDefaultClass")} onClick={() => setLoginClicked(true)}>
-                                {msg("loginWithEmail")}
-                            </button>
-                        )}
-                        {loginClicked && children} */}
-                        {children}
                         {socialProvidersNode && socialProvidersNode}
+                        {children}
                         {auth !== undefined && auth.showTryAnotherWayLink && (
                             <form id="kc-select-try-another-way-form" action={url.loginAction} method="post">
                                 <div className={kcClsx("kcFormGroupClass")}>

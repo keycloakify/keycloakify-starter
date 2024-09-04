@@ -6,6 +6,7 @@ import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "./Template";
 import "./KcBobStyles.css";
 import EmailCodeForm from "./pages/EmailCodeForm";
+import LoginUsername from "./pages/LoginUsername";
 const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 
 const doMakeUserConfirmPassword = true;
@@ -28,6 +29,16 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                 doUseDefaultCss={true}
                             />
                         );
+                    case "login-username.ftl":
+                        return (
+                            <LoginUsername
+                                kcContext={kcContext}
+                                i18n={i18n}
+                                classes={classes}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
                     default:
                         return (
                             <DefaultPage
@@ -46,4 +57,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
     );
 }
 
-const classes = {} satisfies { [key in ClassKey]?: string };
+const classes = {
+    kcLoginClass: "",
+    kcFormCardClass: ""
+} satisfies { [key in ClassKey]?: string };

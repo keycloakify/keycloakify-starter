@@ -61,41 +61,30 @@ export default function EmailCodeForm(props: PageProps<Extract<KcContext, { page
                 </div>
 
                 <div className={kcClsx("kcFormGroupClass")}>
-                    <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-                        <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
-                    </div>
+                    {!resendClicked && (
+                        <div className="flex items-center h-[44px]">
+                            <div onClick={() => setResendClicked(true)} className="text-[#777] text-sm w-fit cursor-pointer">
+                                <span>{msg("noCodeQuestion")}</span>
+                            </div>
+                        </div>
+                    )}
+                    {resendClicked && <input className={kcClsx("kcButtonDefaultClass")} name="resend" type="submit" value={msgStr("resendCode")} />}
+                </div>
 
-                    <div id="kc-form-buttons">
-                        <div className={kcClsx("kcFormButtonsWrapperClass")}>
-                            {!resendClicked && (
-                                <div
-                                    onClick={() => setResendClicked(true)}
-                                    style={{
-                                        cursor: "pointer",
-                                        color: "#777",
-                                        fontSize: "0.9em",
-                                        width: "fit-content"
-                                    }}
-                                >
-                                    <span>{msg("noCodeQuestion")}</span>
-                                </div>
-                            )}
-                            {resendClicked && (
-                                <input className={kcClsx("kcButtonDefaultClass")} name="resend" type="submit" value={msgStr("resendCode")} />
-                            )}
-                            <input
-                                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                                name="login"
-                                type="submit"
-                                value={msgStr("doLogIn")}
-                            />
-                            {/* <input
+                <div className={kcClsx("kcFormGroupClass")}>
+                    <div className={kcClsx("kcFormButtonsWrapperClass")}>
+                        <input
+                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                            name="login"
+                            type="submit"
+                            value={msgStr("doLogIn")}
+                        />
+                        {/* <input
                                 className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
                                 name="cancel"
                                 type="submit"
                                 value={msgStr("doCancel")}
                             /> */}
-                        </div>
                     </div>
                 </div>
             </form>
