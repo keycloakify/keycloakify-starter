@@ -21,8 +21,9 @@ import { SocialProvider } from "../components/social-provider";
 import { SubmitInput } from "../components/submit-input";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
+import Cookies from "js-cookie";
 export default function Login(
-  props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>
+  props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>,
 ) {
   const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
@@ -54,6 +55,19 @@ export default function Login(
   const [email, setEmail] = useState(paramEmail ?? login.username ?? "");
   const [errors, setErrors] = useState("");
   const [wasSubmitted, setWasSubmitted] = useState(false);
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get("code");
+    if (code && code.length > 0) {
+      const currentDomain = window.location.hostname;
+      const formattedDomain =
+        "." + currentDomain.split(".").slice(-2).join(".");
+      Cookies.set("invite_code", code, { domain: formattedDomain });
+      window.location.href = url.registrationUrl;
+    }
+  }, [window.location.search]);
 
   const ref = useRef<HTMLFormElement>(null);
   useEffect(() => {
@@ -97,7 +111,7 @@ export default function Login(
       setWasSubmitted(true);
       const formElement = e.target as HTMLFormElement;
       handleSubmit(formElement);
-    }
+    },
   );
 
   useEffect(() => {
@@ -195,9 +209,9 @@ export default function Login(
                         {...(usernameHidden
                           ? { disabled: true }
                           : {
-                            autoFocus: true,
-                            autoComplete: "off",
-                          })}
+                              autoFocus: true,
+                              autoComplete: "off",
+                            })}
                         required
                         pattern="^[\w.%+-]+@[^_\W.-]+\.[A-Za-z]{2,24}$"
                       />
@@ -279,7 +293,7 @@ export default function Login(
               id="kc-form-buttons"
               className={clsx(
                 getClassName("kcFormButtonsClass"),
-                "flex justify-start !ml-auto float-none w-auto !mt-0 !p-0"
+                "flex justify-start !ml-auto float-none w-auto !mt-0 !p-0",
               )}
             >
               <input
@@ -288,8 +302,8 @@ export default function Login(
                 name="credentialId"
                 {...(auth?.selectedCredential !== undefined
                   ? {
-                    value: auth.selectedCredential,
-                  }
+                      value: auth.selectedCredential,
+                    }
                   : {})}
               />
             </div>

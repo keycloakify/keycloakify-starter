@@ -5463,6 +5463,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/js-cookie@npm:^3":
+  version: 3.0.6
+  resolution: "@types/js-cookie@npm:3.0.6"
+  checksum: b88544a123d9e50b5c699b461caa4e17f54ebbc9814fc188da9def702e6291534bbddd179e09dc70f3e71ff3d7af3f00979ec6a1812301ab30f946cc6e561467
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.12, @types/json-schema@npm:^7.0.9":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -6623,6 +6630,7 @@ __metadata:
     "@storybook/react": "npm:^7.6.14"
     "@storybook/react-vite": "npm:^7.6.14"
     "@storybook/test": "npm:^7.6.14"
+    "@types/js-cookie": "npm:^3"
     "@types/react": "npm:^18.2.43"
     "@types/react-dom": "npm:^18.2.17"
     "@typescript-eslint/eslint-plugin": "npm:^6.14.0"
@@ -6636,6 +6644,7 @@ __metadata:
     evt: "npm:^2.5.7"
     formik: "npm:^2.4.5"
     framer-motion: "npm:^11.0.8"
+    js-cookie: "npm:^3.0.5"
     keycloakify: "npm:^9.5.8"
     oidc-spa: "npm:^4.2.1"
     postcss: "npm:^8.4.35"
@@ -9847,6 +9856,13 @@ __metadata:
   bin:
     jiti: bin/jiti.js
   checksum: af7fc59394df60e8bc3633805af2d22f501b2cbe3fc9040ef1ac77f0857c1bc767ded2a7900d9043075c2f21e621e680dd9cd75611841830a6b74b6e7618092c
+  languageName: node
+  linkType: hard
+
+"js-cookie@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "js-cookie@npm:3.0.5"
+  checksum: 70da0a57f86f08a1e46bcbac52dbb1ca0466cf046a6d90ad315a847a4b0b4e79492ff1334ea94d923035c713d163c77713132a2ea2809dfc1912e6b204f63351
   languageName: node
   linkType: hard
 
