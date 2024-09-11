@@ -56,32 +56,8 @@ export default function Login(
   const [errors, setErrors] = useState("");
   const [wasSubmitted, setWasSubmitted] = useState(false);
 
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const code = urlParams.get("code");
-    if (code && code.length > 0) {
-      const currentDomain = window.location.hostname;
-      const formattedDomain =
-        "." + currentDomain.split(".").slice(-2).join(".");
-      Cookies.set("invite_code", code, { domain: formattedDomain });
-      window.location.href = url.registrationUrl;
-    }
-  }, [window.location.search]);
 
   const ref = useRef<HTMLFormElement>(null);
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (
-        ref.current !== null &&
-        paramEmail !== null &&
-        paramTempPassword !== null
-      ) {
-        handleSubmit(ref.current);
-      }
-    }, 1000);
-    return () => clearInterval(id);
-  }, [ref.current, paramEmail, paramTempPassword]);
 
   const validateEmail = () => {
     if (!email) {
@@ -119,6 +95,38 @@ export default function Login(
       validateEmail();
     }
   }, [email]);
+
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (
+        ref.current !== null &&
+        paramEmail !== null &&
+        paramTempPassword !== null
+      ) {
+        handleSubmit(ref.current);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, [ref.current, paramEmail, paramTempPassword]);
+
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get("code");
+
+    const currentDomain = window.location.hostname;
+    const formattedDomain =
+      "." + currentDomain.split(".").slice(-2).join(".");
+
+    if (code && code.length > 0) {
+      Cookies.set("invite_code", code, { domain: formattedDomain });
+      window.location.href = url.registrationUrl;
+    }
+
+  }, [window.location.search]);
+
   return (
     <Template
       {...{ kcContext, i18n, doUseDefaultCss, classes }}
