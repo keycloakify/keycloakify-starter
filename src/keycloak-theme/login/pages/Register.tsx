@@ -10,6 +10,7 @@ import { SocialProvider } from "../components/social-provider";
 import { SubmitInput } from "../components/submit-input";
 import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
+import Cookies from "js-cookie";
 
 export default function Register(
   props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>
@@ -34,6 +35,8 @@ export default function Register(
   const [lastName, setLastName] = useState(register.formData.lastName ?? "");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+
+
   const [errors, setErrors] = useState(
     {} as {
       firstName: string;
@@ -64,7 +67,6 @@ export default function Register(
   };
 
   const validatePassword = () => {
-    console.log({ password })
     if (!password) {
       return "Required";
     } else if (password.length < 8) {
@@ -100,11 +102,29 @@ export default function Register(
       validateForm();
     }
   });
+
   useEffect(() => {
     if (wasSubmitted) {
       validateForm();
     }
   }, [firstName, lastName, email, password, passwordConfirm]);
+
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const code = urlParams.get("code");
+
+    const currentDomain = window.location.hostname;
+    const formattedDomain =
+      "." + currentDomain.split(".").slice(-2).join(".");
+
+    if (code && code.length > 0) {
+      Cookies.set("invite_code", code, { domain: formattedDomain });
+    } 
+
+  }, [window.location.search]);
+
   return (
     <Template
       {...{ kcContext, i18n, doUseDefaultCss, classes }}
