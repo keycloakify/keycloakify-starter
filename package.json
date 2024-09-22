@@ -1,7 +1,7 @@
 {
     "name": "keycloakify-starter",
     "version": "0.0.0",
-    "description": "Starter for Keycloakify 10",
+    "description": "Starter for Keycloakify 11",
     "repository": {
         "type": "git",
         "url": "git://github.com/codegouvfr/keycloakify-starter.git"
@@ -17,7 +17,7 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "keycloakify": "^10.1.4",
+        "keycloakify": "^11.0.0",
         "autoprefixer": "^10.4.19",
         "postcss": "^8.4.39",
         "react": "^18.2.0",
