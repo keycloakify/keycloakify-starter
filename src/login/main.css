@@ -1,0 +1,180 @@
+
+#root, body,.login-pf body{
+    background:none;
+    background-color: #F0F0F0;
+    height: 100vh;
+}
+.card-pf{
+    border-color:#B4CD93;
+    border-radius: 8px;
+}
+.kcButtonPrimaryClass{
+    transition: all 0.2s ease-in-out;
+    border: 1px #B4CD9300 solid;
+
+}
+.kcButtonPrimaryClass:hover{
+    background-color:#FCFCFC !important;
+    color:black !important;
+    border: 1px #B4CD93 solid;
+}
+
+.login-pf-page .login-pf-header h1 {
+    font-size: 20px;
+    padding-top:20px;
+    letter-spacing: -1px;
+}
+.login-pf-page {
+    padding-top: 0px; 
+}
+@media (min-width: 768px) {
+    .login-pf-page .login-pf-header h1 {
+        font-size:24px
+    }
+}
+
+.kcSelectAuthListItemDescriptionClass {
+font-size:14px;
+line-height: 14px;
+color:grey;
+font-weight: 100;;
+}
+.kcSelectAuthListItemHeadingClass{
+    letter-spacing:-0.6px;
+}
+
+@media (max-width: 767px) {
+    .login-pf-page .card-pf {
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+        padding-top: 0;
+        border-top: 0;
+        box-shadow: 0 0;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+input:focus {
+    outline: none !important;
+  }
+  input{
+    outline: none;
+  }
+
+.btn-default{
+    border-radius: 8px;
+    background-color:#F0F0F0 !important;
+    margin-bottom:6px;
+}
+#loginRestartLink{
+    margin-left:4px;
+}
+.kcFormOptionsWrapperClass{
+margin-top:6px;
+}
+.pf-m-primary{
+    background-color:#403F3F !important;
+    border-radius: 8px;
+    margin-right: 4px;
+}
+#kc-error-message{
+line-height:14px !important;
+}
+#backToApplication{
+    margin-top:14px!important;
+}
+#form-actions{
+    align-content: end;
+}
+a{
+    color:#403F3F;
+}
+a:hover{
+    color:#427A5B;
+}
+ul {
+    height: 50vh; /* Set a fixed height */
+    overflow-y: auto; /* Add vertical scrolling */
+    overflow-x: hidden; /* Add vertical scrolling */
+}
+input[type="checkbox"] {
+    accent-color: #427A5B;
+    }
+    :root {
+        --pf-global--active-color--100: #1B4F32;
+    --pf-global--active-color--200: #B4CD9325;
+    --pf-global--active-color--300: #427A5B;
+    --pf-global--active-color--400: #B4CD93;
+    --pf-global--disabled-color--100: #6a6e73;
+    --pf-global--disabled-color--200: #d2d2d2;
+    --pf-global--disabled-color--300: #f0f0f0;
+    --pf-global--primary-color--100: #676767;
+    --pf-global--primary-color--200: #427A5B;
+    --pf-global--primary-color--light-100: #73bcf7;
+    --pf-global--primary-color--dark-100: #1B4F32;
+    --pf-global--secondary-color--100: #6a6e73;
+    --pf-global--default-color--100: #73c5c5;
+    --pf-global--default-color--200: #009596;
+    --pf-global--default-color--300: #003737;
+    --pf-global--success-color--100: #3e8635;
+    --pf-global--success-color--200: #1e4f18;
+    --pf-global--info-color--100: #FCF5B8;
+    }
+    @font-face {
+        font-family: 'CircularStd';
+        src: url('../template/CircularStd-Book.woff') format('woff'),
+             url('../template/CircularStd-Book.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    body, input, button, select, textarea {
+        font-family: 'CircularStd', sans-serif;
+    }
+    
+    #kc-page-title
+    {
+        margin-top:0;
+        letter-spacing: -1px;
+    }
+
+    .kcLabelWrapperClass.subtitle {
+        display:none;
+
+    }
+
+    #kc-current-locale-link{
+        font-size:11px !important;
+        color:#A4A4A4 !important;
+    }
+
+    .kcFormHeaderClass::after {
+        content: "";
+        display: block;
+        width: 100%; /* Adjust based on your needs */
+        height: 140px; /* Adjust the height to match your image */
+        background-image: url('../template/img/loginimage.png');
+        background-size: cover; /* Ensures the image covers the entire area */
+        background-position: center;
+        margin-top: 10px; /* Add some spacing between the header and the image */
+        border-radius: 8px;
+    }
+    /*
+    #kc-page-title::before {
+        content: "";
+        display: block;
+        width: 100%; 
+        height: 30px; 
+        background-image: url('../template/img/logoenewide.png');
+        background-size: cover; 
+        background-position: center;
+        margin-top: 10px; 
+        border-radius: 8px;
+        margin-bottom:16px;
+    }*/
+   
+    #kc-header-wrapper, .login-pf-signup{
+        display: none;
+    }
+    
