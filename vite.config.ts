@@ -7,7 +7,27 @@ export default defineConfig({
     plugins: [
         react(),
         keycloakify({
-            accountThemeImplementation: "none"
+            accountThemeImplementation: "Single-Page",
+            postBuild: async (buildContext) => {
+
+                const fs = await import("fs");
+                const path = await import("path");
+
+                const logFilePath = path.join(buildContext.projectDirPath, "log.txt");
+
+                fs.rmSync(logFilePath, { force: true });
+
+                const loginDirPath = path.join("theme", buildContext.themeNames[0], "login");
+
+                fs.rmSync(loginDirPath, { recursive: true });
+
+                fs.cpSync(
+                    path.join(buildContext.projectDirPath, "login"),
+                    loginDirPath,
+                    { recursive: true }
+                );
+
+            }
         })
     ]
 });

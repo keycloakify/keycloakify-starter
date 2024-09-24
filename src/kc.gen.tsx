@@ -22,6 +22,7 @@ export const kcEnvDefaults: Record<KcEnvName, string> = {};
 
 export type KcContext =
     | import("./login/KcContext").KcContext
+    | import("./account/KcContext").KcContext
     ;
 
 declare global {
@@ -31,6 +32,7 @@ declare global {
 }
 
 export const KcLoginPage = lazy(() => import("./login/KcPage"));
+export const KcAccountPage = lazy(() => import("./account/KcPage"));
 
 export function KcPage(
     props: {
@@ -44,6 +46,7 @@ export function KcPage(
             {(() => {
                 switch (kcContext.themeType) {
                     case "login": return <KcLoginPage kcContext={kcContext} />;
+                    case "account": return <KcAccountPage kcContext={kcContext} />;
                 }
             })()}
         </Suspense>
