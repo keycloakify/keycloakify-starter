@@ -1,5 +1,11 @@
 // ejected using 'npx eject-keycloak-page'
-import { Flex, FormControl, FormErrorMessage, Input, Spacer } from "@chakra-ui/react";
+import {
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Input,
+  Spacer,
+} from "@chakra-ui/react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { useConstCallback } from "keycloakify/tools/useConstCallback";
 import { useEffect, useState, type FormEventHandler } from "react";
@@ -12,8 +18,14 @@ import type { I18n } from "../i18n";
 import type { KcContext } from "../kcContext";
 import Cookies from "js-cookie";
 
+declare global {
+  interface Window {
+    gr: (...args: any[]) => void;
+  }
+}
+
 export default function Register(
-  props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>
+  props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>,
 ) {
   const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
@@ -29,13 +41,12 @@ export default function Register(
 
   const queryParameters = new URLSearchParams(window.location.search);
   const [email, setEmail] = useState(
-    register.formData.email ?? queryParameters.get("email") ?? ""
+    register.formData.email ?? queryParameters.get("email") ?? "",
   );
   const [firstName, setFirstName] = useState(register.formData.firstName ?? "");
   const [lastName, setLastName] = useState(register.formData.lastName ?? "");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-
 
   const [errors, setErrors] = useState(
     {} as {
@@ -44,7 +55,7 @@ export default function Register(
       email: string;
       password: string;
       passwordConfirm: string;
-    }
+    },
   );
   const [wasSubmitted, setWasSubmitted] = useState(false);
 
@@ -58,13 +69,40 @@ export default function Register(
       return "Required";
     } else if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g.test(
-        email
+        email,
       )
     ) {
       return "Invalid email address";
     }
     return "";
   };
+
+  useEffect(() => {
+    // Create a script element and add your script content to it
+    const script = document.createElement("script");
+    script.innerHTML = `
+      (function(w, d, s, p, t) {
+        w.gr = w.gr || function() {
+          w.gr.q = w.gr.q || [];
+          w.gr.q.push(arguments);
+        };
+        p = d.getElementsByTagName(s)[0];
+        t = d.createElement(s);
+        t.async = true;
+        t.src = "https://app.getreditus.com/gr.js?_ce=60";
+        p.parentNode.insertBefore(t, p);
+      })(window, document, "script");
+      gr("track", "pageview");
+    `;
+
+    // Append the script element to the document's body
+    document.body.appendChild(script);
+
+    // Remove the script element when the component unmounts
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const validatePassword = () => {
     if (!password) {
@@ -97,6 +135,10 @@ export default function Register(
     setWasSubmitted(true);
     const formElement = e.target as HTMLFormElement;
     if (formElement.checkValidity() === true) {
+      if (typeof window.gr === "function") {
+        // Call the 'gr' function if it exists
+        window.gr("track", "conversion", { email });
+      }
       formElement.submit();
     } else {
       validateForm();
@@ -109,20 +151,17 @@ export default function Register(
     }
   }, [firstName, lastName, email, password, passwordConfirm]);
 
-
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const code = urlParams.get("code");
 
     const currentDomain = window.location.hostname;
-    const formattedDomain =
-      "." + currentDomain.split(".").slice(-2).join(".");
+    const formattedDomain = "." + currentDomain.split(".").slice(-2).join(".");
 
     if (code && code.length > 0) {
       Cookies.set("invite_code", code, { domain: formattedDomain });
-    } 
-
+    }
   }, [window.location.search]);
 
   return (
@@ -221,7 +260,9 @@ export default function Register(
                 required
                 minLength={8}
               />
-              {!!errors.password && <FormErrorMessage>{errors.password}</FormErrorMessage>}
+              {!!errors.password && (
+                <FormErrorMessage>{errors.password}</FormErrorMessage>
+              )}
             </FormControl>
 
             <FormControl isInvalid={!!errors.passwordConfirm}>
