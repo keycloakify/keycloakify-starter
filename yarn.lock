@@ -4015,12 +4015,12 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-keycloakify@^11.2.0:
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.2.0.tgz#8f00bb1240d18d09202c8d4bff5a1e92d7bfb049"
-  integrity sha512-8DnU5F6DmtCUKXOhApAm1/5E0ewGYCn3YNy5TKP6zHBpCEIlHNZ6i0lrGQj10rlmwwaOwPEDVNpOZTKZDsHp7Q==
+keycloakify@^11.2.9:
+  version "11.2.9"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.2.9.tgz#9faea5ddce3b91b525b278e203b11710aadc8665"
+  integrity sha512-heCFNvi9HxIn7zEYE2YQo/Dd35ZIN5M3Jau9OLn9Uiw5Qp6rk4sTmRs11ArxFOHrsuRosgkQ0EOcLKpUxN8dkA==
   dependencies:
-    tsafe "^1.6.6"
+    tsafe "^1.7.5"
 
 keyv@^4.5.3:
   version "4.5.4"
@@ -5496,10 +5496,10 @@ ts-dedent@^2.0.0, ts-dedent@^2.2.0:
   resolved "https://registry.yarnpkg.com/ts-dedent/-/ts-dedent-2.2.0.tgz#39e4bd297cd036292ae2394eb3412be63f563bb5"
   integrity sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==
 
-tsafe@^1.6.6:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.7.2.tgz#0f63d414876287ad01b135f832722f93e22da374"
-  integrity sha512-dAPfQLhCfCRre5qs+Z5Q2a7s2CV7RxffZUmvj7puGaePYjECzWREJFd3w4XSFe/T5tbxgowfItA/JSSZ6Ma3dA==
+tsafe@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.7.5.tgz#0d3a31202b5ef87c7ba997e66e03fd80801278ef"
+  integrity sha512-tbNyyBSbwfbilFfiuXkSOj82a6++ovgANwcoqBAcO9/REPoZMEQoE8kWPeO0dy5A2D/2Lajr8Ohue5T0ifIvLQ==
 
 tsconfig-paths@^4.2.0:
   version "4.2.0"
