@@ -20,9 +20,12 @@ import Cookies from "js-cookie";
 
 declare global {
   interface Window {
-    gr: (...args: any[]) => void;
+    comet: (...args: any[]) => void;
+    cometlyDomainOverrides: string[];
   }
 }
+declare function cometToken(): string;
+declare function cometFingerprint(): string;
 
 export default function Register(
   props: PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n>,
@@ -78,27 +81,46 @@ export default function Register(
   };
 
   useEffect(() => {
-    // Create a script element and add your script content to it
+    window.cometlyDomainOverrides = [
+      "buildbetter.ai",
+      "auth.buildbetter.app",
+      "app.buildbetter.app",
+    ];
+    // Create a script element for cometlytrack
     const script = document.createElement("script");
-    script.innerHTML = `
-      (function(w, d, s, p, t) {
-        w.gr = w.gr || function() {
-          w.gr.q = w.gr.q || [];
-          w.gr.q.push(arguments);
-        };
-        p = d.getElementsByTagName(s)[0];
-        t = d.createElement(s);
-        t.async = true;
-        t.src = "https://app.getreditus.com/gr.js?_ce=60";
-        p.parentNode.insertBefore(t, p);
-      })(window, document, "script");
-      gr("track", "pageview");
-    `;
+    script.src =
+      "https://t.cometlytrack.com/e?uid=704858-3377699761000018-9252ef-s";
+    script.async = true;
 
-    // Append the script element to the document's body
+    // Append the first script and set up onload event
+    script.onload = async () => {
+      console.log("cometlytrack script loaded");
+
+      // Check if comet function is available
+      if (typeof window.comet === "function") {
+        // Execute comet sign up logic
+        window.comet("sign_up");
+        const token = await cometToken();
+        const fingerprint = await cometFingerprint();
+        const currentDomain = window.location.hostname;
+        const formattedDomain =
+          "." + currentDomain.split(".").slice(-2).join(".");
+        Cookies.set("cometly_token", token, { domain: formattedDomain });
+        Cookies.set("cometly_fingerprint", fingerprint, {
+          domain: formattedDomain,
+        });
+      } else {
+        console.error("comet function is not defined");
+      }
+    };
+
+    script.onerror = () => {
+      console.error("Failed to load cometlytrack script");
+    };
+
     document.body.appendChild(script);
 
-    // Remove the script element when the component unmounts
+    // Clean up the script when the component unmounts
     return () => {
       document.body.removeChild(script);
     };
@@ -135,10 +157,6 @@ export default function Register(
     setWasSubmitted(true);
     const formElement = e.target as HTMLFormElement;
     if (formElement.checkValidity() === true) {
-      if (typeof window.gr === "function") {
-        // Call the 'gr' function if it exists
-        window.gr("track", "conversion", { email });
-      }
       formElement.submit();
     } else {
       validateForm();
