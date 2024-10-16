@@ -1,0 +1,59 @@
+:root {
+    --grey100: #dadfea;
+    --grey200: #cfd2df;
+    --grey700: #2f3340;
+    --cautionRed700: #d03544;
+    font-family: "Raleway", sans-serif;
+}
+
+.kcBodyClass {
+    background-color: var(--grey100) !important;
+    background-image: none !important;
+    font-family: "Raleway", sans-serif;
+}
+
+.kcButtonClass {
+    border-radius: 8px;
+}
+
+.kcInputClass {
+    border-color: var(--grey200);
+    border-bottom-color: var(--grey200);
+    border-radius: 8px;
+}
+
+.kcFormPasswordVisibilityIconShow {
+    color: var(--grey700);
+}
+
+#password {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.pf-c-button.pf-m-control:after {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-color: var(--grey200);
+    border-bottom-color: var(--grey200);
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--cautionRed700);
+    border-bottom-width: 1px !important;
+    outline-color: var(--cautionRed700);
+}
+
+.kcHeaderWrapperClass {
+    color: var(--grey700);
+}
+
+.header-logo-img {
+    width: 220px;
+}
+
+.kcFormCardClass {
+    color: var(--grey700);
+    border-radius: 10px;
+    border-top: none;
+}
