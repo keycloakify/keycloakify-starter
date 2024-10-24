@@ -1,0 +1,126 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-text padding="0" font-family="helvetica" color="#000" line-height="1.5" />
+      <mj-class
+        name="link"
+        color="#EAF5F8"
+        font-size="20px"
+        font-weight="500"
+        background-color="transparent"
+        align="left"
+        padding="0px"
+      />
+      <mj-section text-align="left" />
+      <mj-image padding="0px" />
+      <mj-all font-family="Arial" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#fff">
+    <mj-section background-color="#582483" padding="50px">
+      <mj-column>
+        <mj-image
+          width="140px"
+          src="https://cms.bob.no/media/iweieowk/bob_horizontal_white.png"
+          align="left"
+          alt="bob-logo"
+        ></mj-image>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#fff" padding="50px">
+      <mj-column>
+        <mj-text font-size="20px">
+          ${kcSanitize(msg("emailCodeMessage"))?no_esc}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#582483" padding="50px">
+      <mj-column>
+        <mj-text color="#fff" font-size="32px" font-weight="700" align="center">
+          ${kcSanitize(msg("emailCode", code))?no_esc}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#fff" padding="50px">
+      <mj-column>
+        <mj-text font-size="18px">${kcSanitize(msg("contactMessage"))?no_esc}</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#fff" padding-left="50px">
+      <mj-column>
+        <mj-text font-size="18px" color="#767676"
+          >${kcSanitize(msg("autoMessage"))?no_esc}</mj-text
+        >
+      </mj-column>
+    </mj-section>
+
+    <mj-section
+      background-color="#320E3B"
+      padding-left="50px"
+      padding-right="50px"
+      padding-top="40px"
+      padding-bottom="0px"
+    >
+      <mj-column padding-bottom="15px">
+        <mj-image
+          width="94px"
+          src="https://cms.bob.no/media/t2kffgid/boblogohorizontal.png"
+          align="left"
+          alt="bob-logo"
+        ></mj-image>
+      </mj-column>
+      <mj-column>
+        <mj-text mj-class="link">
+          <a href="https://bob.no/om-bob/" style="color: #fff; text-decoration: none"
+            >${kcSanitize(msg("aboutUs"))?no_esc}</a
+          >
+        </mj-text>
+        <mj-text mj-class="link" padding-top="10px">
+          <a href="https://bob.no/kontakt/" style="color: #fff; text-decoration: none"
+            >${kcSanitize(msg("contactUs"))?no_esc}</a
+          >
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section
+      background-color="#320E3B"
+      padding-left="50%"
+      padding-right="50px"
+      padding-bottom="40px"
+    >
+      <mj-group width="140px">
+        <mj-column>
+          <mj-image
+            width="24px"
+            src="https://cms.bob.no/media/h5hj5dha/logo-facebook.png"
+            align="left"
+            alt="bob-facebook"
+            href="https://www.facebook.com/BOBboligbyggelag"
+          ></mj-image>
+        </mj-column>
+        <mj-column>
+          <mj-image
+            width="24px"
+            src="https://cms.bob.no/media/uhgfnlus/instagram.png"
+            align="left"
+            alt="bob-instagram"
+            href="https://www.instagram.com/bob_boligbyggelag/"
+          ></mj-image>
+        </mj-column>
+        <mj-column>
+          <mj-image
+            width="24px"
+            src="https://cms.bob.no/media/2lbhf0ej/inkedin.png"
+            align="left"
+            alt="bob-linkedin"
+            href="https://www.linkedin.com/company/bobbbl"
+          ></mj-image>
+        </mj-column>
+      </mj-group>
+    </mj-section>
+  </mj-body>
+</mjml>
