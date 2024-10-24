@@ -3,378 +3,378 @@
 @tailwind utilities;
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .kcHtmlClass {
-    background: white;
-    .kcBodyClass {
-        font-family: "sofia-pro", Arial, Helvetica, sans-serif;
-        font-size: 1rem;
-        background: none;
-        margin: 0;
-    }
+  background: white;
+  .kcBodyClass {
+    font-family: "sofia-pro", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    background: none;
+    margin: 0;
+  }
 }
 
 .kcLoginClass {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    height: 100%;
-    min-height: 100svh;
-    min-height: 100vh;
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  height: 100%;
+  min-height: 100svh;
+  min-height: 100vh;
+  padding: 0;
 }
 
 /* Background */
 .kcContainerClass {
-    flex-grow: 1;
-    background: url("./assets/bob-logo-vertical.svg"),
-        url("./assets/bob-background-city.svg"),
-        linear-gradient(to bottom, #af4fff, #8e3bd1 50%, #582483);
+  flex-grow: 1;
+  background: url("./assets/bob-logo-vertical.svg"),
+    url("./assets/bob-background-city.svg"),
+    linear-gradient(to bottom, #af4fff, #8e3bd1 50%, #582483);
 
-    background-repeat: no-repeat, repeat-x, no-repeat;
-    background-size: calc(min(180px, 20vw)), 600px, cover;
-    background-position:
-        center,
-        0 90%,
-        center;
+  background-repeat: no-repeat, repeat-x, no-repeat;
+  background-size: calc(min(180px, 20vw)), 600px, cover;
+  background-position:
+    center,
+    0 90%,
+    center;
 
-    @media screen and (max-width: 1024px) {
-        display: none;
-    }
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
 }
 
 /** Form */
 .kcFormCardClass {
-    position: relative;
-    max-width: 623px;
-    width: 40%;
-    min-width: 364px;
-    box-shadow: none;
-    border: none;
-    padding: 0;
+  position: relative;
+  max-width: 623px;
+  width: 40%;
+  min-width: 364px;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+
+  @media screen and (max-width: 1024px) {
+    max-width: none;
+    width: 100%;
+
+    background-image: url("./assets/bob-background-city-violet.svg");
+    background-repeat: repeat-x;
+    background-size: 450px;
+    background-position: 0 80%;
+  }
+
+  .kcFormHeaderClass {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     margin: 0;
+    padding: 0;
+    background-color: transparent;
+    width: 100%;
+  }
 
-    @media screen and (max-width: 1024px) {
-        max-width: none;
-        width: 100%;
-
-        background-image: url("./assets/bob-background-city-violet.svg");
-        background-repeat: repeat-x;
-        background-size: 450px;
-        background-position: 0 80%;
-    }
-
-    .kcFormHeaderClass {
-        display: flex;
-        justify-content: center;
-        margin: 0;
-        padding: 0;
-        background-color: transparent;
-        width: 100%;
-    }
-
-    .kcFormClass {
-        display: flex;
-        flex-direction: column;
-        gap: 28px;
-    }
-
-    #kc-content-wrapper,
-    #kc-form-wrapper {
-        margin: 0;
-    }
-    .kcContentWrapperClass {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0;
-        max-width: none;
-        gap: 28px;
-    }
-
-    .kcContentClass {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-self: center;
-        flex-grow: 1;
-        padding: 32px;
-        margin: 0;
-        width: 100%;
-        max-width: 364px;
-        gap: 40px;
-    }
-}
-
-.kcFormButtonsWrapperClass {
+  .kcFormClass {
     display: flex;
     flex-direction: column;
     gap: 28px;
+  }
+
+  #kc-content-wrapper,
+  #kc-form-wrapper {
     margin: 0;
-    padding: 0;
+  }
+  .kcContentWrapperClass {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    max-width: none;
+    gap: 28px;
+  }
+
+  .kcContentClass {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    flex-grow: 1;
+    padding: 32px;
+    margin: 0;
     width: 100%;
+    max-width: 364px;
+    gap: 40px;
+  }
+}
+
+.kcFormButtonsWrapperClass {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 /* Components (button, input) */
 .kcButtonPrimaryClass {
-    /* Primary button */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: pre-wrap;
-    background-color: #582483;
-    background-image: none;
-    color: #fff;
-    border-radius: 3rem;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1.15rem;
-    height: 44px;
-    padding: 0;
+  /* Primary button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+  background-color: #582483;
+  background-image: none;
+  color: #fff;
+  border-radius: 3rem;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.15rem;
+  height: 44px;
+  padding: 0;
 
-    &:hover,
-    &:focus-visible,
-    &:active {
-        background-color: #320e3b;
-    }
+  &:hover,
+  &:focus-visible,
+  &:active {
+    background-color: #320e3b;
+  }
 
-    &:disabled {
-        background-color: #eee;
-        color: #888;
-        cursor: default;
-    }
+  &:disabled {
+    background-color: #eee;
+    color: #888;
+    cursor: default;
+  }
 }
 
 .kcButtonDefaultClass {
-    /* Secondary button */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: pre-wrap;
-    background-color: #fff;
-    background-image: none;
-    color: #582483;
-    border-radius: 3rem;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1.15rem;
-    height: 44px;
-    padding: 0;
-    border: 2px solid #582483;
+  /* Secondary button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+  background-color: #fff;
+  background-image: none;
+  color: #582483;
+  border-radius: 3rem;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.15rem;
+  height: 44px;
+  padding: 0;
+  border: 2px solid #582483;
 
-    &:hover,
-    &:focus-visible,
-    &:active {
-        border: 4px solid #582483;
-    }
+  &:hover,
+  &:focus-visible,
+  &:active {
+    border: 4px solid #582483;
+  }
 
-    &:disabled {
-        background-color: #eee;
-        color: #888;
-        cursor: default;
-        border: 2px solid #888;
-    }
+  &:disabled {
+    background-color: #eee;
+    color: #888;
+    cursor: default;
+    border: 2px solid #888;
+  }
 }
 
 .kcInputClass {
-    border-radius: 0.5rem;
-    height: 40px;
-    width: 100%;
-    border: 1px solid #888;
-    padding: 0 0.5rem;
-    font-size: 1rem;
-    outline: none;
+  border-radius: 0.5rem;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #888;
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  outline: none;
 
-    &:focus-visible {
-        outline: auto;
-        border-color: #582483;
-        outline-color: #582483;
-        --webkit-tap-highlight-color: transparent;
-        --webkit-focus-ring-color: #582483;
-    }
+  &:focus-visible {
+    outline: auto;
+    border-color: #582483;
+    outline-color: #582483;
+    --webkit-tap-highlight-color: transparent;
+    --webkit-focus-ring-color: #582483;
+  }
 
-    &:focus-visible&:invalid {
-        border-color: #ff0000;
-        outline-color: #ff0000;
-    }
+  &:focus-visible&:invalid {
+    border-color: #ff0000;
+    outline-color: #ff0000;
+  }
 }
 
 /* Footer */
 .kcSignUpClass {
-    background-color: #eee;
-    border-radius: 0 0 6px 6px;
-    width: 100%;
+  background-color: #eee;
+  border-radius: 0 0 6px 6px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  #kc-info-wrapper {
+    font-size: 13px;
+  }
+
+  .kcInfoAreaWrapperClass {
+    padding: 12px 16px;
     margin: 0;
-    padding: 0;
+    text-align: left;
+    display: block;
+  }
 
-    #kc-info-wrapper {
-        font-size: 13px;
+  .kcFormSocialAccountLinkClass {
+    color: #000;
+    text-decoration: underline;
+    font-weight: normal;
+    cursor: pointer;
+
+    &:hover {
+      color: #000;
     }
-
-    .kcInfoAreaWrapperClass {
-        padding: 12px 16px;
-        margin: 0;
-        text-align: left;
-        display: block;
-    }
-
-    .kcFormSocialAccountLinkClass {
-        color: #000;
-        text-decoration: underline;
-        font-weight: normal;
-        cursor: pointer;
-
-        &:hover {
-            color: #000;
-        }
-    }
+  }
 }
 
 /* Language dropdown */
 .kcLocaleMainClass {
-    padding: 1rem;
-    color: #fff;
-    @media screen and (max-width: 1024px) {
-        color: #582483;
-        padding: 0;
+  padding: 1rem;
+  color: #fff;
+  @media screen and (max-width: 1024px) {
+    color: #582483;
+    padding: 0;
+  }
+
+  .kcLocaleDropDownClass {
+    display: flex !important;
+    flex-direction: column;
+    align-items: end;
+
+    button#kc-current-locale-link {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
     }
 
-    .kcLocaleDropDownClass {
-        display: flex !important;
-        flex-direction: column;
-        align-items: end;
-
-        button#kc-current-locale-link {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        button#kc-current-locale-link::after {
-            display: none;
-        }
-
-        ul.kcLocaleListClass {
-            list-style: none;
-            margin: 0.5rem 0;
-            > li {
-                padding: 0.1rem;
-                cursor: pointer;
-            }
-        }
+    button#kc-current-locale-link::after {
+      display: none;
     }
+
+    ul.kcLocaleListClass {
+      list-style: none;
+      margin: 0.5rem 0;
+      > li {
+        padding: 0.1rem;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 /* Social auth provider section */
 .kcFormSocialAccountSectionClass {
-    /* z-index: 3; */
-    .kcFormSocialAccountListClass {
-        padding: 0;
-        margin: 0;
-        > li {
-            list-style: none;
-        }
-        .kcFormSocialAccountListButtonClass {
-            display: flex;
-            width: 300px;
-            height: 44px;
-            background: url("./assets/vipps-login.svg") left no-repeat;
-            font-size: 0;
-        }
+  /* z-index: 3; */
+  .kcFormSocialAccountListClass {
+    padding: 0;
+    margin: 0;
+    > li {
+      list-style: none;
     }
+    .kcFormSocialAccountListButtonClass {
+      display: flex;
+      width: 300px;
+      height: 44px;
+      background: url("./assets/vipps-login.svg") left no-repeat;
+      font-size: 0;
+    }
+  }
 }
 
 /* SofiaPro Font */
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-Regular.ttf") format("opentype");
-    font-style: normal;
-    font-weight: 400;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-Regular.ttf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-RegularIt.ttf") format("opentype");
-    font-style: italic;
-    font-weight: 400;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-RegularIt.ttf") format("opentype");
+  font-style: italic;
+  font-weight: 400;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-Black.ttf") format("opentype");
-    font-weight: 900;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-Black.ttf") format("opentype");
+  font-weight: 900;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-BlackIt.ttf") format("opentype");
-    font-weight: 900;
-    font-style: italic;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-BlackIt.ttf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-Bold.ttf") format("opentype");
-    font-weight: 700;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-Bold.ttf") format("opentype");
+  font-weight: 700;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-BoldIt.ttf") format("opentype");
-    font-weight: 700;
-    font-style: italic;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-BoldIt.ttf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-ExtraLight.ttf") format("opentype");
-    font-weight: 200;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-ExtraLight.ttf") format("opentype");
+  font-weight: 200;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-ExtraLightIt.ttf") format("opentype");
-    font-weight: 200;
-    font-style: italic;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-ExtraLightIt.ttf") format("opentype");
+  font-weight: 200;
+  font-style: italic;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-Light.ttf") format("opentype");
-    font-weight: 300;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-Light.ttf") format("opentype");
+  font-weight: 300;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-LightIt.ttf") format("opentype");
-    font-weight: 300;
-    font-style: italic;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-LightIt.ttf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-Medium.ttf") format("opentype");
-    font-weight: 500;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-Medium.ttf") format("opentype");
+  font-weight: 500;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-MediumIt.ttf") format("opentype");
-    font-weight: 500;
-    font-style: italic;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-MediumIt.ttf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-SemiBold.ttf") format("opentype");
-    font-weight: 600;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-SemiBold.ttf") format("opentype");
+  font-weight: 600;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-SemiBoldIt.ttf") format("opentype");
-    font-weight: 600;
-    font-style: italic;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-SemiBoldIt.ttf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-UltraLight.ttf") format("opentype");
-    font-weight: 100;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-UltraLight.ttf") format("opentype");
+  font-weight: 100;
 }
 @font-face {
-    font-family: "sofia-pro";
-    src: url("./assets/fonts/SofiaPro/SofiaPro-UltraLightIt.ttf") format("opentype");
-    font-weight: 100;
-    font-style: italic;
+  font-family: "sofia-pro";
+  src: url("./assets/fonts/SofiaPro/SofiaPro-UltraLightIt.ttf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
 }

@@ -12,52 +12,52 @@ const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 const doMakeUserConfirmPassword = true;
 
 export default function KcPage(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+  const { kcContext } = props;
 
-    const { i18n } = useI18n({ kcContext });
+  const { i18n } = useI18n({ kcContext });
 
-    return (
-        <Suspense>
-            {(() => {
-                switch (kcContext.pageId) {
-                    case "email-code-form.ftl":
-                        return (
-                            <EmailCodeForm
-                                Template={Template}
-                                kcContext={kcContext}
-                                i18n={i18n}
-                                doUseDefaultCss={true}
-                            />
-                        );
-                    case "login-username.ftl":
-                        return (
-                            <LoginUsername
-                                kcContext={kcContext}
-                                i18n={i18n}
-                                classes={classes}
-                                Template={Template}
-                                doUseDefaultCss={true}
-                            />
-                        );
-                    default:
-                        return (
-                            <DefaultPage
-                                kcContext={kcContext}
-                                i18n={i18n}
-                                classes={classes}
-                                Template={Template}
-                                doUseDefaultCss={true}
-                                UserProfileFormFields={UserProfileFormFields}
-                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
-                            />
-                        );
-                }
-            })()}
-        </Suspense>
-    );
+  return (
+    <Suspense>
+      {(() => {
+        switch (kcContext.pageId) {
+          case "email-code-form.ftl":
+            return (
+              <EmailCodeForm
+                Template={Template}
+                kcContext={kcContext}
+                i18n={i18n}
+                doUseDefaultCss={true}
+              />
+            );
+          case "login-username.ftl":
+            return (
+              <LoginUsername
+                kcContext={kcContext}
+                i18n={i18n}
+                classes={classes}
+                Template={Template}
+                doUseDefaultCss={true}
+              />
+            );
+          default:
+            return (
+              <DefaultPage
+                kcContext={kcContext}
+                i18n={i18n}
+                classes={classes}
+                Template={Template}
+                doUseDefaultCss={true}
+                UserProfileFormFields={UserProfileFormFields}
+                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+              />
+            );
+        }
+      })()}
+    </Suspense>
+  );
 }
 
 const classes = {
-    kcLoginClass: "",
-    kcFormCardClass: ""
+  kcLoginClass: "",
+  kcFormCardClass: ""
 } satisfies { [key in ClassKey]?: string };
