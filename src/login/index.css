@@ -9,6 +9,6 @@ body.kcBodyClass {
     @apply font-geist;
 }
 
-.kcHeaderWrapperClass{
+.kcHeaderWrapperClass {
     @apply text-3xl font-bold underline;
 }
