@@ -28,7 +28,6 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
         referrer
     } = kcContext;
 
-
     const { msg } = i18n;
 
     const { goToAuthServer, backFromAuthServer } = useOidc();
@@ -57,7 +56,6 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                     </span>
                 </div>
             </div>
-
             <form action={url.accountUrl} className="form-horizontal" method="post">
                 <input type="hidden" id="stateChecker" name="stateChecker" value={stateChecker} />
 
@@ -148,9 +146,11 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
             </form>
             <button
                 className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                onClick={() => goToAuthServer({
-                    extraQueryParams: { kc_action: "delete_account" }
-                })}
+                onClick={() =>
+                    goToAuthServer({
+                        extraQueryParams: { kc_action: "delete_account" }
+                    })
+                }
             >
                 Delete Account
             </button>
@@ -161,9 +161,11 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
             <br />
             <button
                 className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                onClick={() => goToAuthServer({
-                    extraQueryParams: { kc_action: "UPDATE_PROFILE" }
-                })}
+                onClick={() =>
+                    goToAuthServer({
+                        extraQueryParams: { kc_action: "UPDATE_PROFILE" }
+                    })
+                }
             >
                 Update profile (via Login theme)
             </button>

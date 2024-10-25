@@ -32,12 +32,10 @@ export default function Password(props: PageProps<Extract<KcContext, { pageId: "
             }}
             active="password"
         >
-            {
-                /* NOTE: Since we can't have the password policies we simply create a button that
-                 * redirects to the login-update-password.ftl page of the login theme.
-                 * See: https://github.com/user-attachments/assets/6de0f904-afa9-4ccc-b0d3-88c07f1e80d0
-                 */
-            }
+            {/* NOTE: Since we can't have the password policies we simply create a button that
+             * redirects to the login-update-password.ftl page of the login theme.
+             * See: https://github.com/user-attachments/assets/6de0f904-afa9-4ccc-b0d3-88c07f1e80d0
+             */}
 
             <div className="row">
                 <div className="col-md-10">
@@ -45,14 +43,15 @@ export default function Password(props: PageProps<Extract<KcContext, { pageId: "
                 </div>
             </div>
             <div className="form-horizontal">
-
                 <div className="form-group">
                     <div id="kc-form-buttons" className="col-md-offset-2 col-md-10 submit">
                         <button
                             className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                            onClick={() => goToAuthServer({
-                                extraQueryParams: { kc_action: "UPDATE_PASSWORD" }
-                            })}
+                            onClick={() =>
+                                goToAuthServer({
+                                    extraQueryParams: { kc_action: "UPDATE_PASSWORD" }
+                                })
+                            }
                         >
                             {msg("changePasswordHtmlTitle")}
                         </button>
@@ -70,10 +69,7 @@ export default function Password(props: PageProps<Extract<KcContext, { pageId: "
                         )}
                     </div>
                 </div>
-
             </div>
-
-
         </Template>
     );
 }

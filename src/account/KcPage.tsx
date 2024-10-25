@@ -25,20 +25,22 @@ function ContextualizedKcPage(props: { kcContext: KcContext }) {
         <Suspense>
             {(() => {
                 switch (kcContext.pageId) {
-                    case "account.ftl": return (
-                        <Account
-                            {...{ kcContext, i18n, classes }}
-                            Template={Template}
-                            doUseDefaultCss={true}
-                        />
-                    );
-                    case "password.ftl": return (
-                        <Password
-                            {...{ kcContext, i18n, classes }}
-                            Template={Template}
-                            doUseDefaultCss={true}
-                        />
-                    );
+                    case "account.ftl":
+                        return (
+                            <Account
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "password.ftl":
+                        return (
+                            <Password
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
                     default:
                         return (
                             <DefaultPage
