@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { assert } from "keycloakify/tools/assert";
-import { clsx } from "keycloakify/tools/clsx";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
@@ -9,6 +8,8 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import bobLogoSvgUrl from "./assets/bob-logo-desktop.svg";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/select";
+import { cn } from "../utils";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
   const {
@@ -52,57 +53,30 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   }
 
   const languageDropdown = (
-    <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
-      <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>
-        <div id="kc-locale-dropdown" className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"))}>
-          <button
-            tabIndex={1}
-            id="kc-current-locale-link"
-            aria-label={msgStr("languages")}
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="language-switch1"
-          >
-            {currentLanguage.label}
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M18.5 8.5L12.3536 14.6464C12.1583 14.8417 11.8417 14.8417 11.6464 14.6464L5.5 8.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-          <ul
-            role="menu"
-            tabIndex={-1}
-            aria-labelledby="kc-current-locale-link"
-            aria-activedescendant=""
-            id="language-switch1"
-            className={kcClsx("kcLocaleListClass")}
-          >
-            {enabledLanguages.map(({ languageTag, label, href }, i) => (
-              <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
-                <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <Select defaultValue={currentLanguage.label}>
+      <SelectTrigger className="absolute top-0 right-0 flex gap-2 w-fit ml-auto mb-auto text-violet lg:text-white text-base">
+        <SelectValue placeholder="Language" />
+      </SelectTrigger>
+      <SelectContent align="end" className="bg-white lg:bg-transparent text-violet lg:text-snow">
+        {enabledLanguages.map(({ languageTag, label, href }, i) => (
+          <SelectItem key={languageTag} value={label} className="text-violet lg:text-snow">
+            <a role="menuitem" id={`language-${i + 1}`} className="text-violet lg:text-snow text-base" href={href}>
+              {label}
+            </a>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 
   return (
     <div className={kcClsx("kcLoginClass")}>
-      <div className={kcClsx("kcContainerClass")}>
-        <div className="hidden md:block">
-          {realm.internationalizationEnabled && (assert(locale !== undefined), enabledLanguages.length > 1) && languageDropdown}
-        </div>
+      <div className={cn(kcClsx("kcContainerClass"), "hidden lg:block relative")}>
+        {realm.internationalizationEnabled && (assert(locale !== undefined), enabledLanguages.length > 1) && languageDropdown}
       </div>
-      <div className={clsx(kcClsx("kcFormCardClass"))}>
+      <div className={cn(kcClsx("kcFormCardClass"))}>
         <div id="kc-content" className={kcClsx("kcContentClass")}>
-          <div className="block md:hidden">
+          <div className="block lg:hidden">
             {realm.internationalizationEnabled && (assert(locale !== undefined), enabledLanguages.length > 1) && languageDropdown}
           </div>
           <header className={kcClsx("kcFormHeaderClass")}>
@@ -111,7 +85,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
           <div id="kc-content-wrapper" className={kcClsx("kcContentWrapperClass")}>
             {/* App-initiated actions should not see warning messages about the need to complete the action during login. */}
             {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-              <div className={clsx(`alert-${message.type}`, kcClsx("kcAlertClass"), `pf-m-${message?.type === "error" ? "danger" : message.type}`)}>
+              <div className={cn(`alert-${message.type}`, kcClsx("kcAlertClass"), `pf-m-${message?.type === "error" ? "danger" : message.type}`)}>
                 <div className="pf-c-alert__icon">
                   {message.type === "success" && <span className={kcClsx("kcFeedbackSuccessIcon")}></span>}
                   {message.type === "warning" && <span className={kcClsx("kcFeedbackWarningIcon")}></span>}
