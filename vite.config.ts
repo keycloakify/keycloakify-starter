@@ -9,7 +9,8 @@ export default defineConfig({
   plugins: [
     react(),
     keycloakify({
-      accountThemeImplementation: "none"
+      accountThemeImplementation: "none",
+      themeName: "bob-keycloakify"
     })
   ]
 });

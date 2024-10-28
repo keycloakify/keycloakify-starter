@@ -7,6 +7,8 @@ import Template from "./Template";
 import "./KcBobStyles.css";
 import EmailCodeForm from "./pages/EmailCodeForm";
 import LoginUsername from "./pages/LoginUsername";
+import Error from "./pages/Error";
+
 const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 
 const doMakeUserConfirmPassword = true;
@@ -25,6 +27,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
               <EmailCodeForm
                 Template={Template}
                 kcContext={kcContext}
+                classes={classes}
                 i18n={i18n}
                 doUseDefaultCss={false}
               />
@@ -32,6 +35,16 @@ export default function KcPage(props: { kcContext: KcContext }) {
           case "login-username.ftl":
             return (
               <LoginUsername
+                kcContext={kcContext}
+                i18n={i18n}
+                classes={classes}
+                Template={Template}
+                doUseDefaultCss={false}
+              />
+            );
+          case "error.ftl":
+            return (
+              <Error
                 kcContext={kcContext}
                 i18n={i18n}
                 classes={classes}
