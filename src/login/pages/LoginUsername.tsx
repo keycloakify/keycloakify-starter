@@ -4,6 +4,7 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { cn } from "../../utils";
 
 export default function LoginUsername(props: PageProps<Extract<KcContext, { pageId: "login-username.ftl" }>, I18n>) {
   const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -50,7 +51,7 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
       headerNode={msg("doLogIn")}
       socialProvidersNode={
         <>
-          {!emailClicked && realm.password && social.providers?.length && (
+          {!emailClicked && realm.password && social?.providers?.length && (
             <div id="kc-social-providers" className={kcClsx("kcFormSocialAccountSectionClass")}>
               <ul className={kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass")}>
                 {social.providers.map((...[p, , providers]) => {
@@ -130,19 +131,12 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                   </div>
                 )}
 
-                <div className={kcClsx("kcFormGroupClass", "kcFormSettingClass")}>
+                <div className={cn(kcClsx("kcFormGroupClass", "kcFormSettingClass"), "invisible")}>
                   <div id="kc-form-options">
                     {realm.rememberMe && !usernameHidden && (
                       <div className="checkbox">
                         <label>
-                          <input
-                            tabIndex={3}
-                            id="rememberMe"
-                            name="rememberMe"
-                            type="checkbox"
-                            defaultChecked={!!login.rememberMe}
-                            className="border-[#888]"
-                          />{" "}
+                          <input tabIndex={3} id="rememberMe" name="rememberMe" type="checkbox" checked className="border-[#888]" />{" "}
                           {msg("rememberMe")}
                         </label>
                       </div>
