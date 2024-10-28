@@ -3,6 +3,7 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { useState } from "react";
+import { kcSanitize } from "keycloakify/lib/kcSanitize";
 
 export default function EmailCodeForm(props: PageProps<Extract<KcContext, { pageId: "email-code-form.ftl" }>, I18n>) {
   const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -53,7 +54,7 @@ export default function EmailCodeForm(props: PageProps<Extract<KcContext, { page
                 className={kcClsx("kcInputErrorMessageClass")}
                 aria-live="polite"
                 dangerouslySetInnerHTML={{
-                  __html: messagesPerField.get("emailCode")
+                  __html: kcSanitize(messagesPerField.get("emailCode"))
                 }}
               />
             )}
