@@ -26,7 +26,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
                 Template={Template}
                 kcContext={kcContext}
                 i18n={i18n}
-                doUseDefaultCss={true}
+                doUseDefaultCss={false}
               />
             );
           case "login-username.ftl":
@@ -36,7 +36,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
                 i18n={i18n}
                 classes={classes}
                 Template={Template}
-                doUseDefaultCss={true}
+                doUseDefaultCss={false}
               />
             );
           default:

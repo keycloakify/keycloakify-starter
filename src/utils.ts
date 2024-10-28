@@ -1,3 +1,3 @@
-import { twMerge } from "tailwind-merge";
+import { ClassNameValue, twMerge } from "tailwind-merge";
 
-export const cn = (...args: string[]): string => twMerge(...args);
+export const cn = (...args: ClassNameValue[]): string => twMerge(...args);
