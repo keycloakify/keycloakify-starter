@@ -3182,12 +3182,12 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-keycloakify@10.0.0-rc.112:
-  version "10.0.0-rc.112"
-  resolved "https://registry.npmjs.org/keycloakify/-/keycloakify-10.0.0-rc.112.tgz"
-  integrity sha512-/AWot6uB5tsrRUYE8QUYvdcFJQNYzueDYvNcG+gWT+FW40Y24Qqsu4kDdzPFGn+JXdH4hxSiy9BICIbbSOWXSA==
+keycloakify@^11.3.11:
+  version "11.3.11"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.3.11.tgz#2eb704d0cc883070d8b1bb9a7e4ec0640fdeed52"
+  integrity sha512-ZFSocde1hekW0zW1JZEcbPwPwLEmqLGX8qZTNl1o7DoelEZwf2Xy1ktjRuR04EJhmfwvcIdYhKFQKd39oJekfw==
   dependencies:
-    tsafe "^1.6.6"
+    tsafe "^1.7.5"
 
 keyv@^4.5.3:
   version "4.5.4"
@@ -4433,10 +4433,10 @@ ts-dedent@^2.0.0, ts-dedent@^2.2.0:
   resolved "https://registry.npmjs.org/ts-dedent/-/ts-dedent-2.2.0.tgz"
   integrity sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==
 
-tsafe@^1.6.6:
-  version "1.7.2"
-  resolved "https://registry.npmjs.org/tsafe/-/tsafe-1.7.2.tgz"
-  integrity sha512-dAPfQLhCfCRre5qs+Z5Q2a7s2CV7RxffZUmvj7puGaePYjECzWREJFd3w4XSFe/T5tbxgowfItA/JSSZ6Ma3dA==
+tsafe@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/tsafe/-/tsafe-1.7.5.tgz#0d3a31202b5ef87c7ba997e66e03fd80801278ef"
+  integrity sha512-tbNyyBSbwfbilFfiuXkSOj82a6++ovgANwcoqBAcO9/REPoZMEQoE8kWPeO0dy5A2D/2Lajr8Ohue5T0ifIvLQ==
 
 tsconfig-paths@^4.2.0:
   version "4.2.0"
