@@ -1,12 +1,12 @@
 name: Deploy
 on:
-	workflow_dispatch:
-	release:
-		types:
-			- published
+  workflow_dispatch: 
+  release:
+    types:
+      - published
 jobs:
-	test:
-		runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 		steps:
 			- uses: actions/checkout@v4
 			- uses: actions/setup-node@v4
@@ -18,27 +18,27 @@ jobs:
 		steps:
 			- uses: actions/checkout@v4
 			  with:
-			      fetch-depth: 1
+			    fetch-depth: 1
 			- name: extract tag
 			  id: extract_tag
 			  run: echo "::set-output name=tag::${GITHUB_REF/refs\/tags\//}"
 			- uses: reedyuk/npm-version@1.2.2
 			  with:
-			      git-tag-version: false
-			      version: ${{ steps.extract_tag.outputs.tag }}
+			    git-tag-version: false
+			    version: ${{ steps.extract_tag.outputs.tag }}
 			- uses: actions/setup-node@v4
 			- uses: pnpm/action-setup@v3
 			  with:
-			      version: 9
+			    version: 9
 			- run: pnpm install --frozen-lockfile
 			- run: pnpm build-keycloak-theme
 			- uses: softprops/action-gh-release@v2
 			  with:
-			      name: Release ${{ steps.extract_tag.output.tag }}
-			      tag_name: ${{ steps.extract_tag.output.tag }}
-			      target_commitish: ${{ github.head_ref || github.ref }}
-			      generate_release_notes: true
-			      draft: false
-			      files: dist_keycloak/keycloak-theme-*.jar
+			    name: Release ${{ steps.extract_tag.output.tag }}
+			    tag_name: ${{ steps.extract_tag.output.tag }}
+			    target_commitish: ${{ github.head_ref || github.ref }}
+			    generate_release_notes: true
+			    draft: false
+			    files: dist_keycloak/keycloak-theme-*.jar
 			  env:
-			      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+			    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
