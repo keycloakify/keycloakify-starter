@@ -1,10 +1,10 @@
 {
-    "name": "keycloakify-starter",
+    "name": "keycloak-flags",
     "version": "0.0.0",
-    "description": "Starter for Keycloakify 11",
+    "description": "Flags theme for keycloak",
     "repository": {
         "type": "git",
-        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
+        "url": "git://github.com/flags-gg/keycloak-theme.git"
     },
     "type": "module",
     "scripts": {
