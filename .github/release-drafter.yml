@@ -1,0 +1,67 @@
+name-template: 'v$NEXT_PATCH_VERSION'
+tag-template: 'v$NEXT_PATCH_VERSION'
+template: |
+  # What's Changed
+
+  $CHANGES
+categories:
+  - title: 'New Features'
+    labels:
+      - 'Feature'
+      - 'Feature :boom:'
+  - title: 'Improvements'
+    labels:
+      - 'enhancement'
+      - 'Improvement'
+      - 'Enhancement :tada:'
+      - 'Improvement :tada:'
+  - title: 'Bug Fixes'
+    labels:
+      - 'bug'
+      - 'bug :bug:'
+      - 'Bug fix'
+      - 'Bug fix :bug:'
+      - 'Bug Fix'
+      - 'Bug Fix :bug:'
+      - 'Bug Fixes'
+      - 'Bug Fixes :bug:'
+  - title: 'Breaking Changes'
+    labels:
+      - 'BC Break'
+      - 'BC Break :fire:'
+  - title: 'Environment Variable Changes'
+    labels:
+      - 'Env'
+      - 'Env :man_technologist:'
+      - 'env'
+      - 'env :man_technologist:'
+      - 'Env change'
+      - 'Env change :man_technologist:'
+      - 'Env Change'
+      - 'Env Change :man_technologist:'
+  - title: 'External Change'
+    labels:
+      - 'external'
+      - 'external :shipit:'
+  - title: 'Dependencies'
+    labels:
+      - 'dependencies'
+      - 'dependencies :electric_plug:'
+
+version-resolver:
+  major:
+    labels:
+      - 'type: breaking'
+  minor:
+    labels:
+      - 'type: feature'
+  patch:
+    labels:
+      - 'type: bug'
+      - 'type: maintenance'
+      - 'type: docs'
+      - 'type: dependencies'
+      - 'type: security'
+
+exclude-labels:
+  - 'skip-changelog'
