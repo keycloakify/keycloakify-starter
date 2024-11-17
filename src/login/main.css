@@ -10,3 +10,14 @@
 #kc-social-providers h2 {
     display: none;
 }
+
+div.kcFormGroupClass:has([name="username"]), div.kcFormGroupClass:has([name="email"]) {
+  display: none;
+}
+
+input.kcInputClass[name="username"], input.kcInputClass[name="email"] {
+  display: none;
+}
+kcLabelClass[for="username"], label.kcLabelClass[for="email"] {
+  display: none;
+}
