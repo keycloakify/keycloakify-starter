@@ -1,5 +1,6 @@
 version: "1.0"
 linter: jetbrains/qodana-js:2024.2
+bootstrap: pnpm install
 profile:
   name: qodana.recommended
 include:
@@ -9,3 +10,4 @@ exclude:
   - name: All
     paths:
       - .pnpm-store
+
