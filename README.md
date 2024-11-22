@@ -16,11 +16,11 @@ yarn install # Or use an other package manager, just be sure to delete the yarn.
 
 # Testing the theme locally
 
-[Documentation](https://docs.keycloakify.dev/v/v10/testing-your-theme)
+[Documentation](https://docs.keycloakify.dev/testing-your-theme)
 
 # How to customize the theme
 
-[Documentation](https://docs.keycloakify.dev/v/v10/customization-strategies)
+[Documentation](https://docs.keycloakify.dev/customization-strategies)
 
 # Building the theme
 
