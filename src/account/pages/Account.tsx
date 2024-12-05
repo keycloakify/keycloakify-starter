@@ -144,31 +144,10 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                     </div>
                 </div>
             </form>
-            <button
-                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                onClick={() =>
-                    goToAuthServer({
-                        extraQueryParams: { kc_action: "delete_account" }
-                    })
-                }
-            >
-                Delete Account
-            </button>
             <br />
             <br />
-            -- OR --
+            -- OR: Instead of re-implementing the form, simply redirect to the page of you account theme to enable the user to update their profile info --
             <br />
-            <br />
-            <button
-                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                onClick={() =>
-                    goToAuthServer({
-                        extraQueryParams: { kc_action: "UPDATE_PROFILE" }
-                    })
-                }
-            >
-                Update profile (via Login theme)
-            </button>
             {backFromAuthServer?.extraQueryParams.kc_action === "UPDATE_PROFILE" && (
                 <p>
                     {(() => {
@@ -181,6 +160,66 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                     })()}
                 </p>
             )}
+            <br />
+            <button
+                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                onClick={() =>
+                    goToAuthServer({
+                        extraQueryParams: { kc_action: "UPDATE_PROFILE" }
+                    })
+                }
+            >
+                Update profile (via Login theme)
+            </button>
+            <br />
+            <br />
+            -- Optionally add a button to enable users to delete their account (if enabled in your keycloak configuration) --
+            <br />
+            <br />
+            <button
+                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                onClick={() =>
+                    goToAuthServer({
+                        extraQueryParams: { kc_action: "delete_account" }
+                    })
+                }
+            >
+                Delete Account
+            </button>
+
+            {kcContext.features.passwordUpdateSupported && (
+                <>
+            <br />
+            <br />
+            -- You can also add a button to enable users to change their password --
+            <br />
+            <br />
+
+                        <button
+                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                            onClick={() =>
+                                goToAuthServer({
+                                    extraQueryParams: { kc_action: "UPDATE_PASSWORD" }
+                                })
+                            }
+                        >
+                            {msg("changePasswordHtmlTitle")}
+                        </button>
+                        {backFromAuthServer?.extraQueryParams.kc_action === "UPDATE_PASSWORD" && (
+                            <p>
+                                {(() => {
+                                    switch (backFromAuthServer.result.kc_action_status) {
+                                        case "success":
+                                            return "Password successfully updated";
+                                        case "cancelled":
+                                            return "Password unchanged";
+                                    }
+                                })()}
+                            </p>
+                        )}
+                    </>
+            )}
+
         </Template>
     );
 }
