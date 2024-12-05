@@ -1,4 +1,4 @@
-import { getOidc, realm } from "../oidc";
+import { getOidc } from "../oidc";
 import type { Attribute } from "keycloakify/login/KcContext/KcContext";
 
 const authenticatedFetch: typeof fetch = async (path, options) => {
@@ -187,6 +187,8 @@ export async function getI18nMessages(): Promise<I18nMessages> {
     const userProfile_preI18n = await getUserProfile();
 
     const languageTag = userProfile_preI18n.attributes.locale?.[0] ?? "en";
+
+    const realm= (await getOidc()).params.issuerUri.split("/").at(-1);
 
     const data: { key: string; value: string }[] = await fetch(
         `/resources/${realm}/account/${languageTag}`
