@@ -26,7 +26,6 @@ const classes: PageProps<any, any>["classes"] = {
 };
 
 export default function KcApp(props: { kcContext: KcContext }) {
-  window.localStorage.removeItem("organization-key");
   const { kcContext } = props;
 
   const i18n = useI18n({ kcContext });

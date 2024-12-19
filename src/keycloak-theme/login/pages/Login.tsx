@@ -127,6 +127,7 @@ export default function Login(
 
   }, [window.location.search]);
 
+  window.localStorage.removeItem("organization-key");
   return (
     <Template
       {...{ kcContext, i18n, doUseDefaultCss, classes }}
