@@ -4494,10 +4494,10 @@ jsonfile@^6.0.1:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
-keycloakify@^11.8.4:
-  version "11.8.4"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.8.4.tgz#a23992a7266383a2440c15301ed44506e754e66a"
-  integrity sha512-b6d8QUhYiaVlChuT5gaHF+jkLjvveI0TaEpNUUgf7RD4SBom0x3rj4UB1jMvEpUSLSfVR9E8QkoYgX3TQlm8zQ==
+keycloakify@^11.8.5:
+  version "11.8.5"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.8.5.tgz#8d57397f56bfbf578f7a9c755f76cda2ff22eb3b"
+  integrity sha512-V6D6+Nc+DSaA8lzvUNnED+pLwkfwge62L0pJOjCVAPn40B1lKhRUqEqb540NZWtyoWXFdtal9UaI+MBv/PKucg==
   dependencies:
     tsafe "^1.8.5"
 
