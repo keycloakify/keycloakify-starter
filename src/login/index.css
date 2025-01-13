@@ -1,0 +1,85 @@
+/* Referenced from >>>>> https://tailwindcss.com/docs/guides/vite*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body.kcBodyClass {
+    background: #ffffff;
+}
+
+html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -moz-tab-size: 4;
+    tab-size: 4;
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+    font-feature-settings: normal;
+    font-variation-settings: normal
+}
+
+.kcFormCardClass {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+}
+
+.separate {
+    display: flex;
+    align-items: center;
+    text-align: center
+}
+
+.separate:after,
+.separate:before {
+    content: "";
+    flex: 1 1 0%;
+    border-bottom-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-border-opacity))
+}
+
+.separate:not(:empty):after {
+    margin-left: .5rem
+}
+
+.separate:not(:empty):before {
+    margin-right: .5rem
+}
+
+#kc-info-wrapper {
+    background: #ffffff;
+    padding: 15px 0 0 0;
+}
+
+/* hidden */
+#cc-main .cm.cm--box {
+    transform: scale(.96)!important;
+}
+
+/* visible */
+.show--consent #cc-main .cc--anim .cm.cm--box{
+    transform: scale(1)!important;
+}
+
+.otp-input {
+    width: 50px;
+    border: 3px solid gray;
+    border-radius: 10px;
+    margin: 0 10px;
+    text-align: center;
+    font-size: 36px;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.otp-input:focus {
+    border: 3px solid skyblue;
+    outline: none;
+}
+
+.otp-input:nth-child(1) {
+    cursor: pointer;
+    pointer-events: all;
+}
