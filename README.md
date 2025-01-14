@@ -73,7 +73,7 @@ Note that by default Keycloakify generates multiple `.jar` files for different v
 FROM quay.io/keycloak/keycloak:26.0.7 as builder
 
 # Install custom theme
-COPY https://github.com/ALMiG-Kompressoren-GmbH/tailcloakify/releases/download/v1.0.0/keycloak-theme-for-kc-22-to-25.jar /opt/keycloak/keycloak-theme-for-kc-22-to-25.jar
+ADD --chown=keycloak:keycloak https://github.com/ALMiG-Kompressoren-GmbH/tailcloakify/releases/download/v1.0.0/keycloak-theme-for-kc-22-to-25.jar /opt/keycloak/providers/keycloak-theme-for-kc-22-to-25.jar
 
 FROM quay.io/keycloak/keycloak:26.0.7
 
@@ -89,6 +89,7 @@ ENV KC_BOOTSTRAP_ADMIN_USERNAME=admin
 ENV KC_BOOTSTRAP_ADMIN_PASSWORD=admin
 
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start"]
+
 
 ```
 
