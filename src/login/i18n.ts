@@ -10,30 +10,22 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             footerImprintTitle: "Imprint",
             footerDataProtectionTitle: "Data Protection",
             footerCookiePreferencesTitle: "Cookie Preferences",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
         },
         de: {
             footerImprintTitle: "Impressum",
             footerDataProtectionTitle: "Datenschutz",
             footerCookiePreferencesTitle: "Cookie Einstellungen",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
         },
         fr: {
             footerImprintTitle: "Mentions Légales",
             footerDataProtectionTitle: "Protection des Données",
             footerCookiePreferencesTitle: "Paramètres des Cookies",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
         },
         it: {
             footerImprintTitle: "Impronta",
             footerDataProtectionTitle: "Informativa sulla Privacy",
             footerCookiePreferencesTitle: "Impostazioni dei Cookie",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
-        }
+        },
     })
     .build();
 

@@ -28,7 +28,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-    const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
+    const { msg, msgStr, advancedMsgStr, currentLanguage, enabledLanguages } = i18n;
 
     const { realm, auth, url, message, isAppInitiatedAction } = kcContext;
 
@@ -189,22 +189,22 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             </div>
             <footer className={"flex justify-between max-w-md w-full mt-8 relative"}>
                 <section className={"flex flex-col ml-5"}>
-                    {(msgStr("footerImprintUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]) && (
+                    {(advancedMsgStr("footerImprintUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]) && (
                         <a
                             className={"text-secondary-600 hover:text-secondary-900 text-sm inline-flex no-underline hover:no-underline"}
                             target={"_blank"}
                             rel={"noopener noreferrer"}
-                            href={msgStr("footerImprintUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]}
+                            href={advancedMsgStr("footerImprintUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]}
                         >
                             {msg("footerImprintTitle")}
                         </a>
                     )}
-                    {(msgStr("footerDataprotectionUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]) && (
+                    {(advancedMsgStr("footerDataprotectionUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]) && (
                         <a
                             className={"text-secondary-600 hover:text-secondary-900 text-sm inline-flex no-underline hover:no-underline"}
                             target={"_blank"}
                             rel={"noopener noreferrer"}
-                            href={msgStr("footerDataprotectionUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]}
+                            href={advancedMsgStr("footerDataprotectionUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]}
                         >
                             {msg("footerDataProtectionTitle")}
                         </a>
