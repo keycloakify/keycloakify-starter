@@ -1,6 +1,6 @@
 {
     "name": "keycloakify-starter",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Starter for Keycloakify 11",
     "repository": {
         "type": "git",
