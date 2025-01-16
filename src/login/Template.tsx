@@ -66,6 +66,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         className: bodyClassName ?? kcClsx("kcBodyClass")
     });
 
+    const footerImprintUrl = advancedMsgStr('footerImprintUrl') !== 'footerImprintUrl' ? advancedMsgStr('footerImprintUrl') : null;
+    const footerDataprotectionUrl = advancedMsgStr('footerDataprotectionUrl') !== 'footerDataprotectionUrl' ? advancedMsgStr('footerDataprotectionUrl') : null;
+
     const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss });
 
     if (!isReadyToRender) {
@@ -189,22 +192,22 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             </div>
             <footer className={"flex justify-between max-w-md w-full mt-8 relative"}>
                 <section className={"flex flex-col ml-5"}>
-                    {(advancedMsgStr("footerImprintUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]) && (
+                    {(footerImprintUrl || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]) && (
                         <a
                             className={"text-secondary-600 hover:text-secondary-900 text-sm inline-flex no-underline hover:no-underline"}
                             target={"_blank"}
                             rel={"noopener noreferrer"}
-                            href={advancedMsgStr("footerImprintUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]}
+                            href={footerImprintUrl || kcContext.properties["TAILCLOAKIFY_FOOTER_IMPRINT_URL"]}
                         >
                             {msg("footerImprintTitle")}
                         </a>
                     )}
-                    {(advancedMsgStr("footerDataprotectionUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]) && (
+                    {(footerDataprotectionUrl || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]) && (
                         <a
                             className={"text-secondary-600 hover:text-secondary-900 text-sm inline-flex no-underline hover:no-underline"}
                             target={"_blank"}
                             rel={"noopener noreferrer"}
-                            href={advancedMsgStr("footerDataprotectionUrl") || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]}
+                            href={footerDataprotectionUrl || kcContext.properties["TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL"]}
                         >
                             {msg("footerDataProtectionTitle")}
                         </a>
