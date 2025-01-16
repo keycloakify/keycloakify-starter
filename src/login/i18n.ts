@@ -10,29 +10,51 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             footerImprintTitle: "Imprint",
             footerDataProtectionTitle: "Data Protection",
             footerCookiePreferencesTitle: "Cookie Preferences",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
         },
         de: {
             footerImprintTitle: "Impressum",
             footerDataProtectionTitle: "Datenschutz",
             footerCookiePreferencesTitle: "Cookie Einstellungen",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
         },
         fr: {
             footerImprintTitle: "Mentions Légales",
             footerDataProtectionTitle: "Protection des Données",
             footerCookiePreferencesTitle: "Paramètres des Cookies",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
         },
         it: {
             footerImprintTitle: "Impronta",
             footerDataProtectionTitle: "Informativa sulla Privacy",
             footerCookiePreferencesTitle: "Impostazioni dei Cookie",
-            footerImprintUrl: '',
-            footerDataprotectionUrl: '',
+        },
+        es: {
+            footerImprintTitle: "Aviso Legal",
+            footerDataProtectionTitle: "Protección de Datos",
+            footerCookiePreferencesTitle: "Preferencias de Cookies"
+        },
+        cs: {
+            footerImprintTitle: "Tiráž",
+            footerDataProtectionTitle: "Ochrana Osobních Údajů",
+            footerCookiePreferencesTitle: "Nastavení Cookies"
+        },
+        nl: {
+            footerImprintTitle: "Colofon",
+            footerDataProtectionTitle: "Gegevensbescherming",
+            footerCookiePreferencesTitle: "Cookievoorkeuren"
+        },
+        pl: {
+            footerImprintTitle: "Nota Prawna",
+            footerDataProtectionTitle: "Ochrona Danych",
+            footerCookiePreferencesTitle: "Preferencje Plików Cookie"
+        },
+        ru: {
+            footerImprintTitle: "Выходные Данные",
+            footerDataProtectionTitle: "Защита Данных",
+            footerCookiePreferencesTitle: "Настройки Файлов Cookie"
+        },
+        sv: {
+            footerImprintTitle: "Impressum",
+            footerDataProtectionTitle: "Dataskydd",
+            footerCookiePreferencesTitle: "Cookie-inställningar"
         }
     })
     .build();
