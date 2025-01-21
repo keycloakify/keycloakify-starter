@@ -4,7 +4,6 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { clsx } from "keycloakify/tools/clsx";
-import { placeholderTextFromMsg } from "../placeholderTextFromMsg.ts";
 
 export default function LoginResetPassword(
     props: PageProps<
@@ -55,10 +54,10 @@ export default function LoginResetPassword(
                             type="text"
                             placeholder={
                                 !realm.loginWithEmailAllowed
-                                    ? placeholderTextFromMsg(msg("username"))
+                                    ? msgStr("username")
                                     : !realm.registrationEmailAsUsername
-                                      ? placeholderTextFromMsg(msg("usernameOrEmail"))
-                                      : placeholderTextFromMsg(msg("email"))
+                                      ? msgStr("usernameOrEmail")
+                                      : msgStr("email")
                             }
                             id="username"
                             name="username"

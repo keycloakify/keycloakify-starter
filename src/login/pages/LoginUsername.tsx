@@ -4,7 +4,6 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { placeholderTextFromMsg } from "../placeholderTextFromMsg.ts";
 
 export default function LoginUsername(props: PageProps<Extract<KcContext, { pageId: "login-username.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -98,10 +97,10 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                                     <input
                                         placeholder={
                                             !realm.loginWithEmailAllowed
-                                                ? placeholderTextFromMsg(msg("username"))
+                                                ? msgStr("username")
                                                 : !realm.registrationEmailAsUsername
-                                                  ? placeholderTextFromMsg(msg("usernameOrEmail"))
-                                                  : placeholderTextFromMsg(msg("email"))
+                                                  ? msgStr("usernameOrEmail")
+                                                  : msgStr("email")
                                         }
                                         tabIndex={2}
                                         id="username"
