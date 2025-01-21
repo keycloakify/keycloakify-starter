@@ -1,12 +1,12 @@
-import {useState} from "react";
-import type {LazyOrNot} from "keycloakify/tools/LazyOrNot";
-import {kcSanitize} from "keycloakify/lib/kcSanitize";
-import {getKcClsx, type KcClsx} from "keycloakify/login/lib/kcClsx";
-import {clsx} from "keycloakify/tools/clsx";
-import type {UserProfileFormFieldsProps} from "keycloakify/login/UserProfileFormFieldsProps";
-import type {PageProps} from "keycloakify/login/pages/PageProps";
-import type {KcContext} from "../KcContext";
-import type {I18n} from "../i18n";
+import { useState } from "react";
+import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
+import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
+import { clsx } from "keycloakify/tools/clsx";
+import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { KcContext } from "../KcContext";
+import type { I18n } from "../i18n";
 
 type RegisterProps = PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I18n> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
@@ -14,34 +14,17 @@ type RegisterProps = PageProps<Extract<KcContext, { pageId: "register.ftl" }>, I
 };
 
 export default function Register(props: RegisterProps) {
-    const {
-        kcContext,
-        i18n,
-        doUseDefaultCss,
-        Template,
-        classes,
-        UserProfileFormFields,
-        doMakeUserConfirmPassword
-    } = props;
+    const { kcContext, i18n, doUseDefaultCss, Template, classes, UserProfileFormFields, doMakeUserConfirmPassword } = props;
 
-    const {kcClsx} = getKcClsx({
+    const { kcClsx } = getKcClsx({
         doUseDefaultCss,
         classes
     });
 
-    const {
-        messageHeader,
-        url,
-        messagesPerField,
-        recaptchaRequired,
-        recaptchaVisible,
-        recaptchaSiteKey,
-        recaptchaAction,
-        termsAcceptanceRequired
-    } =
+    const { messageHeader, url, messagesPerField, recaptchaRequired, recaptchaVisible, recaptchaSiteKey, recaptchaAction, termsAcceptanceRequired } =
         kcContext;
 
-    const {msg, msgStr, advancedMsg} = i18n;
+    const { msg, msgStr, advancedMsg } = i18n;
 
     const [isFormSubmittable, setIsFormSubmittable] = useState(false);
     const [areTermsAccepted, setAreTermsAccepted] = useState(false);
@@ -76,8 +59,7 @@ export default function Register(props: RegisterProps) {
                 {recaptchaRequired && (recaptchaVisible || recaptchaAction === undefined) && (
                     <div className="form-group">
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey}
-                                 data-action={recaptchaAction}></div>
+                            <div className="g-recaptcha" data-size="compact" data-sitekey={recaptchaSiteKey} data-action={recaptchaAction}></div>
                         </div>
                     </div>
                 )}
@@ -139,9 +121,9 @@ function TermsAcceptance(props: {
     areTermsAccepted: boolean;
     onAreTermsAcceptedValueChange: (areTermsAccepted: boolean) => void;
 }) {
-    const {i18n, kcClsx, messagesPerField, areTermsAccepted, onAreTermsAcceptedValueChange} = props;
+    const { i18n, kcClsx, messagesPerField, areTermsAccepted, onAreTermsAcceptedValueChange } = props;
 
-    const {msg} = i18n;
+    const { msg } = i18n;
 
     return (
         <>
@@ -157,11 +139,11 @@ function TermsAcceptance(props: {
                         type="checkbox"
                         id="termsAccepted"
                         name="termsAccepted"
-                        className={kcClsx("kcCheckboxInputClass")}
+                        className="accent-primary-600"
                         checked={areTermsAccepted}
                         onChange={e => onAreTermsAcceptedValueChange(e.target.checked)}
                         aria-invalid={messagesPerField.existsError("termsAccepted")}
-                    />
+                    />{" "}
                     <label htmlFor="termsAccepted" className={kcClsx("kcLabelClass")}>
                         {msg("acceptTerms")}
                     </label>

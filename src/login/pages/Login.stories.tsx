@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { createKcPageStory } from "../KcPageStory";
+import useProviderLogos from "../useProviderLogos";
 
 const { KcPageStory } = createKcPageStory({ pageId: "login.ftl" });
 
@@ -377,6 +378,38 @@ export const WithCookieConsent: Story = {
             {...args}
             kcContext={{
                 properties: {
+                    TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT: "true"
+                }
+            }}
+        />
+    )
+};
+export const WithAllSocialProvidersFooterAndCookie_ForSplashScreen: Story = {
+    render: args => (
+        <KcPageStory
+            {...args}
+            kcContext={{
+                realm: {
+                    name: 'Tailcloakify',
+                    displayName: 'Tailcloakify',
+                    displayNameHtml: 'Tailcloakify',
+                    rememberMe: true,
+                },
+                social: {
+                    displayInfo: true,
+                    providers: Object.keys(useProviderLogos())
+                        .filter(providerId => providerId !== 'twitter')
+                        .map(providerId => ({
+                            loginUrl: providerId,
+                            alias: providerId,
+                            providerId: providerId,
+                            displayName: providerId.charAt(0).toUpperCase() + providerId.slice(1),
+                            iconClasses: `fa fa-${providerId}`
+                        }))
+                },
+                properties: {
+                    TAILCLOAKIFY_FOOTER_IMPRINT_URL: "https://google.com",
+                    TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL: "https://google.com",
                     TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT: "true"
                 }
             }}

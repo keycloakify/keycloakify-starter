@@ -55,34 +55,31 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         <div id="kc-social-providers" className={kcClsx("kcFormSocialAccountSectionClass")}>
                             <hr />
                             <h2 className={"pt-4 separate text-secondary-600 text-sm"}>{msg("identity-provider-login-label")}</h2>
-                            <ul className={clsx(kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass"), "gap-4 grid grid-cols-3 pt-4")}>
+                            <ul
+                                className={clsx(
+                                    kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass"),
+                                    "gap-4 grid grid-cols-3 pt-4"
+                                )}
+                            >
                                 {social.providers.map((...[p, , providers]) => (
                                     <li key={p.alias}>
                                         <a
                                             id={`social-${p.alias}`}
-                                            className={clsx(kcClsx(
-                                                "kcFormSocialAccountListButtonClass",
-                                                providers.length > 3 && "kcFormSocialAccountGridItem"
-                                            ), `border border-secondary-200 flex justify-center py-2 rounded-lg hover:border-opacity-30 hover:bg-provider-${p.alias}/10`)}
+                                            className={clsx(
+                                                kcClsx("kcFormSocialAccountListButtonClass", providers.length > 3 && "kcFormSocialAccountGridItem"),
+                                                `border border-secondary-200 flex justify-center py-2 rounded-lg hover:border-opacity-30 hover:bg-provider-${p.alias}/10`
+                                            )}
                                             type="button"
                                             href={p.loginUrl}
                                         >
                                             <div className={"h-6 w-6"}>
                                                 {providerLogos[p.alias] ? (
-                                                    <img
-                                                        src={providerLogos[p.alias]}
-                                                        alt={`${p.displayName} logo`}
-                                                        className={"h-full w-auto"}
-                                                    />
+                                                    <img src={providerLogos[p.alias]} alt={`${p.displayName} logo`} className={"h-full w-auto"} />
                                                 ) : (
                                                     // Fallback to the original iconClasses if the logo is not defined
                                                     p.iconClasses && (
                                                         <i
-                                                            className={clsx(
-                                                                kcClsx("kcCommonLogoIdP"),
-                                                                p.iconClasses,
-                                                                `text-provider-${p.alias}`
-                                                            )}
+                                                            className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses, `text-provider-${p.alias}`)}
                                                             aria-hidden="true"
                                                         ></i>
                                                     )
@@ -116,11 +113,17 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         {!realm.loginWithEmailAllowed
                                             ? msg("username")
                                             : !realm.registrationEmailAsUsername
-                                                ? msg("usernameOrEmail")
-                                                : msg("email")}
+                                              ? msg("usernameOrEmail")
+                                              : msg("email")}
                                     </label>
                                     <input
-                                        placeholder="Username or Email"
+                                        placeholder={
+                                            !realm.loginWithEmailAllowed
+                                                ? msgStr("username")
+                                                : !realm.registrationEmailAsUsername
+                                                  ? msgStr("usernameOrEmail")
+                                                  : msgStr("email")
+                                        }
                                         tabIndex={2}
                                         id="username"
                                         className={clsx(
@@ -199,7 +202,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 <div className={kcClsx("kcFormOptionsWrapperClass")}>
                                     {realm.resetPasswordAllowed && (
                                         <span>
-                                            <a tabIndex={6} href={url.loginResetCredentialsUrl}>
+                                            <a
+                                                tabIndex={6}
+                                                href={url.loginResetCredentialsUrl}
+                                                className={"text-primary-600 hover:text-primary-500 inline-flex no-underline hover:no-underline"}
+                                            >
                                                 {msg("doForgotPassword")}
                                             </a>
                                         </span>
@@ -207,10 +214,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 </div>
                             </div>
 
-                            <div id="kc-form-buttons"
-                                className={clsx(kcClsx("kcFormGroupClass"), "flex flex-col pt-4 space-y-2")}>
-                                <input type="hidden" id="id-hidden-input" name="credentialId"
-                                    value={auth.selectedCredential} />
+                            <div id="kc-form-buttons" className={clsx(kcClsx("kcFormGroupClass"), "flex flex-col pt-4 space-y-2")}>
+                                <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
                                 <input
                                     tabIndex={7}
                                     disabled={isLoginButtonDisabled}

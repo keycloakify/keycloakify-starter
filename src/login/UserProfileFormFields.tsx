@@ -1,11 +1,11 @@
-import { useEffect, useReducer, Fragment } from "react";
+import { Fragment, useEffect, useReducer } from "react";
 import { assert } from "keycloakify/tools/assert";
 import type { KcClsx } from "keycloakify/login/lib/kcClsx";
 import {
-    useUserProfileForm,
-    getButtonToDisplayForMultivaluedAttributeField,
     type FormAction,
-    type FormFieldError
+    type FormFieldError,
+    getButtonToDisplayForMultivaluedAttributeField,
+    useUserProfileForm
 } from "keycloakify/login/lib/useUserProfileForm";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import type { Attribute } from "keycloakify/login/KcContext";
@@ -307,7 +307,10 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
 
                     return valueOrValues;
                 })()}
-                className={clsx(kcClsx("kcInputClass"),"block focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm")}
+                className={clsx(
+                    kcClsx("kcInputClass"),
+                    "block focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm"
+                )}
                 aria-invalid={displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined}
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}
@@ -471,7 +474,14 @@ function InputTagSelects(props: InputFieldByTypeProps) {
                 break walk;
             }
 
-            const validator = (attribute.validators as Record<string, { options?: string[] }>)[inputOptionsFromValidation];
+            const validator = (
+                attribute.validators as Record<
+                    string,
+                    {
+                        options?: string[];
+                    }
+                >
+            )[inputOptionsFromValidation];
 
             if (validator === undefined) {
                 break walk;
@@ -554,7 +564,10 @@ function TextareaTag(props: InputFieldByTypeProps) {
         <textarea
             id={attribute.name}
             name={attribute.name}
-            className={kcClsx("kcInputClass")}
+            className={clsx(
+                kcClsx("kcInputClass"),
+                "block p-2.5 focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm"
+            )}
             aria-invalid={displayableErrors.length !== 0}
             disabled={attribute.readOnly}
             cols={attribute.annotations.inputTypeCols === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeCols}`)}
@@ -588,7 +601,10 @@ function SelectTag(props: InputFieldByTypeProps) {
         <select
             id={attribute.name}
             name={attribute.name}
-            className={kcClsx("kcInputClass")}
+            className={clsx(
+                kcClsx("kcInputClass"),
+                "block focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm"
+            )}
             aria-invalid={displayableErrors.length !== 0}
             disabled={attribute.readOnly}
             multiple={isMultiple}
@@ -627,7 +643,14 @@ function SelectTag(props: InputFieldByTypeProps) {
 
                         assert(typeof inputOptionsFromValidation === "string");
 
-                        const validator = (attribute.validators as Record<string, { options?: string[] }>)[inputOptionsFromValidation];
+                        const validator = (
+                            attribute.validators as Record<
+                                string,
+                                {
+                                    options?: string[];
+                                }
+                            >
+                        )[inputOptionsFromValidation];
 
                         if (validator === undefined) {
                             break walk;
