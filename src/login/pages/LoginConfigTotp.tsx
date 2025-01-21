@@ -1,23 +1,31 @@
-import {getKcClsx, KcClsx} from "keycloakify/login/lib/kcClsx";
-import {kcSanitize} from "keycloakify/lib/kcSanitize";
-import type {PageProps} from "keycloakify/login/pages/PageProps";
-import type {KcContext} from "../KcContext";
-import type {I18n} from "../i18n";
-import {clsx} from "keycloakify/tools/clsx";
+import { getKcClsx, KcClsx } from "keycloakify/login/lib/kcClsx";
+import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { KcContext } from "../KcContext";
+import type { I18n } from "../i18n";
+import { clsx } from "keycloakify/tools/clsx";
 
-export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
-    pageId: "login-config-totp.ftl"
-}>, I18n>) {
-    const {kcContext, i18n, doUseDefaultCss, Template, classes} = props;
+export default function LoginConfigTotp(
+    props: PageProps<
+        Extract<
+            KcContext,
+            {
+                pageId: "login-config-totp.ftl";
+            }
+        >,
+        I18n
+    >
+) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const {kcClsx} = getKcClsx({
+    const { kcClsx } = getKcClsx({
         doUseDefaultCss,
         classes
     });
 
-    const {url, isAppInitiatedAction, totp, mode, messagesPerField} = kcContext;
+    const { url, isAppInitiatedAction, totp, mode, messagesPerField } = kcContext;
 
-    const {msg, msgStr, advancedMsg} = i18n;
+    const { msg, msgStr, advancedMsg } = i18n;
 
     return (
         <Template
@@ -48,10 +56,17 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
                             <li>
                                 <p>{msg("loginTotpManualStep2")}</p>
                                 <p>
+                                    <br />
                                     <span id="kc-totp-secret-key">{totp.totpSecretEncoded}</span>
+                                    <br />
                                 </p>
+                                <br />
                                 <p>
-                                    <a href={totp.qrUrl} id="mode-barcode">
+                                    <a
+                                        href={totp.qrUrl}
+                                        id="mode-barcode"
+                                        className={"text-primary-600 hover:text-primary-500 inline-flex no-underline hover:no-underline"}
+                                    >
                                         {msg("loginTotpScanBarcode")}
                                     </a>
                                 </p>
@@ -83,13 +98,19 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
                     ) : (
                         <li>
                             <p>{msg("loginTotpStep2")}</p>
-                            <img className={"mx-auto"} id="kc-totp-secret-qr-code"
-                                 src={`data:image/png;base64, ${totp.totpSecretQrCode}`}
-                                 alt="Figure: Barcode"/>
-                            <br/>
+                            <img
+                                className={"mx-auto"}
+                                id="kc-totp-secret-qr-code"
+                                src={`data:image/png;base64, ${totp.totpSecretQrCode}`}
+                                alt="Figure: Barcode"
+                            />
+                            <br />
                             <p>
-                                <a className={"text-primary-600 hover:text-primary-500 inline-flex no-underline hover:no-underline"}
-                                   href={totp.manualUrl} id="mode-manual">
+                                <a
+                                    className={"text-primary-600 hover:text-primary-500 inline-flex no-underline hover:no-underline"}
+                                    href={totp.manualUrl}
+                                    id="mode-manual"
+                                >
                                     {msg("loginTotpUnableToScan")}
                                 </a>
                             </p>
@@ -103,8 +124,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
                     </li>
                 </ol>
 
-                <form action={url.loginAction} className={kcClsx("kcFormClass")} id="kc-totp-settings-form"
-                      method="post">
+                <form action={url.loginAction} className={kcClsx("kcFormClass")} id="kc-totp-settings-form" method="post">
                     <div className={clsx(kcClsx("kcFormGroupClass"), "mt-4")}>
                         <div className={kcClsx("kcInputWrapperClass")}>
                             <label htmlFor="totp" className={kcClsx("kcLabelClass")}>
@@ -120,7 +140,8 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
                                 autoComplete="off"
                                 className={clsx(
                                     kcClsx("kcInputClass"),
-                                    "block focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm")}
+                                    "block focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm"
+                                )}
                                 aria-invalid={messagesPerField.existsError("totp")}
                             />
 
@@ -135,8 +156,8 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
                                 />
                             )}
                         </div>
-                        <input type="hidden" id="totpSecret" name="totpSecret" value={totp.totpSecret}/>
-                        {mode && <input type="hidden" id="mode" value={mode}/>}
+                        <input type="hidden" id="totpSecret" name="totpSecret" value={totp.totpSecret} />
+                        {mode && <input type="hidden" id="mode" value={mode} />}
                     </div>
 
                     <div className={kcClsx("kcFormGroupClass")}>
@@ -154,7 +175,8 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
                                 autoComplete="off"
                                 className={clsx(
                                     kcClsx("kcInputClass"),
-                                    "block focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm")}
+                                    "block focus:outline-none border-secondary-200 mt-1 rounded-md w-full focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 sm:text-sm"
+                                )}
                                 aria-invalid={messagesPerField.existsError("userLabel")}
                             />
                             {messagesPerField.existsError("userLabel") && (
@@ -171,7 +193,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
                     </div>
 
                     <div className={kcClsx("kcFormGroupClass")}>
-                        <LogoutOtherSessions kcClsx={kcClsx} i18n={i18n}/>
+                        <LogoutOtherSessions kcClsx={kcClsx} i18n={i18n} />
                     </div>
 
                     {isAppInitiatedAction ? (
@@ -210,18 +232,23 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, {
 }
 
 function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
-    const {kcClsx, i18n} = props;
+    const { kcClsx, i18n } = props;
 
-    const {msg} = i18n;
+    const { msg } = i18n;
 
     return (
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
             <div className={kcClsx("kcFormOptionsWrapperClass")}>
                 <div className="checkbox">
                     <label className={"ml-2 text-secondary text-sm"}>
-                        <input type="checkbox"
-                               className={"accent-primary-600"}
-                               id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true}/>
+                        <input
+                            type="checkbox"
+                            className={"accent-primary-600"}
+                            id="logout-sessions"
+                            name="logout-sessions"
+                            value="on"
+                            defaultChecked={true}
+                        />
                         {msg("logoutOtherSessions")}
                     </label>
                 </div>

@@ -1,23 +1,32 @@
-import {getKcClsx} from "keycloakify/login/lib/kcClsx";
-import {kcSanitize} from "keycloakify/lib/kcSanitize";
-import type {PageProps} from "keycloakify/login/pages/PageProps";
-import type {KcContext} from "../KcContext";
-import type {I18n} from "../i18n";
-import {clsx} from "keycloakify/tools/clsx";
+import { getKcClsx } from "keycloakify/login/lib/kcClsx";
+import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { KcContext } from "../KcContext";
+import type { I18n } from "../i18n";
+import { clsx } from "keycloakify/tools/clsx";
+import { placeholderTextFromMsg } from "../placeholderTextFromMsg.ts";
 
-export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
-    pageId: "login-reset-password.ftl"
-}>, I18n>) {
-    const {kcContext, i18n, doUseDefaultCss, Template, classes} = props;
+export default function LoginResetPassword(
+    props: PageProps<
+        Extract<
+            KcContext,
+            {
+                pageId: "login-reset-password.ftl";
+            }
+        >,
+        I18n
+    >
+) {
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const {kcClsx} = getKcClsx({
+    const { kcClsx } = getKcClsx({
         doUseDefaultCss,
         classes
     });
 
-    const {url, realm, auth, messagesPerField} = kcContext;
+    const { url, realm, auth, messagesPerField } = kcContext;
 
-    const {msg, msgStr} = i18n;
+    const { msg, msgStr } = i18n;
 
     return (
         <Template
@@ -37,14 +46,20 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                             {!realm.loginWithEmailAllowed
                                 ? msg("username")
                                 : !realm.registrationEmailAsUsername
-                                    ? msg("usernameOrEmail")
-                                    : msg("email")}
+                                  ? msg("usernameOrEmail")
+                                  : msg("email")}
                         </label>
                     </div>
                     <div className={kcClsx("kcInputWrapperClass")}>
                         <input
                             type="text"
-                            placeholder="Username"
+                            placeholder={
+                                !realm.loginWithEmailAllowed
+                                    ? placeholderTextFromMsg(msg("username"))
+                                    : !realm.registrationEmailAsUsername
+                                      ? placeholderTextFromMsg(msg("usernameOrEmail"))
+                                      : placeholderTextFromMsg(msg("email"))
+                            }
                             id="username"
                             name="username"
                             className={clsx(
@@ -71,15 +86,19 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
                         <div className={kcClsx("kcFormOptionsWrapperClass")}>
                             <span>
-                                <a className={"no-underline hover:no-underline text-secondary-600 text-sm"} href={url.loginUrl}>{msg("backToLogin")}</a>
+                                <a className={"no-underline hover:no-underline text-secondary-600 text-sm"} href={url.loginUrl}>
+                                    {msg("backToLogin")}
+                                </a>
                             </span>
                         </div>
                     </div>
 
                     <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                         <input
-                            className={clsx(kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass"),
-                                "rounded-md bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700 px-4 py-2 text-sm flex justify-center relative w-full focus:outline-none focus:ring-2 focus:ring-offset-2")}
+                            className={clsx(
+                                kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass"),
+                                "rounded-md bg-primary-600 text-white focus:ring-primary-600 hover:bg-primary-700 px-4 py-2 text-sm flex justify-center relative w-full focus:outline-none focus:ring-2 focus:ring-offset-2"
+                            )}
                             type="submit"
                             value={msgStr("doSubmit")}
                         />

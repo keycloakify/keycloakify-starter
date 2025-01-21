@@ -3,7 +3,7 @@
     <br/>
     <br/>
 </p>
-<img src="./public/Tailcloakify-login-page.png" alt="keycloak theme config" width="1905">
+<img src="./public/Default-Login-page.png" alt="keycloak theme config" width="1905">
 
 Tailcloakify is a [Keycloak](https://github.com/keycloak/keycloak) Theme that is based on 
 [Keycloakify](https://github.com/keycloakify/keycloakify) + Vite, layered with TailwindCSS and inspired by [Keywind](https://github.com/lukin/keywind) 

@@ -6,6 +6,7 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { placeholderTextFromMsg } from "../placeholderTextFromMsg.ts";
 import useProviderLogos from "../useProviderLogos";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
@@ -55,11 +56,17 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                         <div id="kc-social-providers" className={kcClsx("kcFormSocialAccountSectionClass")}>
                             <hr />
                             <h2 className={"pt-4 separate text-secondary-600 text-sm"}>{msg("identity-provider-login-label")}</h2>
-                            <ul className={clsx(kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass"), "gap-4 grid grid-cols-3 pt-4")}>
+                            <ul
+                                className={clsx(
+                                    kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass"),
+                                    "gap-4 grid grid-cols-3 pt-4"
+                                )}
+                            >
                                 {social.providers.map((...[p, , providers]) => (
                                     <li key={p.alias}>
                                         <a
                                             id={`social-${p.alias}`}
+
                                             className={clsx(kcClsx(
                                                 "kcFormSocialAccountListButtonClass",
                                                 providers.length > 3 && "kcFormSocialAccountGridItem"
@@ -68,6 +75,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                             href={p.loginUrl}
                                         >
                                             <div className={"h-6 w-6"}>
+
                                                 {providerLogos[p.alias] ? (
                                                     <img
                                                         src={providerLogos[p.alias]}
@@ -116,11 +124,17 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         {!realm.loginWithEmailAllowed
                                             ? msg("username")
                                             : !realm.registrationEmailAsUsername
-                                                ? msg("usernameOrEmail")
-                                                : msg("email")}
+                                              ? msg("usernameOrEmail")
+                                              : msg("email")}
                                     </label>
                                     <input
-                                        placeholder="Username or Email"
+                                        placeholder={
+                                            !realm.loginWithEmailAllowed
+                                                ? placeholderTextFromMsg(msg("username"))
+                                                : !realm.registrationEmailAsUsername
+                                                  ? placeholderTextFromMsg(msg("usernameOrEmail"))
+                                                  : placeholderTextFromMsg(msg("email"))
+                                        }
                                         tabIndex={2}
                                         id="username"
                                         className={clsx(
@@ -199,7 +213,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 <div className={kcClsx("kcFormOptionsWrapperClass")}>
                                     {realm.resetPasswordAllowed && (
                                         <span>
-                                            <a tabIndex={6} href={url.loginResetCredentialsUrl}>
+                                            <a
+                                                tabIndex={6}
+                                                href={url.loginResetCredentialsUrl}
+                                                className={"text-primary-600 hover:text-primary-500 inline-flex no-underline hover:no-underline"}
+                                            >
                                                 {msg("doForgotPassword")}
                                             </a>
                                         </span>
