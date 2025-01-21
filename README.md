@@ -9,7 +9,6 @@ Tailcloakify is a [Keycloak](https://github.com/keycloak/keycloak) Theme that is
 [Keycloakify](https://github.com/keycloakify/keycloakify), layered with [TailwindCSS](https://github.com/tailwindlabs/tailwindcss) and inspired by [Keywind](https://github.com/lukin/keywind) 
 UI design approach.
 
-
 # How to Use
 
 1. Place the provided JAR file in the <keycloak-home>/providers/ directory or use the example Dockerfile from this repository to add the provided JAR file into your Docker Image.
@@ -43,7 +42,6 @@ Some customizations are possible thought Keycloaks Localization System, allowing
 | ------------------------ | ---------------------------------------------------------------------------------- |
 | footerImprintUrl         | The localized enabled alternative to env: TAILCLOAKIFY_FOOTER_IMPRINT_URL          |
 | footerDataprotectionUrl  | The localized enabled alternative to env: TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL   |
-
 
 # Developer Quick Start
 
@@ -93,27 +91,24 @@ Note that by default Keycloakify generates multiple `.jar` files for different v
 ## GitHub Actions
 
 Tailcloakify comes with a generic GitHub Actions workflow that builds the theme and publishes
-the jars [as GitHub releases artifacts](https://github.com/ALMiG-Kompressoren-GmbH/tailcloakify/releases/tag/v1.0.0).  
+the jars [as GitHub releases artifacts](https://github.com/ALMiG-Kompressoren-GmbH/tailcloakify/releases/tag/v1.1.0).  
 To release a new version **just update the `package.json` version and push**.
 
 To enable the workflow go to your fork of this repository on GitHub then navigate to:
 `Settings` > `Actions` > `Workflow permissions`, select `Read and write permissions`.
 
-
 # Contributing
 
 If you would like to introduce additional changes, please read the [Contributing Guidelines](CONTRIBUTING.md).
 
-
 # Code of Conduct
+
 Anyone who interacts with Tailcloakify in any space, including but not limited to this GitHub repository, must follow
 our [Code of Conduct](CODE_OF_CONDUCT.md).
-
 
 # License
 
 Licensed under the [MIT License](LICENSE).
-
 
 # Authors
 
