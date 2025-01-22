@@ -219,7 +219,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             rel={"noopener noreferrer"}
                             type={"button"}
                             data-cc={"show-preferencesModal"}
-                            href={"#"}
                         >
                             {msg("footerCookiePreferencesTitle")}
                         </a>
