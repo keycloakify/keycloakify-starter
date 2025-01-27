@@ -2,6 +2,8 @@
 
 This project provides a streamlined impersonation workflow within the Keycloak Admin Console.  
 
+https://github.com/user-attachments/assets/e8f3ee2b-cb32-49d3-bfe9-f81968a45339  
+
 The only custom code is at [src/admin](./src/admin).  
 
 Assume we're working in realm `myrealm`, at `https://keycloak.company.com`. There are two applications:
@@ -80,6 +82,12 @@ Then, enable it as the admin theme:
 6. Under **Admin Theme**, pick `keycloak-v2-with-direct-impersonation`.
 7. Click **Save**.
 
+For an user to be able to impersonate another user of the realm it should 
+have the `impersonation` role, it also needs `view-users` if you want to be
+able to provide a username to impersonate (instead of just the user id).  
+
+<img width="1395" alt="Image" src="https://github.com/user-attachments/assets/945add9c-8e90-457c-b450-ccfaae564f02" />
+
 ## Why Not Use Keycloak Token Exchange?
 
 Although you might consider the experimental [Keycloak Token Exchange](https://www.keycloak.org/securing-apps/token-exchange), in practice:
@@ -113,3 +121,4 @@ In this example:
 2. Log in as `staff1` (password hidden, contact me on discord if you want to actually test it).
 3. Click click on the link to impersonate `alice`.
 4. You’ll be redirected to `https://example-tanstack-router.oidc-spa.dev/` as Alice.
+
