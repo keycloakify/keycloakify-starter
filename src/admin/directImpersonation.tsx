@@ -13,7 +13,7 @@ export function MaybeImpersonate(props: { children: React.ReactNode }) {
     const { isDirectImpersonation } = directImpersonation({ realm, adminClient });
 
     if (isDirectImpersonation) {
-        return null;
+        return <h1>Impersonating...</h1>;
     }
 
     return <>{children}</>;
