@@ -7,8 +7,13 @@ export default defineConfig({
     plugins: [
         react(),
         keycloakify({
-            themeName: "admin-with-direct-impersonation",
-            accountThemeImplementation: "none"
+            themeName: "v3-with-direct-impersonation",
+            accountThemeImplementation: "none",
+            keycloakVersionTargets: {
+                "22-to-25": false,
+                "all-other-versions": "keycloak-admin-with-direct-impersonation.jar"
+            }
+            
         })
     ]
 });

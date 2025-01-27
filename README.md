@@ -1,58 +1,98 @@
-<p align="center">
-    <i>🚀 <a href="https://keycloakify.dev">Keycloakify</a> v11 starter 🚀</i>
-    <br/>
-    <br/>
-</p>
+# Custom Keycloak Admin UI with Direct Impersonation
 
-# Quick start
+This project provides a streamlined impersonation workflow within the Keycloak Admin Console.  
+
+Assume we're working in realm `myrealm`, at `https://keycloak.company.com`. There are two applications:
+
+- **Customer-facing application**  
+  - Client ID: `customer-app`  
+  - URL: `https://company.com`
+- **Support staff application**  
+  - Client ID: `admin-app`  
+  - URL: `https://company.com/admin`
+
+Both support staff and customers reside in the same realm `myrealm`, but support staff have permission to impersonate any user.
+
+## The Problem
+
+By default, support staff can impersonate a user without any custom code by:
+
+1. Going to `https://keycloak.company.com/realms/myrealm/account/`.
+2. Logging in with support staff credentials.
+3. Selecting **Users** in the left menu.
+4. Searching for the user (e.g., `customer1`).
+5. Under **Action**, choosing **Impersonate** (opens the Admin Console as `customer1`).
+6. Manually changing the URL to `https://company.com/`.
+
+Though it works, this process requires many steps.
+
+## The Desired Workflow
+
+Ideally, a support staff member can:
+
+1. Navigate to `https://company.com/admin`.  
+2. Log in with support staff credentials.  
+3. Search for a user (e.g., `customer1`).  
+4. Click **Impersonate**.  
+5. Automatically land on `https://company.com` as `customer1`.  
+
+This custom Keycloak Admin UI supports that workflow.
+
+### Implementation Overview
+
+To finalize Step 5, the support staff application can handle it with a simple redirect:
+
+```js
+const url = new URL('https://keycloak.company.com/realms/myrealm/console');
+url.searchParams.append('impersonate.user', 'customer1');
+url.searchParams.append('impersonate.redirectUrl', 'https://company.com');
+
+window.location.href = url.href;
+```
+
+Because support staff already have an active Keycloak session, the impersonation only proceeds if their account has the required impersonation permissions.
+
+## Enabling the Custom Keycloak Admin UI
+
+To build and deploy the custom admin theme:
 
 ```bash
 git clone https://github.com/keycloakify/keycloakify-starter
 cd keycloakify-starter
-yarn install # Or use an other package manager, just be sure to delete the yarn.lock if you use another package manager.
+git checkout direct_impersonation
+yarn
+yarn build-keycloak-theme
 ```
 
-# Testing the theme locally
+A prebuilt version is also available at [this link](./release/keycloak-admin-with-direct-impersonation.jar).  
 
-[Documentation](https://docs.keycloakify.dev/testing-your-theme)
+Next, upload `dist_keycloak/keycloak-admin-with-direct-impersonation.jar` to your Keycloak server. (Refer to [the Keycloakify documentation](https://docs.keycloakify.dev/deploying-your-theme) for more details on deploying themes.)
 
-# How to customize the theme
+Then, enable it as the admin theme:
 
-[Documentation](https://docs.keycloakify.dev/customization-strategies)
+1. Go to `https://keycloak.company.com/auth/admin/master/console/`.
+2. Log in as the Keycloak admin.
+3. Choose **myrealm** in the top-left dropdown.
+4. Open **Realm Settings**.
+5. Select the **Themes** tab.
+6. Under **Admin Theme**, pick `v3-with-direct-impersonation`.
+7. Click **Save**.
 
-# Building the theme
+## Why Not Use Keycloak Token Exchange?
 
-You need to have [Maven](https://maven.apache.org/) installed to build the theme (Maven >= 3.1.1, Java >= 7).  
-The `mvn` command must be in the $PATH.
+Although you might consider the experimental [Keycloak Token Exchange](https://www.keycloak.org/securing-apps/token-exchange), in practice:
 
--   On macOS: `brew install maven`
--   On Debian/Ubuntu: `sudo apt-get install maven`
--   On Windows: `choco install openjdk` and `choco install maven` (Or download from [here](https://maven.apache.org/download.cgi))
+Exchanged tokens still set `azp` to `admin-app` so the customer application 
+cannot refresh these tokens properly. Impersonation will only lasts for the 
+access token’s lifespan (commonly five minutes).  
 
-```bash
-npm run build-keycloak-theme
-```
+This issue is discussed in detail here:  
+- [Keycloak impersonation mints token for wrong client (Stack Overflow)](https://stackoverflow.com/questions/62466630/keycloak-impersonation-mints-token-for-wrong-client)  
+- [Keycloak GitHub Issue #8756](https://github.com/keycloak/keycloak/issues/8756)
 
-Note that by default Keycloakify generates multiple .jar files for different versions of Keycloak.  
-You can customize this behavior, see documentation [here](https://docs.keycloakify.dev/targeting-specific-keycloak-versions).
+## Testing It Live
 
-# Initializing the account theme
-
-```bash
-npx keycloakify initialize-account-theme
-```
-
-# Initializing the email theme
-
-```bash
-npx keycloakify initialize-email-theme
-```
-
-# GitHub Actions
-
-The starter comes with a generic GitHub Actions workflow that builds the theme and publishes
-the jars [as GitHub releases artifacts](https://github.com/keycloakify/keycloakify-starter/releases/tag/v10.0.0).  
-To release a new version **just update the `package.json` version and push**.
-
-To enable the workflow go to your fork of this repository on GitHub then navigate to:
-`Settings` > `Actions` > `Workflow permissions`, select `Read and write permissions`.
+1. Navigate to `https://test-admin-app.oidc-spa.dev`.
+2. Log in as `staff1` (password hidden, contact me on discord if you want to test it).
+3. Click **Impersonate Alice**.
+4. You’ll be redirected to `https://example-tanstack-router.oidc-spa.dev/` as Alice.
