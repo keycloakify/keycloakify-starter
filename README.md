@@ -92,9 +92,24 @@ This issue is discussed in detail here:
 - [Keycloak impersonation mints token for wrong client (Stack Overflow)](https://stackoverflow.com/questions/62466630/keycloak-impersonation-mints-token-for-wrong-client)  
 - [Keycloak GitHub Issue #8756](https://github.com/keycloak/keycloak/issues/8756)
 
-## Testing It Live
+## Example implementation  
 
-1. Navigate to `https://test-admin-app.oidc-spa.dev`.
-2. Log in as `staff1` (password hidden, contact me on discord if you want to test it).
-3. Click **Impersonate Alice**.
+You can find an example implementation here:  
+https://github.com/keycloakify/impersonation-test.oidc-spa.dev  
+
+In this example:  
+- **Customer-facing application**  
+  - Client ID: `example-tanstack-router` (`customer-app`)
+  - URL: `https://example-tanstack-router.oidc-spa.dev` (`https://company.com`)
+- **Support staff application**  
+  - Client ID: `impersonation-test`  (`admin-app`)
+  - URL: `https://impersonation-test.oidc-spa.dev` (`https://company.com/admin`)
+- Keycloak url: `https://oidc-spa.cloud-iam.com` (`https://keycloak.company.com`)
+- Keycloak realm: `oidc-spa` (`myrealm`)
+- Support staff user: `staff1` 
+- Impersonated customer user: `alice` (`customer1`)
+
+1. Navigate to `https://impersonation-test.oidc-spa.dev`
+2. Log in as `staff1` (password hidden, contact me on discord if you want to actually test it).
+3. Click click on the link to impersonate `alice`.
 4. You’ll be redirected to `https://example-tanstack-router.oidc-spa.dev/` as Alice.
