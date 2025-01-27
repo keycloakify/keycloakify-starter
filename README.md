@@ -104,7 +104,7 @@ In this example:
 - **Support staff application**  
   - Client ID: `impersonation-test`  (`admin-app`)
   - URL: `https://impersonation-test.oidc-spa.dev` (`https://company.com/admin`)
-- Keycloak url: `https://oidc-spa.cloud-iam.com` (`https://keycloak.company.com`)
+- Keycloak url: `https://cloud-iam.oidc-spa.dev` (`https://keycloak.company.com`)
 - Keycloak realm: `oidc-spa` (`myrealm`)
 - Support staff user: `staff1` 
 - Impersonated customer user: `alice` (`customer1`)
