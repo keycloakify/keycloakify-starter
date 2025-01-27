@@ -8,6 +8,7 @@
     },
     "type": "module",
     "scripts": {
+        "postinstall": "keycloakify sync-extensions",
         "dev": "vite",
         "build": "tsc && vite build",
         "build-keycloak-theme": "npm run build && keycloakify build",
@@ -19,7 +20,32 @@
     "dependencies": {
         "keycloakify": "^11.8.8",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "@keycloakify/keycloak-admin-ui": "~260007.0.4",
+        "@patternfly/patternfly": "^5.4.0",
+        "@patternfly/react-code-editor": "^5.4.3",
+        "@patternfly/react-core": "^5.4.1",
+        "@patternfly/react-icons": "^5.4.0",
+        "@patternfly/react-styles": "^5.4.0",
+        "@patternfly/react-table": "^5.4.1",
+        "dagre": "^0.8.5",
+        "file-saver": "^2.0.5",
+        "file-selector": "^0.6.0",
+        "flat": "^6.0.1",
+        "i18next": "^23.15.1",
+        "i18next-http-backend": "^2.6.1",
+        "lodash-es": "^4.17.21",
+        "monaco-editor": "^0.52.0",
+        "p-debounce": "^4.0.0",
+        "react-dropzone": "^14.2.3",
+        "react-hook-form": "^7.53.0",
+        "react-i18next": "^15.0.2",
+        "react-router-dom": "^6.26.2",
+        "reactflow": "^11.11.4",
+        "use-react-router-breadcrumbs": "^4.0.1",
+        "keycloak-js": "26.0.7",
+        "@keycloak/keycloak-admin-client": "26.0.7",
+        "@keycloakify/keycloak-ui-shared": "~260007.0.2"
     },
     "devDependencies": {
         "@eslint/js": "^9.15.0",
@@ -41,7 +67,10 @@
         "prettier": "3.3.1",
         "typescript": "^5.2.2",
         "typescript-eslint": "^8.15.0",
-        "vite": "^5.0.8"
+        "vite": "^5.0.8",
+        "@types/dagre": "^0.7.52",
+        "@types/file-saver": "^2.0.7",
+        "@types/lodash-es": "^4.17.12"
     },
     "engines": {
         "node": "^18.0.0 || >=20.0.0"
