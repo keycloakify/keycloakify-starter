@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useAdminClient } from "./admin-client";
 import { useEnvironment } from "../shared/keycloak-ui-shared";
 import type KeycloakAdminClient from "@keycloak/keycloak-admin-client";
@@ -11,9 +10,7 @@ export function MaybeImpersonate(props: { children: React.ReactNode }) {
         environment: { realm }
     } = useEnvironment();
 
-    const [{ isDirectImpersonation }] = useState(() =>
-        directImpersonation({ realm, adminClient })
-    );
+    const { isDirectImpersonation } = directImpersonation({ realm, adminClient });
 
     if (isDirectImpersonation) {
         return null;
@@ -57,16 +54,25 @@ function getImpersonationQueryParams(): ImpersonationQueryParams | undefined {
 
 }
 
+let memo: ReturnType<typeof directImpersonation> | undefined =
+    undefined;
+
 function directImpersonation(params: {
     realm: string;
     adminClient: KeycloakAdminClient;
 }): { isDirectImpersonation: boolean } {
+
+    if (memo !== undefined) {
+        return memo;
+    }
+
     const { realm, adminClient } = params;
 
     const queryParams = getImpersonationQueryParams();
 
     if (queryParams === undefined) {
-        return { isDirectImpersonation: false };
+        memo = { isDirectImpersonation: false };
+        return memo;
     }
 
     (async () => {
@@ -83,7 +89,6 @@ function directImpersonation(params: {
         window.location.href = queryParams.redirectUrl;
     })();
 
-    return {
-        isDirectImpersonation: true
-    };
+    memo = { isDirectImpersonation: true };
+    return memo;
 }
