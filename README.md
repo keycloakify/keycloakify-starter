@@ -77,7 +77,7 @@ Then, enable it as the admin theme:
 3. Choose **myrealm** in the top-left dropdown.
 4. Open **Realm Settings**.
 5. Select the **Themes** tab.
-6. Under **Admin Theme**, pick `v3-with-direct-impersonation`.
+6. Under **Admin Theme**, pick `keycloak-v2-with-direct-impersonation`.
 7. Click **Save**.
 
 ## Why Not Use Keycloak Token Exchange?

@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [
         react(),
         keycloakify({
-            themeName: "v3-with-direct-impersonation",
+            themeName: "keycloak-v2-with-direct-impersonation",
             accountThemeImplementation: "none",
             keycloakVersionTargets: {
                 "22-to-25": false,
