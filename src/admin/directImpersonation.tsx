@@ -61,7 +61,6 @@ function directImpersonation(params: {
     realm: string;
     adminClient: KeycloakAdminClient;
 }): { isDirectImpersonation: boolean } {
-
     if (memo !== undefined) {
         return memo;
     }
@@ -77,8 +76,29 @@ function directImpersonation(params: {
 
     (async () => {
         try {
+
+            const userId = await (async ()=> {
+
+                if( getIsUuid(queryParams.user) ) {
+                    return queryParams.user;
+                }
+
+                const users = await adminClient.users.find({
+                    username: queryParams.user
+                });
+
+                const [user] = users;
+
+                if( user === undefined || user.id === undefined ) {
+                    throw new Error(`User not found: ${queryParams.user}`);
+                }
+
+                return user.id;
+
+            })();
+
             await adminClient.users.impersonation(
-                { id: queryParams.user },
+                { id: userId },
                 { user: queryParams.user, realm }
             );
         } catch (error) {
@@ -91,4 +111,9 @@ function directImpersonation(params: {
 
     memo = { isDirectImpersonation: true };
     return memo;
+}
+
+
+function getIsUuid(str: string) {
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 }
