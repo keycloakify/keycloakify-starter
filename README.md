@@ -2,6 +2,8 @@
 
 This project provides a streamlined impersonation workflow within the Keycloak Admin Console.  
 
+The only custom code is at [src/admin](./src/admin).  
+
 Assume we're working in realm `myrealm`, at `https://keycloak.company.com`. There are two applications:
 
 - **Customer-facing application**  
