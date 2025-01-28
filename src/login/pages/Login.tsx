@@ -74,8 +74,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                 </>
             }
         >
-            <div id="kc-form" class="flex flex-col">
-                <div class ="bg-[#204839] w-[32rem] h-1  self-center"></div>
+            <div id="kc-form" className="flex flex-col">
+                <div className ="bg-[#204839] w-[32rem] h-1  self-center"></div>
                 <div id="kc-form-wrapper">
                     {realm.password && (
                         <form
@@ -169,7 +169,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
                             <div id="kc-form-buttons" className={kcClsx("kcFormGroupClass")}>
                                 <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
-                                <div class="flex items-center gap-3 justify-end">
+                                <div className="flex items-center gap-3 justify-end">
                                 <div className={kcClsx("kcFormOptionsWrapperClass")}>
                                     {realm.resetPasswordAllowed && (
                                         <span>

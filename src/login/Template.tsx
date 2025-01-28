@@ -54,7 +54,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     return (
         
         <div className={kcClsx("kcLoginClass")}>
-            {/* <div class=" w-screen h-9 bg-[#204839]">
+            {/* <div className=" w-screen h-9 bg-[#204839]">
             </div> */}
             <div id="kc-header" className={kcClsx("kcHeaderClass")}>
                 <div id="kc-header-wrapper" className={kcClsx("kcHeaderWrapperClass")}>
@@ -183,7 +183,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </div>
                 </div>
             </div>
-            <div class=" bottom-0 absolute w-screen h-9 bg-[#204839]">
+            <div className=" bottom-0 absolute w-screen h-9 bg-[#204839]">
             </div>
         </div>
     );
