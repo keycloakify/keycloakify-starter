@@ -10,5 +10,43 @@ body.kcBodyClass {
 }
 
 .kcHeaderWrapperClass {
-    @apply text-3xl font-bold underline;
+    @apply hidden;
+}
+
+.kcInputClass {
+    @apply bg-[#F2F2F2] rounded-lg border-none focus:outline-none 
+}
+
+.kcFormOptionsWrapperClass{
+    @apply text-nowrap text-[#3A9573] italic
+}
+
+.kcFormGroupClass {
+    @apply no-underline flex flex-col items-start w-[60%] h-fit
+
+
+}
+
+#kc-login {
+    @apply bg-[#3A9573] w-fit px-3
+}
+
+.kcLabelClass {
+    @apply  text-[#204839] font-semibold
+}
+
+.kcFormCardClass {
+    @apply w-[666px] max-w-[800px] border-none rounded-xl
+}
+
+#kc-form-login {
+    @apply flex flex-col items-center
+}
+
+#kc-form-buttons {
+    @apply  items-end
+}
+
+.kcLoginClass {
+    @apply  flex flex-col
 }
