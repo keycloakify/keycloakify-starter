@@ -17,7 +17,11 @@ export default defineConfig({
                 { name: "TAILCLOAKIFY_FOOTER_IMPRINT_URL", default: "" },
                 { name: "TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL", default: "" },
                 { name: "TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT", default: "" },
-            ]
+            ],
+            kcContextExclusionsFtl: [
+                '<@addToXKeycloakifyMessagesIfMessageKey str="footerImprintUrl" />',
+                '<@addToXKeycloakifyMessagesIfMessageKey str="footerDataprotectionUrl" />',
+            ].join(".\n")
         })
     ]
 });
