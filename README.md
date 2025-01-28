@@ -25,18 +25,19 @@ Tailcloakify provides ways of customizing your theme without the need to rebuild
 
 ## Environment variables
 
-| Name                                        | Description                                                                    |
-| ------------------------------------------- | ------------------------------------------------------------------------------ |
-| TAILCLOAKIFY_ADDITIONAL_SCRIPTS             | Use it to add other external scripts                                           |
-| TAILCLOAKIFY_BACKGROUND_LOGO_URL            | Use it to add an image of your logo                                            |
-| TAILCLOAKIFY_BACKGROUND_VIDEO_URL           | Use it to add a MP4 format background video on your register and login pages   |
-| TAILCLOAKIFY_FOOTER_IMPRINT_URL             | Use it to add an Impressum                                                     |
-| TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL      | Use it to add url to your data protection document                             |
-| TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT  | Use it to integrate Orestbida cookie consent plugin                            |
+| Name                                        | Description                                                                  |
+| ------------------------------------------- |------------------------------------------------------------------------------|
+| TAILCLOAKIFY_ADDITIONAL_SCRIPTS             | Use it to add other external scripts                                         |
+| TAILCLOAKIFY_BACKGROUND_LOGO_URL            | Use it to add an image of your logo                                          |
+| TAILCLOAKIFY_BACKGROUND_VIDEO_URL           | Use it to add a MP4 format background video on your register and login pages |
+| TAILCLOAKIFY_FAVICON_URL                    | Use it to add a url to your Favicon                                          |
+| TAILCLOAKIFY_FOOTER_IMPRINT_URL             | Use it to add an Impressum                                                   |
+| TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL      | Use it to add url to your data protection document                           |
+| TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT  | Use it to integrate Orestbida cookie consent plugin                          |
 
 ## Keycloak localization feature
 
-Some customizations are possible thought Keycloaks Localization System, allowing setting up different configurations for each language. You can eigher add custom localization by adding those into the keycloak server or by manualy setting them within the realm settings.
+Some customizations are possible through Keycloak's Localization System, allowing setting up different configurations for each language. You can either add custom localization by adding those into the keycloak server or by manually setting them within the realm settings.
 
 | Name                     | Description                                                                        |
 | ------------------------ | ---------------------------------------------------------------------------------- |
