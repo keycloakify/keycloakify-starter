@@ -429,7 +429,7 @@ export const WithCookieConsentAndExternalScript: Story = {
         />
     )
 };
-export const WithBackgroundLogoAndBackgroundVideo: Story = {
+export const WithBackgroundLogoAndBackgroundVideoAndFavicon: Story = {
     render: args => (
         <KcPageStory
             {...args}
@@ -437,7 +437,8 @@ export const WithBackgroundLogoAndBackgroundVideo: Story = {
                 properties: {
                     TAILCLOAKIFY_BACKGROUND_LOGO_URL:
                         "https://www.almig.de/typo3conf/ext/almig_package/Resources/Public/Images/almig-logo-inverted.png",
-                    TAILCLOAKIFY_BACKGROUND_VIDEO_URL: "https://www.almig.de/fileadmin/user_upload/Video/Almig_Intro.mp4"
+                    TAILCLOAKIFY_BACKGROUND_VIDEO_URL: "https://www.almig.de/fileadmin/user_upload/Video/Almig_Intro.mp4",
+                    TAILCLOAKIFY_FAVICON_URL: "https://almig.de/typo3conf/ext/almig_package/Resources/Public/Icons/favicon.ico"
                 }
             }}
         />

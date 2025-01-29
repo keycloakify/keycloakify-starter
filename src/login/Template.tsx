@@ -36,7 +36,20 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
     }, []);
 
-    // Load Scripts & Cookie Consent
+    useEffect(() => {
+        const url: string | undefined = kcContext.properties.TAILCLOAKIFY_FAVICON_URL;
+
+        if (url) {
+            let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+            if (!link) {
+                link = document.createElement("link");
+                link.rel = "icon";
+                document.head.appendChild(link);
+            }
+            link.href = url;
+        }
+    });
+
     function loadScript(src: string) {
         return new Promise<void>((resolve, reject) => {
             const script = document.createElement("script");
