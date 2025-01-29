@@ -3,6 +3,7 @@ import * as CookieConsent from "vanilla-cookieconsent";
 
 // Referenced from >>>>> https://playground.cookieconsent.orestbida.com/
 const useSetCookieConsent = () => {
+    window.CookieConsent = CookieConsent;
     CookieConsent.run({
         mode: "opt-in",
         autoShow: true,

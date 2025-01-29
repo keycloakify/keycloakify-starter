@@ -390,15 +390,15 @@ export const WithAllSocialProvidersFooterAndCookie_ForSplashScreen: Story = {
             {...args}
             kcContext={{
                 realm: {
-                    name: 'Tailcloakify',
-                    displayName: 'Tailcloakify',
-                    displayNameHtml: 'Tailcloakify',
-                    rememberMe: true,
+                    name: "Tailcloakify",
+                    displayName: "Tailcloakify",
+                    displayNameHtml: "Tailcloakify",
+                    rememberMe: true
                 },
                 social: {
                     displayInfo: true,
                     providers: Object.keys(useProviderLogos())
-                        .filter(providerId => providerId !== 'twitter')
+                        .filter(providerId => providerId !== "twitter")
                         .map(providerId => ({
                             loginUrl: providerId,
                             alias: providerId,
