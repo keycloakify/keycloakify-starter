@@ -83,3 +83,11 @@ html {
     cursor: pointer;
     pointer-events: all;
 }
+
+.kcLocaleListClass {
+    max-height: 150px;
+    overflow-y: scroll;
+    border-radius: 0.5rem;
+    scrollbar-width: auto;
+    scrollbar-color: gray transparent;
+}
