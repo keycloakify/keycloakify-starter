@@ -37,7 +37,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     }, []);
 
     useEffect(() => {
-        const url: string | undefined = kcContext.properties.TAILCLOAKIFY_FAVICON_URL;
+        const url: string | undefined = advancedMsgStr("faviconUrl") || kcContext.properties.TAILCLOAKIFY_FAVICON_URL;
 
         if (url) {
             let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
@@ -102,10 +102,14 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             )}
         >
             <div id="kc-header">
-                {kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"] && (
-                    <img alt={"Logo"} src={kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"]} className={"fixed z-10 top-4 left-8"} />
+                {(advancedMsgStr("backgroundLogoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"]) && (
+                    <img
+                        alt={"Logo"}
+                        src={advancedMsgStr("backgroundLogoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"]}
+                        className={"fixed z-10 top-4 left-8"}
+                    />
                 )}
-                {kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"] && (
+                {(advancedMsgStr("backgroundVideoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"]) && (
                     <video
                         autoPlay={true}
                         loop={true}
@@ -113,7 +117,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         playsInline={true}
                         className={"fixed top-0 left-0 right-0 bottom-0 min-h-full min-w-full opacity-20 max-w-none"}
                     >
-                        <source src={kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"]} type="video/mp4" />
+                        <source
+                            src={advancedMsgStr("backgroundLogoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"]}
+                            type="video/mp4"
+                        />
                     </video>
                 )}
             </div>
