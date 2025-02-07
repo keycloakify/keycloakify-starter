@@ -1,6 +1,6 @@
 {
   "name": "tailcloakify",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "Tailcloakify, the Keycloak Theme based on Keycloakify, and layered with TailwindCSS",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "keywords": [],
   "dependencies": {
     "autoprefixer": "^10.4.19",
-    "keycloakify": "^11.4.4",
+    "keycloakify": "^11.8.12",
     "postcss": "^8.4.39",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

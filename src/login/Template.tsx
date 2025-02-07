@@ -37,22 +37,40 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     }, []);
 
     useEffect(() => {
-        const promisses: Promise<null>[] = [];
-        const scripts = kcContext.properties["TAILCLOAKIFY_ADDITIONAL_SCRIPTS"];
+        const url: string | undefined = advancedMsgStr("faviconUrl") || kcContext.properties.TAILCLOAKIFY_FAVICON_URL;
 
-        if (scripts) {
-            const scriptUrls = scripts.split(";"); // Split the URLs by semicolon
-            scriptUrls.forEach(url => {
-                const scriptElement = document.createElement("script");
-                promisses.push(new Promise(res => (scriptElement.onload = () => res(null))));
-                scriptElement.src = url.trim(); // Trim any extra whitespace
-                scriptElement.async = true;
-                document.head.appendChild(scriptElement); // Append to the head
-            });
+        if (url) {
+            let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+            if (!link) {
+                link = document.createElement("link");
+                link.rel = "icon";
+                document.head.appendChild(link);
+            }
+            link.href = url;
+        }
+    });
+
+    function loadScript(src: string) {
+        return new Promise<void>((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.async = true;
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+            document.head.appendChild(script);
+        });
+    }
+
+    useEffect(() => {
+        const promisses: Promise<void>[] = [];
+
+        if (kcContext.properties["TAILCLOAKIFY_ADDITIONAL_SCRIPTS"]) {
+            const scriptUrls = kcContext.properties["TAILCLOAKIFY_ADDITIONAL_SCRIPTS"].split(";"); // Split the URLs by semicolon
+            scriptUrls.forEach(url => promisses.push(loadScript(url)));
         }
 
         Promise.all(promisses).then(() => {
-            if (!window.CookieConsent && kcContext.properties["TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT"]) useSetCookieConsent();
+            if (window.CookieConsent === undefined && kcContext.properties["TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT"]) useSetCookieConsent();
         });
     }, []);
 
@@ -66,8 +84,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         className: bodyClassName ?? kcClsx("kcBodyClass")
     });
 
-    const footerImprintUrl = advancedMsgStr('footerImprintUrl') !== 'footerImprintUrl' ? advancedMsgStr('footerImprintUrl') : null;
-    const footerDataprotectionUrl = advancedMsgStr('footerDataprotectionUrl') !== 'footerDataprotectionUrl' ? advancedMsgStr('footerDataprotectionUrl') : null;
+    const footerImprintUrl = advancedMsgStr("footerImprintUrl") !== "footerImprintUrl" ? advancedMsgStr("footerImprintUrl") : null;
+    const footerDataprotectionUrl =
+        advancedMsgStr("footerDataprotectionUrl") !== "footerDataprotectionUrl" ? advancedMsgStr("footerDataprotectionUrl") : null;
 
     const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss });
 
@@ -83,10 +102,14 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             )}
         >
             <div id="kc-header">
-                {kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"] && (
-                    <img alt={"Logo"} src={kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"]} className={"fixed z-10 top-4 left-8"} />
+                {(advancedMsgStr("backgroundLogoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"]) && (
+                    <img
+                        alt={"Logo"}
+                        src={advancedMsgStr("backgroundLogoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_LOGO_URL"]}
+                        className={"fixed z-10 top-4 left-8"}
+                    />
                 )}
-                {kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"] && (
+                {(advancedMsgStr("backgroundVideoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"]) && (
                     <video
                         autoPlay={true}
                         loop={true}
@@ -94,14 +117,17 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         playsInline={true}
                         className={"fixed top-0 left-0 right-0 bottom-0 min-h-full min-w-full opacity-20 max-w-none"}
                     >
-                        <source src={kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"]} type="video/mp4" />
+                        <source
+                            src={advancedMsgStr("backgroundLogoUrl") || kcContext.properties["TAILCLOAKIFY_BACKGROUND_VIDEO_URL"]}
+                            type="video/mp4"
+                        />
                     </video>
                 )}
             </div>
 
-            <div className={clsx(kcClsx("kcFormCardClass"), "relative z-10 max-w-md space-y-6 w-full rounded-lg")}>
+            <div className={clsx(kcClsx("kcFormCardClass"), "relative z-10 max-w-md w-full rounded-lg")}>
                 <div className={"font-bold text-center text-2xl"}>{msg("loginTitleHtml", realm.displayNameHtml)}</div>
-                <header className={clsx(kcClsx("kcFormHeaderClass"), "space-y-4")}>
+                <header className={clsx(kcClsx("kcFormHeaderClass"))}>
                     {(() => {
                         const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
                             <h1 id="kc-page-title" className={"text-center text-xl"}>
@@ -218,14 +244,14 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             target={"_blank"}
                             rel={"noopener noreferrer"}
                             type={"button"}
-                            data-cc={"show-preferencesModal"}
+                            onClick={() => window?.CookieConsent?.showPreferences()}
                         >
                             {msg("footerCookiePreferencesTitle")}
                         </a>
                     )}
                 </section>
 
-                <section className={"mr-4"}>
+                <section>
                     {enabledLanguages.length > 1 && (
                         <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
                             <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>

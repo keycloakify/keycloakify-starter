@@ -19,6 +19,9 @@ export default defineConfig({
                 { name: "TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT", default: "" },
             ],
             kcContextExclusionsFtl: [
+                '<@addToXKeycloakifyMessagesIfMessageKey str="backgroundLogoUrl" />',
+                '<@addToXKeycloakifyMessagesIfMessageKey str="backgroundVideoUrl" />',
+                '<@addToXKeycloakifyMessagesIfMessageKey str="faviconUrl" />',
                 '<@addToXKeycloakifyMessagesIfMessageKey str="footerImprintUrl" />',
                 '<@addToXKeycloakifyMessagesIfMessageKey str="footerDataprotectionUrl" />',
             ].join(".\n")
