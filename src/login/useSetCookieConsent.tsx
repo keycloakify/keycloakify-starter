@@ -1,9 +1,10 @@
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 import * as CookieConsent from "vanilla-cookieconsent";
 import { KcContext } from "../kc.gen";
+import { I18n } from "./i18n";
 
 // Referenced from >>>>> https://playground.cookieconsent.orestbida.com/
-const useSetCookieConsent = (kcContext: KcContext) => {
+const useSetCookieConsent = (kcContext: KcContext, i18n: I18n) => {
     const showGoogleCaptcha =
         kcContext.properties[
             "TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT_GOOGLE_CAPTCHA"
@@ -59,7 +60,9 @@ const useSetCookieConsent = (kcContext: KcContext) => {
             default:
                 navigator &&
                 navigator.language &&
-                ["de", "en", "fr", "it"].includes(navigator.language)
+                ["de", "en", "fr", "it", "es", "cs", "nl", "pl", "ru"].includes(
+                    navigator.language
+                )
                     ? navigator.language
                     : "en",
             autoDetect: "document",
@@ -67,8 +70,7 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                 de: {
                     consentModal: {
                         title: "DIESE WEBSEITE VERWENDET COOKIES",
-                        description:
-                            'Diese Website verwendet unbedingt erforderliche Cookies, um ihre ordnungsgemäße Funktion sicherzustellen. Weitere Informationen finden Sie in unserer <a href="https://almig.de/de/datenschutz" class="cc-link">Datenschutzerklärung</a>.',
+                        description: `Diese Website verwendet unbedingt erforderliche Cookies, um ihre ordnungsgemäße Funktion sicherzustellen. Weitere Informationen finden Sie in unserer <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Datenschutzerklärung</a>.`,
                         acceptAllBtn: "Alle Akzeptieren",
                         showPreferencesBtn: "Einstellungen anpassen"
                     },
@@ -80,8 +82,7 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                         sections: [
                             {
                                 title: "Wozu verwenden wir Cookies?",
-                                description:
-                                    'Diese Website verwendet unbedingt erforderliche Cookies, um ihre ordnungsgemäße Funktion sicherzustellen. Weitere Informationen finden Sie in unserer <a href="https://almig.de/de/datenschutz" class="cc-link">Datenschutzerklärung</a>.'
+                                description: `Diese Website verwendet unbedingt erforderliche Cookies, um ihre ordnungsgemäße Funktion sicherzustellen. Weitere Informationen finden Sie in unserer <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Datenschutzerklärung</a>.`
                             },
                             {
                                 title: "Notwendige Cookies",
@@ -105,8 +106,7 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                 en: {
                     consentModal: {
                         title: "We use some cookies",
-                        description:
-                            'This website uses essential cookies to ensure its proper functioning and audience tracking cookies. These cookies comply with the GDPR legislation. More information is available in our <a href="https://almig.de/en/data-protection" class="cc-link">Privacy Policy</a>.',
+                        description: `This website uses essential cookies to ensure its proper functioning and audience tracking cookies. These cookies comply with the GDPR legislation. More information is available in our <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Privacy Policy</a>.`,
                         acceptAllBtn: "Accept All",
                         showPreferencesBtn: "Settings"
                     },
@@ -118,13 +118,12 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                         sections: [
                             {
                                 title: "What are Cookies used for?",
-                                description:
-                                    'This website uses essential cookies to ensure its proper functioning and audience tracking cookies. These cookies comply with the GDPR legislation. More information is available in our <a href="https://almig.de/en/data-protection" class="cc-link">Privacy Policy</a>.'
+                                description: `This website uses essential cookies to ensure its proper functioning and audience tracking cookies. These cookies comply with the GDPR legislation. More information is available in our <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Privacy Policy</a>.`
                             },
                             {
                                 title: "Functional Cookies",
                                 description:
-                                    "These cookies are necessary for the proper functioning of the site: they are used, during your session, to remember the language you have chosen, to remember your connection as a customer, to allow you to filter the display of products, to remember your basket, to record your order. These functional cookies cannot be deactivated as this would make it impossible for you to browse the site. These essential cookies are internal cookies from our website almig.de",
+                                    "These cookies are necessary for the proper functioning of the site: they are used, during your session, to remember the language you have chosen, to remember your connection as a customer, to allow you to filter the display of products, to remember your basket, to record your order. These functional cookies cannot be deactivated as this would make it impossible for you to browse the site. These essential cookies are internal cookies from our website.",
                                 linkedCategory: "necessary"
                             },
                             ...(showGoogleCaptcha
@@ -143,8 +142,7 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                 fr: {
                     consentModal: {
                         title: "Informations sur les cookies",
-                        description:
-                            'Ce site web utilise des cookies essentiels pour assurer son bon fonctionnement et des cookies de suivi dâ€™audience. Ces cookies sont conformes Ã  la lÃ©gislation GDPR. Plus dinformations dans notre <a href="https://almig.de/fr/protection-des-donnees" class="cc-link">Politique de ConfidentialitÃ©</a>.',
+                        description: `Ce site web utilise des cookies essentiels pour assurer son bon fonctionnement et des cookies de suivi dâ€™audience. Ces cookies sont conformes Ã  la lÃ©gislation GDPR. Plus dinformations dans notre <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Politique de ConfidentialitÃ©</a>.`,
                         acceptAllBtn: "Acceptez tout",
                         showPreferencesBtn: "Ajuster les paramÃ¨tres"
                     },
@@ -156,13 +154,12 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                         sections: [
                             {
                                 title: "Pourquoi utilisons-nous les cookies?",
-                                description:
-                                    'Ce site web utilise des cookies essentiels pour assurer son bon fonctionnement et des cookies de suivi dâ€™audience. Ces cookies sont conformes Ã  la lÃ©gislation GDPR. Plus dinformations dans notre <a href="https://almig.de/fr/protection-des-donnees" class="cc-link">Politique de ConfidentialitÃ©</a>.'
+                                description: `Ce site web utilise des cookies essentiels pour assurer son bon fonctionnement et des cookies de suivi dâ€™audience. Ces cookies sont conformes Ã  la lÃ©gislation GDPR. Plus dinformations dans notre <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Politique de ConfidentialitÃ©</a>`
                             },
                             {
                                 title: "Cookies Fonctionnels",
                                 description:
-                                    "Ces cookies sont nÃ©cessaires au bon fonctionnement du site: ils servent, durant votre session, Ã  mÃ©moriser la langue choisie, Ã  mÃ©moriser votre connexion en tant que client, Ã  vous permettre de filtrer lâ€™affichage des produits, Ã  mÃ©moriser votre panier, Ã  enregistrer votre commande. Ces cookies fonctionnels ne sont pas dÃ©sactivables car cela rendrait impossible votre navigation sur le site. Ces cookies indispensables sont des cookies internes, provenant de notre site almig.de",
+                                    "Ces cookies sont nÃ©cessaires au bon fonctionnement du site: ils servent, durant votre session, Ã  mÃ©moriser la langue choisie, Ã  mÃ©moriser votre connexion en tant que client, Ã  vous permettre de filtrer lâ€™affichage des produits, Ã  mÃ©moriser votre panier, Ã  enregistrer votre commande. Ces cookies fonctionnels ne sont pas dÃ©sactivables car cela rendrait impossible votre navigation sur le site. Ces cookies indispensables sont des cookies internes, provenant de notre site.",
                                 linkedCategory: "necessary"
                             },
                             ...(showGoogleCaptcha
@@ -181,8 +178,7 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                 it: {
                     consentModal: {
                         title: "Utilizziamo alcuni cookie",
-                        description:
-                            'Questo sito Web utilizza cookie essenziali per garantire il corretto funzionamento e cookie di tracciamento del pubblico. Questi cookie sono conformi alla normativa GDPR. Ulteriori informazioni sono disponibili nella nostra <a href="https://www.almig.de/it/protezione-dei-dati" class="cc-link">Informativa sulla privacy</a>.',
+                        description: `Questo sito Web utilizza cookie essenziali per garantire il corretto funzionamento e cookie di tracciamento del pubblico. Questi cookie sono conformi alla normativa GDPR. Ulteriori informazioni sono disponibili nella nostra <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Informativa sulla privacy</a>.`,
                         acceptAllBtn: "Accettare Tutti",
                         showPreferencesBtn: "Maggiori informazioni"
                     },
@@ -194,13 +190,12 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                         sections: [
                             {
                                 title: "Per cosa utilizziamo i cookie?",
-                                description:
-                                    'Questo sito Web utilizza cookie essenziali per garantire il corretto funzionamento e cookie di tracciamento del pubblico. Questi cookie sono conformi alla normativa GDPR. Ulteriori informazioni sono disponibili nella nostra <a href="https://www.almig.de/it/protezione-dei-dati" class="cc-link">Informativa sulla privacy</a>.'
+                                description: `Questo sito Web utilizza cookie essenziali per garantire il corretto funzionamento e cookie di tracciamento del pubblico. Questi cookie sono conformi alla normativa GDPR. Ulteriori informazioni sono disponibili nella nostra <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Informativa sulla privacy</a>.`
                             },
                             {
                                 title: "Cookie funzionali",
                                 description:
-                                    "Questi cookie sono necessari per il corretto funzionamento del sito: vengono utilizzati, durante la tua sessione, per ricordare la lingua che hai scelto, per ricordare la tua connessione come cliente, per permetterti di filtrare la visualizzazione dei prodotti, per ricordare il tuo carrello , per registrare il tuo ordine. Questi cookie funzionali non possono essere disattivati â€‹â€‹in quanto ciÃ² renderebbe impossibile la navigazione sul sito. Questi cookie essenziali sono cookie interni del nostro sito web almig.de",
+                                    "Questi cookie sono necessari per il corretto funzionamento del sito: vengono utilizzati, durante la tua sessione, per ricordare la lingua che hai scelto, per ricordare la tua connessione come cliente, per permetterti di filtrare la visualizzazione dei prodotti, per ricordare il tuo carrello , per registrare il tuo ordine. Questi cookie funzionali non possono essere disattivati â€‹â€‹in quanto ciÃ² renderebbe impossibile la navigazione sul sito. Questi cookie essenziali sono cookie interni del nostro sito web.",
                                 linkedCategory: "necessary"
                             },
                             ...(showGoogleCaptcha
@@ -210,6 +205,186 @@ const useSetCookieConsent = (kcContext: KcContext) => {
                                           description:
                                               "Utilizziamo Recaptcha di Google per registrare e confermare la tua identitÃ . Tra le altre cose, carica script dai server di Google Inc. con sede in America, memorizza cookie e trasferisce i dati dell'utente ai server della societÃ .<br>Non Ã¨ possibile registrarsi senza accettare questa categoria. Ulteriori informazioni sono disponibili nella nostra Informativa sulla privacy. Per ulteriori informazioni o per la registrazione manuale vi invitiamo a contattarci direttamente tramite i canali di contatto generali.",
                                           linkedCategory: "google-recaptcha"
+                                      }
+                                  ]
+                                : [])
+                        ]
+                    }
+                },
+                es: {
+                    consentModal: {
+                        title: "ESTE SITIO WEB UTILIZA COOKIES",
+                        description: `Este sitio web utiliza cookies estrictamente necesarias para garantizar su correcto funcionamiento. Para más información, consulte nuestra <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Política de Privacidad</a>.`,
+                        acceptAllBtn: "Aceptar Todo",
+                        showPreferencesBtn: "Ajustar Preferencias"
+                    },
+                    preferencesModal: {
+                        title: "Configuración de Cookies",
+                        acceptAllBtn: "Aceptar Todo",
+                        savePreferencesBtn: "Guardar",
+                        closeIconLabel: "Cerrar",
+                        sections: [
+                            {
+                                title: "¿Para qué usamos las cookies?",
+                                description: `Este sitio web utiliza cookies estrictamente necesarias para garantizar su correcto funcionamiento. Para más información, consulte nuestra <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Política de Privacidad</a>.`
+                            },
+                            {
+                                title: "Cookies Necesarias",
+                                description:
+                                    "Las cookies necesarias ayudan a hacer que un sitio web sea utilizable al habilitar funciones básicas como la configuración de cookies, la navegación por la página y el acceso a áreas seguras del sitio web. El sitio web no puede funcionar correctamente sin estas cookies.",
+                                linkedCategory: "necessary"
+                            },
+                            ...(showGoogleCaptcha
+                                ? [
+                                      {
+                                          title: "Recaptcha de Google",
+                                          description:
+                                              "Para el registro y la confirmación de su identidad, utilizamos Recaptcha de Google. Esto, entre otras cosas, carga scripts desde servidores de Google Inc. con sede en Estados Unidos, almacena cookies y transfiere datos de usuarios a los servidores de la empresa.<br>No es posible registrarse sin aceptar esta categoría. Para más información, consulte nuestra Política de Privacidad. Para un registro manual, contáctenos directamente a través de los canales de contacto generales.",
+                                          linkedCategory: "google_recaptcha"
+                                      }
+                                  ]
+                                : [])
+                        ]
+                    }
+                },
+                cs: {
+                    consentModal: {
+                        title: "TATO WEBOVÁ STRÁNKA POUŽÍVÁ COOKIES",
+                        description: `Tato webová stránka používá nezbytně nutné cookies, aby zajistila svou správnou funkci. Více informací naleznete v naší <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Zásadách ochrany osobních údajů</a>.`,
+                        acceptAllBtn: "Přijmout Vše",
+                        showPreferencesBtn: "Upravit Nastavení"
+                    },
+                    preferencesModal: {
+                        title: "Nastavení Cookies",
+                        acceptAllBtn: "Přijmout Vše",
+                        savePreferencesBtn: "Uložit",
+                        closeIconLabel: "Zavřít",
+                        sections: [
+                            {
+                                title: "K čemu používáme cookies?",
+                                description: `Tato webová stránka používá nezbytně nutné cookies, aby zajistila svou správnou funkci. Více informací naleznete v naší <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Zásadách ochrany osobních údajů</a>.`
+                            },
+                            {
+                                title: "Nezbytné Cookies",
+                                description:
+                                    "Nezbytné cookies pomáhají zpřístupnit webové stránky tím, že umožňují základní funkce, jako je nastavení cookies, navigace na stránce a přístup do zabezpečených oblastí webových stránek. Bez těchto cookies by webové stránky nemohly správně fungovat.",
+                                linkedCategory: "necessary"
+                            },
+                            ...(showGoogleCaptcha
+                                ? [
+                                      {
+                                          title: "Recaptcha od Google",
+                                          description:
+                                              "Pro registraci a potvrzení vaší identity používáme Recaptcha od Google. To mimo jiné načítá skripty ze serverů společnosti Google Inc. se sídlem v Americe, ukládá cookies a přenáší uživatelská data na servery společnosti.<br>Bez přijetí této kategorie není registrace možná. Více informací naleznete v našich Zásadách ochrany osobních údajů. Pro manuální registraci nás prosím kontaktujte prostřednictvím obecných kontaktních kanálů.",
+                                          linkedCategory: "google_recaptcha"
+                                      }
+                                  ]
+                                : [])
+                        ]
+                    }
+                },
+                nl: {
+                    consentModal: {
+                        title: "DEZE WEBSITE GEBRUIKT COOKIES",
+                        description: `Deze website gebruikt strikt noodzakelijke cookies om de goede werking te garanderen. Voor meer informatie, zie onze <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Privacyverklaring</a>.`,
+                        acceptAllBtn: "Alles Accepteren",
+                        showPreferencesBtn: "Voorkeuren Aanpassen"
+                    },
+                    preferencesModal: {
+                        title: "Cookievoorkeuren",
+                        acceptAllBtn: "Alles Accepteren",
+                        savePreferencesBtn: "Opslaan",
+                        closeIconLabel: "Sluiten",
+                        sections: [
+                            {
+                                title: "Waarom gebruiken we cookies?",
+                                description: `Deze website gebruikt strikt noodzakelijke cookies om de goede werking te garanderen. Voor meer informatie, zie onze <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Privacyverklaring</a>.`
+                            },
+                            {
+                                title: "Noodzakelijke Cookies",
+                                description:
+                                    "Noodzakelijke cookies helpen een website bruikbaar te maken door basisfuncties zoals cookie-instellingen, paginanavigatie en toegang tot beveiligde delen van de website mogelijk te maken. Zonder deze cookies kan de website niet goed functioneren.",
+                                linkedCategory: "necessary"
+                            },
+                            ...(showGoogleCaptcha
+                                ? [
+                                      {
+                                          title: "Recaptcha van Google",
+                                          description:
+                                              "Voor registratie en bevestiging van uw identiteit gebruiken we Recaptcha van Google. Dit laadt onder andere scripts van servers van Google Inc. in Amerika, slaat cookies op en stuurt gebruikersgegevens naar de servers van het bedrijf.<br>Registratie is niet mogelijk zonder deze categorie te accepteren. Voor meer informatie, zie onze Privacyverklaring. Neem voor een handmatige registratie contact met ons op via de algemene contactkanalen.",
+                                          linkedCategory: "google_recaptcha"
+                                      }
+                                  ]
+                                : [])
+                        ]
+                    }
+                },
+                pl: {
+                    consentModal: {
+                        title: "TA STRONA INTERNETOWA UŻYWA CIASTECZEK",
+                        description: `Ta strona internetowa używa niezbędnych plików cookie, aby zapewnić prawidłowe działanie. Więcej informacji można znaleźć w naszej <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Polityce Prywatności</a>.`,
+                        acceptAllBtn: "Zaakceptuj Wszystko",
+                        showPreferencesBtn: "Dostosuj Ustawienia"
+                    },
+                    preferencesModal: {
+                        title: "Ustawienia Plików Cookie",
+                        acceptAllBtn: "Zaakceptuj Wszystko",
+                        savePreferencesBtn: "Zapisz",
+                        closeIconLabel: "Zamknij",
+                        sections: [
+                            {
+                                title: "Do czego używamy plików cookie?",
+                                description: `Ta strona internetowa używa niezbędnych plików cookie, aby zapewnić prawidłowe działanie. Więcej informacji można znaleźć w naszej <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Polityce Prywatności</a>.`
+                            },
+                            {
+                                title: "Niezbędne Pliki Cookie",
+                                description:
+                                    "Niezbędne pliki cookie pomagają uczynić stronę internetową użyteczną poprzez umożliwienie podstawowych funkcji, takich jak ustawienia plików cookie, nawigacja po stronie i dostęp do bezpiecznych obszarów strony. Strona internetowa nie może działać poprawnie bez tych plików cookie.",
+                                linkedCategory: "necessary"
+                            },
+                            ...(showGoogleCaptcha
+                                ? [
+                                      {
+                                          title: "Recaptcha od Google",
+                                          description:
+                                              "Do rejestracji i potwierdzenia tożsamości używamy Recaptcha od Google. Wśród innych rzeczy, ładuje to skrypty z serwerów Google Inc. z siedzibą w Ameryce, przechowuje pliki cookie i przekazuje dane użytkowników na serwery firmy.<br>Rejestracja nie jest możliwa bez zaakceptowania tej kategorii. Więcej informacji można znaleźć w naszej Polityce Prywatności. W przypadku rejestracji ręcznej skontaktuj się z nami bezpośrednio poprzez ogólne kanały kontaktowe.",
+                                          linkedCategory: "google_recaptcha"
+                                      }
+                                  ]
+                                : [])
+                        ]
+                    }
+                },
+                ru: {
+                    consentModal: {
+                        title: "ЭТОТ САЙТ ИСПОЛЬЗУЕТ COOKIES",
+                        description: `Этот сайт использует строго необходимые файлы cookie для обеспечения своей корректной работы. Подробнее см. в нашей <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Политике Конфиденциальности</a>.`,
+                        acceptAllBtn: "Принять Все",
+                        showPreferencesBtn: "Настроить Параметры"
+                    },
+                    preferencesModal: {
+                        title: "Настройки Cookies",
+                        acceptAllBtn: "Принять Все",
+                        savePreferencesBtn: "Сохранить",
+                        closeIconLabel: "Закрыть",
+                        sections: [
+                            {
+                                title: "Для чего мы используем cookies?",
+                                description: `Этот сайт использует строго необходимые файлы cookie для обеспечения своей корректной работы. Подробнее см. в нашей <a href="${i18n.advancedMsgStr("footerDataprotectionUrl")}" class="cc-link">Политике Конфиденциальности</a>.`
+                            },
+                            {
+                                title: "Необходимые Cookies",
+                                description:
+                                    "Необходимые cookies помогают сделать сайт пригодным для использования, обеспечивая основные функции, такие как настройки cookies, навигация по странице и доступ к защищенным областям сайта. Без этих cookies сайт не сможет работать корректно.",
+                                linkedCategory: "necessary"
+                            },
+                            ...(showGoogleCaptcha
+                                ? [
+                                      {
+                                          title: "Recaptcha от Google",
+                                          description:
+                                              "Для регистрации и подтверждения вашей личности мы используем Recaptcha от Google. Это, среди прочего, загружает скрипты с серверов Google Inc., расположенных в Америке, сохраняет cookies и передает пользовательские данные на серверы компании.<br>Регистрация невозможна без принятия этой категории. Подробнее см. в нашей Политике Конфиденциальности. Для ручной регистрации свяжитесь с нами напрямую через общие каналы связи.",
+                                          linkedCategory: "google_recaptcha"
                                       }
                                   ]
                                 : [])
