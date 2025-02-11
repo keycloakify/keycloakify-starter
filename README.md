@@ -34,6 +34,7 @@ Tailcloakify provides ways of customizing your theme without the need to rebuild
 | TAILCLOAKIFY_FOOTER_IMPRINT_URL             | Use it to add an Impressum                                                   |
 | TAILCLOAKIFY_FOOTER_DATAPROTECTION_URL      | Use it to add url to your data protection document                           |
 | TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT  | Use it to integrate Orestbida cookie consent plugin                          |
+| TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT_GOOGLE_CAPTCHA  | Provide any falsy value to disable the cookie section for the google captcha                          |
 
 ## Keycloak localization feature
 

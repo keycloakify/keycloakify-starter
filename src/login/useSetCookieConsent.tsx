@@ -1,13 +1,15 @@
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 import * as CookieConsent from "vanilla-cookieconsent";
-import { KcContext } from "keycloakify/login/KcContext";
+import { KcContext } from "../kc.gen";
 
 // Referenced from >>>>> https://playground.cookieconsent.orestbida.com/
 const useSetCookieConsent = (kcContext: KcContext) => {
-    window.CookieConsent = CookieConsent;
     const showGoogleCaptcha =
-        kcContext.properties.TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT_GOOGLE_CAPTCHA ===
-        "TRUE";
+        kcContext.properties[
+            "TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT_GOOGLE_CAPTCHA"
+        ] === "TRUE";
+
+    window.CookieConsent = CookieConsent;
     CookieConsent.run({
         mode: "opt-in",
         autoShow: true,

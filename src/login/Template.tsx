@@ -70,7 +70,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         }
 
         Promise.all(promisses).then(() => {
-            if (window.CookieConsent === undefined && kcContext.properties["TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT"]) useSetCookieConsent();
+            if (window.CookieConsent === undefined && kcContext.properties["TAILCLOAKIFY_FOOTER_ORESTBIDACOOKIECONSENT"])
+                useSetCookieConsent(kcContext);
         });
     }, []);
 
