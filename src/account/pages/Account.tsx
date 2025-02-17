@@ -153,9 +153,9 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                     {(() => {
                         switch (backFromAuthServer.result.kc_action_status) {
                             case "success":
-                                return "Profile successfully updated";
+                                return <span style={{ color: "green" }}>Profile successfully updated</span>;
                             case "cancelled":
-                                return "Profile unchanged";
+                                return <span style={{ color: "red" }}>Profile unchanged</span>;
                         }
                     })()}
                 </p>
@@ -210,9 +210,9 @@ export default function Account(props: PageProps<Extract<KcContext, { pageId: "a
                                 {(() => {
                                     switch (backFromAuthServer.result.kc_action_status) {
                                         case "success":
-                                            return "Password successfully updated";
+                                            return <span style={{ color: "green" }}>Password successfully updated</span>;
                                         case "cancelled":
-                                            return "Password unchanged";
+                                            return <span style={{ color: "red" }}>Password unchanged</span>;
                                     }
                                 })()}
                             </p>

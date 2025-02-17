@@ -60,9 +60,9 @@ export default function Password(props: PageProps<Extract<KcContext, { pageId: "
                                 {(() => {
                                     switch (backFromAuthServer.result.kc_action_status) {
                                         case "success":
-                                            return "Password successfully updated";
+                                            return <span style={{ color: "green" }}>Password successfully updated</span>;
                                         case "cancelled":
-                                            return "Password unchanged";
+                                            return <span style={{ color: "red" }}>Password unchanged</span>;
                                     }
                                 })()}
                             </p>
