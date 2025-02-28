@@ -1,18 +1,6 @@
 import { getOidc } from "../oidc";
+import { parseKeycloakIssuerUri } from "oidc-spa/tools/parseKeycloakIssuerUri";
 import type { Attribute } from "keycloakify/login/KcContext/KcContext";
-
-const authenticatedFetch: typeof fetch = async (path, options) => {
-    const oidc = await getOidc();
-
-    return fetch(`${oidc.params.issuerUri}${path}`, {
-        ...options,
-        headers: {
-            ...options?.headers,
-            Authorization: `Bearer ${oidc.getTokens().accessToken}`,
-            "Content-Type": "application/json"
-        }
-    });
-};
 
 export type UserProfile = {
     id: string;
@@ -161,9 +149,23 @@ export async function getUserProfile(): Promise<UserProfile> {
         return userProfileMock;
     }
 
-    return authenticatedFetch("/account/?userProfileMetadata=true").then(response =>
-        response.json()
-    );
+    const oidc = await getOidc();
+
+    const { accessToken } = await oidc.getTokens();
+
+    const { kcHttpRelativePath, realm } = parseKeycloakIssuerUri(
+        oidc.params.issuerUri
+    )!;
+
+    return fetch(
+        `${kcHttpRelativePath ?? ""}/realms/${realm}/account/?userProfileMetadata=true`,
+        {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${accessToken}`
+            }
+        }
+    ).then(r => r.json());
 }
 
 export type I18nMessages = Record<string, string>;
@@ -188,11 +190,18 @@ export async function getI18nMessages(): Promise<I18nMessages> {
 
     const languageTag = userProfile_preI18n.attributes.locale?.[0] ?? "en";
 
-    const realm= (await getOidc()).params.issuerUri.split("/").at(-1);
+    const { kcHttpRelativePath, realm } = parseKeycloakIssuerUri(
+        (await getOidc()).params.issuerUri
+    )!;
 
     const data: { key: string; value: string }[] = await fetch(
-        `/resources/${realm}/account/${languageTag}`
-    ).then(response => response.json());
+        `${kcHttpRelativePath ?? ""}/resources/${realm}/account/${languageTag}`,
+        {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    ).then(r => r.json());
 
     return Object.fromEntries(data.map(({ key, value }) => [key, value]));
 }

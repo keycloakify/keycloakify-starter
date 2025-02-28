@@ -4867,10 +4867,10 @@ ohash@^1.1.3:
   resolved "https://registry.yarnpkg.com/ohash/-/ohash-1.1.3.tgz#f12c3c50bfe7271ce3fd1097d42568122ccdcf07"
   integrity sha512-zuHHiGTYTA1sYJ/wZN+t5HKZaH23i4yI1HMwbuXm24Nid7Dv0KcuRlKoNKS9UNfAVSBlnGLcuQrnOKWOZoEGaw==
 
-oidc-spa@^6.1.14:
-  version "6.1.14"
-  resolved "https://registry.yarnpkg.com/oidc-spa/-/oidc-spa-6.1.14.tgz#0a269ad29700ecf81695eb31e9782605340da5a5"
-  integrity sha512-mCncXBQRiOwlgCZDONBRT1WAbK+eQja4+oWXtmu5GzuB2dc9ql+Cx5DPAyHHbtu9QeFiHjiu5zUIQpSUnq9xLQ==
+oidc-spa@^6.8.1:
+  version "6.8.1"
+  resolved "https://registry.yarnpkg.com/oidc-spa/-/oidc-spa-6.8.1.tgz#27ff651242844aeba9e4d18c9775034040728d1a"
+  integrity sha512-CBzN2YELKGTzdvjqLr/UFJ8L9iQs2LoctTI6ZhlDnTOO1MMyCoagj5CdvjjqjjQl6MW764GwZS5EnjmLFAyzKQ==
 
 on-finished@2.4.1:
   version "2.4.1"
