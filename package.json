@@ -18,7 +18,7 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
-        "keycloakify": "^11.8.8",
+        "keycloakify": "^11.8.18",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "@keycloakify/keycloak-admin-ui": "~260007.0.4",

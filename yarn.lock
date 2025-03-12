@@ -4977,10 +4977,10 @@ keycloak-js@26.0.7:
   resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-26.0.7.tgz#2025256f7c519df654240648052ea06344e2377e"
   integrity sha512-vKCk1ISMiouYRLjMzi5fKp58RnYxKEBS29BoDgVfYwVW94IXchj9jLqBvIet31VD1v79l3WaWT+WMX7fH8O4wA==
 
-keycloakify@^11.8.8:
-  version "11.8.8"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.8.8.tgz#0ca4ce910c681ee4f80308e82dc95fc2556ffb19"
-  integrity sha512-ya/Vz2a3qgQtIBDs4LvaJNBxH7YjaSaxBQ42NeEe7BzQlfcmKcMXpo14B9ThSx6G+zdqqdMcrPX06mphk5cSDA==
+keycloakify@^11.8.18:
+  version "11.8.18"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.8.18.tgz#9e4d0abd2f9a09fc0268fa726f4295ac3627d0d4"
+  integrity sha512-+GOfPkvNWirVkjrRomR44Oc5OdG4m0RjjTLkQ1/f8ourlSDPjBMF5uSYo8TJVcCEk/jIKh2dJSajZDAPPkXMWw==
   dependencies:
     tsafe "^1.8.5"
 
