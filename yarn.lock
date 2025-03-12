@@ -4415,10 +4415,10 @@ jsonfile@^6.0.1:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
-keycloakify@^11.8.15:
-  version "11.8.15"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.8.15.tgz#7c2d3702b9f50f31b75b7aafe5433ff228e0f195"
-  integrity sha512-f5mJa8Zdc/oGpKw8+Owa3O/sljhEr1j9cowJOSru+om9MLQJ1ns9aBNGj8u4XC1E4NL1lhik2K0SbfXeOU04qA==
+keycloakify@^11.8.18:
+  version "11.8.18"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.8.18.tgz#9e4d0abd2f9a09fc0268fa726f4295ac3627d0d4"
+  integrity sha512-+GOfPkvNWirVkjrRomR44Oc5OdG4m0RjjTLkQ1/f8ourlSDPjBMF5uSYo8TJVcCEk/jIKh2dJSajZDAPPkXMWw==
   dependencies:
     tsafe "^1.8.5"
 
@@ -4867,10 +4867,10 @@ ohash@^1.1.3:
   resolved "https://registry.yarnpkg.com/ohash/-/ohash-1.1.3.tgz#f12c3c50bfe7271ce3fd1097d42568122ccdcf07"
   integrity sha512-zuHHiGTYTA1sYJ/wZN+t5HKZaH23i4yI1HMwbuXm24Nid7Dv0KcuRlKoNKS9UNfAVSBlnGLcuQrnOKWOZoEGaw==
 
-oidc-spa@^6.8.1:
-  version "6.8.1"
-  resolved "https://registry.yarnpkg.com/oidc-spa/-/oidc-spa-6.8.1.tgz#27ff651242844aeba9e4d18c9775034040728d1a"
-  integrity sha512-CBzN2YELKGTzdvjqLr/UFJ8L9iQs2LoctTI6ZhlDnTOO1MMyCoagj5CdvjjqjjQl6MW764GwZS5EnjmLFAyzKQ==
+oidc-spa@^6.9.8:
+  version "6.9.8"
+  resolved "https://registry.yarnpkg.com/oidc-spa/-/oidc-spa-6.9.8.tgz#30e2f8856d9636e71172ddc7748d63be1c911815"
+  integrity sha512-M3KpguANFiP8uBI+XORawKJi4F3GWlDBwmhhHoGBcvgxUtZ6BrrwtukkuURoNoaqCAVOnUuTdaSeZPfVLD8MjQ==
 
 on-finished@2.4.1:
   version "2.4.1"
