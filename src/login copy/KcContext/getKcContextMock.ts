@@ -61,7 +61,7 @@ export function createGetKcContextMock<
                 })
             );
 
-        // @ts-expect-error
+        // @ts-expect-error: We know what we are doing
         return kcContextMock;
     }
 

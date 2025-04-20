@@ -160,8 +160,8 @@ export const kcContextCommonMock: KcContext.Common = {
                 type Missing = Exclude<Expected, Got>;
                 type Unexpected = Exclude<Got, Expected>;
 
-                assert<Equals<Missing, never>>;
-                assert<Equals<Unexpected, never>>;
+                assert<Equals<Missing, never>>();
+                assert<Equals<Unexpected, never>>();
             }
 
             return {
