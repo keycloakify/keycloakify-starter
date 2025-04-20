@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import type { ExtendKcContext } from "keycloakify/login";
+import type { ExtendKcContext } from "./_internals";
 import type { KcEnvName, ThemeName } from "../kc.gen";
 
 export type KcContextExtension = {

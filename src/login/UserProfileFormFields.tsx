@@ -2,15 +2,15 @@ import type { JSX } from "keycloakify/tools/JSX";
 import { useEffect, Fragment } from "react";
 import { assert } from "keycloakify/tools/assert";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
-import type { KcClsx } from "keycloakify/login/lib/kcClsx";
+import type { KcClsx } from "./_internals/lib/kcClsx";
 import {
     useUserProfileForm,
     getButtonToDisplayForMultivaluedAttributeField,
     type FormAction,
     type FormFieldError
-} from "keycloakify/login/lib/useUserProfileForm";
-import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
-import type { Attribute } from "keycloakify/login/KcContext";
+} from "./_internals/lib/useUserProfileForm";
+import type { UserProfileFormFieldsProps } from "./_internals/UserProfileFormFieldsProps";
+import type { Attribute } from "./_internals/KcContext";
 import type { KcContext } from "./KcContext";
 import type { I18n } from "./i18n";
 
