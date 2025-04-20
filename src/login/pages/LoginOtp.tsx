@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { getKcClsx } from "../lib/kcClsx";
+import { getKcClsx } from "../_internals/lib/kcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";

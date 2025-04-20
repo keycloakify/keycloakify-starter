@@ -2,7 +2,7 @@ import type { JSX } from "keycloakify/tools/JSX";
 import { useState } from "react";
 import type { LazyOrNot } from "keycloakify/tools/LazyOrNot";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import { getKcClsx, type KcClsx } from "../lib/kcClsx";
+import { getKcClsx, type KcClsx } from "../_internals/lib/kcClsx";
 import { clsx } from "keycloakify/tools/clsx";
 import type { UserProfileFormFieldsProps } from "../UserProfileFormFieldsProps";
 import type { PageProps } from "./PageProps";

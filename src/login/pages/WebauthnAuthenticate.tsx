@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { clsx } from "keycloakify/tools/clsx";
-import { getKcClsx } from "../lib/kcClsx";
+import { getKcClsx } from "../_internals/lib/kcClsx";
 import { useScript } from "./WebauthnAuthenticate.useScript";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";

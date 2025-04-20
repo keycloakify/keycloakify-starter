@@ -1,7 +1,7 @@
 import type { JSX } from "keycloakify/tools/JSX";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import { getKcClsx, type KcClsx } from "../lib/kcClsx";
+import { getKcClsx, type KcClsx } from "../_internals/lib/kcClsx";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";

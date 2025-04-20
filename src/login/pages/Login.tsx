@@ -4,7 +4,7 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import { clsx } from "keycloakify/tools/clsx";
 import type { PageProps } from "./PageProps";
-import { getKcClsx, type KcClsx } from "../lib/kcClsx";
+import { getKcClsx, type KcClsx } from "../_internals/lib/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { getKcClsx } from "../lib/kcClsx";
+import { getKcClsx } from "../_internals/lib/kcClsx";
 
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import type { PageProps } from "./PageProps";
-import { getKcClsx } from "../lib/kcClsx";
+import { getKcClsx } from "../_internals/lib/kcClsx";
 import { useScript } from "./LoginPasskeysConditionalAuthenticate.useScript";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";

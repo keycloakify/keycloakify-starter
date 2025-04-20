@@ -1,5 +1,5 @@
 import { clsx } from "keycloakify/tools/clsx";
-import { getKcClsx, type KcClsx } from "../lib/kcClsx";
+import { getKcClsx, type KcClsx } from "../_internals/lib/kcClsx";
 import { useScript } from "./LoginRecoveryAuthnCodeConfig.useScript";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";
