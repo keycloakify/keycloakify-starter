@@ -3,7 +3,7 @@ import { TextareaTag } from "./TextareaTag";
 import { SelectTag } from "./SelectTag";
 import { InputTagSelects } from "./InputTagSelects";
 import { InputTag } from "./InputTag";
-import { PasswordWrapper } from "./PasswordWrapper";
+import { PasswordWrapper } from "../PasswordWrapper";
 import type { KcClsx } from "../../_internals/kcClsx";
 import type { FormAction, FormFieldError } from "../../_internals/useUserProfileForm";
 import type { Attribute } from "../../_internals/KcContext";

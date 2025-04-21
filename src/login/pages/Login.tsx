@@ -1,15 +1,20 @@
-import type { JSX } from "keycloakify/tools/JSX";
 import { useState } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import { clsx } from "keycloakify/tools/clsx";
-import type { PageProps } from "./PageProps";
+import { Template } from "../components/Template";
+import { PasswordWrapper } from "../components/PasswordWrapper";
+import type { KcClsx } from "../_internals/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
-export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>>) {
-    const { kcContext, i18n, kcClsx } = props;
+type Props = {
+    kcContext: Extract<KcContext, { pageId: "login.ftl" }>;
+    i18n: I18n;
+    kcClsx: KcClsx;
+};
 
+export default function Login(props: Props) {
+    const { kcContext, i18n, kcClsx } = props;
 
     const { social, realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField } = kcContext;
 
@@ -21,8 +26,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         <Template
             kcContext={kcContext}
             i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+            kcClsx={kcClsx}
             displayMessage={!messagesPerField.existsError("username", "password")}
             headerNode={msg("loginAccountTitle")}
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
@@ -190,25 +194,3 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     );
 }
 
-function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { kcClsx, i18n, passwordInputId, children } = props;
-
-    const { msgStr } = i18n;
-
-    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
-
-    return (
-        <div className={kcClsx("kcInputGroup")}>
-            {children}
-            <button
-                type="button"
-                className={kcClsx("kcFormPasswordVisibilityButtonClass")}
-                aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
-                aria-controls={passwordInputId}
-                onClick={toggleIsPasswordRevealed}
-            >
-                <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
-            </button>
-        </div>
-    );
-}

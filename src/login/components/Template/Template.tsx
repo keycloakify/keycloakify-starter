@@ -24,7 +24,7 @@ export type TemplateProps = {
     bodyClassName?: string;
 };
 
-export default function Template(props: TemplateProps) {
+export function Template(props: TemplateProps) {
     const {
         displayInfo = false,
         displayMessage = true,

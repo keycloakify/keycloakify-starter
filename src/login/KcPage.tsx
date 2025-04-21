@@ -2,8 +2,8 @@ import { Suspense, lazy } from "react";
 import type { ClassKey } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
+import { getKcClsx } from "./_internals/kcClsx";
 import { assert, type Equals } from "tsafe/assert";
-import Template from "keycloakify/login/Template";
 
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
@@ -52,28 +52,24 @@ const LoginIdpLinkConfirmOverride = lazy(
     () => import("./pages/LoginIdpLinkConfirmOverride")
 );
 
-const doMakeUserConfirmPassword = true;
-
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
 
     const { i18n } = useI18n({ kcContext });
 
-    const rest= {
-        i18n,
+    const { kcClsx } = getKcClsx({
         classes,
-        Template,
         doUseDefaultCss: true,
-        UserProfileFormFields,
-        doMakeUserConfirmPassword
-    };
+    });
 
     return (
         <Suspense>
             {(() => {
                 switch (kcContext.pageId) {
                     case "login.ftl":
-                        return <Login kcContext={kcContext} {...rest} />;
+                        return (
+                            <Login kcContext={kcContext} i18n={i18n} kcClsx={kcClsx} />
+                        );
                     case "register.ftl":
                         return <Register kcContext={kcContext} {...rest} />;
                     case "info.ftl":
