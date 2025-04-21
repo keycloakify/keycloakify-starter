@@ -1,5 +1,5 @@
 import type { JSX } from "keycloakify/tools/JSX";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { createGetI18n, type KcContextLike } from "../noJsx/getI18n";
 import type { GenericI18n_noJsx } from "../noJsx/GenericI18n_noJsx";
@@ -8,14 +8,17 @@ import type { GenericI18n } from "./GenericI18n";
 import type { LanguageTag as LanguageTag_defaultSet, MessageKey as MessageKey_defaultSet } from "../messages_defaultSet/types";
 
 export type ReturnTypeOfCreateUseI18n<MessageKey_themeDefined extends string, LanguageTag_notInDefaultSet extends string> = {
-    useI18n: (params: { kcContext: KcContextLike }) => {
-        i18n: GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;
-    };
+    useI18n: () => GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;
+    I18nProvider: (props: {
+        kcContext: KcContextLike;
+        children: JSX.Element;
+    })=> JSX.Element;
     ofTypeI18n: GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;
 };
 
 export { KcContextLike };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function createUseI18n<
     ThemeName extends string = string,
     MessageKey_themeDefined extends string = never,
@@ -113,7 +116,7 @@ export function createUseI18n<
 
     const { getI18n } = createGetI18n({ extraLanguageTranslations, messagesByLanguageTag_themeDefined });
 
-    function useI18n(params: { kcContext: KcContextLike }): Result {
+    function useI18n_internal(params: { kcContext: KcContextLike }): Result {
         const { kcContext } = params;
 
         const { i18n, prI18n_currentLanguage } = getI18n({ kcContext });
@@ -139,5 +142,29 @@ export function createUseI18n<
         return { i18n: i18n_toReturn };
     }
 
-    return { useI18n, ofTypeI18n: Reflect<I18n>() };
+    const context = createContext<I18n | undefined>(undefined);
+
+    function I18nProvider(props: { kcContext: KcContextLike; children: JSX.Element }) {
+        const { kcContext, children } = props;
+        const { i18n } = useI18n_internal({ kcContext });
+
+        return (
+            <context.Provider value={i18n}>
+                {children}
+            </context.Provider>
+        );
+    }
+
+    function useI18n() {
+        const i18n = useContext(context);
+
+        if (i18n === undefined) {
+            throw new Error("useI18n must be used within an I18nProvider");
+        }
+
+        return i18n;
+    }
+
+
+    return { I18nProvider, useI18n, ofTypeI18n: Reflect<I18n>() };
 }

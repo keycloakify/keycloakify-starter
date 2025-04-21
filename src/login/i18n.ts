@@ -3,8 +3,6 @@ import { i18nBuilder } from "./_internals/i18n";
 import type { ThemeName } from "../kc.gen";
 
 /** @see: https://docs.keycloakify.dev/features/i18n */
-const { useI18n, ofTypeI18n } = i18nBuilder.withThemeName<ThemeName>().build();
+const { I18nProvider, useI18n } = i18nBuilder.withThemeName<ThemeName>().build();
 
-type I18n = typeof ofTypeI18n;
-
-export { useI18n, type I18n };
+export { useI18n, I18nProvider };

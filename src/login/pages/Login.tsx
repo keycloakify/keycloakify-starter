@@ -3,30 +3,24 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { clsx } from "keycloakify/tools/clsx";
 import { Template } from "../components/Template";
 import { PasswordWrapper } from "../components/PasswordWrapper";
-import type { KcClsx } from "../_internals/kcClsx";
+import { useKcClsx } from "../_internals/useKcClsx";
+import { useI18n } from "../i18n";
 import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 
-type Props = {
-    kcContext: Extract<KcContext, { pageId: "login.ftl" }>;
-    i18n: I18n;
-    kcClsx: KcClsx;
-};
-
-export default function Login(props: Props) {
-    const { kcContext, i18n, kcClsx } = props;
+export default function Login(props: { kcContext: Extract<KcContext, { pageId: "login.ftl" }> }) {
+    const { kcContext } = props;
 
     const { social, realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr } = useI18n();
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
+
+    const { kcClsx } = useKcClsx();
 
     return (
         <Template
             kcContext={kcContext}
-            i18n={i18n}
-            kcClsx={kcClsx}
             displayMessage={!messagesPerField.existsError("username", "password")}
             headerNode={msg("loginAccountTitle")}
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
@@ -123,7 +117,7 @@ export default function Login(props: Props) {
                                 <label htmlFor="password" className={kcClsx("kcLabelClass")}>
                                     {msg("password")}
                                 </label>
-                                <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password">
+                                <PasswordWrapper passwordInputId="password">
                                     <input
                                         tabIndex={3}
                                         id="password"
@@ -193,4 +187,3 @@ export default function Login(props: Props) {
         </Template>
     );
 }
-

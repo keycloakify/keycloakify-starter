@@ -1,14 +1,21 @@
 import type { JSX } from "keycloakify/tools/JSX";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
-import type { KcClsx } from "../_internals/kcClsx";
-import type { I18n } from "../i18n";
+import { useKcClsx } from "../_internals/useKcClsx";
+import { useI18n } from "../i18n";
 
-export function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { kcClsx, i18n, passwordInputId, children } = props;
+export function PasswordWrapper(props: {
+    passwordInputId: string;
+    children: JSX.Element;
+}) {
+    const { passwordInputId, children } = props;
 
-    const { msgStr } = i18n;
+    const { msgStr } = useI18n();
 
-    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
+    const { kcClsx } = useKcClsx();
+
+    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({
+        passwordInputId
+    });
 
     return (
         <div className={kcClsx("kcInputGroup")}>
@@ -20,7 +27,14 @@ export function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInp
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
             >
-                <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
+                <i
+                    className={kcClsx(
+                        isPasswordRevealed
+                            ? "kcFormPasswordVisibilityIconHide"
+                            : "kcFormPasswordVisibilityIconShow"
+                    )}
+                    aria-hidden
+                />
             </button>
         </div>
     );
