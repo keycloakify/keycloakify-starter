@@ -1,11 +1,11 @@
 import { clsx } from "keycloakify/tools/clsx";
 import { useI18n } from "../../i18n";
-import type { KcContext } from "../../KcContext";
 import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import type { KcContext } from "./KcContext";
 
 export function SocialProviders(props: {
-    kcContext: Extract<KcContext, { pageId: "login.ftl" }>;
+    kcContext: KcContext;
 }) {
     const { kcContext } = props;
 

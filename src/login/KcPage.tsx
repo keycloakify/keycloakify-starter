@@ -21,7 +21,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
 
 const classes = {} satisfies { [key in ClassKey]?: string };
 
-const Login = lazy(() => import("./pages/Login"));
+const Login = lazy(() => import("./pages/login"));
 const Register = lazy(() => import("./pages/Register"));
 const Info = lazy(() => import("./pages/Info"));
 const Error = lazy(() => import("./pages/Error"));

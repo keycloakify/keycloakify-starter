@@ -3,10 +3,10 @@ import { Template } from "../../components/Template";
 import { Form } from "./Form";
 import { SocialProviders } from "./SocialProviders";
 import { useI18n } from "../../i18n";
-import type { KcContext } from "../../KcContext";
+import type { KcContext } from "./KcContext";
 
 export function Page(props: {
-    kcContext: Extract<KcContext, { pageId: "login.ftl" }>;
+    kcContext: KcContext;
 }) {
     const { kcContext } = props;
 
