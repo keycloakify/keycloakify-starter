@@ -5,7 +5,7 @@ import { SocialProviders } from "./SocialProviders";
 import { useI18n } from "../../i18n";
 import type { KcContext } from "../../KcContext";
 
-export function Login(props: {
+export function Page(props: {
     kcContext: Extract<KcContext, { pageId: "login.ftl" }>;
 }) {
     const { kcContext } = props;
