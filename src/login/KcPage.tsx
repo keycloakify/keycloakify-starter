@@ -5,7 +5,6 @@ import { useI18n } from "./i18n";
 import { assert, type Equals } from "tsafe/assert";
 import Template from "keycloakify/login/Template";
 
-const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Info = lazy(() => import("./pages/Info"));
