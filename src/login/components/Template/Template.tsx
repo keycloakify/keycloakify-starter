@@ -1,12 +1,11 @@
+import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
-import type { ReactNode } from "react";
-import { useInitializeTemplate } from "../_internals/useInitializeTemplate";
+import { type KcClsx, useInitializeTemplate } from "../../_internals";
 import type { I18n } from "../../i18n";
 import type { KcContext } from "../../KcContext";
-import type { KcClsx } from "../../_internals";
 
 export type TemplateProps = {
     kcContext: KcContext;
