@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { PasswordWrapper } from "../../components/PasswordWrapper";
 import { useI18n } from "../../i18n";
-import type { KcContext } from "../../KcContext";
+import type { KcContext } from "./KcContext";
 import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 
-export function Form(props: { kcContext: Extract<KcContext, { pageId: "login.ftl" }> }) {
+export function Form(props: { kcContext: KcContext }) {
     const { kcContext } = props;
 
     const { realm, url, usernameHidden, login, auth, messagesPerField } = kcContext;

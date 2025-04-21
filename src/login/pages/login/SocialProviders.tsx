@@ -4,9 +4,7 @@ import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { KcContext } from "./KcContext";
 
-export function SocialProviders(props: {
-    kcContext: KcContext;
-}) {
+export function SocialProviders(props: { kcContext: KcContext }) {
     const { kcContext } = props;
 
     const { realm, social } = kcContext;

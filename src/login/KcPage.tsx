@@ -21,9 +21,10 @@ export default function KcPage(props: { kcContext: KcContext }) {
 
 const classes = {} satisfies { [key in ClassKey]?: string };
 
-const Login = lazy(() => import("./pages/login"));
-const Register = lazy(() => import("./pages/Register"));
-const Info = lazy(() => import("./pages/Info"));
+const Page_login = lazy(() => import("./pages/login"));
+const Page_register = lazy(() => import("./pages/register"));
+const Page_info = lazy(() => import("./pages/info"));
+
 const Error = lazy(() => import("./pages/Error"));
 const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
@@ -73,11 +74,11 @@ function Page(props: { kcContext: KcContext }) {
 
     switch (kcContext.pageId) {
         case "login.ftl":
-            return <Login kcContext={kcContext} />;
+            return <Page_login kcContext={kcContext} />;
         case "register.ftl":
-            return <Register kcContext={kcContext} doMakeUserConfirmPassword={true} />;
+            return <Page_register kcContext={kcContext} doMakeUserConfirmPassword={true} />;
         case "info.ftl":
-            return <Info kcContext={kcContext} {...rest} />;
+            return <Page_info kcContext={kcContext} />;
         case "error.ftl":
             return <Error kcContext={kcContext} {...rest} />;
         case "login-reset-password.ftl":
