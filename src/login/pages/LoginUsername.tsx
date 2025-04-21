@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { clsx } from "keycloakify/tools/clsx";
-import { getKcClsx } from "../_internals/lib/kcClsx";
+import { getKcClsx } from "../_internals/kcClsx";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";

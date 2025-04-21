@@ -2,7 +2,7 @@ import type { JSX } from "keycloakify/tools/JSX";
 import { useEffect, Fragment } from "react";
 import { assert } from "keycloakify/tools/assert";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
-import type { KcClsx } from "./_internals/lib/kcClsx";
+import type { KcClsx } from "./_internals/kcClsx";
 import {
     useUserProfileForm,
     getButtonToDisplayForMultivaluedAttributeField,

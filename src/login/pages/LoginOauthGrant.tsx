@@ -1,4 +1,4 @@
-import { getKcClsx } from "../_internals/lib/kcClsx";
+import { getKcClsx } from "../_internals/kcClsx";
 import { PageProps } from "./PageProps";
 import { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";

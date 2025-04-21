@@ -2,7 +2,7 @@ import type { ThemeType, LoginThemePageId } from "keycloakify/bin/shared/constan
 import type { ValueOf } from "keycloakify/tools/ValueOf";
 import { assert } from "tsafe/assert";
 import type { Equals } from "tsafe";
-import type { ClassKey } from "../lib/kcClsx";
+import type { ClassKey } from "../kcClsx";
 
 export type ExtendKcContext<
     KcContextExtension extends { properties?: Record<string, string | undefined> },

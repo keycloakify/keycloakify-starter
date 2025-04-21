@@ -18,4 +18,3 @@ export type TemplateProps<KcContext, I18n> = {
     bodyClassName?: string;
 };
 
-export type { ClassKey };

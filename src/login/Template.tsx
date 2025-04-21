@@ -1,14 +1,32 @@
 import { useEffect } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { TemplateProps } from "keycloakify/login/TemplateProps";
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
+
+import type { ReactNode } from "react";
+
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
+import type { KcClsx } from "./_internals";
 
-export default function Template(props: TemplateProps<KcContext, I18n>) {
+export type TemplateProps = {
+    kcContext: KcContext;
+    i18n: I18n;
+    children: ReactNode;
+    kcClsx: KcClsx;
+
+    displayInfo?: boolean;
+    displayMessage?: boolean;
+    displayRequiredFields?: boolean;
+    headerNode: ReactNode;
+    socialProvidersNode?: ReactNode;
+    infoNode?: ReactNode;
+    documentTitle?: string;
+    bodyClassName?: string;
+};
+
+export default function Template(props: TemplateProps) {
     const {
         displayInfo = false,
         displayMessage = true,
@@ -20,12 +38,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         bodyClassName,
         kcContext,
         i18n,
-        doUseDefaultCss,
-        classes,
-        children
+        children,
+        kcClsx
     } = props;
-
-    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
     const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
 
@@ -45,7 +60,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         className: bodyClassName ?? kcClsx("kcBodyClass")
     });
 
-    const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss });
+    const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss: kcClsx.doUseDefaultCss });
 
     if (!isReadyToRender) {
         return null;

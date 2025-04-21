@@ -1,4 +1,4 @@
-import { getKcClsx, type KcClsx } from "../_internals/lib/kcClsx";
+import { getKcClsx, type KcClsx } from "../_internals/kcClsx";
 import { useScript } from "./WebauthnRegister.useScript";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";

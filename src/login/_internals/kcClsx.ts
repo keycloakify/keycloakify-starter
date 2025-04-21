@@ -1,4 +1,4 @@
-import { createGetKcClsx } from "keycloakify/lib/getKcClsx";
+import { createGetKcClsx } from "./keycloakify/lib/kcClsx";
 
 export type ClassKey =
     | "kcBodyClass"

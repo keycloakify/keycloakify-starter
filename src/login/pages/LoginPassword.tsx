@@ -3,7 +3,7 @@ import { useState } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { clsx } from "keycloakify/tools/clsx";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
-import { getKcClsx, type KcClsx } from "../_internals/lib/kcClsx";
+import { getKcClsx, type KcClsx } from "../_internals/kcClsx";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";

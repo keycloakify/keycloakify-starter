@@ -1,4 +1,4 @@
-import { getKcClsx } from "../_internals/lib/kcClsx";
+import { getKcClsx } from "../_internals/kcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";
