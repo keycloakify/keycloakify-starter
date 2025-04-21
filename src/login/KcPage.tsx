@@ -24,8 +24,8 @@ const classes = {} satisfies { [key in ClassKey]?: string };
 const Page_login = lazy(() => import("./pages/login"));
 const Page_register = lazy(() => import("./pages/register"));
 const Page_info = lazy(() => import("./pages/info"));
+const Page_error = lazy(() => import("./pages/error"));
 
-const Error = lazy(() => import("./pages/Error"));
 const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
 const Terms = lazy(() => import("./pages/Terms"));
@@ -80,7 +80,8 @@ function Page(props: { kcContext: KcContext }) {
         case "info.ftl":
             return <Page_info kcContext={kcContext} />;
         case "error.ftl":
-            return <Error kcContext={kcContext} {...rest} />;
+            return <Page_error kcContext={kcContext} />;
+
         case "login-reset-password.ftl":
             return <LoginResetPassword kcContext={kcContext} {...rest} />;
         case "login-verify-email.ftl":
