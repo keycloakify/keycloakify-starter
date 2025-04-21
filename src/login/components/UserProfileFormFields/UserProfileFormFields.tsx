@@ -1,6 +1,5 @@
 import type { JSX } from "keycloakify/tools/JSX";
 import { useEffect, Fragment } from "react";
-import type { KcClsx } from "../../_internals/kcClsx";
 import {
     useUserProfileForm,
     type FormAction,
@@ -11,30 +10,29 @@ import { FieldErrors } from "./FieldErrors";
 import { InputFieldByType } from "./InputFieldByType";
 import type { Attribute } from "../../_internals/KcContext";
 import type { KcContext } from "../../KcContext";
-import type { I18n } from "../../i18n";
+import { useI18n } from "../../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
 export type UserProfileFormFieldsProps = {
     kcContext: Extract<KcContext, { profile: unknown }>;
-    i18n: I18n;
-    kcClsx: KcClsx;
     onIsFormSubmittableValueChange: (isFormSubmittable: boolean) => void;
     doMakeUserConfirmPassword: boolean;
-    BeforeField?: (props: BeforeAfterFieldProps<I18n>) => JSX.Element | null;
-    AfterField?: (props: BeforeAfterFieldProps<I18n>) => JSX.Element | null;
+    BeforeField?: (props: BeforeAfterFieldProps) => JSX.Element | null;
+    AfterField?: (props: BeforeAfterFieldProps) => JSX.Element | null;
 };
 
-type BeforeAfterFieldProps<I18n> = {
+type BeforeAfterFieldProps = {
     attribute: Attribute;
     dispatchFormAction: React.Dispatch<FormAction>;
     displayableErrors: FormFieldError[];
     valueOrValues: string | string[];
-    kcClsx: KcClsx;
-    i18n: I18n;
 };
 
 
-export default function UserProfileFormFields(props: UserProfileFormFieldsProps) {
-    const { kcContext, i18n, kcClsx, onIsFormSubmittableValueChange, doMakeUserConfirmPassword, BeforeField, AfterField } = props;
+export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
+    const { kcContext, onIsFormSubmittableValueChange, doMakeUserConfirmPassword, BeforeField, AfterField } = props;
+
+    const i18n = useI18n();
 
     const { advancedMsg } = i18n;
 
@@ -51,6 +49,8 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps)
         onIsFormSubmittableValueChange(isFormSubmittable);
     }, [isFormSubmittable]);
 
+    const { kcClsx } = useKcClsx();
+
     const groupNameRef = { current: "" };
 
     return (
@@ -65,8 +65,6 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps)
                                 dispatchFormAction={dispatchFormAction}
                                 displayableErrors={displayableErrors}
                                 valueOrValues={valueOrValues}
-                                kcClsx={kcClsx}
-                                i18n={i18n}
                             />
                         )}
                         <div
@@ -115,8 +113,6 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps)
                                         dispatchFormAction={dispatchFormAction}
                                         displayableErrors={displayableErrors}
                                         valueOrValues={valueOrValues}
-                                        kcClsx={kcClsx}
-                                        i18n={i18n}
                                     />
                                 )}
                                 {/* NOTE: Downloading of html5DataAnnotations scripts is done in the useUserProfileForm hook */}

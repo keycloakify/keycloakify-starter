@@ -64,7 +64,12 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             case "login.ftl":
                                 return <Login kcContext={kcContext} />;
                             case "register.ftl":
-                                return <Register kcContext={kcContext} {...rest} />;
+                                return (
+                                    <Register
+                                        kcContext={kcContext}
+                                        doMakeUserConfirmPassword={true}
+                                    />
+                                );
                             case "info.ftl":
                                 return <Info kcContext={kcContext} {...rest} />;
                             case "error.ftl":
