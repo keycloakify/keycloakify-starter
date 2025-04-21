@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
 import type { ExtendKcContext } from "./_internals/KcContext";
 import type { KcEnvName, ThemeName } from "../kc.gen";
 
