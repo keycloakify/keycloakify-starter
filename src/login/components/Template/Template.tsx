@@ -3,7 +3,7 @@ import { clsx } from "keycloakify/tools/clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import type { ReactNode } from "react";
-import { useInitialize } from "./useInitialize";
+import { useInitializeTemplate } from "../_internals/useInitializeTemplate";
 import type { I18n } from "../../i18n";
 import type { KcContext } from "../../KcContext";
 import type { KcClsx } from "../../_internals";
@@ -58,7 +58,7 @@ export default function Template(props: TemplateProps) {
         className: bodyClassName ?? kcClsx("kcBodyClass")
     });
 
-    const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss: kcClsx.doUseDefaultCss });
+    const { isReadyToRender } = useInitializeTemplate({ kcContext, doUseDefaultCss: kcClsx.doUseDefaultCss });
 
     if (!isReadyToRender) {
         return null;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { assert } from "keycloakify/tools/assert";
 import { useInsertScriptTags } from "keycloakify/tools/useInsertScriptTags";
 import { useInsertLinkTags } from "keycloakify/tools/useInsertLinkTags";
-import type { KcContext } from "keycloakify/login/KcContext";
+import type { KcContext } from "./KcContext";
 
 export type KcContextLike = {
     url: {
@@ -16,7 +16,7 @@ export type KcContextLike = {
 assert<keyof KcContextLike extends keyof KcContext ? true : false>();
 assert<KcContext extends KcContextLike ? true : false>();
 
-export function useInitialize(params: {
+export function useInitializeTemplate(params: {
     kcContext: KcContextLike;
     doUseDefaultCss: boolean;
 }) {
