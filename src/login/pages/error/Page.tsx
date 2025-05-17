@@ -1,10 +1,10 @@
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
-export function Page(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+export function Page() {
+    const { kcContext } = useKcContext("...");
 
     const { message, client, skipLink } = kcContext;
 

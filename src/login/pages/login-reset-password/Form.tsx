@@ -1,10 +1,10 @@
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../_internals/useKcClsx";
 
 export function Form(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+    const { kcContext } = useKcContext("...");
 
     const { kcClsx } = useKcClsx();
 

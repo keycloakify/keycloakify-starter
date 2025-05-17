@@ -2,11 +2,11 @@ import { getKcClsx } from "../_internals/kcClsx";
 import { PageProps } from "./PageProps";
 import { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
-export function Page(props: { kcContext: KcContext }) {
+export function Page() {
     const { kcContext, i18n, doUseDefaultCss, classes, Template } = props;
     const { url, oauth, client } = kcContext;
 

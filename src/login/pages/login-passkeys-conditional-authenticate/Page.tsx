@@ -5,11 +5,11 @@ import { getKcClsx } from "../_internals/kcClsx";
 import { useScript } from "./LoginPasskeysConditionalAuthenticate.useScript";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
-export function Page(props: { kcContext: KcContext }) {
+export function Page() {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { messagesPerField, login, url, usernameHidden, shouldDisplayAuthenticators, authenticators, registrationDisabled, realm } = kcContext;

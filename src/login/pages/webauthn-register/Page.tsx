@@ -3,11 +3,11 @@ import { useScript } from "./WebauthnRegister.useScript";
 import type { PageProps } from "./PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
-export function Page(props: { kcContext: KcContext }) {
+export function Page() {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });

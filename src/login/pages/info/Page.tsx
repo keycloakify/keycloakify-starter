@@ -1,31 +1,20 @@
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useI18n } from "../../i18n";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { Template } from "../../components/Template";
 
-export function Page(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+export function Page() {
+    const { kcContext } = useKcContext("info.ftl");
 
     const { advancedMsgStr, msg } = useI18n();
 
-    const {
-        messageHeader,
-        message,
-        requiredActions,
-        skipLink,
-        pageRedirectUri,
-        actionUri,
-        client
-    } = kcContext;
-
     return (
         <Template
-            kcContext={kcContext}
             displayMessage={false}
             headerNode={
                 <span
                     dangerouslySetInnerHTML={{
-                        __html: kcSanitize(messageHeader ?? message.summary)
+                        __html: kcSanitize(kcContext.messageHeader ?? kcContext.message.summary)
                     }}
                 />
             }
@@ -36,12 +25,12 @@ export function Page(props: { kcContext: KcContext }) {
                     dangerouslySetInnerHTML={{
                         __html: kcSanitize(
                             (() => {
-                                let html = message.summary?.trim();
+                                let html = kcContext.message.summary?.trim();
 
-                                if (requiredActions) {
+                                if (kcContext.requiredActions) {
                                     html += " <b>";
 
-                                    html += requiredActions
+                                    html += kcContext.requiredActions
                                         .map(requiredAction =>
                                             advancedMsgStr(
                                                 `requiredAction.${requiredAction}`
@@ -58,29 +47,29 @@ export function Page(props: { kcContext: KcContext }) {
                     }}
                 />
                 {(() => {
-                    if (skipLink) {
+                    if (kcContext.skipLink) {
                         return null;
                     }
 
-                    if (pageRedirectUri) {
+                    if (kcContext.pageRedirectUri) {
                         return (
                             <p>
-                                <a href={pageRedirectUri}>{msg("backToApplication")}</a>
+                                <a href={kcContext.pageRedirectUri}>{msg("backToApplication")}</a>
                             </p>
                         );
                     }
-                    if (actionUri) {
+                    if (kcContext.actionUri) {
                         return (
                             <p>
-                                <a href={actionUri}>{msg("proceedWithAction")}</a>
+                                <a href={kcContext.actionUri}>{msg("proceedWithAction")}</a>
                             </p>
                         );
                     }
 
-                    if (client.baseUrl) {
+                    if (kcContext.client.baseUrl) {
                         return (
                             <p>
-                                <a href={client.baseUrl}>{msg("backToApplication")}</a>
+                                <a href={kcContext.client.baseUrl}>{msg("backToApplication")}</a>
                             </p>
                         );
                     }

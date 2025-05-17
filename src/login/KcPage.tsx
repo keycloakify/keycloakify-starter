@@ -72,84 +72,81 @@ const Page_login_idp_link_confirm_override = lazy(
 );
 
 function Page() {
-
     const { kcContext } = useKcContext();
 
     switch (kcContext.pageId) {
         case "login.ftl":
             return <Page_login />;
         case "register.ftl":
-            return (
-                <Page_register kcContext={kcContext} doMakeUserConfirmPassword={true} />
-            );
+            return <Page_register />;
         case "info.ftl":
-            return <Page_info kcContext={kcContext} />;
+            return <Page_info />;
         case "error.ftl":
-            return <Page_error kcContext={kcContext} />;
+            return <Page_error />;
         case "login-reset-password.ftl":
-            return <Page_login_reset_password kcContext={kcContext} />;
+            return <Page_login_reset_password />;
         case "login-verify-email.ftl":
-            return <Page_login_verify_email kcContext={kcContext} />;
+            return <Page_login_verify_email />;
         case "terms.ftl":
-            return <Page_terms kcContext={kcContext} />;
+            return <Page_terms />;
         case "login-oauth2-device-verify-user-code.ftl":
-            return <Page_login_oauth2_device_verify_user_code kcContext={kcContext} />;
+            return <Page_login_oauth2_device_verify_user_code />;
         case "login-oauth-grant.ftl":
-            return <Page_login_oauth_grant kcContext={kcContext} />;
+            return <Page_login_oauth_grant />;
         case "login-otp.ftl":
-            return <Page_login_otp kcContext={kcContext} />;
+            return <Page_login_otp />;
         case "login-username.ftl":
-            return <Page_login_username kcContext={kcContext} />;
+            return <Page_login_username />;
         case "login-password.ftl":
-            return <Page_login_password kcContext={kcContext} />;
+            return <Page_login_password />;
         case "webauthn-authenticate.ftl":
-            return <Page_webauthn_authenticate kcContext={kcContext} />;
+            return <Page_webauthn_authenticate />;
         case "webauthn-register.ftl":
-            return <Page_webauthn_register kcContext={kcContext} />;
+            return <Page_webauthn_register />;
         case "login-update-password.ftl":
-            return <Page_login_update_password kcContext={kcContext} />;
+            return <Page_login_update_password />;
         case "login-update-profile.ftl":
-            return <Page_login_update_profile kcContext={kcContext} />;
+            return <Page_login_update_profile />;
         case "login-idp-link-confirm.ftl":
-            return <Page_login_idp_link_confirm kcContext={kcContext} />;
+            return <Page_login_idp_link_confirm />;
         case "login-idp-link-email.ftl":
-            return <Page_login_idp_link_email kcContext={kcContext} />;
+            return <Page_login_idp_link_email />;
         case "login-page-expired.ftl":
-            return <Page_login_page_expired kcContext={kcContext} />;
+            return <Page_login_page_expired />;
         case "login-config-totp.ftl":
-            return <Page_login_config_totp kcContext={kcContext} />;
+            return <Page_login_config_totp />;
         case "logout-confirm.ftl":
-            return <Page_logout_confirm kcContext={kcContext} />;
+            return <Page_logout_confirm />;
         case "idp-review-user-profile.ftl":
-            return <Page_idp_review_user_profile kcContext={kcContext} />;
+            return <Page_idp_review_user_profile />;
         case "update-email.ftl":
-            return <Page_update_email kcContext={kcContext} />;
+            return <Page_update_email />;
         case "select-authenticator.ftl":
-            return <Page_select_authenticator kcContext={kcContext} />;
+            return <Page_select_authenticator />;
         case "saml-post-form.ftl":
-            return <Page_saml_post_form kcContext={kcContext} />;
+            return <Page_saml_post_form />;
         case "delete-credential.ftl":
-            return <Page_delete_credential kcContext={kcContext} />;
+            return <Page_delete_credential />;
         case "code.ftl":
-            return <Page_code kcContext={kcContext} />;
+            return <Page_code />;
         case "delete-account-confirm.ftl":
-            return <Page_delete_account_confirm kcContext={kcContext} />;
+            return <Page_delete_account_confirm />;
         case "frontchannel-logout.ftl":
-            return <Page_frontchannel_logout kcContext={kcContext} />;
+            return <Page_frontchannel_logout />;
         case "login-recovery-authn-code-config.ftl":
-            return <Page_login_recovery_authn_code_config kcContext={kcContext} />;
+            return <Page_login_recovery_authn_code_config />;
         case "login-recovery-authn-code-input.ftl":
-            return <Page_login_recovery_authn_code_input kcContext={kcContext} />;
+            return <Page_login_recovery_authn_code_input />;
         case "login-reset-otp.ftl":
-            return <Page_login_reset_otp kcContext={kcContext} />;
+            return <Page_login_reset_otp />;
         case "login-x509-info.ftl":
-            return <Page_login_x509_info kcContext={kcContext} />;
+            return <Page_login_x509_info />;
         case "webauthn-error.ftl":
-            return <Page_webauthn_error kcContext={kcContext} />;
+            return <Page_webauthn_error />;
         case "login-passkeys-conditional-authenticate.ftl":
-            return <Page_login_passkeys_conditional_authenticate kcContext={kcContext} />;
+            return <Page_login_passkeys_conditional_authenticate />;
         case "login-idp-link-confirm-override.ftl":
-            return <Page_login_idp_link_confirm_override kcContext={kcContext} />;
+            return <Page_login_idp_link_confirm_override />;
     }
 
     assert<Equals<typeof kcContext, never>>(false);
