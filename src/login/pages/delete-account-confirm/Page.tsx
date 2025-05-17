@@ -1,27 +1,26 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page(props: { kcContext: KcContext }) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcContext } = props;
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcClsx } = useKcClsx();
 
-    const { url, triggered_from_aia } = kcContext;
-
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr } = useI18n();
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("deleteAccountConfirm")}>
-            <form action={url.loginAction} className="form-vertical" method="post">
-                <div className="alert alert-warning" style={{ marginTop: "0", marginBottom: "30px" }}>
+        <Template kcContext={kcContext} headerNode={msg("deleteAccountConfirm")}>
+            <form
+                action={kcContext.url.loginAction}
+                className="form-vertical"
+                method="post"
+            >
+                <div
+                    className="alert alert-warning"
+                    style={{ marginTop: "0", marginBottom: "30px" }}
+                >
                     <span className="pficon pficon-warning-triangle-o"></span>
                     {msg("irreversibleAction")}
                 </div>
@@ -39,13 +38,21 @@ export function Page(props: { kcContext: KcContext }) {
                 <p className="delete-account-text">{msg("finalDeletionConfirmation")}</p>
                 <div id="kc-form-buttons">
                     <input
-                        className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                        className={kcClsx(
+                            "kcButtonClass",
+                            "kcButtonPrimaryClass",
+                            "kcButtonLargeClass"
+                        )}
                         type="submit"
                         value={msgStr("doConfirmDelete")}
                     />
-                    {triggered_from_aia && (
+                    {kcContext.triggered_from_aia && (
                         <button
-                            className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
+                            className={kcClsx(
+                                "kcButtonClass",
+                                "kcButtonDefaultClass",
+                                "kcButtonLargeClass"
+                            )}
                             style={{ marginLeft: "calc(100% - 220px)" }}
                             type="submit"
                             name="cancel-aia"
