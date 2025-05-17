@@ -1,10 +1,8 @@
 import { useI18n } from "../../i18n";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 
-export function Info(props: {
-    kcContext: KcContext;
-}) {
-    const { kcContext } = props;
+export function Info() {
+    const { kcContext } = useKcContext("login.ftl");
 
     const { url } = kcContext;
 

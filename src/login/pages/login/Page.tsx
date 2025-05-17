@@ -21,8 +21,8 @@ export function Page() {
                 kcContext.realm.registrationAllowed &&
                 !kcContext.registrationDisabled
             }
-            infoNode={<Info kcContext={kcContext} />}
-            socialProvidersNode={<SocialProviders />}
+            infoNode={<Info />}
+            socialProvidersNode={kcContext.realm.password && <SocialProviders />}
         >
             <Form />
         </Template>

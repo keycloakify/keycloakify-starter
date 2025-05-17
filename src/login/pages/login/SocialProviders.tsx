@@ -5,68 +5,66 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useKcContext } from "../../KcContext";
 
 export function SocialProviders() {
-    const { kcContext } = useKcContext("login.ftl");
-
-    const { realm, social } = kcContext;
+    const { kcContext } = useKcContext(["login.ftl"]);
 
     const { msg } = useI18n();
 
     const { kcClsx } = useKcClsx();
 
+    if (
+        kcContext.social === undefined ||
+        kcContext.social.providers === undefined ||
+        kcContext.social.providers.length === 0
+    ) {
+        return null;
+    }
+
     return (
-        <>
-            {realm.password &&
-                social?.providers !== undefined &&
-                social.providers.length !== 0 && (
-                    <div
-                        id="kc-social-providers"
-                        className={kcClsx("kcFormSocialAccountSectionClass")}
-                    >
-                        <hr />
-                        <h2>{msg("identity-provider-login-label")}</h2>
-                        <ul
-                            className={kcClsx(
-                                "kcFormSocialAccountListClass",
-                                social.providers.length > 3 &&
-                                    "kcFormSocialAccountListGridClass"
-                            )}
-                        >
-                            {social.providers.map((...[p, , providers]) => (
-                                <li key={p.alias}>
-                                    <a
-                                        id={`social-${p.alias}`}
-                                        className={kcClsx(
-                                            "kcFormSocialAccountListButtonClass",
-                                            providers.length > 3 &&
-                                                "kcFormSocialAccountGridItem"
-                                        )}
-                                        type="button"
-                                        href={p.loginUrl}
-                                    >
-                                        {p.iconClasses && (
-                                            <i
-                                                className={clsx(
-                                                    kcClsx("kcCommonLogoIdP"),
-                                                    p.iconClasses
-                                                )}
-                                                aria-hidden="true"
-                                            ></i>
-                                        )}
-                                        <span
-                                            className={clsx(
-                                                kcClsx("kcFormSocialAccountNameClass"),
-                                                p.iconClasses && "kc-social-icon-text"
-                                            )}
-                                            dangerouslySetInnerHTML={{
-                                                __html: kcSanitize(p.displayName)
-                                            }}
-                                        ></span>
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+        <div
+            id="kc-social-providers"
+            className={kcClsx("kcFormSocialAccountSectionClass")}
+        >
+            <hr />
+            <h2>{msg("identity-provider-login-label")}</h2>
+            <ul
+                className={kcClsx(
+                    "kcFormSocialAccountListClass",
+                    kcContext.social.providers.length > 3 && "kcFormSocialAccountListGridClass"
                 )}
-        </>
+            >
+                {kcContext.social.providers.map((...[p, , providers]) => (
+                    <li key={p.alias}>
+                        <a
+                            id={`social-${p.alias}`}
+                            className={kcClsx(
+                                "kcFormSocialAccountListButtonClass",
+                                providers.length > 3 && "kcFormSocialAccountGridItem"
+                            )}
+                            type="button"
+                            href={p.loginUrl}
+                        >
+                            {p.iconClasses && (
+                                <i
+                                    className={clsx(
+                                        kcClsx("kcCommonLogoIdP"),
+                                        p.iconClasses
+                                    )}
+                                    aria-hidden="true"
+                                ></i>
+                            )}
+                            <span
+                                className={clsx(
+                                    kcClsx("kcFormSocialAccountNameClass"),
+                                    p.iconClasses && "kc-social-icon-text"
+                                )}
+                                dangerouslySetInnerHTML={{
+                                    __html: kcSanitize(p.displayName)
+                                }}
+                            ></span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 }

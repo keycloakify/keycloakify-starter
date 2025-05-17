@@ -5,7 +5,7 @@ export function createUseKcContext<KcContext extends { pageId: string }>() {
     const context = createContext<KcContext | undefined>(undefined);
 
     function useKcContext<PageId extends KcContext["pageId"] = string>(
-        assertPageId?: PageId
+        assertPageId?: PageId | PageId[]
     ): {
         kcContext: Extract<KcContext, { pageId: PageId }>;
     } {

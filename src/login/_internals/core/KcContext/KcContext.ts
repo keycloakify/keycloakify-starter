@@ -215,6 +215,7 @@ export declare namespace KcContext {
         recaptchaAction?: string;
         termsAcceptanceRequired?: boolean;
         messageHeader?: string;
+        social?: Login["social"];
     };
 
     export type Info = Common & {
