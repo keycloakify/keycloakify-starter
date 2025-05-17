@@ -1,9 +1,6 @@
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { KcContext } from "./KcContext";
 import { useI18n } from "../../i18n";
-import { Template } from "../../components/Template";
 import type { KcContext } from "./KcContext";
-import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page(props: { kcContext: KcContext }) {

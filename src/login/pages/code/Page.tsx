@@ -1,6 +1,4 @@
 import { getKcClsx } from "../_internals/kcClsx";
-import type { KcContext } from "./KcContext";
-import type { I18n } from "../i18n";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "../../i18n";
