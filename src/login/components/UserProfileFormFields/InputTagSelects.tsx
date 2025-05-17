@@ -1,9 +1,12 @@
 import { assert } from "keycloakify/tools/assert";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
-import { inputLabel } from "./inputLabel";
+import { useKcClsx } from "../../_internals/useKcClsx";
+import { InputLabel } from "./InputLabelX";
 
 export function InputTagSelects(props: InputFieldByTypeProps) {
-    const { attribute, dispatchFormAction, kcClsx, i18n, valueOrValues } = props;
+    const { attribute, dispatchFormAction, valueOrValues } = props;
+
+    const { kcClsx } = useKcClsx();
 
     const { classDiv, classInput, classLabel, inputType } = (() => {
         const { inputType } = attribute.annotations;
@@ -111,7 +114,10 @@ export function InputTagSelects(props: InputFieldByTypeProps) {
                         htmlFor={`${attribute.name}-${option}`}
                         className={`${classLabel}${attribute.readOnly ? ` ${kcClsx("kcInputClassRadioCheckboxLabelDisabled")}` : ""}`}
                     >
-                        {inputLabel(i18n, attribute, option)}
+                        <InputLabel
+                            attribute={attribute}
+                            option={option}
+                        />
                     </label>
                 </div>
             ))}

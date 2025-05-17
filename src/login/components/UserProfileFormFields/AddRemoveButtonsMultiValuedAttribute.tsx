@@ -3,18 +3,17 @@ import {
     type FormAction
 } from "../../_internals/useUserProfileForm";
 import type { Attribute } from "../../_internals/KcContext";
-import type { I18n } from "../../i18n";
+import { useI18n } from "../../i18n";
 
 export function AddRemoveButtonsMultiValuedAttribute(props: {
     attribute: Attribute;
     values: string[];
     fieldIndex: number;
     dispatchFormAction: React.Dispatch<Extract<FormAction, { action: "update" }>>;
-    i18n: I18n;
 }) {
-    const { attribute, values, fieldIndex, dispatchFormAction, i18n } = props;
+    const { attribute, values, fieldIndex, dispatchFormAction } = props;
 
-    const { msg } = i18n;
+    const { msg } = useI18n();
 
     const { hasAdd, hasRemove } = getButtonToDisplayForMultivaluedAttributeField({
         attribute,

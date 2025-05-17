@@ -65,8 +65,6 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                         <GroupLabel
                             attribute={attribute}
                             groupNameRef={groupNameRef}
-                            i18n={i18n}
-                            kcClsx={kcClsx}
                         />
                         {BeforeField !== undefined && (
                             <BeforeField
@@ -112,13 +110,10 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                                     valueOrValues={valueOrValues}
                                     displayableErrors={displayableErrors}
                                     dispatchFormAction={dispatchFormAction}
-                                    kcClsx={kcClsx}
-                                    i18n={i18n}
                                 />
                                 <FieldErrors
                                     attribute={attribute}
                                     displayableErrors={displayableErrors}
-                                    kcClsx={kcClsx}
                                     fieldIndex={undefined}
                                 />
                                 {attribute.annotations.inputHelperTextAfter !==

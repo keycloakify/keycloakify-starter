@@ -1,11 +1,14 @@
 
 import { assert } from "keycloakify/tools/assert";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
-import { inputLabel } from "./inputLabel";
+import { InputLabel } from "./InputLabelX";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
 export function SelectTag(props: InputFieldByTypeProps) {
     
-    const { attribute, dispatchFormAction, kcClsx, displayableErrors, i18n, valueOrValues } = props;
+    const { attribute, dispatchFormAction, displayableErrors, valueOrValues } = props;
+
+    const { kcClsx } = useKcClsx();
 
     const isMultiple = attribute.annotations.inputType === "multiselect";
 
@@ -68,9 +71,13 @@ export function SelectTag(props: InputFieldByTypeProps) {
                     return attribute.validators.options?.options ?? [];
                 })();
 
-                return options.map(option => (
+                return options.map((option, i) => (
                     <option key={option} value={option}>
-                        {inputLabel(i18n, attribute, option)}
+                        {<InputLabel
+                            key={i}
+                            attribute={attribute}
+                            option={option}
+                        />}
                     </option>
                 ));
             })()}

@@ -1,19 +1,19 @@
-import { assert } from "keycloakify/tools/assert";
-import type { KcClsx } from "../../_internals/kcClsx";
+import { assert } from "tsafe/assert";
 import type { Attribute } from "../../_internals/KcContext";
-import type { I18n } from "../../i18n";
+import { useI18n } from "../../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
 export function GroupLabel(props: {
     attribute: Attribute;
     groupNameRef: {
         current: string;
     };
-    i18n: I18n;
-    kcClsx: KcClsx;
 }) {
-    const { attribute, groupNameRef, i18n, kcClsx } = props;
+    const { attribute, groupNameRef } = props;
 
-    const { advancedMsg } = i18n;
+    const { advancedMsg } = useI18n();
+
+    const { kcClsx } = useKcClsx();
 
     if (attribute.group?.name !== groupNameRef.current) {
         groupNameRef.current = attribute.group?.name ?? "";

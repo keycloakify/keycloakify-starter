@@ -1,9 +1,9 @@
-
-import type { I18n } from "../../i18n";
 import type { Attribute } from "../../_internals/KcContext";
+import { useI18n } from "../../i18n";
 
-export function inputLabel(i18n: I18n, attribute: Attribute, option: string) {
-    const { advancedMsg } = i18n;
+export function InputLabel(props: { attribute: Attribute; option: string }) {
+    const { attribute, option } = props;
+    const { advancedMsg } = useI18n();
 
     if (attribute.annotations.inputOptionLabels !== undefined) {
         const { inputOptionLabels } = attribute.annotations;
@@ -12,7 +12,9 @@ export function inputLabel(i18n: I18n, attribute: Attribute, option: string) {
     }
 
     if (attribute.annotations.inputOptionLabelsI18nPrefix !== undefined) {
-        return advancedMsg(`${attribute.annotations.inputOptionLabelsI18nPrefix}.${option}`);
+        return advancedMsg(
+            `${attribute.annotations.inputOptionLabelsI18nPrefix}.${option}`
+        );
     }
 
     return option;

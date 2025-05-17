@@ -1,13 +1,23 @@
-
 import { assert } from "keycloakify/tools/assert";
 import { FieldErrors } from "./FieldErrors";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
 import { AddRemoveButtonsMultiValuedAttribute } from "./AddRemoveButtonsMultiValuedAttribute";
+import { useI18n } from "../../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
-export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefined }) {
-    const { attribute, fieldIndex, kcClsx, dispatchFormAction, valueOrValues, i18n, displayableErrors } = props;
+export function InputTag(
+    props: InputFieldByTypeProps & { fieldIndex: number | undefined }
+) {
+    const {
+        attribute,
+        fieldIndex,
+        dispatchFormAction,
+        valueOrValues,
+        displayableErrors
+    } = props;
 
-    const { advancedMsgStr } = i18n;
+    const { advancedMsgStr } = useI18n();
+    const { kcClsx } = useKcClsx();
 
     return (
         <>
@@ -34,24 +44,41 @@ export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | u
                     return valueOrValues;
                 })()}
                 className={kcClsx("kcInputClass")}
-                aria-invalid={displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined}
+                aria-invalid={
+                    displayableErrors.find(error => error.fieldIndex === fieldIndex) !==
+                    undefined
+                }
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}
                 placeholder={
-                    attribute.annotations.inputTypePlaceholder === undefined ? undefined : advancedMsgStr(attribute.annotations.inputTypePlaceholder)
+                    attribute.annotations.inputTypePlaceholder === undefined
+                        ? undefined
+                        : advancedMsgStr(attribute.annotations.inputTypePlaceholder)
                 }
                 pattern={attribute.annotations.inputTypePattern}
-                size={attribute.annotations.inputTypeSize === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeSize}`)}
+                size={
+                    attribute.annotations.inputTypeSize === undefined
+                        ? undefined
+                        : parseInt(`${attribute.annotations.inputTypeSize}`)
+                }
                 maxLength={
-                    attribute.annotations.inputTypeMaxlength === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeMaxlength}`)
+                    attribute.annotations.inputTypeMaxlength === undefined
+                        ? undefined
+                        : parseInt(`${attribute.annotations.inputTypeMaxlength}`)
                 }
                 minLength={
-                    attribute.annotations.inputTypeMinlength === undefined ? undefined : parseInt(`${attribute.annotations.inputTypeMinlength}`)
+                    attribute.annotations.inputTypeMinlength === undefined
+                        ? undefined
+                        : parseInt(`${attribute.annotations.inputTypeMinlength}`)
                 }
                 max={attribute.annotations.inputTypeMax}
                 min={attribute.annotations.inputTypeMin}
                 step={attribute.annotations.inputTypeStep}
-                {...Object.fromEntries(Object.entries(attribute.html5DataAnnotations ?? {}).map(([key, value]) => [`data-${key}`, value]))}
+                {...Object.fromEntries(
+                    Object.entries(attribute.html5DataAnnotations ?? {}).map(
+                        ([key, value]) => [`data-${key}`, value]
+                    )
+                )}
                 onChange={event =>
                     dispatchFormAction({
                         action: "update",
@@ -92,13 +119,16 @@ export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | u
 
                 return (
                     <>
-                        <FieldErrors attribute={attribute} kcClsx={kcClsx} displayableErrors={displayableErrors} fieldIndex={fieldIndex} />
+                        <FieldErrors
+                            attribute={attribute}
+                            displayableErrors={displayableErrors}
+                            fieldIndex={fieldIndex}
+                        />
                         <AddRemoveButtonsMultiValuedAttribute
                             attribute={attribute}
                             values={values}
                             fieldIndex={fieldIndex}
                             dispatchFormAction={dispatchFormAction}
-                            i18n={i18n}
                         />
                     </>
                 );

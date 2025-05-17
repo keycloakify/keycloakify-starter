@@ -1,19 +1,20 @@
 import { Fragment } from "react";
-import type { KcClsx } from "../../_internals/kcClsx";
 import type { FormFieldError } from "../../_internals/useUserProfileForm";
 import type { Attribute } from "../../_internals/KcContext";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
 export function FieldErrors(props: {
     attribute: Attribute;
     displayableErrors: FormFieldError[];
     fieldIndex: number | undefined;
-    kcClsx: KcClsx;
 }) {
-    const { attribute, fieldIndex, kcClsx } = props;
+    const { attribute, fieldIndex } = props;
 
     const displayableErrors = props.displayableErrors.filter(
         error => error.fieldIndex === fieldIndex
     );
+
+    const { kcClsx } = useKcClsx();
 
     if (displayableErrors.length === 0) {
         return null;
