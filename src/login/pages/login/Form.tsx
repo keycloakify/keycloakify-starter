@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { PasswordWrapper } from "../../components/PasswordWrapper";
 import { useI18n } from "../../i18n";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 
-export function Form(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
-
-    const { realm, url, usernameHidden, login, auth, messagesPerField } = kcContext;
+export function Form() {
+    const { kcContext } = useKcContext("login.ftl");
 
     const { msg, msgStr } = useI18n();
 
@@ -19,25 +17,25 @@ export function Form(props: { kcContext: KcContext }) {
     return (
         <div id="kc-form">
             <div id="kc-form-wrapper">
-                {realm.password && (
+                {kcContext.realm.password && (
                     <form
                         id="kc-form-login"
                         onSubmit={() => {
                             setIsLoginButtonDisabled(true);
                             return true;
                         }}
-                        action={url.loginAction}
+                        action={kcContext.url.loginAction}
                         method="post"
                     >
-                        {!usernameHidden && (
+                        {!kcContext.usernameHidden && (
                             <div className={kcClsx("kcFormGroupClass")}>
                                 <label
                                     htmlFor="username"
                                     className={kcClsx("kcLabelClass")}
                                 >
-                                    {!realm.loginWithEmailAllowed
+                                    {!kcContext.realm.loginWithEmailAllowed
                                         ? msg("username")
-                                        : !realm.registrationEmailAsUsername
+                                        : !kcContext.realm.registrationEmailAsUsername
                                           ? msg("usernameOrEmail")
                                           : msg("email")}
                                 </label>
@@ -46,23 +44,26 @@ export function Form(props: { kcContext: KcContext }) {
                                     id="username"
                                     className={kcClsx("kcInputClass")}
                                     name="username"
-                                    defaultValue={login.username ?? ""}
+                                    defaultValue={kcContext.login.username ?? ""}
                                     type="text"
                                     autoFocus
                                     autoComplete="username"
-                                    aria-invalid={messagesPerField.existsError(
+                                    aria-invalid={kcContext.messagesPerField.existsError(
                                         "username",
                                         "password"
                                     )}
                                 />
-                                {messagesPerField.existsError("username", "password") && (
+                                {kcContext.messagesPerField.existsError(
+                                    "username",
+                                    "password"
+                                ) && (
                                     <span
                                         id="input-error"
                                         className={kcClsx("kcInputErrorMessageClass")}
                                         aria-live="polite"
                                         dangerouslySetInnerHTML={{
                                             __html: kcSanitize(
-                                                messagesPerField.getFirstError(
+                                                kcContext.messagesPerField.getFirstError(
                                                     "username",
                                                     "password"
                                                 )
@@ -85,21 +86,24 @@ export function Form(props: { kcContext: KcContext }) {
                                     name="password"
                                     type="password"
                                     autoComplete="current-password"
-                                    aria-invalid={messagesPerField.existsError(
+                                    aria-invalid={kcContext.messagesPerField.existsError(
                                         "username",
                                         "password"
                                     )}
                                 />
                             </PasswordWrapper>
-                            {usernameHidden &&
-                                messagesPerField.existsError("username", "password") && (
+                            {kcContext.usernameHidden &&
+                                kcContext.messagesPerField.existsError(
+                                    "username",
+                                    "password"
+                                ) && (
                                     <span
                                         id="input-error"
                                         className={kcClsx("kcInputErrorMessageClass")}
                                         aria-live="polite"
                                         dangerouslySetInnerHTML={{
                                             __html: kcSanitize(
-                                                messagesPerField.getFirstError(
+                                                kcContext.messagesPerField.getFirstError(
                                                     "username",
                                                     "password"
                                                 )
@@ -111,27 +115,30 @@ export function Form(props: { kcContext: KcContext }) {
 
                         <div className={kcClsx("kcFormGroupClass", "kcFormSettingClass")}>
                             <div id="kc-form-options">
-                                {realm.rememberMe && !usernameHidden && (
-                                    <div className="checkbox">
-                                        <label>
-                                            <input
-                                                tabIndex={5}
-                                                id="rememberMe"
-                                                name="rememberMe"
-                                                type="checkbox"
-                                                defaultChecked={!!login.rememberMe}
-                                            />{" "}
-                                            {msg("rememberMe")}
-                                        </label>
-                                    </div>
-                                )}
+                                {kcContext.realm.rememberMe &&
+                                    !kcContext.usernameHidden && (
+                                        <div className="checkbox">
+                                            <label>
+                                                <input
+                                                    tabIndex={5}
+                                                    id="rememberMe"
+                                                    name="rememberMe"
+                                                    type="checkbox"
+                                                    defaultChecked={
+                                                        !!kcContext.login.rememberMe
+                                                    }
+                                                />{" "}
+                                                {msg("rememberMe")}
+                                            </label>
+                                        </div>
+                                    )}
                             </div>
                             <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                                {realm.resetPasswordAllowed && (
+                                {kcContext.realm.resetPasswordAllowed && (
                                     <span>
                                         <a
                                             tabIndex={6}
-                                            href={url.loginResetCredentialsUrl}
+                                            href={kcContext.url.loginResetCredentialsUrl}
                                         >
                                             {msg("doForgotPassword")}
                                         </a>
@@ -145,7 +152,7 @@ export function Form(props: { kcContext: KcContext }) {
                                 type="hidden"
                                 id="id-hidden-input"
                                 name="credentialId"
-                                value={auth.selectedCredential}
+                                value={kcContext.auth.selectedCredential}
                             />
                             <input
                                 tabIndex={7}

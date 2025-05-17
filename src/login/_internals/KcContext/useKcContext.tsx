@@ -1,8 +1,6 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { assert, is } from "tsafe/assert";
 
-export type { Attribute, ExtendKcContext, PasswordPolicies, UserProfile, Validators } from "./core/KcContext/KcContext";
-
 export function createUseKcContext<KcContext extends { pageId: string }>() {
     const context = createContext<KcContext | undefined>(undefined);
 

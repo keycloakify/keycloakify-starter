@@ -4,12 +4,11 @@ import { clsx } from "keycloakify/tools/clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitializeTemplate } from "../../_internals/useInitializeTemplate";
-import  { useKcClsx } from "../../_internals/useKcClsx";
-import  { useI18n } from "../../i18n";
-import type { KcContext } from "../../KcContext";
+import { useKcClsx } from "../../_internals/useKcClsx";
+import { useI18n } from "../../i18n";
+import { useKcContext } from "../../KcContext";
 
 export type TemplateProps = {
-    kcContext: KcContext;
     children: ReactNode;
 
     displayInfo?: boolean;
@@ -32,16 +31,18 @@ export function Template(props: TemplateProps) {
         infoNode = null,
         documentTitle,
         bodyClassName,
-        kcContext,
-        children,
+        children
     } = props;
+
+    const { kcContext } = useKcContext();
 
     const { msg, msgStr, currentLanguage, enabledLanguages } = useI18n();
 
     const { kcClsx, doUseDefaultCss } = useKcClsx();
 
     useEffect(() => {
-        document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
+        document.title =
+            documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
     }, []);
 
     useSetClassName({
@@ -71,8 +72,17 @@ export function Template(props: TemplateProps) {
                 <header className={kcClsx("kcFormHeaderClass")}>
                     {enabledLanguages.length > 1 && (
                         <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
-                            <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>
-                                <div id="kc-locale-dropdown" className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"))}>
+                            <div
+                                id="kc-locale-wrapper"
+                                className={kcClsx("kcLocaleWrapperClass")}
+                            >
+                                <div
+                                    id="kc-locale-dropdown"
+                                    className={clsx(
+                                        "menu-button-links",
+                                        kcClsx("kcLocaleDropDownClass")
+                                    )}
+                                >
                                     <button
                                         tabIndex={1}
                                         id="kc-current-locale-link"
@@ -91,28 +101,55 @@ export function Template(props: TemplateProps) {
                                         id="language-switch1"
                                         className={kcClsx("kcLocaleListClass")}
                                     >
-                                        {enabledLanguages.map(({ languageTag, label, href }, i) => (
-                                            <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
-                                                <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
-                                                    {label}
-                                                </a>
-                                            </li>
-                                        ))}
+                                        {enabledLanguages.map(
+                                            ({ languageTag, label, href }, i) => (
+                                                <li
+                                                    key={languageTag}
+                                                    className={kcClsx(
+                                                        "kcLocaleListItemClass"
+                                                    )}
+                                                    role="none"
+                                                >
+                                                    <a
+                                                        role="menuitem"
+                                                        id={`language-${i + 1}`}
+                                                        className={kcClsx(
+                                                            "kcLocaleItemClass"
+                                                        )}
+                                                        href={href}
+                                                    >
+                                                        {label}
+                                                    </a>
+                                                </li>
+                                            )
+                                        )}
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     )}
                     {(() => {
-                        const node = !(kcContext.auth !== undefined && kcContext.auth.showUsername && !kcContext.auth.showResetCredentials) ? (
+                        const node = !(
+                            kcContext.auth !== undefined &&
+                            kcContext.auth.showUsername &&
+                            !kcContext.auth.showResetCredentials
+                        ) ? (
                             <h1 id="kc-page-title">{headerNode}</h1>
                         ) : (
                             <div id="kc-username" className={kcClsx("kcFormGroupClass")}>
-                                <label id="kc-attempted-username">{kcContext.auth.attemptedUsername}</label>
-                                <a id="reset-login" href={kcContext.url.loginRestartFlowUrl} aria-label={msgStr("restartLoginTooltip")}>
+                                <label id="kc-attempted-username">
+                                    {kcContext.auth.attemptedUsername}
+                                </label>
+                                <a
+                                    id="reset-login"
+                                    href={kcContext.url.loginRestartFlowUrl}
+                                    aria-label={msgStr("restartLoginTooltip")}
+                                >
                                     <div className="kc-login-tooltip">
                                         <i className={kcClsx("kcResetFlowIcon")}></i>
-                                        <span className="kc-tooltip-text">{msg("restartLoginTooltip")}</span>
+                                        <span className="kc-tooltip-text">
+                                            {msg("restartLoginTooltip")}
+                                        </span>
                                     </div>
                                 </a>
                             </div>
@@ -121,7 +158,12 @@ export function Template(props: TemplateProps) {
                         if (displayRequiredFields) {
                             return (
                                 <div className={kcClsx("kcContentWrapperClass")}>
-                                    <div className={clsx(kcClsx("kcLabelWrapperClass"), "subtitle")}>
+                                    <div
+                                        className={clsx(
+                                            kcClsx("kcLabelWrapperClass"),
+                                            "subtitle"
+                                        )}
+                                    >
                                         <span className="subtitle">
                                             <span className="required">*</span>
                                             {msg("requiredFields")}
@@ -138,50 +180,87 @@ export function Template(props: TemplateProps) {
                 <div id="kc-content">
                     <div id="kc-content-wrapper">
                         {/* App-initiated actions should not see warning messages about the need to complete the action during login. */}
-                        {displayMessage && kcContext.message !== undefined && (kcContext.message.type !== "warning" || !kcContext.isAppInitiatedAction) && (
-                            <div
-                                className={clsx(
-                                    `alert-${kcContext.message.type}`,
-                                    kcClsx("kcAlertClass"),
-                                    `pf-m-${kcContext.message?.type === "error" ? "danger" : kcContext.message.type}`
-                                )}
-                            >
-                                <div className="pf-c-alert__icon">
-                                    {kcContext.message.type === "success" && <span className={kcClsx("kcFeedbackSuccessIcon")}></span>}
-                                    {kcContext.message.type === "warning" && <span className={kcClsx("kcFeedbackWarningIcon")}></span>}
-                                    {kcContext.message.type === "error" && <span className={kcClsx("kcFeedbackErrorIcon")}></span>}
-                                    {kcContext.message.type === "info" && <span className={kcClsx("kcFeedbackInfoIcon")}></span>}
-                                </div>
-                                <span
-                                    className={kcClsx("kcAlertTitleClass")}
-                                    dangerouslySetInnerHTML={{
-                                        __html: kcSanitize(kcContext.message.summary)
-                                    }}
-                                />
-                            </div>
-                        )}
-                        {children}
-                        {kcContext.auth !== undefined && kcContext.auth.showTryAnotherWayLink && (
-                            <form id="kc-select-try-another-way-form" action={kcContext.url.loginAction} method="post">
-                                <div className={kcClsx("kcFormGroupClass")}>
-                                    <input type="hidden" name="tryAnotherWay" value="on" />
-                                    <a
-                                        href="#"
-                                        id="try-another-way"
-                                        onClick={() => {
-                                            document.forms["kc-select-try-another-way-form" as never].submit();
-                                            return false;
+                        {displayMessage &&
+                            kcContext.message !== undefined &&
+                            (kcContext.message.type !== "warning" ||
+                                !kcContext.isAppInitiatedAction) && (
+                                <div
+                                    className={clsx(
+                                        `alert-${kcContext.message.type}`,
+                                        kcClsx("kcAlertClass"),
+                                        `pf-m-${kcContext.message?.type === "error" ? "danger" : kcContext.message.type}`
+                                    )}
+                                >
+                                    <div className="pf-c-alert__icon">
+                                        {kcContext.message.type === "success" && (
+                                            <span
+                                                className={kcClsx(
+                                                    "kcFeedbackSuccessIcon"
+                                                )}
+                                            ></span>
+                                        )}
+                                        {kcContext.message.type === "warning" && (
+                                            <span
+                                                className={kcClsx(
+                                                    "kcFeedbackWarningIcon"
+                                                )}
+                                            ></span>
+                                        )}
+                                        {kcContext.message.type === "error" && (
+                                            <span
+                                                className={kcClsx("kcFeedbackErrorIcon")}
+                                            ></span>
+                                        )}
+                                        {kcContext.message.type === "info" && (
+                                            <span
+                                                className={kcClsx("kcFeedbackInfoIcon")}
+                                            ></span>
+                                        )}
+                                    </div>
+                                    <span
+                                        className={kcClsx("kcAlertTitleClass")}
+                                        dangerouslySetInnerHTML={{
+                                            __html: kcSanitize(kcContext.message.summary)
                                         }}
-                                    >
-                                        {msg("doTryAnotherWay")}
-                                    </a>
+                                    />
                                 </div>
-                            </form>
-                        )}
+                            )}
+                        {children}
+                        {kcContext.auth !== undefined &&
+                            kcContext.auth.showTryAnotherWayLink && (
+                                <form
+                                    id="kc-select-try-another-way-form"
+                                    action={kcContext.url.loginAction}
+                                    method="post"
+                                >
+                                    <div className={kcClsx("kcFormGroupClass")}>
+                                        <input
+                                            type="hidden"
+                                            name="tryAnotherWay"
+                                            value="on"
+                                        />
+                                        <a
+                                            href="#"
+                                            id="try-another-way"
+                                            onClick={() => {
+                                                document.forms[
+                                                    "kc-select-try-another-way-form" as never
+                                                ].submit();
+                                                return false;
+                                            }}
+                                        >
+                                            {msg("doTryAnotherWay")}
+                                        </a>
+                                    </div>
+                                </form>
+                            )}
                         {socialProvidersNode}
                         {displayInfo && (
                             <div id="kc-info" className={kcClsx("kcSignUpClass")}>
-                                <div id="kc-info-wrapper" className={kcClsx("kcInfoAreaWrapperClass")}>
+                                <div
+                                    id="kc-info-wrapper"
+                                    className={kcClsx("kcInfoAreaWrapperClass")}
+                                >
                                     {infoNode}
                                 </div>
                             </div>

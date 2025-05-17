@@ -1,4 +1,4 @@
-import type { ExtendKcContext } from "./_internals/KcContext";
+import { ExtendKcContext, createUseKcContext } from "./_internals/KcContext";
 import type { KcEnvName, ThemeName } from "../kc.gen";
 
 export type KcContextExtension = {
@@ -12,3 +12,4 @@ export type KcContextExtensionPerPage = {};
 
 export type KcContext = ExtendKcContext<KcContextExtension, KcContextExtensionPerPage>;
 
+export const { useKcContext, KcContextProvider } = createUseKcContext<KcContext>();

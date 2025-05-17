@@ -2,10 +2,10 @@ import { clsx } from "keycloakify/tools/clsx";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 
-export function SocialProviders(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+export function SocialProviders() {
+    const { kcContext } = useKcContext("login.ftl");
 
     const { realm, social } = kcContext;
 

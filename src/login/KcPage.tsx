@@ -1,8 +1,7 @@
 import { Suspense, lazy } from "react";
-import type { ClassKey } from "keycloakify/login";
-import type { KcContext } from "./KcContext";
+import { KcContext, KcContextProvider } from "./KcContext";
 import { I18nProvider } from "./i18n";
-import { KcClsxProvider } from "./_internals/useKcClsx";
+import { KcClsxProvider, type ClassKey } from "./_internals/useKcClsx";
 import { assert, type Equals } from "tsafe/assert";
 
 const classes = {} satisfies { [key in ClassKey]?: string };
@@ -11,13 +10,15 @@ export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
 
     return (
-        <KcClsxProvider doUseDefaultCss={true} classes={classes}>
-            <I18nProvider kcContext={kcContext}>
-                <Suspense>
-                    <Page kcContext={kcContext} />
-                </Suspense>
-            </I18nProvider>
-        </KcClsxProvider>
+        <KcContextProvider kcContext={kcContext}>
+            <KcClsxProvider doUseDefaultCss={true} classes={classes}>
+                <I18nProvider kcContext={kcContext}>
+                    <Suspense>
+                        <Page kcContext={kcContext} />
+                    </Suspense>
+                </I18nProvider>
+            </KcClsxProvider>
+        </KcContextProvider>
     );
 }
 
