@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { assert } from "keycloakify/tools/assert";
 import { useInsertScriptTags } from "keycloakify/tools/useInsertScriptTags";
 import { useInsertLinkTags } from "keycloakify/tools/useInsertLinkTags";
-import type { KcContext } from "./KcContext";
+import type { KcContext } from "./core/KcContext/KcContext";
 
 export type KcContextLike = {
     url: {

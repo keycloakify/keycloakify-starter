@@ -1,4 +1,8 @@
-export type GenericI18n_noJsx<MessageKey extends string, LanguageTag extends string> = {
+import type { JSX } from "keycloakify/tools/JSX";
+import type { GenericI18n as GenericI18n_noJsx } from "../core/i18n/GenericI18n";
+import { assert, type Equals } from "tsafe/assert";
+
+export type GenericI18n<MessageKey extends string, LanguageTag extends string> = {
     currentLanguage: {
         /**
          * e.g: "en", "fr", "zh-CN"
@@ -54,11 +58,25 @@ export type GenericI18n_noJsx<MessageKey extends string, LanguageTag extends str
      * advancedMsgStr("${not-a-message-key}") === advancedMsgStr("not-a-message-key") === "not-a-message-key"
      */
     advancedMsgStr: (key: string, ...args: (string | undefined)[]) => string;
-
     /**
      * Initially the messages are in english (fallback language).
      * The translations in the current language are being fetched dynamically.
      * This property is true while the translations are being fetched.
      */
     isFetchingTranslations: boolean;
+    /**
+     * Same as msgStr but returns a JSX.Element with the html string rendered as html.
+     */
+    msg: (key: MessageKey, ...args: (string | undefined)[]) => JSX.Element;
+    /**
+     * Same as advancedMsgStr but returns a JSX.Element with the html string rendered as html.
+     */
+    advancedMsg: (key: string, ...args: (string | undefined)[]) => JSX.Element;
 };
+
+{
+    type A = Omit<GenericI18n<string, string>, "msg" | "advancedMsg">;
+    type B = GenericI18n_noJsx<string, string>;
+
+    assert<Equals<A, B>>();
+}

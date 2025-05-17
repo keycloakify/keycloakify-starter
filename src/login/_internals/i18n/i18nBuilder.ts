@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
     LanguageTag as LanguageTag_defaultSet,
     MessageKey as MessageKey_defaultSet
-} from "../messages_defaultSet/types";
+} from "../core/i18n/messages_defaultSet/types";
 import { type ReturnTypeOfCreateUseI18n, createUseI18n } from "./useI18n";
 
 export type I18nBuilder<

@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "keycloakify/tools/Array.prototype.every";
 import { assert, type Equals } from "tsafe/assert";
 import type {
+    KcContext,
     PasswordPolicies,
     Attribute,
     Validators
-} from "keycloakify/login/KcContext";
-import type { KcContext } from "../../KcContext";
-import type { KcContextLike as KcContextLike_i18n } from "keycloakify/login/i18n";
-import { formatNumber } from "keycloakify/tools/formatNumber";
-import type { MessageKey_defaultSet } from "keycloakify/login/i18n";
+} from "../KcContext/KcContext";
+import type { KcContextLike as KcContextLike_i18n } from "../i18n/getI18n";
+import type { MessageKey as MessageKey_defaultSet } from "../i18n/messages_defaultSet/types";
 import { emailRegexp } from "keycloakify/tools/emailRegExp";
-import { unFormatNumberOnSubmit } from "./kcNumberUnFormat";
+import { formatNumber, unFormatNumberOnSubmit } from "./kcNumberUnFormat";
 import { structuredCloneButFunctions } from "keycloakify/tools/structuredCloneButFunctions";
 import { id } from "tsafe/id";
 
@@ -306,11 +306,11 @@ function getInitialState(params: { kcContext: KcContextLike }): internal.State {
             };
 
             delete attribute.group;
-            // @ts-expect-error
+            // @ts-expect-error: We know what we are doing
             delete attribute.groupDisplayHeader;
-            // @ts-expect-error
+            // @ts-expect-error: We know what we are doing
             delete attribute.groupDisplayDescription;
-            // @ts-expect-error
+            // @ts-expect-error: We know what we are doing
             delete attribute.groupAnnotations;
 
             if (group === "") {
@@ -505,6 +505,7 @@ function formStateSelector(params: { state: internal.State }): FormState {
                                     return hasLostFocusAtLeastOnce;
                             }
                             assert<Equals<typeof error.source.rule, never>>(false);
+                            break;
                         case "passwordPolicy":
                             switch (error.source.name) {
                                 case "length":
@@ -525,6 +526,7 @@ function formStateSelector(params: { state: internal.State }): FormState {
                                     return true;
                             }
                             assert<Equals<typeof error.source, never>>(false);
+                            break;
                         case "validator":
                             switch (error.source.name) {
                                 case "length":

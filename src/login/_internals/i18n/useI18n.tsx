@@ -1,11 +1,14 @@
 import type { JSX } from "keycloakify/tools/JSX";
 import { useEffect, useState, createContext, useContext } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import { createGetI18n, type KcContextLike } from "../noJsx/getI18n";
-import type { GenericI18n_noJsx } from "../noJsx/GenericI18n_noJsx";
+import { createGetI18n, type KcContextLike } from "../core/i18n/getI18n";
+import type { GenericI18n as GenericI18n_noJsx } from "../core/i18n/GenericI18n";
 import { Reflect } from "tsafe/Reflect";
 import type { GenericI18n } from "./GenericI18n";
-import type { LanguageTag as LanguageTag_defaultSet, MessageKey as MessageKey_defaultSet } from "../messages_defaultSet/types";
+import type {
+    LanguageTag as LanguageTag_defaultSet,
+    MessageKey as MessageKey_defaultSet
+} from "../core/i18n/messages_defaultSet/types";
 
 export type ReturnTypeOfCreateUseI18n<MessageKey_themeDefined extends string, LanguageTag_notInDefaultSet extends string> = {
     useI18n: () => GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;

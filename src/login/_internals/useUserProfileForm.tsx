@@ -1,10 +1,13 @@
 import type { JSX } from "keycloakify/tools/JSX";
-import * as reactlessApi from "./getUserProfileApi/index";
 import type { PasswordPolicies, Attribute, Validators } from "keycloakify/login/KcContext";
 import { useEffect, useState, useMemo, Fragment } from "react";
 import { assert, type Equals } from "tsafe/assert";
-import type { I18n } from "./i18n";
-export { getButtonToDisplayForMultivaluedAttributeField } from "./getUserProfileApi/index";
+export { getButtonToDisplayForMultivaluedAttributeField } from "./core/userProfileApi/index";
+import type { MessageKey_defaultSet } from "./i18n";
+import type { GenericI18n } from "./i18n/GenericI18n";
+import * as coreApi from "./core/userProfileApi/index";
+
+type I18n = GenericI18n<MessageKey_defaultSet, string>;
 
 export type FormFieldError = {
     errorMessage: JSX.Element;
@@ -15,7 +18,7 @@ export type FormFieldError = {
 
 {
     type A = Omit<FormFieldError, "errorMessage" | "errorMessageStr">;
-    type B = Omit<reactlessApi.FormFieldError, "advancedMsgArgs">;
+    type B = Omit<coreApi.FormFieldError, "advancedMsgArgs">;
 
     assert<Equals<A, B>>();
 }
@@ -45,7 +48,7 @@ export namespace FormFieldError {
 
 {
     type A = FormFieldError.Source;
-    type B = reactlessApi.FormFieldError.Source;
+    type B = coreApi.FormFieldError.Source;
 
     assert<Equals<A, B>>();
 }
@@ -58,7 +61,7 @@ export type FormFieldState = {
 
 {
     type A = Omit<FormFieldState, "displayableErrors">;
-    type B = Omit<reactlessApi.FormFieldState, "displayableErrors">;
+    type B = Omit<coreApi.FormFieldState, "displayableErrors">;
 
     assert<Equals<A, B>>();
 }
@@ -91,12 +94,12 @@ export type FormAction =
 
 {
     type A = FormAction;
-    type B = reactlessApi.FormAction;
+    type B = coreApi.FormAction;
 
     assert<Equals<A, B>>();
 }
 
-export type KcContextLike = reactlessApi.KcContextLike;
+export type KcContextLike = coreApi.KcContextLike;
 
 export type I18nLike = Pick<I18n, "advancedMsg" | "advancedMsgStr">;
 
@@ -108,7 +111,7 @@ export type ParamsOfUseUserProfileForm = {
 
 {
     type A = Omit<ParamsOfUseUserProfileForm, "i18n">;
-    type B = reactlessApi.ParamsOfGetUserProfileApi;
+    type B = coreApi.ParamsOfGetUserProfileApi;
 
     assert<Equals<A, B>>();
 }
@@ -121,7 +124,7 @@ export type ReturnTypeOfUseUserProfileForm = {
 export function useUserProfileForm(params: ParamsOfUseUserProfileForm): ReturnTypeOfUseUserProfileForm {
     const { doMakeUserConfirmPassword, i18n, kcContext } = params;
 
-    const api = reactlessApi.getUserProfileApi({
+    const api = coreApi.getUserProfileApi({
         kcContext,
         doMakeUserConfirmPassword
     });

@@ -1,9 +1,9 @@
 import "keycloakify/tools/Object.fromEntries";
 import { assert, is } from "tsafe/assert";
 import { extractLastParenthesisContent } from "keycloakify/tools/extractLastParenthesisContent";
-import messages_defaultSet_fallbackLanguage from "../messages_defaultSet/en";
-import { fetchMessages_defaultSet } from "../messages_defaultSet";
-import type { KcContext } from "../../KcContext";
+import messages_defaultSet_fallbackLanguage from "./messages_defaultSet/en";
+import { fetchMessages_defaultSet } from "./messages_defaultSet";
+import type { KcContext } from "../KcContext/KcContext";
 import { FALLBACK_LANGUAGE_TAG } from "keycloakify/bin/shared/constants";
 import { id } from "tsafe/id";
 import { Reflect } from "tsafe/Reflect";
@@ -11,8 +11,8 @@ import {
     type LanguageTag as LanguageTag_defaultSet,
     type MessageKey as MessageKey_defaultSet,
     languageTags as languageTags_defaultSet
-} from "../messages_defaultSet/types";
-import type { GenericI18n_noJsx } from "./GenericI18n_noJsx";
+} from "./messages_defaultSet/types";
+import type { GenericI18n } from "./GenericI18n";
 
 export type KcContextLike = {
     themeName: string;
@@ -33,12 +33,12 @@ assert<KcContext extends KcContextLike ? true : false>();
 
 export type ReturnTypeOfCreateGetI18n<MessageKey_themeDefined extends string, LanguageTag_notInDefaultSet extends string> = {
     getI18n: (params: { kcContext: KcContextLike }) => {
-        i18n: GenericI18n_noJsx<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;
+        i18n: GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;
         prI18n_currentLanguage:
-            | Promise<GenericI18n_noJsx<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>>
+            | Promise<GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>>
             | undefined;
     };
-    ofTypeI18n: GenericI18n_noJsx<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;
+    ofTypeI18n: GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, LanguageTag_defaultSet | LanguageTag_notInDefaultSet>;
 };
 
 export function createGetI18n<
@@ -75,7 +75,7 @@ export function createGetI18n<
 
     type MessageKey = MessageKey_defaultSet | MessageKey_themeDefined;
 
-    type I18n = GenericI18n_noJsx<MessageKey, LanguageTag>;
+    type I18n = GenericI18n<MessageKey, LanguageTag>;
 
     type Result = { i18n: I18n; prI18n_currentLanguage: Promise<I18n> | undefined };
 
@@ -252,7 +252,7 @@ export function createGetI18n<
                           const fromDefaultSet = await fetchMessages_defaultSet(currentLanguageTag);
 
                           const isEmpty = (() => {
-                              for (let _key in fromDefaultSet) {
+                              for (const _key in fromDefaultSet) {
                                   return false;
                               }
 
@@ -310,7 +310,7 @@ function createI18nTranslationFunctionsFactory<MessageKey_themeDefined extends s
 
     function createI18nTranslationFunctions(params: {
         messages_defaultSet_currentLanguage: Partial<Record<MessageKey_defaultSet, string>> | undefined;
-    }): Pick<GenericI18n_noJsx<MessageKey_defaultSet | MessageKey_themeDefined, string>, "msgStr" | "advancedMsgStr"> {
+    }): Pick<GenericI18n<MessageKey_defaultSet | MessageKey_themeDefined, string>, "msgStr" | "advancedMsgStr"> {
         const { messages_defaultSet_currentLanguage } = params;
 
         function resolveMsg(props: { key: string; args: (string | undefined)[] }): string | undefined {

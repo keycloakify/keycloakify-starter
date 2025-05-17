@@ -1,5 +1,5 @@
 import { useContext, createContext, useMemo, type ReactNode } from "react";
-import { getKcClsx, type KcClsx, type ClassKey } from "./getKcClsx";
+import { getKcClsx, type KcClsx, type ClassKey } from "./core/kcClsx";
 
 const context = createContext<{ kcClsx: KcClsx; doUseDefaultCss: boolean } | undefined>(
     undefined

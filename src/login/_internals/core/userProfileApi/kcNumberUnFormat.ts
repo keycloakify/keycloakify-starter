@@ -1,4 +1,4 @@
-import { assert } from "keycloakify/tools/assert";
+import { assert } from "tsafe/assert";
 let cleanup: (() => void) | undefined;
 const handledElements = new WeakSet<HTMLElement>();
 const KC_NUMBER_UNFORMAT = "kcNumberUnFormat";
@@ -55,7 +55,7 @@ export function unFormatNumberOnSubmit() {
 }
 
 // NOTE: Keycloak code
-const formatNumber = (input: string, format: string) => {
+export const formatNumber = (input: string, format: string) => {
     if (!input) {
         return "";
     }
@@ -77,7 +77,7 @@ const formatNumber = (input: string, format: string) => {
     let rawValue = input.replace(/\D+/g, "");
 
     // make sure the value is a number
-    //@ts-expect-error
+    //@ts-expect-error: We know what we are doing
     if (parseInt(rawValue) != rawValue) {
         return "";
     }
@@ -91,7 +91,7 @@ const formatNumber = (input: string, format: string) => {
     const formatter = digitPattern.reduce((result, p) => result + `(\\d${p})`, "^");
 
     // if the current digits match the pattern we have each group of digits in an array
-    let digits = new RegExp(formatter).exec(rawValue);
+    const digits = new RegExp(formatter).exec(rawValue);
 
     // no match, return the raw value without any format
     if (!digits) {
