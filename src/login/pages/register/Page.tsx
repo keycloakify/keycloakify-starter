@@ -15,17 +15,6 @@ export function Page(props: {
 
     const { kcClsx } = useKcClsx();
 
-    const {
-        messageHeader,
-        url,
-        messagesPerField,
-        recaptchaRequired,
-        recaptchaVisible,
-        recaptchaSiteKey,
-        recaptchaAction,
-        termsAcceptanceRequired
-    } = kcContext;
-
     const { msg, msgStr, advancedMsg } = useI18n();
 
     const [isFormSubmittable, setIsFormSubmittable] = useState(false);
@@ -35,17 +24,17 @@ export function Page(props: {
         <Template
             kcContext={kcContext}
             headerNode={
-                messageHeader !== undefined
-                    ? advancedMsg(messageHeader)
+                kcContext.messageHeader !== undefined
+                    ? advancedMsg(kcContext.messageHeader)
                     : msg("registerTitle")
             }
-            displayMessage={messagesPerField.exists("global")}
+            displayMessage={kcContext.messagesPerField.exists("global")}
             displayRequiredFields
         >
             <form
                 id="kc-register-form"
                 className={kcClsx("kcFormClass")}
-                action={url.registrationAction}
+                action={kcContext.url.registrationAction}
                 method="post"
             >
                 <UserProfileFormFields
@@ -53,22 +42,22 @@ export function Page(props: {
                     onIsFormSubmittableValueChange={setIsFormSubmittable}
                     doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                 />
-                {termsAcceptanceRequired && (
+                {kcContext.termsAcceptanceRequired && (
                     <TermsAcceptance
                         kcContext={kcContext}
                         areTermsAccepted={areTermsAccepted}
                         onAreTermsAcceptedValueChange={setAreTermsAccepted}
                     />
                 )}
-                {recaptchaRequired &&
-                    (recaptchaVisible || recaptchaAction === undefined) && (
+                {kcContext.recaptchaRequired &&
+                    (kcContext.recaptchaVisible || kcContext.recaptchaAction === undefined) && (
                         <div className="form-group">
                             <div className={kcClsx("kcInputWrapperClass")}>
                                 <div
                                     className="g-recaptcha"
                                     data-size="compact"
-                                    data-sitekey={recaptchaSiteKey}
-                                    data-action={recaptchaAction}
+                                    data-sitekey={kcContext.recaptchaSiteKey}
+                                    data-action={kcContext.recaptchaAction}
                                 ></div>
                             </div>
                         </div>
@@ -77,14 +66,14 @@ export function Page(props: {
                     <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
                         <div className={kcClsx("kcFormOptionsWrapperClass")}>
                             <span>
-                                <a href={url.loginUrl}>{msg("backToLogin")}</a>
+                                <a href={kcContext.url.loginUrl}>{msg("backToLogin")}</a>
                             </span>
                         </div>
                     </div>
 
-                    {recaptchaRequired &&
-                    !recaptchaVisible &&
-                    recaptchaAction !== undefined ? (
+                    {kcContext.recaptchaRequired &&
+                    !kcContext.recaptchaVisible &&
+                    kcContext.recaptchaAction !== undefined ? (
                         <div
                             id="kc-form-buttons"
                             className={kcClsx("kcFormButtonsClass")}
@@ -99,7 +88,7 @@ export function Page(props: {
                                     ),
                                     "g-recaptcha"
                                 )}
-                                data-sitekey={recaptchaSiteKey}
+                                data-sitekey={kcContext.recaptchaSiteKey}
                                 data-callback={() => {
                                     (
                                         document.getElementById(
@@ -107,7 +96,7 @@ export function Page(props: {
                                         ) as HTMLFormElement
                                     ).submit();
                                 }}
-                                data-action={recaptchaAction}
+                                data-action={kcContext.recaptchaAction}
                                 type="submit"
                             >
                                 {msg("doRegister")}
@@ -121,7 +110,7 @@ export function Page(props: {
                             <input
                                 disabled={
                                     !isFormSubmittable ||
-                                    (termsAcceptanceRequired && !areTermsAccepted)
+                                    (kcContext.termsAcceptanceRequired && !areTermsAccepted)
                                 }
                                 className={kcClsx(
                                     "kcButtonClass",
