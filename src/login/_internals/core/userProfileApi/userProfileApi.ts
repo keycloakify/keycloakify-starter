@@ -113,7 +113,7 @@ export type ParamsOfGetUserProfileApi = {
 };
 
 export function getUserProfileApi(params: ParamsOfGetUserProfileApi): UserProfileApi {
-    const { kcContext } = params;
+    const { kcContext, doMakeUserConfirmPassword } = params;
 
     use_cache: {
         const userProfileApi_cache = cachedUserProfileApiByKcContext.get(kcContext);
@@ -125,7 +125,7 @@ export function getUserProfileApi(params: ParamsOfGetUserProfileApi): UserProfil
         return userProfileApi_cache;
     }
 
-    const userProfileApi = getUserProfileApi_noCache(params);
+    const userProfileApi = getUserProfileApi_noCache({ kcContext, doMakeUserConfirmPassword });
 
     cachedUserProfileApiByKcContext.set(kcContext, userProfileApi);
 
@@ -150,7 +150,7 @@ function getUserProfileApi_noCache(params: ParamsOfGetUserProfileApi): UserProfi
 
     unFormatNumberOnSubmit();
 
-    let state: internal.State = getInitialState({ kcContext });
+    let state: internal.State = getInitialState({ kcContext, doMakeUserConfirmPassword });
     const callbacks = new Set<() => void>();
 
     return {
@@ -171,7 +171,7 @@ function getUserProfileApi_noCache(params: ParamsOfGetUserProfileApi): UserProfi
     };
 }
 
-function getInitialState(params: { kcContext: KcContextLike }): internal.State {
+function getInitialState(params: { kcContext: KcContextLike; doMakeUserConfirmPassword: boolean; }): internal.State {
     const { kcContext } = params;
 
     const { getErrors } = createGetErrors({ kcContext });
@@ -286,8 +286,44 @@ function getInitialState(params: { kcContext: KcContextLike }): internal.State {
         );
     })();
 
-    // Retro-compatibility and consistency patches
+    /* See: https://github.com/keycloak/keycloak/issues/38029 and https://github.com/keycloakify/keycloakify/issues/837 */
+    add_locale_attribute_for_keycloak_prior_to_26_2_0: {
+        if (kcContext.locale === undefined) {
+            break add_locale_attribute_for_keycloak_prior_to_26_2_0;
+        }
+
+        if (attributes.find(attribute => attribute.name === "locale") !== undefined) {
+            break add_locale_attribute_for_keycloak_prior_to_26_2_0;
+        }
+
+        attributes.push(
+            id<Attribute>({
+                validators: {},
+                displayName: "locale",
+                values: [],
+                annotations: {},
+                required: false,
+                html5DataAnnotations: {},
+                multivalued: false,
+                readOnly: false,
+                name: "locale"
+            })
+        );
+    }
+
     attributes.forEach(attribute => {
+
+        if( attribute.name === "password-confirm" ) {
+            attribute.annotations.inputType = "hidden";
+        }
+
+        if (attribute.name === "locale") {
+            assert(kcContext.locale !== undefined);
+            attribute.annotations.inputType = "hidden";
+            attribute.value = kcContext.locale.currentLanguageTag;
+            delete attribute.values;
+        }
+
         patch_legacy_group: {
             if (typeof attribute.group !== "string") {
                 break patch_legacy_group;

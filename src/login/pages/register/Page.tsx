@@ -1,19 +1,15 @@
-import type { KcContext } from "./KcContext";
+import { useKcContext } from "../../KcContext";
 import { Template } from "../../components/Template";
 import { useI18n } from "../../i18n";
 import { Form } from "./Form";
 
-export function Page(props: {
-    kcContext: KcContext;
-    doMakeUserConfirmPassword: boolean;
-}) {
-    const { kcContext, doMakeUserConfirmPassword } = props;
+export function Page() {
 
     const { msg, advancedMsg } = useI18n();
+    const { kcContext } = useKcContext("register.ftl");
 
     return (
         <Template
-            kcContext={kcContext}
             headerNode={
                 kcContext.messageHeader !== undefined
                     ? advancedMsg(kcContext.messageHeader)
@@ -22,10 +18,7 @@ export function Page(props: {
             displayMessage={kcContext.messagesPerField.exists("global")}
             displayRequiredFields
         >
-            <Form
-                kcContext={kcContext}
-                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
-            />
+            <Form />
         </Template>
     );
 }

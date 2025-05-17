@@ -1,19 +1,17 @@
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { KcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../_internals/useKcClsx";
 
 export function TermsAcceptance(props: {
-    kcContext: Pick<KcContext, "messagesPerField">;
     areTermsAccepted: boolean;
     onAreTermsAcceptedValueChange: (areTermsAccepted: boolean) => void;
 }) {
-    const { areTermsAccepted, onAreTermsAcceptedValueChange, kcContext } = props;
+    const { areTermsAccepted, onAreTermsAcceptedValueChange } = props;
 
+    const { kcContext } = useKcContext();
     const { msg } = useI18n();
     const { kcClsx } = useKcClsx();
-
-    const { messagesPerField } = kcContext;
 
     return (
         <>
@@ -32,20 +30,24 @@ export function TermsAcceptance(props: {
                         className={kcClsx("kcCheckboxInputClass")}
                         checked={areTermsAccepted}
                         onChange={e => onAreTermsAcceptedValueChange(e.target.checked)}
-                        aria-invalid={messagesPerField.existsError("termsAccepted")}
+                        aria-invalid={kcContext.messagesPerField.existsError(
+                            "termsAccepted"
+                        )}
                     />
                     <label htmlFor="termsAccepted" className={kcClsx("kcLabelClass")}>
                         {msg("acceptTerms")}
                     </label>
                 </div>
-                {messagesPerField.existsError("termsAccepted") && (
+                {kcContext.messagesPerField.existsError("termsAccepted") && (
                     <div className={kcClsx("kcLabelWrapperClass")}>
                         <span
                             id="input-error-terms-accepted"
                             className={kcClsx("kcInputErrorMessageClass")}
                             aria-live="polite"
                             dangerouslySetInnerHTML={{
-                                __html: kcSanitize(messagesPerField.get("termsAccepted"))
+                                __html: kcSanitize(
+                                    kcContext.messagesPerField.get("termsAccepted")
+                                )
                             }}
                         />
                     </div>

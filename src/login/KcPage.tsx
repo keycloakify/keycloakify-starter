@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { KcContext, KcContextProvider } from "./KcContext";
+import { KcContext, KcContextProvider, useKcContext } from "./KcContext";
 import { I18nProvider } from "./i18n";
 import { KcClsxProvider, type ClassKey } from "./_internals/useKcClsx";
 import { assert, type Equals } from "tsafe/assert";
@@ -14,7 +14,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
             <KcClsxProvider doUseDefaultCss={true} classes={classes}>
                 <I18nProvider kcContext={kcContext}>
                     <Suspense>
-                        <Page kcContext={kcContext} />
+                        <Page />
                     </Suspense>
                 </I18nProvider>
             </KcClsxProvider>
@@ -71,12 +71,13 @@ const Page_login_idp_link_confirm_override = lazy(
     () => import("./pages/login-idp-link-confirm-override")
 );
 
-function Page(props: { kcContext: KcContext }) {
-    const { kcContext } = props;
+function Page() {
+
+    const { kcContext } = useKcContext();
 
     switch (kcContext.pageId) {
         case "login.ftl":
-            return <Page_login kcContext={kcContext} />;
+            return <Page_login />;
         case "register.ftl":
             return (
                 <Page_register kcContext={kcContext} doMakeUserConfirmPassword={true} />

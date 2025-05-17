@@ -3,16 +3,19 @@ import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useKcContext } from "../../KcContext";
+import { assert } from "tsafe/assert";
 
+/** To use this component make sure that kcContext.social exists */
 export function SocialProviders() {
-    const { kcContext } = useKcContext(["login.ftl"]);
+    const { kcContext } = useKcContext();
+
+    assert("social" in kcContext && kcContext.social !== undefined);
 
     const { msg } = useI18n();
 
     const { kcClsx } = useKcClsx();
 
     if (
-        kcContext.social === undefined ||
         kcContext.social.providers === undefined ||
         kcContext.social.providers.length === 0
     ) {

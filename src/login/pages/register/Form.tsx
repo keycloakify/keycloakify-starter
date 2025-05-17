@@ -1,23 +1,20 @@
 
 import { useState } from "react";
 import { clsx } from "keycloakify/tools/clsx";
-import type { KcContext } from "./KcContext";
+import  { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../_internals/useKcClsx";
 import { UserProfileFormFields } from "../../components/UserProfileFormFields";
 import { TermsAcceptance } from "./TermsAcceptance";
 
-export function Form(props: { kcContext: KcContext; doMakeUserConfirmPassword: boolean }) {
+export function Form() {
 
-    const { kcContext, doMakeUserConfirmPassword } = props;
-
+    const { kcContext } = useKcContext("register.ftl");
     const { kcClsx } = useKcClsx();
-
     const { msg, msgStr } = useI18n();
 
     const [isFormSubmittable, setIsFormSubmittable] = useState(false);
     const [areTermsAccepted, setAreTermsAccepted] = useState(false);
-
 
     return (
             <form
@@ -27,13 +24,10 @@ export function Form(props: { kcContext: KcContext; doMakeUserConfirmPassword: b
                 method="post"
             >
                 <UserProfileFormFields
-                    kcContext={kcContext}
                     onIsFormSubmittableValueChange={setIsFormSubmittable}
-                    doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                 />
                 {kcContext.termsAcceptanceRequired && (
                     <TermsAcceptance
-                        kcContext={kcContext}
                         areTermsAccepted={areTermsAccepted}
                         onAreTermsAcceptedValueChange={setAreTermsAccepted}
                     />
