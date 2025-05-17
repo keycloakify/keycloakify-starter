@@ -1,7 +1,7 @@
 import { assert } from "keycloakify/tools/assert";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
 import { useKcClsx } from "../../_internals/useKcClsx";
-import { InputLabel } from "./InputLabelX";
+import { InputLabel } from "./InputLabel";
 
 export function InputTagSelects(props: InputFieldByTypeProps) {
     const { attribute, dispatchFormAction, valueOrValues } = props;
