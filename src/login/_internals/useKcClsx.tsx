@@ -14,11 +14,15 @@ export function KcClsxProvider(props: {
 }) {
     const { doUseDefaultCss, classes, children } = props;
 
-    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
-
     const contextValue = useMemo(
-        () => ({ kcClsx, doUseDefaultCss }),
-        [kcClsx, doUseDefaultCss]
+        () => {
+
+            const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
+
+            return { kcClsx, doUseDefaultCss };
+
+        },
+        [classes, doUseDefaultCss]
     );
 
     return <context.Provider value={contextValue}>{children}</context.Provider>;
