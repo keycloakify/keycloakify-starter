@@ -5,7 +5,7 @@ import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext } = useKcContext("...");
+    const { kcContext } = useKcContext("code.ftl");
 
     const { kcClsx } = useKcClsx();
 
@@ -13,7 +13,6 @@ export function Page() {
 
     return (
         <Template
-            kcContext={kcContext}
             headerNode={kcContext.code.success ? msg("codeSuccessTitle") : msg("codeErrorTitle", kcContext.code.error)}
         >
             <div id="kc-code">

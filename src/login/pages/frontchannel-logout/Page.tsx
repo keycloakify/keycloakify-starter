@@ -1,44 +1,36 @@
 import { useEffect } from "react";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { logout } = kcContext;
+    const { kcContext } = useKcContext("frontchannel-logout.ftl");
 
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr } = useI18n();
 
     useEffect(() => {
-        if (logout.logoutRedirectUri) {
-            window.location.replace(logout.logoutRedirectUri);
+        if (kcContext.logout.logoutRedirectUri) {
+            window.location.replace(kcContext.logout.logoutRedirectUri);
         }
     }, []);
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
             documentTitle={msgStr("frontchannel-logout.title")}
             headerNode={msg("frontchannel-logout.title")}
         >
             <p>{msg("frontchannel-logout.message")}</p>
             <ul>
-                {logout.clients.map(client => (
+                {kcContext.logout.clients.map(client => (
                     <li key={client.name}>
                         {client.name}
                         <iframe src={client.frontChannelLogoutUrl} style={{ display: "none" }} />
                     </li>
                 ))}
             </ul>
-            {logout.logoutRedirectUri && (
-                <a id="continue" className="btn btn-primary" href={logout.logoutRedirectUri}>
+            {kcContext.logout.logoutRedirectUri && (
+                <a id="continue" className="btn btn-primary" href={kcContext.logout.logoutRedirectUri}>
                     {msg("doContinue")}
                 </a>
             )}

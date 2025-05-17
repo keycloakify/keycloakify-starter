@@ -4,14 +4,14 @@ import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext } = useKcContext("...");
+    const { kcContext } = useKcContext("delete-account-confirm.ftl");
 
     const { kcClsx } = useKcClsx();
 
     const { msg, msgStr } = useI18n();
 
     return (
-        <Template kcContext={kcContext} headerNode={msg("deleteAccountConfirm")}>
+        <Template headerNode={msg("deleteAccountConfirm")}>
             <form
                 action={kcContext.url.loginAction}
                 className="form-vertical"

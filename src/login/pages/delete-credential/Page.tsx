@@ -1,43 +1,45 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcContext } = useKcContext("delete-credential.ftl");
 
-    const { msgStr, msg } = i18n;
+    const { msgStr, msg } = useI18n();
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
-
-    const { url, credentialLabel } = kcContext;
+    const { kcClsx } = useKcClsx();
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
             displayMessage={false}
-            headerNode={msg("deleteCredentialTitle", credentialLabel)}
+            headerNode={msg("deleteCredentialTitle", kcContext.credentialLabel)}
         >
-            <div id="kc-delete-text">{msg("deleteCredentialMessage", credentialLabel)}</div>
-            <form className="form-actions" action={url.loginAction} method="POST">
+            <div id="kc-delete-text">
+                {msg("deleteCredentialMessage", kcContext.credentialLabel)}
+            </div>
+            <form
+                className="form-actions"
+                action={kcContext.url.loginAction}
+                method="POST"
+            >
                 <input
-                    className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                    className={kcClsx(
+                        "kcButtonClass",
+                        "kcButtonPrimaryClass",
+                        "kcButtonLargeClass"
+                    )}
                     name="accept"
                     id="kc-accept"
                     type="submit"
                     value={msgStr("doConfirmDelete")}
                 />
                 <input
-                    className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
+                    className={kcClsx(
+                        "kcButtonClass",
+                        "kcButtonDefaultClass",
+                        "kcButtonLargeClass"
+                    )}
                     name="cancel-aia"
                     value={msgStr("doCancel")}
                     id="kc-decline"

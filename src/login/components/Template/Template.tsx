@@ -3,14 +3,12 @@ import { useEffect } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useSetClassName } from "keycloakify/tools/useSetClassName";
-import { useInitializeTemplate } from "../../_internals/useInitializeTemplate";
+import { useInitializeTemplate } from "./useInitializeTemplate";
 import { useKcClsx } from "../../_internals/useKcClsx";
 import { useI18n } from "../../i18n";
 import { useKcContext } from "../../KcContext";
 
-export type TemplateProps = {
-    children: ReactNode;
-
+export function Template(props: {
     displayInfo?: boolean;
     displayMessage?: boolean;
     displayRequiredFields?: boolean;
@@ -19,9 +17,8 @@ export type TemplateProps = {
     infoNode?: ReactNode;
     documentTitle?: string;
     bodyClassName?: string;
-};
-
-export function Template(props: TemplateProps) {
+    children: ReactNode;
+}) {
     const {
         displayInfo = false,
         displayMessage = true,
@@ -38,7 +35,7 @@ export function Template(props: TemplateProps) {
 
     const { msg, msgStr, currentLanguage, enabledLanguages } = useI18n();
 
-    const { kcClsx, doUseDefaultCss } = useKcClsx();
+    const { kcClsx } = useKcClsx();
 
     useEffect(() => {
         document.title =
@@ -55,7 +52,7 @@ export function Template(props: TemplateProps) {
         className: bodyClassName ?? kcClsx("kcBodyClass")
     });
 
-    const { isReadyToRender } = useInitializeTemplate({ kcContext, doUseDefaultCss });
+    const { isReadyToRender } = useInitializeTemplate();
 
     if (!isReadyToRender) {
         return null;

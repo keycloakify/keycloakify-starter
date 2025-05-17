@@ -1,39 +1,24 @@
 import { useEffect } from "react";
-import { assert } from "tsafe/assert";
 import { useInsertScriptTags } from "keycloakify/tools/useInsertScriptTags";
 import { useInsertLinkTags } from "keycloakify/tools/useInsertLinkTags";
-import type { KcContext } from "./core/KcContext/KcContext";
+import { useKcContext } from "../../KcContext";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
-export type KcContextLike = {
-    url: {
-        resourcesCommonPath: string;
-        resourcesPath: string;
-        ssoLoginInOtherTabsUrl: string;
-    };
-    scripts?: string[];
-};
+export function useInitializeTemplate() {
+    const { kcContext } = useKcContext();
 
-assert<keyof KcContextLike extends keyof KcContext ? true : false>();
-assert<KcContext extends KcContextLike ? true : false>();
-
-export function useInitializeTemplate(params: {
-    kcContext: KcContextLike;
-    doUseDefaultCss: boolean;
-}) {
-    const { kcContext, doUseDefaultCss } = params;
-
-    const { url, scripts } = kcContext;
+    const { doUseDefaultCss } = useKcClsx();
 
     const { areAllStyleSheetsLoaded } = useInsertLinkTags({
         componentOrHookName: "Template",
         hrefs: !doUseDefaultCss
             ? []
             : [
-                  `${url.resourcesCommonPath}/node_modules/@patternfly/patternfly/patternfly.min.css`,
-                  `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`,
-                  `${url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`,
-                  `${url.resourcesCommonPath}/lib/pficon/pficon.css`,
-                  `${url.resourcesPath}/css/login.css`
+                  `${kcContext.url.resourcesCommonPath}/node_modules/@patternfly/patternfly/patternfly.min.css`,
+                  `${kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly.min.css`,
+                  `${kcContext.url.resourcesCommonPath}/node_modules/patternfly/dist/css/patternfly-additions.min.css`,
+                  `${kcContext.url.resourcesCommonPath}/lib/pficon/pficon.css`,
+                  `${kcContext.url.resourcesPath}/css/login.css`
               ]
     });
 
@@ -43,20 +28,20 @@ export function useInitializeTemplate(params: {
             // NOTE: The importmap is added in by the FTL script because it's too late to add it here.
             {
                 type: "module",
-                src: `${url.resourcesPath}/js/menu-button-links.js`
+                src: `${kcContext.url.resourcesPath}/js/menu-button-links.js`
             },
-            ...(scripts === undefined
+            ...(kcContext.scripts === undefined
                 ? []
-                : scripts.map(src => ({
+                : kcContext.scripts.map(src => ({
                       type: "text/javascript" as const,
                       src
                   }))),
             {
                 type: "module",
                 textContent: `
-                    import { checkCookiesAndSetTimer } from "${url.resourcesPath}/js/authChecker.js";
+                    import { checkCookiesAndSetTimer } from "${kcContext.url.resourcesPath}/js/authChecker.js";
 
-                    checkCookiesAndSetTimer("${url.ssoLoginInOtherTabsUrl}");
+                    checkCookiesAndSetTimer("${kcContext.url.ssoLoginInOtherTabsUrl}");
                 `
             }
         ]
