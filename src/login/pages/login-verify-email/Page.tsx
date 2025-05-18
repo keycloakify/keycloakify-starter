@@ -1,23 +1,18 @@
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { msg } = i18n;
+    const { kcContext } = useKcContext("login-verify-email.ftl");
+
+    const { msg }= useI18n();
 
     const { url, user } = kcContext;
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             displayInfo
             headerNode={msg("emailVerifyTitle")}
             infoNode={

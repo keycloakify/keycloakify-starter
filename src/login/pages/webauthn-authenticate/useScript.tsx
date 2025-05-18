@@ -1,34 +1,16 @@
 import { useEffect } from "react";
 import { useInsertScriptTags } from "keycloakify/tools/useInsertScriptTags";
-import { assert } from "keycloakify/tools/assert";
-import { KcContext } from "../KcContext/KcContext";
 import { waitForElementMountedOnDom } from "keycloakify/tools/waitForElementMountedOnDom";
+import { useKcContext } from "../../KcContext";
+import { useI18n } from "../../i18n";
 
-type KcContextLike = {
-    url: {
-        resourcesPath: string;
-    };
-    isUserIdentified: "true" | "false";
-    challenge: string;
-    userVerification: KcContext.WebauthnAuthenticate["userVerification"];
-    rpId: string;
-    createTimeout: number | string;
-};
 
-assert<keyof KcContextLike extends keyof KcContext.WebauthnAuthenticate ? true : false>();
-assert<KcContext.WebauthnAuthenticate extends KcContextLike ? true : false>();
+export function useScript(params: { authButtonId: string; }) {
+    const { authButtonId } = params;
 
-type I18nLike = {
-    msgStr: (key: "webauthn-unsupported-browser-text") => string;
-    isFetchingTranslations: boolean;
-};
+    const { kcContext } = useKcContext("webauthn-authenticate.ftl");
 
-export function useScript(params: { authButtonId: string; kcContext: KcContextLike; i18n: I18nLike }) {
-    const { authButtonId, kcContext, i18n } = params;
-
-    const { url, isUserIdentified, challenge, userVerification, rpId, createTimeout } = kcContext;
-
-    const { msgStr, isFetchingTranslations } = i18n;
+    const { msgStr, isFetchingTranslations }= useI18n();
 
     const { insertScriptTags } = useInsertScriptTags({
         componentOrHookName: "WebauthnAuthenticate",
@@ -37,15 +19,15 @@ export function useScript(params: { authButtonId: string; kcContext: KcContextLi
                 type: "module",
                 textContent: () => `
 
-                    import { authenticateByWebAuthn } from "${url.resourcesPath}/js/webauthnAuthenticate.js";
+                    import { authenticateByWebAuthn } from "${kcContext.url.resourcesPath}/js/webauthnAuthenticate.js";
                     const authButton = document.getElementById('${authButtonId}');
                     authButton.addEventListener("click", function() {
                         const input = {
-                            isUserIdentified : ${isUserIdentified},
-                            challenge : '${challenge}',
-                            userVerification : '${userVerification}',
-                            rpId : '${rpId}',
-                            createTimeout : ${createTimeout},
+                            isUserIdentified : ${kcContext.isUserIdentified},
+                            challenge : '${kcContext.challenge}',
+                            userVerification : '${kcContext.userVerification}',
+                            rpId : '${kcContext.rpId}',
+                            createTimeout : ${kcContext.createTimeout},
                             errmsg : ${JSON.stringify(msgStr("webauthn-unsupported-browser-text"))}
                         };
                         authenticateByWebAuthn(input);

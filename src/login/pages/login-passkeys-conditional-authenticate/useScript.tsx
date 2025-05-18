@@ -1,34 +1,15 @@
 import { useEffect } from "react";
 import { useInsertScriptTags } from "keycloakify/tools/useInsertScriptTags";
-import { assert } from "keycloakify/tools/assert";
-import { KcContext } from "../KcContext/KcContext";
 import { waitForElementMountedOnDom } from "keycloakify/tools/waitForElementMountedOnDom";
+import { useI18n } from "../../i18n";
+import { useKcContext } from "../../KcContext";
 
-type KcContextLike = {
-    url: {
-        resourcesPath: string;
-    };
-    isUserIdentified: boolean | "true" | "false";
-    challenge: string;
-    userVerification: string;
-    rpId: string;
-    createTimeout: number | string;
-};
+export function useScript(params: { authButtonId: string; }) {
+    const { authButtonId } = params;
 
-assert<keyof KcContextLike extends keyof KcContext.LoginPasskeysConditionalAuthenticate ? true : false>();
-assert<KcContext.LoginPasskeysConditionalAuthenticate extends KcContextLike ? true : false>();
+    const { kcContext } = useKcContext("login-passkeys-conditional-authenticate.ftl");
 
-type I18nLike = {
-    msgStr: (key: "webauthn-unsupported-browser-text" | "passkey-unsupported-browser-text") => string;
-    isFetchingTranslations: boolean;
-};
-
-export function useScript(params: { authButtonId: string; kcContext: KcContextLike; i18n: I18nLike }) {
-    const { authButtonId, kcContext, i18n } = params;
-
-    const { url, isUserIdentified, challenge, userVerification, rpId, createTimeout } = kcContext;
-
-    const { msgStr, isFetchingTranslations } = i18n;
+    const { msgStr, isFetchingTranslations }= useI18n();
 
     const { insertScriptTags } = useInsertScriptTags({
         componentOrHookName: "LoginRecoveryAuthnCodeConfig",
@@ -36,16 +17,16 @@ export function useScript(params: { authButtonId: string; kcContext: KcContextLi
             {
                 type: "module",
                 textContent: () => `
-                    import { authenticateByWebAuthn } from "${url.resourcesPath}/js/webauthnAuthenticate.js";
-                    import { initAuthenticate } from "${url.resourcesPath}/js/passkeysConditionalAuth.js";
+                    import { authenticateByWebAuthn } from "${kcContext.url.resourcesPath}/js/webauthnAuthenticate.js";
+                    import { initAuthenticate } from "${kcContext.url.resourcesPath}/js/passkeysConditionalAuth.js";
 
                     const authButton = document.getElementById("${authButtonId}");
                     const input = {
-                        isUserIdentified : ${isUserIdentified},
-                        challenge : ${JSON.stringify(challenge)},
-                        userVerification : ${JSON.stringify(userVerification)},
-                        rpId : ${JSON.stringify(rpId)},
-                        createTimeout : ${createTimeout}
+                        isUserIdentified : ${kcContext.isUserIdentified},
+                        challenge : ${JSON.stringify(kcContext.challenge)},
+                        userVerification : ${JSON.stringify(kcContext.userVerification)},
+                        rpId : ${JSON.stringify(kcContext.rpId)},
+                        createTimeout : ${kcContext.createTimeout}
                     };
                     authButton.addEventListener("click", () => {
                         authenticateByWebAuthn({

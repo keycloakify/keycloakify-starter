@@ -1,28 +1,22 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
-import { useKcContext } from "../../KcContext";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
+import { useKcContext } from "../../KcContext";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcContext } = useKcContext("login-idp-link-confirm-override.ftl");
 
-    const { url, idpDisplayName } = kcContext;
 
-    const { msg } = i18n;
+    const { kcClsx } = useKcClsx();
+
+    const { msg }= useI18n();
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("confirmOverrideIdpTitle")}>
-            <form id="kc-register-form" action={url.loginAction} method="post">
+        <Template headerNode={msg("confirmOverrideIdpTitle")}>
+            <form id="kc-register-form" action={kcContext.url.loginAction} method="post">
                 {msg("pageExpiredMsg1")}{" "}
-                <a id="loginRestartLink" href={url.loginRestartFlowUrl}>
+                <a id="loginRestartLink" href={kcContext.url.loginRestartFlowUrl}>
                     {msg("doClickHere")}
                 </a>
                 <br />
@@ -34,7 +28,7 @@ export function Page() {
                     id="confirmOverride"
                     value="confirmOverride"
                 >
-                    {msg("confirmOverrideIdpContinue", idpDisplayName)}
+                    {msg("confirmOverrideIdpContinue", kcContext.idpDisplayName)}
                 </button>
             </form>
         </Template>

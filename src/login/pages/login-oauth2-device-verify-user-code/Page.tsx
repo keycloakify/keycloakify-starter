@@ -1,34 +1,27 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import { PageProps } from "./PageProps";
-import { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
+           ;
+
+
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, classes, Template } = props;
-    const { url } = kcContext;
+    const { kcContext } = useKcContext("login-oauth2-device-verify-user-code.ftl");    
 
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr }= useI18n();
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcClsx } = useKcClsx();
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             headerNode={msg("oauth2DeviceVerificationTitle")}
         >
             <form
                 id="kc-user-verify-device-user-code-form"
                 className={kcClsx("kcFormClass")}
-                action={url.oauth2DeviceVerificationAction}
+                action={kcContext.url.oauth2DeviceVerificationAction}
                 method="post"
             >
                 <div className={kcClsx("kcFormGroupClass")}>

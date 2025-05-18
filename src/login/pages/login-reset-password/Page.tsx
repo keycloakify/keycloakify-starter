@@ -4,13 +4,12 @@ import { Template } from "../../components/Template";
 import { Form } from "./Form";
 
 export function Page() {
-    const { kcContext } = useKcContext("...");
+    const { kcContext } = useKcContext("login-reset-password.ftl");
 
     const { msg } = useI18n();
 
     return (
         <Template
-            kcContext={kcContext}
             displayInfo
             displayMessage={!kcContext.messagesPerField.existsError("username")}
             infoNode={

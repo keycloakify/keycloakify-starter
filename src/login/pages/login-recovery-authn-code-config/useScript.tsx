@@ -1,16 +1,13 @@
 import { useEffect } from "react";
 import { useInsertScriptTags } from "keycloakify/tools/useInsertScriptTags";
 import { waitForElementMountedOnDom } from "keycloakify/tools/waitForElementMountedOnDom";
+import { useI18n } from "../../i18n";
 
-type I18nLike = {
-    msgStr: (key: "recovery-codes-download-file-header" | "recovery-codes-download-file-description" | "recovery-codes-download-file-date") => string;
-    isFetchingTranslations: boolean;
-};
 
-export function useScript(params: { olRecoveryCodesListId: string; i18n: I18nLike }) {
-    const { olRecoveryCodesListId, i18n } = params;
+export function useScript(params: { olRecoveryCodesListId: string; }) {
+    const { olRecoveryCodesListId } = params;
 
-    const { msgStr, isFetchingTranslations } = i18n;
+    const { msgStr, isFetchingTranslations }= useI18n();
 
     const { insertScriptTags } = useInsertScriptTags({
         componentOrHookName: "LoginRecoveryAuthnCodeConfig",

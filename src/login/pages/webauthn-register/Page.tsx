@@ -1,20 +1,20 @@
-import { getKcClsx, type KcClsx } from "../_internals/kcClsx";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import { useScript } from "./WebauthnRegister.useScript";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+
+
+
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcContext } = useKcContext("webauthn-register.ftl");
 
     const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
     const { url, isSetRetry, isAppInitiatedAction } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr }= useI18n();
 
     const authButtonId = "authenticateWebAuthnButton";
 
@@ -26,10 +26,7 @@ export function Page() {
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             headerNode={
                 <>
                     <span className={kcClsx("kcWebAuthnKeyIcon")} />
@@ -75,7 +72,7 @@ export function Page() {
 function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
     const { kcClsx, i18n } = props;
 
-    const { msg } = i18n;
+    const { msg }= useI18n();
 
     return (
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>

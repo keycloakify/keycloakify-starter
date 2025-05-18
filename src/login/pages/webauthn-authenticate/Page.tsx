@@ -1,37 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment } from "react";
 import { clsx } from "keycloakify/tools/clsx";
-import { getKcClsx } from "../_internals/kcClsx";
-import { useScript } from "./WebauthnAuthenticate.useScript";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
+import { useScript } from "./useScript";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-
-    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
+    const { kcContext } = useKcContext("webauthn-authenticate.ftl");
+    const { kcClsx } = useKcClsx();
 
     const { url, realm, registrationDisabled, authenticators, shouldDisplayAuthenticators } = kcContext;
 
-    const { msg, msgStr, advancedMsg } = i18n;
+    const { msg, msgStr, advancedMsg }= useI18n();
 
     const authButtonId = "authenticateWebAuthnButton";
 
-    useScript({
-        authButtonId,
-        kcContext,
-        i18n
-    });
+    useScript({ authButtonId });
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             displayInfo={realm.registrationAllowed && !registrationDisabled}
             infoNode={
                 <div id="kc-registration">
@@ -58,8 +48,8 @@ export function Page() {
                     {authenticators && (
                         <>
                             <form id="authn_select" className={kcClsx("kcFormClass")}>
-                                {authenticators.authenticators.map(authenticator => (
-                                    <input type="hidden" name="authn_use_chk" value={authenticator.credentialId} />
+                                {authenticators.authenticators.map((authenticator, i) => (
+                                    <input key={i} type="hidden" name="authn_use_chk" value={authenticator.credentialId} />
                                 ))}
                             </form>
 

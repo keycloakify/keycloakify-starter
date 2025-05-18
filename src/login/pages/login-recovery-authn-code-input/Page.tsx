@@ -1,30 +1,22 @@
-import { getKcClsx } from "../_internals/kcClsx";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcContext } = useKcContext("login-recovery-authn-code-input.ftl");
+
+    const { kcClsx } = useKcClsx();
 
     const { url, messagesPerField, recoveryAuthnCodesInputBean } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr }= useI18n();
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             headerNode={msg("auth-recovery-code-header")}
             displayMessage={!messagesPerField.existsError("recoveryCodeInput")}
         >

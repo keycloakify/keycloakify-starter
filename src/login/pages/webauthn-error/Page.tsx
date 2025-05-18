@@ -1,29 +1,20 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcContext } = useKcContext("webauthn-error.ftl");
 
     const { url, isAppInitiatedAction } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr }= useI18n();
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcClsx } = useKcClsx();
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             displayMessage
             headerNode={msg("webauthn-error-title")}
         >

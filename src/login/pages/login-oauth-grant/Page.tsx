@@ -1,40 +1,34 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import { PageProps } from "./PageProps";
-import { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
-import { useKcContext } from "../../KcContext";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
+import { useKcContext } from "../../KcContext";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, classes, Template } = props;
-    const { url, oauth, client } = kcContext;
 
-    const { msg, msgStr, advancedMsg, advancedMsgStr } = i18n;
+    const { kcContext } = useKcContext("login-oauth-grant.ftl");
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { msg, msgStr, advancedMsg, advancedMsgStr } = useI18n();
+
+    const { kcClsx } = useKcClsx();
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
             bodyClassName="oauth"
             headerNode={
                 <>
-                    {client.attributes.logoUri && <img src={client.attributes.logoUri} />}
-                    <p>{client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}</p>
+                    {kcContext.client.attributes.logoUri && <img src={kcContext.client.attributes.logoUri} />}
+                    <p>
+                        {kcContext.client.name
+                            ? msg("oauthGrantTitle", advancedMsgStr(kcContext.client.name))
+                            : msg("oauthGrantTitle", kcContext.client.clientId)}
+                    </p>
                 </>
             }
         >
             <div id="kc-oauth" className="content-area">
                 <h3>{msg("oauthGrantRequest")}</h3>
                 <ul>
-                    {oauth.clientScopesRequested.map(clientScope => (
+                    {kcContext.oauth.clientScopesRequested.map(clientScope => (
                         <li key={clientScope.consentScreenText}>
                             <span>
                                 {advancedMsg(clientScope.consentScreenText)}
@@ -48,22 +42,27 @@ export function Page() {
                     ))}
                 </ul>
 
-                {client.attributes.policyUri ||
-                    (client.attributes.tosUri && (
+                {kcContext.client.attributes.policyUri ||
+                    (kcContext.client.attributes.tosUri && (
                         <h3>
-                            {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
-                            {client.attributes.tosUri && (
+                            {kcContext.client.name
+                                ? msg(
+                                      "oauthGrantInformation",
+                                      advancedMsgStr(kcContext.client.name)
+                                  )
+                                : msg("oauthGrantInformation", kcContext.client.clientId)}
+                            {kcContext.client.attributes.tosUri && (
                                 <>
                                     {msg("oauthGrantReview")}
-                                    <a href={client.attributes.tosUri} target="_blank">
+                                    <a href={kcContext.client.attributes.tosUri} target="_blank" rel="noreferrer">
                                         {msg("oauthGrantTos")}
                                     </a>
                                 </>
                             )}
-                            {client.attributes.policyUri && (
+                            {kcContext.client.attributes.policyUri && (
                                 <>
                                     {msg("oauthGrantReview")}
-                                    <a href={client.attributes.policyUri} target="_blank">
+                                    <a href={kcContext.client.attributes.policyUri} target="_blank" rel="noreferrer">
                                         {msg("oauthGrantPolicy")}
                                     </a>
                                 </>
@@ -71,8 +70,8 @@ export function Page() {
                         </h3>
                     ))}
 
-                <form className="form-actions" action={url.oauthAction} method="POST">
-                    <input type="hidden" name="code" value={oauth.code} />
+                <form className="form-actions" action={kcContext.url.oauthAction} method="POST">
+                    <input type="hidden" name="code" value={kcContext.oauth.code} />
                     <div className={kcClsx("kcFormGroupClass")}>
                         <div id="kc-form-options">
                             <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
@@ -81,14 +80,22 @@ export function Page() {
                         <div id="kc-form-buttons">
                             <div className={kcClsx("kcFormButtonsWrapperClass")}>
                                 <input
-                                    className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                                    className={kcClsx(
+                                        "kcButtonClass",
+                                        "kcButtonPrimaryClass",
+                                        "kcButtonLargeClass"
+                                    )}
                                     name="accept"
                                     id="kc-login"
                                     type="submit"
                                     value={msgStr("doYes")}
                                 />
                                 <input
-                                    className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
+                                    className={kcClsx(
+                                        "kcButtonClass",
+                                        "kcButtonDefaultClass",
+                                        "kcButtonLargeClass"
+                                    )}
                                     name="cancel"
                                     id="kc-cancel"
                                     type="submit"

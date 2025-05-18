@@ -1,24 +1,18 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
+import { useKcClsx } from "../../_internals/useKcClsx";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcContext } = useKcContext("select-authenticator.ftl");
     const { url, auth } = kcContext;
 
-    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
-    const { msg, advancedMsg } = i18n;
+    const { kcClsx } = useKcClsx();
+    const { msg, advancedMsg }= useI18n();
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             displayInfo={false}
             headerNode={msg("loginChooseAuthenticator")}
         >

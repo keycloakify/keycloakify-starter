@@ -5,8 +5,8 @@ import { Form } from "./Form";
 
 export function Page() {
 
-    const { msg, advancedMsg } = useI18n();
     const { kcContext } = useKcContext("register.ftl");
+    const { msg, advancedMsg } = useI18n();
 
     return (
         <Template

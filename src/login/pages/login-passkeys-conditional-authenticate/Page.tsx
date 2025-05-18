@@ -1,36 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-empty */
 import { Fragment } from "react";
 import { clsx } from "keycloakify/tools/clsx";
-import type { PageProps } from "./PageProps";
-import { getKcClsx } from "../_internals/kcClsx";
-import { useScript } from "./LoginPasskeysConditionalAuthenticate.useScript";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+
+import { useKcClsx } from "../../_internals/useKcClsx";
+import { useScript } from "./useScript";
+
+
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+
+    const { kcContext } = useKcContext("login-passkeys-conditional-authenticate.ftl");
 
     const { messagesPerField, login, url, usernameHidden, shouldDisplayAuthenticators, authenticators, registrationDisabled, realm } = kcContext;
 
-    const { msg, msgStr, advancedMsg } = i18n;
+    const { msg, msgStr, advancedMsg }= useI18n();
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcClsx } = useKcClsx();
 
     const authButtonId = "authenticateWebAuthnButton";
 
-    useScript({ authButtonId, kcContext, i18n });
+    useScript({ authButtonId });
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             headerNode={msg("passkey-login-title")}
             infoNode={
                 realm.registrationAllowed &&
@@ -55,7 +52,7 @@ export function Page() {
                 <input type="hidden" id="error" name="error" />
             </form>
 
-            <div className={kcClsx("kcFormGroupClass")} no-bottom-margin="true" style={{ marginBottom: 0 }}>
+            <div className={kcClsx("kcFormGroupClass")} style={{ marginBottom: 0 }}>
                 {authenticators !== undefined && Object.keys(authenticators).length !== 0 && (
                     <>
                         <form id="authn_select" className={kcClsx("kcFormClass")}>
@@ -128,7 +125,7 @@ export function Page() {
                                 style={{ display: "none" }}
                                 onSubmit={event => {
                                     try {
-                                        // @ts-expect-error
+                                        // @ts-expect-error: Ok
                                         event.target.login.disabled = true;
                                     } catch {}
 

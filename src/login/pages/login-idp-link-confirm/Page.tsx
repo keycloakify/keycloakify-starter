@@ -1,30 +1,27 @@
-import { getKcClsx } from "../_internals/kcClsx";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcContext } = useKcContext("login-idp-link-confirm.ftl");
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcClsx } = useKcClsx();
 
-    const { url, idpAlias } = kcContext;
-
-    const { msg } = i18n;
+    const { msg } = useI18n();
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("confirmLinkIdpTitle")}>
-            <form id="kc-register-form" action={url.loginAction} method="post">
+        <Template headerNode={msg("confirmLinkIdpTitle")}>
+            <form id="kc-register-form" action={kcContext.url.loginAction} method="post">
                 <div className={kcClsx("kcFormGroupClass")}>
                     <button
                         type="submit"
-                        className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonBlockClass", "kcButtonLargeClass")}
+                        className={kcClsx(
+                            "kcButtonClass",
+                            "kcButtonDefaultClass",
+                            "kcButtonBlockClass",
+                            "kcButtonLargeClass"
+                        )}
                         name="submitAction"
                         id="updateProfile"
                         value="updateProfile"
@@ -33,12 +30,17 @@ export function Page() {
                     </button>
                     <button
                         type="submit"
-                        className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonBlockClass", "kcButtonLargeClass")}
+                        className={kcClsx(
+                            "kcButtonClass",
+                            "kcButtonDefaultClass",
+                            "kcButtonBlockClass",
+                            "kcButtonLargeClass"
+                        )}
                         name="submitAction"
                         id="linkAccount"
                         value="linkAccount"
                     >
-                        {msg("confirmLinkIdpContinue", idpAlias)}
+                        {msg("confirmLinkIdpContinue", kcContext.idpAlias)}
                     </button>
                 </div>
             </form>

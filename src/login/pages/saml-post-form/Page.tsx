@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcContext } = useKcContext("saml-post-form.ftl");
 
-    const { msgStr, msg } = i18n;
+    const { msgStr, msg }= useI18n();
 
     const { samlPost } = kcContext;
 
@@ -29,7 +26,7 @@ export function Page() {
         htmlFormElement.submit();
     }, [htmlFormElement]);
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("saml.post-form.title")}>
+        <Template  headerNode={msg("saml.post-form.title")}>
             <p>{msg("saml.post-form.message")}</p>
             <form name="saml-post-binding" method="post" action={samlPost.url} ref={setHtmlFormElement}>
                 {samlPost.SAMLRequest && <input type="hidden" name="SAMLRequest" value={samlPost.SAMLRequest} />}

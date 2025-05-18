@@ -1,27 +1,26 @@
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+
+
+
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { url } = kcContext;
+    const { kcContext } = useKcContext("login-page-expired.ftl");
 
-    const { msg } = i18n;
+    const { msg }= useI18n();
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("pageExpiredTitle")}>
+        <Template  headerNode={msg("pageExpiredTitle")}>
             <p id="instruction1" className="instruction">
                 {msg("pageExpiredMsg1")}
-                <a id="loginRestartLink" href={url.loginRestartFlowUrl}>
+                <a id="loginRestartLink" href={kcContext.url.loginRestartFlowUrl}>
                     {msg("doClickHere")}
                 </a>{" "}
                 .<br />
                 {msg("pageExpiredMsg2")}{" "}
-                <a id="loginContinueLink" href={url.loginAction}>
+                <a id="loginContinueLink" href={kcContext.url.loginAction}>
                     {msg("doClickHere")}
                 </a>{" "}
                 .

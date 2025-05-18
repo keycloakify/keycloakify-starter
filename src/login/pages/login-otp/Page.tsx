@@ -1,50 +1,44 @@
 import { Fragment, useState } from "react";
-import { getKcClsx } from "../_internals/kcClsx";
+import { useKcClsx } from "../../_internals/useKcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+
+
+
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcContext } = useKcContext("login-otp.ftl");
 
-    const { otpLogin, url, messagesPerField } = kcContext;
+    const { kcClsx } = useKcClsx();
 
-    const { msg, msgStr } = i18n;
+
+    const { msg, msgStr }= useI18n();
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
-            displayMessage={!messagesPerField.existsError("totp")}
+           
+            displayMessage={!kcContext.messagesPerField.existsError("totp")}
             headerNode={msg("doLogIn")}
         >
             <form
                 id="kc-otp-login-form"
                 className={kcClsx("kcFormClass")}
-                action={url.loginAction}
+                action={kcContext.url.loginAction}
                 onSubmit={() => {
                     setIsSubmitting(true);
                     return true;
                 }}
                 method="post"
             >
-                {otpLogin.userOtpCredentials.length > 1 && (
+                {kcContext.otpLogin.userOtpCredentials.length > 1 && (
                     <div className={kcClsx("kcFormGroupClass")}>
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            {otpLogin.userOtpCredentials.map((otpCredential, index) => (
+                            {kcContext.otpLogin.userOtpCredentials.map((otpCredential, index) => (
                                 <Fragment key={index}>
                                     <input
                                         id={`kc-otp-credential-${index}`}
@@ -52,7 +46,7 @@ export function Page() {
                                         type="radio"
                                         name="selectedCredentialId"
                                         value={otpCredential.id}
-                                        defaultChecked={otpCredential.id === otpLogin.selectedCredentialId}
+                                        defaultChecked={otpCredential.id === kcContext.otpLogin.selectedCredentialId}
                                     />
                                     <label htmlFor={`kc-otp-credential-${index}`} className={kcClsx("kcLoginOTPListClass")} tabIndex={index}>
                                         <span className={kcClsx("kcLoginOTPListItemHeaderClass")}>
@@ -82,15 +76,15 @@ export function Page() {
                             type="text"
                             className={kcClsx("kcInputClass")}
                             autoFocus
-                            aria-invalid={messagesPerField.existsError("totp")}
+                            aria-invalid={kcContext.messagesPerField.existsError("totp")}
                         />
-                        {messagesPerField.existsError("totp") && (
+                        {kcContext.messagesPerField.existsError("totp") && (
                             <span
                                 id="input-error-otp-code"
                                 className={kcClsx("kcInputErrorMessageClass")}
                                 aria-live="polite"
                                 dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("totp"))
+                                    __html: kcSanitize(kcContext.messagesPerField.get("totp"))
                                 }}
                             />
                         )}

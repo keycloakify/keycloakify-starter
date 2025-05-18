@@ -1,35 +1,28 @@
 import { clsx } from "keycloakify/tools/clsx";
-import { getKcClsx, type KcClsx } from "../_internals/kcClsx";
-import { useScript } from "./LoginRecoveryAuthnCodeConfig.useScript";
-import type { PageProps } from "./PageProps";
-import type { KcContext } from "../KcContext";
-import type { I18n } from "../i18n";
+import { useKcClsx } from "../../_internals/useKcClsx";
+import { useScript } from "./useScript";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
+import { LogoutOtherSessions } from "../../components/LogoutOtherSessions";
 
 export function Page() {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    const { kcContext } = useKcContext("login-recovery-authn-code-config.ftl");
+
+    const { kcClsx } = useKcClsx();
 
     const { recoveryAuthnCodesConfigBean, isAppInitiatedAction } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg, msgStr }= useI18n();
 
     const olRecoveryCodesListId = "kc-recovery-codes-list";
 
-    useScript({ olRecoveryCodesListId, i18n });
+    useScript({ olRecoveryCodesListId });
 
     return (
         <Template
-            kcContext={kcContext}
-            i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
-            classes={classes}
+           
             headerNode={msg("recovery-code-config-header")}
         >
             <div className={clsx("pf-c-alert", "pf-m-warning", "pf-m-inline", kcClsx("kcRecoveryCodesWarning"))} aria-label="Warning alert">
@@ -86,7 +79,7 @@ export function Page() {
                 <input type="hidden" name="generatedAt" value={recoveryAuthnCodesConfigBean.generatedAt} />
                 <input type="hidden" id="userLabel" name="userLabel" value={msgStr("recovery-codes-label-default")} />
 
-                <LogoutOtherSessions kcClsx={kcClsx} i18n={i18n} />
+                <LogoutOtherSessions />
 
                 {isAppInitiatedAction ? (
                     <>
@@ -118,24 +111,5 @@ export function Page() {
                 )}
             </form>
         </Template>
-    );
-}
-
-function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
-    const { kcClsx, i18n } = props;
-
-    const { msg } = i18n;
-
-    return (
-        <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-            <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                <div className="checkbox">
-                    <label>
-                        <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
-                        {msg("logoutOtherSessions")}
-                    </label>
-                </div>
-            </div>
-        </div>
     );
 }
