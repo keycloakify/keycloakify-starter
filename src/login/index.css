@@ -7,7 +7,9 @@
 body.kcBodyClass {
     @apply bg-[url(./assets/img/background.jpg)] bg-no-repeat bg-center bg-fixed;
     @apply font-geist;
+    @apply w-screen h-screen items-center justify-center
 }
+
 
 .kcHeaderWrapperClass {
     @apply hidden;
@@ -36,7 +38,7 @@ body.kcBodyClass {
 }
 
 .kcFormCardClass {
-    @apply w-[666px] max-w-[800px] border-none rounded-xl
+    @apply w-[666px] max-w-[800px] border-none rounded-xl mb-96
 }
 
 #kc-form-login {
@@ -48,7 +50,11 @@ body.kcBodyClass {
 }
 
 .kcLoginClass {
-    @apply  flex flex-col
+    @apply  flex w-screen h-screen items-center justify-center
+}
+
+.kcFormSocialAccountListButtonClass {
+    @apply rounded-full
 }
 
 #kc-info-wrapper {
