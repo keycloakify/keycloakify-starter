@@ -50,3 +50,7 @@ body.kcBodyClass {
 .kcLoginClass {
     @apply  flex flex-col
 }
+
+#kc-info-wrapper {
+    @apply flex rounded-b-lg
+}

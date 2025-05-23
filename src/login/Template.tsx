@@ -7,6 +7,7 @@ import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
+import logoPngUrl from "./assets/img/logo.png";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -183,7 +184,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </div>
                 </div>
             </div>
-            <div className=" bottom-0 absolute w-screen h-9 bg-[#204839]">
+            {/* Banner Bottom */}
+            <div className=" bottom-0 absolute w-screen h-12 bg-[#204839] flex items-center justify-center">
+                
+                <img src={logoPngUrl} className="h-10  saturate-[0] brightness-[500]"/>
             </div>
         </div>
     );
