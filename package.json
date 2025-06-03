@@ -12,7 +12,7 @@
         "format": "prettier . --write"
     },
     "dependencies": {
-        "keycloakify": "^11.8.38",
+        "keycloakify": "^11.8.39",
         "react": "^19.1.0",
         "react-dom": "^19.1.0"
     },
