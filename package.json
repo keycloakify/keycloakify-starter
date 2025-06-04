@@ -17,15 +17,23 @@
     "license": "MIT",
     "keywords": [],
     "dependencies": {
+        "@radix-ui/react-label": "^2.1.7",
+        "@radix-ui/react-slot": "^1.2.3",
+        "@tailwindcss/vite": "^4.1.8",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
         "keycloakify": "^11.8.32",
+        "lucide-react": "^0.512.0",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "tailwind-merge": "^3.3.0",
+        "tailwindcss": "^4.1.8"
     },
     "devDependencies": {
         "@eslint/js": "^9.15.0",
-        "storybook": "^8.1.10",
         "@storybook/react": "^8.1.10",
         "@storybook/react-vite": "^8.1.10",
+        "@types/node": "^22.15.29",
         "@types/react": "^18.2.43",
         "@types/react-dom": "^18.2.17",
         "@typescript-eslint/eslint-plugin": "^8.15.0",
@@ -39,6 +47,8 @@
         "eslint-plugin-storybook": "^0.11.1",
         "globals": "^15.12.0",
         "prettier": "3.3.1",
+        "storybook": "^8.1.10",
+        "tw-animate-css": "^1.3.3",
         "typescript": "^5.2.2",
         "typescript-eslint": "^8.15.0",
         "vite": "^5.0.8"
