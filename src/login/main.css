@@ -121,3 +121,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+	.link-style {
+		@apply underline underline-offset-4 font-semibold text-lg;
+	}
+}
+
+@layer components {
+	.input-error {
+		@apply text-lg mt-2 text-red-500 font-bold py-0.5 px-1 ;
+	}
+}
+
+input[type="checkbox"], input[type="radio"] {
+	margin: 0; /* Remove the extra margin */
+	vertical-align: middle; /* Vertically align checkbox and radio buttons with text */
+	line-height: normal; /* Ensure normal line height */
+}
+
+.responsive-container {
+	@apply flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 items-center;
+}

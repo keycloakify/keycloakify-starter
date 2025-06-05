@@ -1,186 +1,208 @@
+import type { JSX } from "keycloakify/tools/JSX";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
+import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
+import { clsx } from "keycloakify/tools/clsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
+import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import React from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+
+const loginheader = () => {
+    return (
+        <CardHeader>
+            <CardTitle><b>Welcome back to subtype</b></CardTitle>
+            <CardDescription>Login with your email or a provider below</CardDescription>
+        </CardHeader>
+    );
+};
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
-    const { kcContext, i18n } = props;
-    const { realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField, social } = kcContext;
+    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+    const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
+    const { social, realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField } = kcContext;
     const { msg, msgStr } = i18n;
-
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-muted px-4">
-            <Card className="w-full max-w-md shadow-lg">
-                <CardHeader>
-                    <CardTitle className="text-2xl text-center">{msg("loginAccountTitle")}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    {/* Login form */}
-                    <form
-                        onSubmit={() => {
-                            // Disable login button on submit to prevent multiple submits
-                            setIsLoginButtonDisabled(true);
-                            return true;
-                        }}
-                        action={url.loginAction}
-                        method="post"
-                        className="space-y-4"
-                    >
-                        {/* Username input, shown if username is not hidden */}
-                        {!usernameHidden && (
-                            <div>
-                                <Label htmlFor="username">
-                                    {!realm.loginWithEmailAllowed
-                                        ? msg("username")
-                                        : !realm.registrationEmailAsUsername
-                                        ? msg("usernameOrEmail")
-                                        : msg("email")}
-                                </Label>
-                                <Input
-                                    id="username"
-                                    name="username"
-                                    type="text"
-                                    defaultValue={login.username ?? ""}
-                                    autoFocus
-                                    autoComplete="username"
-                                    aria-invalid={messagesPerField.existsError("username", "password")}
-                                />
-                                {/* Display username or password errors */}
-                                {messagesPerField.existsError("username", "password") && (
-                                    <p
-                                        className="text-sm text-destructive mt-1"
-                                        dangerouslySetInnerHTML={{ __html: messagesPerField.getFirstError("username", "password") }}
-                                    />
-                                )}
-                            </div>
-                        )}
-
-                        {/* Password input with toggle */}
-                        <div>
-                            <Label htmlFor="password">{msg("password")}</Label>
-                            <PasswordWrapper passwordInputId="password" i18n={i18n}>
-                                <Input
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                    aria-invalid={messagesPerField.existsError("username", "password")}
-                                />
-                            </PasswordWrapper>
-                            {/* Display errors when username is hidden */}
-                            {usernameHidden && messagesPerField.existsError("username", "password") && (
-                                <p
-                                    className="text-sm text-destructive mt-1"
-                                    dangerouslySetInnerHTML={{ __html: messagesPerField.getFirstError("username", "password") }}
-                                />
-                            )}
-                        </div>
-
-                        {/* Remember me checkbox and forgot password link */}
-                        <div className="flex items-center justify-between">
-                            {realm.rememberMe && !usernameHidden && (
-                                <label className="flex items-center space-x-2 text-sm">
-                                    <input type="checkbox" name="rememberMe" defaultChecked={!!login.rememberMe} />
-                                    <span>{msg("rememberMe")}</span>
-                                </label>
-                            )}
-                            {realm.resetPasswordAllowed && (
-                                <a href={url.loginResetCredentialsUrl} className="text-sm text-muted-foreground hover:underline">
-                                    {msg("doForgotPassword")}
+        <Template
+            kcContext={kcContext}
+            i18n={i18n}
+            doUseDefaultCss={doUseDefaultCss}
+            classes={classes}
+            displayMessage={!messagesPerField.existsError("username", "password")}
+            headerNode={loginheader()}
+            displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
+            infoNode={
+                <CardFooter>
+                    <div id="kc-registration-container">
+                        <div id="kc-registration">
+                            <span>
+                                {msg("noAccount")}{" "}
+                                <a tabIndex={8} href={url.registrationUrl} className="underline hover:text-primary">
+                                    {msg("doRegister")}
                                 </a>
-                            )}
+                            </span>
                         </div>
-
-                        {/* Hidden input for credentialId */}
-                        <input type="hidden" name="credentialId" value={auth.selectedCredential} />
-
-                        {/* Submit button */}
-                        <Button type="submit" className="w-full" disabled={isLoginButtonDisabled}>
-                            {msgStr("doLogIn")}
-                        </Button>
-                    </form>
-
-                    {/* Social login providers section, if available */}
-                    {social?.providers?.length > 0 && (
-                        <>
-                            {/* Separator line with label */}
-                            <div className="relative my-6">
-                                <div className="absolute inset-0 flex items-center">
-                                    <span className="w-full border-t border-muted-foreground" />
-                                </div>
-                                <div className="relative flex justify-center text-xs uppercase text-muted-foreground">
-                                    <span className="bg-muted px-2">{msg("identity-provider-login-label")}</span>
-                                </div>
+                    </div>
+                </CardFooter>
+            }
+            socialProvidersNode={
+                social?.providers?.length ? (
+                    <div className="mt-6">
+                        <div className="relative mb-4">
+                            <div className="absolute inset-0 flex items-center">
+                                <span className="w-full border-t" />
                             </div>
-
-                            {/* Grid of social provider buttons */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                {social.providers.map((provider) => (
-                                    <a
-                                        key={provider.alias}
-                                        href={provider.loginUrl}
-                                        className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-                                    >
-                                        {/* Provider icon if present */}
-                                        {provider.iconClasses && (
-                                            <i className={`${provider.iconClasses} text-lg`} aria-hidden="true" />
+                            <div className="relative flex justify-center text-xs uppercase">
+                                <span className="bg-background px-2 text-muted-foreground">{msg("identity-provider-login-label")}</span>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {social.providers.map(p => (
+                                <a
+                                    key={p.alias}
+                                    href={p.loginUrl}
+                                    className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                                >
+                                    {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>}
+                                    <span dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                ) : null
+            }
+        >
+            <CardContent>
+                <div id="kc-form">
+                    <div id="kc-form-wrapper">
+                        {realm.password && (
+                            <form
+                                id="kc-form-login"
+                                onSubmit={() => {
+                                    setIsLoginButtonDisabled(true);
+                                    return true;
+                                }}
+                                action={url.loginAction}
+                                method="post"
+                                className="space-y-6"
+                            >
+                                {!usernameHidden && (
+                                    <div className="space-y-2">
+                                        <Label htmlFor="username">
+                                            {!realm.loginWithEmailAllowed
+                                                ? msg("username")
+                                                : !realm.registrationEmailAsUsername
+                                                  ? msg("usernameOrEmail")
+                                                  : msg("email")}
+                                        </Label>
+                                        <Input
+                                            tabIndex={2}
+                                            id="username"
+                                            name="username"
+                                            defaultValue={login.username ?? ""}
+                                            type="text"
+                                            autoFocus
+                                            autoComplete="username"
+                                            aria-invalid={messagesPerField.existsError("username", "password")}
+                                        />
+                                        {messagesPerField.existsError("username", "password") && (
+                                            <p
+                                                id="input-error"
+                                                className="text-sm text-destructive"
+                                                aria-live="polite"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
+                                                }}
+                                            />
                                         )}
-                                        {/* Provider display name safely inserted */}
-                                        <span dangerouslySetInnerHTML={{ __html: provider.displayName }} />
-                                    </a>
-                                ))}
-                            </div>
-                        </>
-                    )}
+                                    </div>
+                                )}
 
-                    {/* Registration link if allowed */}
-                    {realm.registrationAllowed && !registrationDisabled && (
-                        <p className="mt-4 text-center text-sm">
-                            {msg("noAccount")}{" "}
-                            <a href={url.registrationUrl} className="underline hover:text-primary">
-                                {msg("doRegister")}
-                            </a>
-                        </p>
-                    )}
-                </CardContent>
-            </Card>
-        </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="password">{msg("password")}</Label>
+                                    <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password">
+                                        <Input
+                                            tabIndex={3}
+                                            id="password"
+                                            name="password"
+                                            type="password"
+                                            autoComplete="current-password"
+                                            aria-invalid={messagesPerField.existsError("username", "password")}
+                                        />
+                                    </PasswordWrapper>
+                                    {usernameHidden && messagesPerField.existsError("username", "password") && (
+                                        <p
+                                            id="input-error"
+                                            className="text-sm text-destructive"
+                                            aria-live="polite"
+                                            dangerouslySetInnerHTML={{
+                                                __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
+                                            }}
+                                        />
+                                    )}
+                                </div>
+
+                                <div className="flex items-center justify-between">
+                                    {realm.rememberMe && !usernameHidden && (
+                                        <div className="flex flex-col gap-6">
+                                            <div className="flex items-center gap-3">
+                                                <Checkbox tabIndex={5} id="rememberMe" name="rememberMe" defaultChecked={!!login.rememberMe} />
+                                                <Label htmlFor="rememberMe" className="text-sm">
+                                                    {msg("rememberMe")}
+                                                </Label>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {realm.resetPasswordAllowed && (
+                                        <div>
+                                            <a
+                                                tabIndex={6}
+                                                href={url.loginResetCredentialsUrl}
+                                                className="text-sm text-muted-foreground hover:underline"
+                                            >
+                                                {msg("doForgotPassword")}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+
+                                <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
+
+                                <Button tabIndex={7} disabled={isLoginButtonDisabled} className="w-full" name="login" id="kc-login" type="submit">
+                                    <b>Login</b>
+                                </Button>
+                            </form>
+                        )}
+                    </div>
+                </div>
+            </CardContent>
+        </Template>
     );
 }
 
-function PasswordWrapper({
-    passwordInputId,
-    i18n,
-    children,
-}: {
-    passwordInputId: string;
-    i18n: I18n;
-    children: React.ReactNode;
-}) {
+function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
+    const { kcClsx, i18n, passwordInputId, children } = props;
     const { msgStr } = i18n;
-    const [isRevealed, setIsRevealed] = useState(false);
+    const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
 
     return (
         <div className="relative">
-            {/* Clone child input to toggle type between password/text */}
-            {children && React.cloneElement(children as React.ReactElement, { type: isRevealed ? "text" : "password" })}
-
-            {/* Toggle button to show/hide password */}
+            {children}
             <button
                 type="button"
-                className="absolute inset-y-0 right-3 flex items-center text-muted-foreground"
-                aria-label={msgStr(isRevealed ? "hidePassword" : "showPassword")}
-                onClick={() => setIsRevealed((prev) => !prev)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
+                aria-controls={passwordInputId}
+                onClick={toggleIsPasswordRevealed}
             >
-                {isRevealed ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
             </button>
         </div>
     );
