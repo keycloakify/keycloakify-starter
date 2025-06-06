@@ -3,7 +3,7 @@ import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "./Template";
-import tailwindcss from "@tailwindcss/vite";
+import type { ClassKey } from "keycloakify/login";
 const UserProfileFormFields = lazy(() => import("./UserProfileFormFields"));
 const Login = lazy(() => import("./pages/Login"));
 const Info = lazy(() => import("./pages/Info"));

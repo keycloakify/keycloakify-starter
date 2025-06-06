@@ -8,11 +8,7 @@ import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
-import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
-import { AlertCircleIcon, CheckCircle2Icon, PopcornIcon } from "lucide-react";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
