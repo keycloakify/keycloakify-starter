@@ -12,11 +12,15 @@ import { CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import useProviderLogos from "../useProviderLogos";
 
+const providerLogos = useProviderLogos();
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle><b>Welcome back</b></CardTitle>
+            <CardTitle>
+                <b>Welcome back</b>
+            </CardTitle>
             <CardDescription>Login with your email or a provider below</CardDescription>
         </CardHeader>
     );
@@ -70,7 +74,21 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     href={p.loginUrl}
                                     className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
                                 >
-                                    {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>}
+                                    {providerLogos[p.alias] ? (
+                                        <div className={"h-6 w-6"}>
+                                            <img src={providerLogos[p.alias]} alt={`${p.displayName} logo`} className={"h-full w-auto"} />
+                                        </div>
+                                    ) : // Fallback to the original iconClasses if the logo is not defined
+                                    p.iconClasses ? (
+                                        <div className={"h-6 w-6"}>
+                                            <i
+                                                className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses, `text-provider-${p.alias}`)}
+                                                aria-hidden="true"
+                                            ></i>
+                                        </div>
+                                    ) : (
+                                        <div className="h-6 mx-1 pt-1 font-bold">{p.displayName || p.alias}</div>
+                                    )}
                                     <span dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }} />
                                 </a>
                             ))}
@@ -153,7 +171,13 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     {realm.rememberMe && !usernameHidden && (
                                         <div className="flex flex-col gap-6">
                                             <div className="flex items-center gap-3">
-                                                <Checkbox tabIndex={5} id="rememberMe" name="rememberMe" className="data-[state=checked]:bg-accent dark:bg-white" defaultChecked={!!login.rememberMe} />
+                                                <Checkbox
+                                                    tabIndex={5}
+                                                    id="rememberMe"
+                                                    name="rememberMe"
+                                                    className="data-[state=checked]:bg-accent dark:bg-white"
+                                                    defaultChecked={!!login.rememberMe}
+                                                />
                                                 <Label htmlFor="rememberMe" className="text-sm">
                                                     {msg("rememberMe")}
                                                 </Label>

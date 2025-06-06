@@ -3,16 +3,18 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ReactElement } from "react";
 
-const header = () => {
+const header = (msg: ReactElement<any, any>) => {
     return (
         <CardHeader>
             <CardTitle>
                 <b>Forgot your password?</b>
             </CardTitle>
+            <CardDescription>{msg}</CardDescription>
         </CardHeader>
     );
 };
@@ -34,10 +36,8 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             i18n={i18n}
             doUseDefaultCss={doUseDefaultCss}
             classes={classes}
-            displayInfo
             displayMessage={!messagesPerField.existsError("username")}
-            infoNode={realm.duplicateEmailsAllowed ? msg("emailInstructionUsername") : msg("emailInstruction")}
-            headerNode={header()}
+            headerNode={header(realm.duplicateEmailsAllowed ? msg("emailInstructionUsername") : msg("emailInstruction"))}
         >
             <CardContent>
                 <form id="kc-reset-password-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
