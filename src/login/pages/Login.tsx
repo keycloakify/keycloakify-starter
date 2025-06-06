@@ -43,7 +43,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                     <div id="kc-registration-container">
                         <div id="kc-registration">
                             <span>
-                                Need an account?{" "}
+                                {msgStr("noAccount")}{" "}
                                 <a tabIndex={8} href={url.registrationUrl} className="underline hover:text-primary">
                                     Sign up here
                                 </a>
