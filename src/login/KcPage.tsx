@@ -31,6 +31,14 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                 doUseDefaultCss={true}
                             />
                         );
+                    case "login-otp.ftl":
+                        return (
+                            <LoginOtp
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
                     case "info.ftl":
                         return (
                             <Info
@@ -47,14 +55,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                 doUseDefaultCss={true}
                             />
                         );
-                    case "login-otp.ftl":
-                        return (
-                            <LoginOtp
-                                {...{ kcContext, i18n, classes }}
-                                Template={Template}
-                                doUseDefaultCss={true}
-                            />
-                        );
+
                     case "logout-confirm.ftl":
                         return (
                             <LogoutConfirm

@@ -110,7 +110,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     </header>
                     <div id="kc-content">
                         <div id="kc-content-wrapper">
-                            {/* App-initiated actions should not see warning messages about the need to complete the action during login. */}
                             {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
                                 <Alert
                                     className={clsx(
