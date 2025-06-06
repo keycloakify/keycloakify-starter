@@ -13,10 +13,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const loginheader = () => {
+const header = () => {
     return (
         <CardHeader>
-            <CardTitle><b>Welcome back to subtype</b></CardTitle>
+            <CardTitle><b>Welcome back</b></CardTitle>
             <CardDescription>Login with your email or a provider below</CardDescription>
         </CardHeader>
     );
@@ -36,16 +36,16 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             doUseDefaultCss={doUseDefaultCss}
             classes={classes}
             displayMessage={!messagesPerField.existsError("username", "password")}
-            headerNode={loginheader()}
+            headerNode={header()}
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
             infoNode={
                 <CardFooter>
                     <div id="kc-registration-container">
                         <div id="kc-registration">
                             <span>
-                                {msg("noAccount")}{" "}
+                                Need an account?{" "}
                                 <a tabIndex={8} href={url.registrationUrl} className="underline hover:text-primary">
-                                    {msg("doRegister")}
+                                    Sign up here
                                 </a>
                             </span>
                         </div>
@@ -153,7 +153,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     {realm.rememberMe && !usernameHidden && (
                                         <div className="flex flex-col gap-6">
                                             <div className="flex items-center gap-3">
-                                                <Checkbox tabIndex={5} id="rememberMe" name="rememberMe" defaultChecked={!!login.rememberMe} />
+                                                <Checkbox tabIndex={5} id="rememberMe" name="rememberMe" className="data-[state=checked]:bg-accent dark:bg-white" defaultChecked={!!login.rememberMe} />
                                                 <Label htmlFor="rememberMe" className="text-sm">
                                                     {msg("rememberMe")}
                                                 </Label>
@@ -174,7 +174,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 </div>
 
                                 <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
-
                                 <Button tabIndex={7} disabled={isLoginButtonDisabled} className="w-full" name="login" id="kc-login" type="submit">
                                     <b>Login</b>
                                 </Button>

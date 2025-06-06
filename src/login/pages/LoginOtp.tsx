@@ -1,9 +1,27 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { buttonVariants } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import clsx from "clsx";
+import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+
+// Used https://github.com/encodia/strateco-login/blob/main/src/login/pages/LoginOtp.tsx
+
+const header = () => {
+    return (
+        <CardHeader>
+            <CardTitle>
+                <b>Welcome back</b>
+            </CardTitle>
+            <CardDescription>Enter the code provided by your authenticator</CardDescription>
+        </CardHeader>
+    );
+};
 
 export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "login-otp.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -17,8 +35,6 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
 
     const { msg, msgStr } = i18n;
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
     return (
         <Template
             kcContext={kcContext}
@@ -26,90 +42,87 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
             doUseDefaultCss={doUseDefaultCss}
             classes={classes}
             displayMessage={!messagesPerField.existsError("totp")}
-            headerNode={msg("doLogIn")}
+            headerNode={header()}
         >
-            <form
-                id="kc-otp-login-form"
-                className={kcClsx("kcFormClass")}
-                action={url.loginAction}
-                onSubmit={() => {
-                    setIsSubmitting(true);
-                    return true;
-                }}
-                method="post"
-            >
-                {otpLogin.userOtpCredentials.length > 1 && (
+            <CardContent>
+                <form id="kc-otp-login-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
+                    {otpLogin.userOtpCredentials.length > 1 && (
+                        <div>
+                            <div>
+                                <div className="grid grid-cols-1  md:grid-cols-2 gap-1 my-5">
+                                    {otpLogin.userOtpCredentials.map((otpCredential, index) => (
+                                        <Fragment key={index}>
+                                            <div className="flex items-center ">
+                                                <input
+                                                    id={`kc-otp-credential-${index}`}
+                                                    className=" "
+                                                    type="radio"
+                                                    name="selectedCredentialId"
+                                                    value={otpCredential.id}
+                                                    defaultChecked={otpCredential.id === otpLogin.selectedCredentialId}
+                                                />
+                                                <label htmlFor={`kc-otp-credential-${index}`} tabIndex={index} className="mx-3">
+                                                    <div className="flex space-x-3  text-xl">
+                                                        <span>
+                                                            <i className={kcClsx("kcLoginOTPListItemIconClass")} aria-hidden="true"></i>
+                                                        </span>
+                                                        <span className="">{otpCredential.userLabel}</span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </Fragment>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     <div className={kcClsx("kcFormGroupClass")}>
+                        <div className={kcClsx("kcLabelWrapperClass")}>
+                            <Label htmlFor="otp">
+                                {msg("loginOtpOneTime")}
+                            </Label>
+                        </div>
                         <div className={kcClsx("kcInputWrapperClass")}>
-                            {otpLogin.userOtpCredentials.map((otpCredential, index) => (
-                                <Fragment key={index}>
-                                    <input
-                                        id={`kc-otp-credential-${index}`}
-                                        className={kcClsx("kcLoginOTPListInputClass")}
-                                        type="radio"
-                                        name="selectedCredentialId"
-                                        value={otpCredential.id}
-                                        defaultChecked={otpCredential.id === otpLogin.selectedCredentialId}
-                                    />
-                                    <label htmlFor={`kc-otp-credential-${index}`} className={kcClsx("kcLoginOTPListClass")} tabIndex={index}>
-                                        <span className={kcClsx("kcLoginOTPListItemHeaderClass")}>
-                                            <span className={kcClsx("kcLoginOTPListItemIconBodyClass")}>
-                                                <i className={kcClsx("kcLoginOTPListItemIconClass")} aria-hidden="true"></i>
-                                            </span>
-                                            <span className={kcClsx("kcLoginOTPListItemTitleClass")}>{otpCredential.userLabel}</span>
-                                        </span>
-                                    </label>
-                                </Fragment>
-                            ))}
+                            <Input
+                                id="otp"
+                                name="otp"
+                                autoComplete="off"
+                                type="text"
+                                className="mt-2"
+                                autoFocus
+                                aria-invalid={messagesPerField.existsError("totp")}
+                            />
+                            {messagesPerField.existsError("totp") && (
+                                <span
+                                    id="input-error-otp-code"
+                                    className={kcClsx("kcInputErrorMessageClass")}
+                                    aria-live="polite"
+                                    dangerouslySetInnerHTML={{
+                                        __html: kcSanitize(messagesPerField.get("totp"))
+                                    }}
+                                />
+                            )}
                         </div>
                     </div>
-                )}
 
-                <div className={kcClsx("kcFormGroupClass")}>
-                    <div className={kcClsx("kcLabelWrapperClass")}>
-                        <label htmlFor="otp" className={kcClsx("kcLabelClass")}>
-                            {msg("loginOtpOneTime")}
-                        </label>
-                    </div>
-                    <div className={kcClsx("kcInputWrapperClass")}>
-                        <input
-                            id="otp"
-                            name="otp"
-                            autoComplete="off"
-                            type="text"
-                            className={kcClsx("kcInputClass")}
-                            autoFocus
-                            aria-invalid={messagesPerField.existsError("totp")}
-                        />
-                        {messagesPerField.existsError("totp") && (
-                            <span
-                                id="input-error-otp-code"
-                                className={kcClsx("kcInputErrorMessageClass")}
-                                aria-live="polite"
-                                dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("totp"))
-                                }}
+                    <div className={kcClsx("kcFormGroupClass")}>
+                        <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
+                            <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
+                        </div>
+                        <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
+                            <Input
+                                //className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
+                                className={clsx(buttonVariants(), "w-full")}
+                                name="login"
+                                id="kc-login"
+                                type="submit"
+                                value={msgStr("doLogIn")}
                             />
-                        )}
+                        </div>
                     </div>
-                </div>
-
-                <div className={kcClsx("kcFormGroupClass")}>
-                    <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-                        <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
-                    </div>
-                    <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
-                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                            name="login"
-                            id="kc-login"
-                            type="submit"
-                            value={msgStr("doLogIn")}
-                            disabled={isSubmitting}
-                        />
-                    </div>
-                </div>
-            </form>
+                </form>
+            </CardContent>
         </Template>
     );
 }
