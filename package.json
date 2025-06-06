@@ -1,10 +1,10 @@
 {
-    "name": "subspace-sso",
-    "version": "0.0.0",
-    "description": "Starter for Keycloakify 11",
+    "name": "subcloakify",
+    "version": "1.0.0",
+    "description": "subcloakify - a keycloak theme for subtype, for all",
     "repository": {
         "type": "git",
-        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
+        "url": "git://github.com/subtype-space/subcloakify.git"
     },
     "type": "module",
     "scripts": {

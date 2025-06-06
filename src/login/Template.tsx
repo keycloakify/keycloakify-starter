@@ -11,7 +11,6 @@ import type { KcContext } from "./KcContext";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 
-
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
         displayInfo = false,
@@ -69,6 +68,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     return (
         <div className="bg-muted min-h-screen flex flex-col gap-6 items-center justify-center prose dark:prose-invert max-w-none">
+            {import.meta.env.LOGO_URL?.trim() && <img src={import.meta.env.LOGO_URL} width={300} />}
             <Card className="px-3  md:-[40rem] shadow-2xl w-full min-h-screen  md:w-[30rem] sm:min-h-fit ">
                 <CardContent className="space-y-8 pb-5 ">
                     <header>
