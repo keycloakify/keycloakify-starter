@@ -34,7 +34,8 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "login-otp.ftl":
                         return (
                             <LoginOtp
-                                {...{ kcContext, i18n, classes }}
+                                kcContext={kcContext}
+                                i18n={i18n}
                                 Template={Template}
                                 doUseDefaultCss={true}
                             />
