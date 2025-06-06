@@ -10,6 +10,7 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -68,7 +69,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     return (
         <div className="bg-muted min-h-screen flex flex-col gap-6 items-center justify-center prose dark:prose-invert max-w-none">
-            {import.meta.env.LOGO_URL?.trim() && <img src={import.meta.env.LOGO_URL} width={300} />}
+            {import.meta.env.LOGO_URL?.trim() && <img src={`${import.meta.env.LOGO_URL}`} width={300} />}
             <Card className="px-3  md:-[40rem] shadow-2xl w-full min-h-screen  md:w-[30rem] sm:min-h-fit ">
                 <CardContent className="space-y-8 pb-5 ">
                     <header>
@@ -77,7 +78,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                                 <h1 id="kc-page-title">{headerNode}</h1>
                             ) : (
                                 <div id="kc-username" className={kcClsx("kcFormGroupClass")}>
-                                    <label id="kc-attempted-username">{auth.attemptedUsername}</label>
+                                    <Label id="kc-attempted-username">{auth.attemptedUsername}</Label>
                                     <a id="reset-login" href={url.loginRestartFlowUrl} aria-label={msgStr("restartLoginTooltip")}>
                                         <div className="kc-login-tooltip">
                                             <i className={kcClsx("kcResetFlowIcon")}></i>
@@ -89,14 +90,17 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
                             if (displayRequiredFields) {
                                 return (
+                                    // <div className={kcClsx("kcContentWrapperClass")}>
+                                    //     <div className={clsx(kcClsx("kcLabelWrapperClass"), "subtitle")}>
+                                    //         <span className="subtitle">
+                                    //             <span className="required">*</span>
+                                    //             {msg("requiredFields")}
+                                    //         </span>
+                                    //     </div>
+                                    //     <div className="col-md-10">{node}</div>
+                                    // </div>
                                     <div className={kcClsx("kcContentWrapperClass")}>
-                                        <div className={clsx(kcClsx("kcLabelWrapperClass"), "subtitle")}>
-                                            <span className="subtitle">
-                                                <span className="required">*</span>
-                                                {msg("requiredFields")}
-                                            </span>
-                                        </div>
-                                        <div className="col-md-10">{node}</div>
+                                        <div>{node}</div>
                                     </div>
                                 );
                             }
