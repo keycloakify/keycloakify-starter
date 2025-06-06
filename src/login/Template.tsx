@@ -9,6 +9,8 @@ import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card, CardContent } from "@/components/ui/card";
+
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -38,15 +40,15 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     }, []);
 
     useEffect(() => {
-        const { currentLanguage } = locale ?? {};
+        const { currentLanguageTag } = locale ?? {};
 
-        if (currentLanguage === undefined) {
+        if (currentLanguageTag === undefined) {
             return;
         }
 
         const html = document.querySelector("html");
         assert(html !== null);
-        html.lang = currentLanguage;
+        html.lang = currentLanguageTag;
     }, []);
 
     useSetClassName({
