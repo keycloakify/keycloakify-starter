@@ -74,19 +74,20 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 <CardContent className="space-y-8 pb-5 ">
                     <header>
                         {(() => {
-                            const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
-                                <h1 id="kc-page-title">{headerNode}</h1>
-                            ) : (
-                                <div id="kc-username" className={kcClsx("kcFormGroupClass")}>
-                                    <Label id="kc-attempted-username">{auth.attemptedUsername}</Label>
-                                    <a id="reset-login" href={url.loginRestartFlowUrl} aria-label={msgStr("restartLoginTooltip")}>
-                                        <div className="kc-login-tooltip">
-                                            <i className={kcClsx("kcResetFlowIcon")}></i>
-                                            <span className="kc-tooltip-text">{msg("restartLoginTooltip")}</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            );
+                            const node = <h1 id="kc-page-title">{headerNode}</h1>;
+                            // const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
+                            //     <h1 id="kc-page-title">{headerNode}</h1>
+                            // ) : (
+                            //     <div id="kc-username" className={kcClsx("kcFormGroupClass")}>
+                            //         <Label id="kc-attempted-username">{auth.attemptedUsername}</Label>
+                            //         <a id="reset-login" href={url.loginRestartFlowUrl} aria-label={msgStr("restartLoginTooltip")}>
+                            //             <div className="kc-login-tooltip">
+                            //                 <i className={kcClsx("kcResetFlowIcon")}></i>
+                            //                 <span className="kc-tooltip-text">{msg("restartLoginTooltip")}</span>
+                            //             </div>
+                            //         </a>
+                            //     </div>
+                            // );
 
                             if (displayRequiredFields) {
                                 return (
