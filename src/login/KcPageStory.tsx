@@ -13,9 +13,6 @@ const kcContextExtension: KcContextExtension = {
 };
 const kcContextExtensionPerPage: KcContextExtensionPerPage = {
     "login-otp.ftl": {
-        auth: {
-            attemptedUsername: "user@user.com"
-        },
         url: {
             loginRestartFlowUrl: "#",
             loginAction: "#"

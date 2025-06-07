@@ -11,9 +11,6 @@ export type KcContextExtension = {
 
 export type KcContextExtensionPerPage = {
     "login-otp.ftl": {
-        auth: {
-            attemptedUsername: string;
-        };
         url: {
             loginRestartFlowUrl: string;
             loginAction: string;
