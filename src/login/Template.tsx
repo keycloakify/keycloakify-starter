@@ -10,7 +10,6 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
