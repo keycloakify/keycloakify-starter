@@ -20,7 +20,7 @@ const kcContextExtensionPerPage: KcContextExtensionPerPage = {
             loginRestartFlowUrl: "#",
             loginAction: "#"
         }
-    };
+    }
 };
 
 export const { getKcContextMock } = createGetKcContextMock({
