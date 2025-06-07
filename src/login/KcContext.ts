@@ -9,6 +9,16 @@ export type KcContextExtension = {
     // See: https://docs.keycloakify.dev/faq-and-help/some-values-you-need-are-missing-from-in-kccontext
 };
 
-export type KcContextExtensionPerPage = {};
+export type KcContextExtensionPerPage = {
+    "login-otp.ftl": {
+        auth: {
+            attemptedUsername: string;
+        };
+        url: {
+            loginRestartFlowUrl: string;
+            loginAction: string;
+        };
+    };
+};
 
 export type KcContext = ExtendKcContext<KcContextExtension, KcContextExtensionPerPage>;
