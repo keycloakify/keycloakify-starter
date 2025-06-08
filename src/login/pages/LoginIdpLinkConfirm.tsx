@@ -19,10 +19,10 @@ const header = () => {
 export default function LoginIdpLinkConfirm(props: PageProps<Extract<KcContext, { pageId: "login-idp-link-confirm.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+    // const { kcClsx } = getKcClsx({
+    //     doUseDefaultCss,
+    //     classes
+    // });
 
     const { url, idpAlias } = kcContext;
 
