@@ -6,10 +6,22 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFormFieldsProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { CardContent, CardTitle, CardHeader } from "@/components/ui/card";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 type IdpReviewUserProfileProps = PageProps<Extract<KcContext, { pageId: "idp-review-user-profile.ftl" }>, I18n> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
     doMakeUserConfirmPassword: boolean;
+};
+
+const header = () => {
+    return (
+        <CardHeader>
+            <CardTitle>
+                <b>Update your account information</b>
+            </CardTitle>
+        </CardHeader>
+    );
 };
 
 export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
@@ -20,7 +32,7 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
         classes
     });
 
-    const { msg, msgStr } = i18n;
+    const { msgStr } = i18n;
 
     const { url, messagesPerField } = kcContext;
 
@@ -34,30 +46,34 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
             classes={classes}
             displayMessage={messagesPerField.exists("global")}
             displayRequiredFields
-            headerNode={msg("loginIdpReviewProfileTitle")}
+            headerNode={header()}
         >
-            <form id="kc-idp-review-profile-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
-                <UserProfileFormFields
-                    kcContext={kcContext}
-                    i18n={i18n}
-                    onIsFormSubmittableValueChange={setIsFomSubmittable}
-                    kcClsx={kcClsx}
-                    doMakeUserConfirmPassword={doMakeUserConfirmPassword}
-                />
-                <div className={kcClsx("kcFormGroupClass")}>
-                    <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-                        <div className={kcClsx("kcFormOptionsWrapperClass")} />
+            <CardContent>
+                <form id="kc-idp-review-profile-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
+                    <UserProfileFormFields
+                        kcContext={kcContext}
+                        i18n={i18n}
+                        onIsFormSubmittableValueChange={setIsFomSubmittable}
+                        kcClsx={kcClsx}
+                        doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+                    />
+                    <div className={kcClsx("kcFormGroupClass")}>
+                        <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
+                            <div className={kcClsx("kcFormOptionsWrapperClass")} />
+                        </div>
+                        <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
+                            <Button
+                                className={`${buttonVariants({})}`}
+                                type="submit"
+                                disabled={!isFomSubmittable}
+                                id="kc-submit"
+                            >
+                                {msgStr("doSubmit")}
+                            </Button>
+                        </div>
                     </div>
-                    <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
-                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                            type="submit"
-                            value={msgStr("doSubmit")}
-                            disabled={!isFomSubmittable}
-                        />
-                    </div>
-                </div>
-            </form>
+                </form>
+            </CardContent>
         </Template>
     );
 }

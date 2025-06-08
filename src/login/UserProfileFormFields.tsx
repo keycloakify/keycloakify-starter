@@ -13,6 +13,8 @@ import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFo
 import type { Attribute } from "keycloakify/login/KcContext";
 import type { KcContext } from "./KcContext";
 import type { I18n } from "./i18n";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function UserProfileFormFields(props: UserProfileFormFieldsProps<KcContext, I18n>) {
     const { kcContext, i18n, kcClsx, onIsFormSubmittableValueChange, doMakeUserConfirmPassword, BeforeField, AfterField } = props;
@@ -61,9 +63,9 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                             }}
                         >
                             <div className={kcClsx("kcLabelWrapperClass")}>
-                                <label htmlFor={attribute.name} className={kcClsx("kcLabelClass")}>
+                                <Label htmlFor={attribute.name}>
                                     {advancedMsg(attribute.displayName ?? "")}
-                                </label>
+                                </Label>
                                 {attribute.required && <> *</>}
                             </div>
                             <div className={kcClsx("kcInputWrapperClass")}>
@@ -143,9 +145,9 @@ function GroupLabel(props: {
 
                         return (
                             <div className={kcClsx("kcContentWrapperClass")}>
-                                <label id={`header-${attribute.group.name}`} className={kcClsx("kcFormGroupHeader")}>
+                                <Label id={`header-${attribute.group.name}`}>
                                     {groupHeaderText}
-                                </label>
+                                </Label>
                             </div>
                         );
                     })()}
@@ -157,9 +159,9 @@ function GroupLabel(props: {
 
                             return (
                                 <div className={kcClsx("kcLabelWrapperClass")}>
-                                    <label id={`description-${attribute.group.name}`} className={kcClsx("kcLabelClass")}>
+                                    <Label id={`description-${attribute.group.name}`}>
                                         {groupDescriptionText}
-                                    </label>
+                                    </Label>
                                 </div>
                             );
                         }
@@ -282,7 +284,7 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
 
     return (
         <>
-            <input
+            <Input
                 type={(() => {
                     const { inputType } = attribute.annotations;
 
@@ -304,7 +306,7 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
 
                     return valueOrValues;
                 })()}
-                className={kcClsx("kcInputClass")}
+                // className={kcClsx("kcInputClass")}
                 aria-invalid={displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined}
                 disabled={attribute.readOnly}
                 autoComplete={attribute.autocomplete}
@@ -351,7 +353,7 @@ function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefine
                         fieldIndex: fieldIndex
                     })
                 }
-            />
+            ></Input>
             {(() => {
                 if (fieldIndex === undefined) {
                     return null;
@@ -488,7 +490,7 @@ function InputTagSelects(props: InputFieldByTypeProps) {
         <>
             {options.map(option => (
                 <div key={option} className={classDiv}>
-                    <input
+                    <Input
                         type={inputType}
                         id={`${attribute.name}-${option}`}
                         name={attribute.name}
@@ -528,12 +530,12 @@ function InputTagSelects(props: InputFieldByTypeProps) {
                             })
                         }
                     />
-                    <label
+                    <Label
                         htmlFor={`${attribute.name}-${option}`}
                         className={`${classLabel}${attribute.readOnly ? ` ${kcClsx("kcInputClassRadioCheckboxLabelDisabled")}` : ""}`}
                     >
                         {inputLabel(i18n, attribute, option)}
-                    </label>
+                    </Label>
                 </div>
             ))}
         </>
