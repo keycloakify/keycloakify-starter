@@ -142,7 +142,7 @@ a {
 }
 
 
-#kc-login, #kc-logout, #saveTOTPBtn, #kc-submit {
+#kc-login, #kc-logout, #saveTOTPBtn, #kc-submit, #updateProfile, #linkAccount {
   color: var(--secondary);
   background-color: var(--secondary-foreground);
 }

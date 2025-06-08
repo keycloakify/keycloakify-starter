@@ -13,6 +13,9 @@ const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm"));
 const LoginConfigTotp = lazy(() => import("./pages/LoginConfigTotp"));
 const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 const LoginVerifyEmail = lazy(() => import("./pages/LoginVerifyEmail"));
+const LoginIdpLinkConfirm = lazy(() => import("./pages/LoginIdpLinkConfirm"));
+const LoginUpdateProfile = lazy(() => import("./pages/LoginUpdateProfile"));
+const IdpReviewUserProfile = lazy(() => import("./pages/IdpReviewUserProfile"));
 const doMakeUserConfirmPassword = true;
 import "./main.css";
 export default function KcPage(props: { kcContext: KcContext }) {
@@ -86,6 +89,34 @@ export default function KcPage(props: { kcContext: KcContext }) {
                                 {...{ kcContext, i18n, classes }}
                                 Template={Template}
                                 doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-idp-link-confirm.ftl":
+                        return (
+                            <LoginIdpLinkConfirm
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                            />
+                        );
+                    case "login-update-profile.ftl":
+                        return (
+                            <LoginUpdateProfile
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                                UserProfileFormFields={UserProfileFormFields}
+                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+                            />
+                        );
+                    case "idp-review-user-profile.ftl":
+                        return (
+                            <IdpReviewUserProfile
+                                {...{ kcContext, i18n, classes }}
+                                Template={Template}
+                                doUseDefaultCss={true}
+                                UserProfileFormFields={UserProfileFormFields}
+                                doMakeUserConfirmPassword={doMakeUserConfirmPassword}
                             />
                         );
                     default:
