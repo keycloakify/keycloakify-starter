@@ -7,6 +7,7 @@ import { CardContent, CardHeader, CardTitle, CardDescription } from "@/component
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ReactElement } from "react";
+import { Label } from "@/components/ui/label";
 
 const header = (msg: ReactElement<any, any>) => {
     return (
@@ -42,16 +43,14 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             <CardContent>
                 <form id="kc-reset-password-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                     <div className={kcClsx("kcFormGroupClass")}>
-                        <div className={kcClsx("kcLabelWrapperClass")}>
-                            <label htmlFor="username" className={kcClsx("kcLabelClass")}>
+                        <div className={kcClsx("kcInputWrapperClass")}>
+                            <Label htmlFor="username">
                                 {!realm.loginWithEmailAllowed
                                     ? msg("username")
                                     : !realm.registrationEmailAsUsername
                                       ? msg("usernameOrEmail")
                                       : msg("email")}
-                            </label>
-                        </div>
-                        <div className={kcClsx("kcInputWrapperClass")}>
+                            </Label>
                             <Input
                                 type="text"
                                 id="username"
