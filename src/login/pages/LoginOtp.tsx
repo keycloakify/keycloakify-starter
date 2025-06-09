@@ -4,7 +4,7 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { buttonVariants } from "../../components/ui/button";
+import { Button, buttonVariants } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import clsx from "clsx";
 import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -111,14 +111,13 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                             <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
                         </div>
                         <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                            <Input
+                            <Button
                                 //className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
                                 className={clsx(buttonVariants(), "w-full")}
                                 name="login"
                                 id="kc-login"
                                 type="submit"
-                                value={msgStr("doLogIn")}
-                            />
+                            ><b>Login</b></Button>
                         </div>
                     </div>
                 </form>

@@ -166,21 +166,21 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                         </div>
 
                         {isAppInitiatedAction ? (
-                            <div className="flex space-x-2 items-center justify-between">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <Button
                                     type="submit"
-                                    className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
+                                    className="w-full"
                                     id="saveTOTPBtn"
                                     value={msgStr("doSubmit")}
                                 >
                                     Submit
                                 </Button>
-                                <Button type="submit" id="cancelTOTPBtn" name="cancel-aia" value="true" variant="secondary">
+                                <Button type="submit" id="cancelTOTPBtn" name="cancel-aia" value="true" variant="secondary" className="w-full">
                                     Cancel
                                 </Button>
                             </div>
                         ) : (
-                            <Button type="submit" id="saveTOTPBtn">
+                            <Button type="submit" id="saveTOTPBtn" className="w-full">
                                 Submit
                             </Button>
                         )}

@@ -4,7 +4,7 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ReactElement } from "react";
 import { Label } from "@/components/ui/label";
@@ -81,7 +81,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                         </div>
 
                         <div id="kc-form-buttons" className="">
-                            <Button id="kc-submit" className={`${buttonVariants({})}`} type="submit" value={msgStr("doSubmit")}>
+                            <Button id="kc-submit" className="w-full" type="submit" value={msgStr("doSubmit")}>
                                 Submit
                             </Button>
                         </div>

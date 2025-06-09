@@ -35,10 +35,10 @@ export default function LoginIdpLinkConfirm(props: PageProps<Extract<KcContext, 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <Button
                         type="submit"
-                        className={`${buttonVariants({})} `}
                         name="submitAction"
                         id="updateProfile"
                         value="updateProfile"
+                        variant="secondary"
                     >
                         {msg("confirmLinkIdpReviewProfile")}
                     </Button>

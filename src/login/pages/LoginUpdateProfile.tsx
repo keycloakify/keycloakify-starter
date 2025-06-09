@@ -63,13 +63,8 @@ export default function LoginUpdateProfile(props: LoginUpdateProfileProps) {
                         </div>
                         <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                             <Button
-                                
                                 disabled={!isFormSubmittable}
-                                className={kcClsx(
-                                    "kcButtonClass",
-                                    "kcButtonPrimaryClass",
-                                    !isAppInitiatedAction
-                                )}
+                                className={`${!kcClsx(!isAppInitiatedAction)} w-full`}
                                 type="submit"
                                 id="kc-submit"
                             >{msgStr("doSubmit")}</Button>
@@ -80,6 +75,7 @@ export default function LoginUpdateProfile(props: LoginUpdateProfileProps) {
                                     value="true"
                                     formNoValidate
                                     variant="secondary"
+                                    className="w-full"
                                 >
                                     {msg("doCancel")}
                                 </Button>
