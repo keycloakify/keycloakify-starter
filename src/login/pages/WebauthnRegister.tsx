@@ -74,8 +74,8 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
 
     return (
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
-            <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                <div className="checkbox">
+            <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-3">
                     <Checkbox id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true}></Checkbox>
                     <Label htmlFor="logout-sessions">{msg("logoutOtherSessions")}</Label>
                 </div>

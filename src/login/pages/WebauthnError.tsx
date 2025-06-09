@@ -37,7 +37,7 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
             displayMessage
             headerNode={header()}
         >
-            <CardContent>
+            <CardContent className="py-6">
                 <form id="kc-error-credential-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                     <input type="hidden" id="executionValue" name="authenticationExecution" />
                     <input type="hidden" id="isSetRetry" name="isSetRetry" />

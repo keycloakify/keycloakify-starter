@@ -33,7 +33,7 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
 
     const { otpLogin, url, messagesPerField } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg } = i18n;
 
     return (
         <Template
