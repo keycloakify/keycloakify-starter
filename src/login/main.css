@@ -142,7 +142,7 @@ a {
 }
 
 
-#kc-login, #kc-logout, #saveTOTPBtn, #kc-submit, #updateProfile, #linkAccount, #authenticateWebAuthnButton, #kc-try-again {
+#kc-login, #kc-logout, #saveTOTPBtn, #kc-submit, #linkAccount, #authenticateWebAuthnButton, #kc-try-again {
   color: var(--secondary);
   background-color: var(--secondary-foreground);
 }

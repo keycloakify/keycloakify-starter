@@ -38,7 +38,7 @@ export default function LoginIdpLinkConfirm(props: PageProps<Extract<KcContext, 
                         name="submitAction"
                         id="updateProfile"
                         value="updateProfile"
-                        variant="secondary"
+                        variant="outline"
                     >
                         {msg("confirmLinkIdpReviewProfile")}
                     </Button>
