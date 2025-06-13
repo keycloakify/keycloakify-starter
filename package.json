@@ -1,6 +1,6 @@
 {
     "name": "subcloakify",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "description": "subcloakify - a keycloak theme for subtype, for all",
     "repository": {
         "type": "git",
