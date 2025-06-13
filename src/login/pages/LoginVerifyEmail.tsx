@@ -7,10 +7,10 @@ import { ReactNode, ReactElement } from "react";
 const header = (msg: string | number | boolean | Iterable<ReactNode> | ReactElement<any, any> | null | undefined) => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>Email verification</b>
+            <CardTitle id="card-title">
+                Email verification
             </CardTitle>
-            <CardDescription>{msg}</CardDescription>
+            <CardDescription id="card-description">{msg}</CardDescription>
         </CardHeader>
     );
 };

@@ -11,10 +11,10 @@ import { Button } from "@/components/ui/button";
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>Configure 2FA</b>
+            <CardTitle id="card-title">
+                Configure 2FA
             </CardTitle>
-            <CardDescription>For additional security, please configure 2FA.</CardDescription>
+            <CardDescription id="card-description">For additional security, please configure 2FA.</CardDescription>
         </CardHeader>
     );
 };

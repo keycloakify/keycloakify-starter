@@ -7,10 +7,10 @@ import { CardHeader, CardTitle, CardDescription, CardContent } from "@/component
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>Well, this is awkward...</b>
+            <CardTitle id="card-title">
+                Well, this is awkward...
             </CardTitle>
-            <CardDescription>Something happened and we couldn't process your request at this time</CardDescription>
+            <CardDescription id="card-description">Something happened and we couldn't process your request at this time</CardDescription>
         </CardHeader>
     );
 };

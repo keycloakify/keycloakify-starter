@@ -7,8 +7,8 @@ import { CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>Heads up</b>
+            <CardTitle id="card-title">
+                Heads up
             </CardTitle>
         </CardHeader>
     );

@@ -131,7 +131,7 @@ a {
 
 @layer components {
 	.link-style {
-		@apply underline underline-offset-4 font-semibold text-lg;
+		@apply underline underline-offset-4 font-semibold;
 	}
 }
 
@@ -141,6 +141,14 @@ a {
 	}
 }
 
+#card-title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#card-description {
+  font-size: 15px;
+}
 
 #kc-login, #kc-logout, #saveTOTPBtn, #kc-submit, #linkAccount, #authenticateWebAuthnButton, #kc-try-again {
   color: var(--secondary);

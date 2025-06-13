@@ -8,10 +8,10 @@ import { CardContent, CardTitle, CardHeader, CardDescription } from "@/component
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>This is awkward...</b>
+            <CardTitle id="card-title">
+                This is awkward...
             </CardTitle>
-            <CardDescription>There was an issue authenticating with your passkey</CardDescription>
+            <CardDescription id="card-description">There was an issue authenticating with your passkey</CardDescription>
         </CardHeader>
     );
 };

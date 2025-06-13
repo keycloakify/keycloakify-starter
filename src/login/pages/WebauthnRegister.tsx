@@ -11,10 +11,10 @@ import { Label } from "@/components/ui/label";
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>Passkey registration</b>
+            <CardTitle id="card-title">
+                Passkey registration
             </CardTitle>
-            <CardDescription>Register your passkey now for passwordless authentication</CardDescription>
+            <CardDescription id="card-description">Click or tap register to begin the registration process</CardDescription>
         </CardHeader>
     );
 };

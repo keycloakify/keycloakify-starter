@@ -15,10 +15,10 @@ import { Label } from "@/components/ui/label";
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>Welcome back</b>
+            <CardTitle id="card-title">
+                Welcome back
             </CardTitle>
-            <CardDescription>Enter the code provided by your authenticator</CardDescription>
+            <CardDescription id="card-description">Enter the code provided by your authenticator</CardDescription>
         </CardHeader>
     );
 };

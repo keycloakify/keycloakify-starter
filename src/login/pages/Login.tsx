@@ -18,10 +18,10 @@ const providerLogos = useProviderLogos();
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
-                <b>Welcome back</b>
+            <CardTitle id="card-title">
+                Welcome back
             </CardTitle>
-            <CardDescription>Login with your email or a provider below</CardDescription>
+            <CardDescription id="card-description">Login with your email or a provider below</CardDescription>
         </CardHeader>
     );
 };

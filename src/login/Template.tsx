@@ -73,7 +73,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 <CardContent className="space-y-8 pb-5 ">
                     <header>
                         {(() => {
-                            const node = <h1 id="kc-page-title">{headerNode}</h1>;
+                            const node = <div id="kc-page-title">{headerNode}</div>;
                             // const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
                             //     <h1 id="kc-page-title">{headerNode}</h1>
                             // ) : (
