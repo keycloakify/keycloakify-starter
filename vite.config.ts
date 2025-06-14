@@ -10,8 +10,7 @@ export default defineConfig({
         react(),
         keycloakify({
             accountThemeImplementation: "none"
-        }),
-        tailwindcss()
+        })
     ],
     resolve: {
         alias: {

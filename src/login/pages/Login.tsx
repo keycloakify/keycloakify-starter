@@ -198,7 +198,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 </div>
 
                                 <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
-                                <Button tabIndex={7} disabled={isLoginButtonDisabled} className="w-full" name="login" id="kc-login" type="submit">
+                                <Button tabIndex={7} disabled={isLoginButtonDisabled} className="bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full" name="login" id="kc-login" type="submit">
                                     <b>Login</b>
                                 </Button>
                             </form>
