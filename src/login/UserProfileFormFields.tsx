@@ -62,11 +62,10 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                                         : undefined
                             }}
                         >
-                            <div className={kcClsx("kcLabelWrapperClass")}>
+                            <div className={`kcClsx("kcLabelWrapperClass") mb-2`}>
                                 <Label htmlFor={attribute.name}>
-                                    {advancedMsg(attribute.displayName ?? "")}
+                                    {advancedMsg(attribute.displayName ?? "")}{attribute.required && <>*</>}
                                 </Label>
-                                {attribute.required && <> *</>}
                             </div>
                             <div className={kcClsx("kcInputWrapperClass")}>
                                 {attribute.annotations.inputHelperTextBefore !== undefined && (
@@ -75,7 +74,7 @@ export default function UserProfileFormFields(props: UserProfileFormFieldsProps<
                                         id={`form-help-text-before-${attribute.name}`}
                                         aria-live="polite"
                                     >
-                                        {advancedMsg(attribute.annotations.inputHelperTextBefore)}
+                                      {advancedMsg(attribute.annotations.inputHelperTextBefore)}
                                     </div>
                                 )}
                                 <InputFieldByType

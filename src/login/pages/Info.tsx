@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle id="card-title">Heads up</CardTitle>
+            <CardTitle id="card-title">One more thing</CardTitle>
         </CardHeader>
     );
 };
@@ -23,7 +23,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
             <CardContent>
                 <div id="kc-info-message">
                     <p
-                        className="instruction"
+                        className="instruction mb-3"
                         dangerouslySetInnerHTML={{
                             __html: kcSanitize(
                                 (() => {

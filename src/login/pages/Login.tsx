@@ -11,16 +11,15 @@ import { Button } from "@/components/ui/button";
 import { CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
+import { EyeOff, EyeIcon } from "lucide-react";
 import useProviderLogos from "../useProviderLogos";
 
 const providerLogos = useProviderLogos();
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle id="card-title">
-                Welcome back
-            </CardTitle>
+            <CardTitle id="card-title">Welcome back</CardTitle>
             <CardDescription id="card-description">Login with your email or a provider below</CardDescription>
         </CardHeader>
     );
@@ -171,7 +170,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     {realm.rememberMe && !usernameHidden && (
                                         <div className="flex flex-col gap-6">
                                             <div className="flex items-center gap-3">
-                                                <Checkbox
+                                                <Switch
                                                     tabIndex={5}
                                                     id="rememberMe"
                                                     name="rememberMe"
@@ -199,9 +198,17 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
                                 <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
                                 <div>
-                                <Button tabIndex={7} disabled={isLoginButtonDisabled} className="kc-primary w-full" name="login" id="kc-login" variant="default" type="submit">
-                                    <b>Login</b>
-                                </Button>
+                                    <Button
+                                        tabIndex={7}
+                                        disabled={isLoginButtonDisabled}
+                                        className="kc-primary w-full"
+                                        name="login"
+                                        id="kc-login"
+                                        variant="default"
+                                        type="submit"
+                                    >
+                                        <b>Login</b>
+                                    </Button>
                                 </div>
                             </form>
                         )}
@@ -213,22 +220,26 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 }
 
 function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { kcClsx, i18n, passwordInputId, children } = props;
+    const { i18n, passwordInputId, children } = props;
     const { msgStr } = i18n;
     const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
 
     return (
         <div className="relative">
             {children}
-            <button
+            <Button
                 type="button"
+                variant="ghost"
+                size="icon"
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
             >
-                <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
-            </button>
+                <i  aria-hidden >
+                    {isPasswordRevealed ? <EyeOff/> : <EyeIcon/>}
+                </i>
+            </Button>
         </div>
     );
 }

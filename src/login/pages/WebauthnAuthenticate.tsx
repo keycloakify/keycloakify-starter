@@ -45,12 +45,10 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
             displayInfo={realm.registrationAllowed && !registrationDisabled}
             infoNode={
                 <div id="kc-registration">
-                    <span>
                         {msg("noAccount")}{" "}
-                        <a tabIndex={6} href={url.registrationUrl}>
+                        <a tabIndex={6} className="underline hover:text-primary" href={url.registrationUrl}>
                             {msg("doRegister")}
                         </a>
-                    </span>
                 </div>
             }
             headerNode={header()}
@@ -145,7 +143,7 @@ export default function WebauthnAuthenticate(props: PageProps<Extract<KcContext,
                                 id={authButtonId}
                                 type="button"
                                 autoFocus
-                                className="w-full"
+                                className="w-full kc-primary"
                             >
                                 {msgStr("webauthn-doAuthenticate")}
                             </Button>

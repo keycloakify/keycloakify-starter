@@ -43,7 +43,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             <CardContent>
                 <form id="kc-reset-password-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                     <div className={kcClsx("kcFormGroupClass")}>
-                        <div className={kcClsx("kcInputWrapperClass")}>
+                        <div className="grid w-full max-w-sm items-center gap-3">
                             <Label htmlFor="username">
                                 {!realm.loginWithEmailAllowed
                                     ? msg("username")
@@ -75,12 +75,12 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                         <div id="kc-form-options">
                             <div>
                                 <span>
-                                    <a href={url.loginUrl}>{msg("backToLogin")}</a>
+                                    <a className="text-sm" href={url.loginUrl}>{msg("backToLogin")}</a>
                                 </span>
                             </div>
                         </div>
 
-                        <div id="kc-form-buttons" className="">
+                        <div id="kc-form-buttons" className="py-6">
                             <Button id="kc-submit" className="w-full" type="submit" value={msgStr("doSubmit")}>
                                 Submit
                             </Button>

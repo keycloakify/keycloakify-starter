@@ -5,7 +5,7 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
 const header = () => {
@@ -57,7 +57,7 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
 
                 {!isSetRetry && isAppInitiatedAction && (
                     <form action={url.loginAction} className={kcClsx("kcFormClass")} id="kc-webauthn-settings-form" method="post">
-                        <Button type="submit" id="cancelWebAuthnAIA" name="cancel-aia" value="true" variant="secondary" className="w-full">
+                        <Button type="submit" id="cancelWebAuthnAIA" name="cancel-aia" value="true" variant="outline" className="w-full">
                             {msg("doCancel")}
                         </Button>
                     </form>
@@ -76,7 +76,7 @@ function LogoutOtherSessions(props: { kcClsx: KcClsx; i18n: I18n }) {
         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
             <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-3">
-                    <Checkbox id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} className="data-[state=checked]:bg-accent dark:bg-white"></Checkbox>
+                    <Switch id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} className="data-[state=checked]:bg-primary dark:bg-primary"></Switch>
                     <Label htmlFor="logout-sessions">{msg("logoutOtherSessions")}</Label>
                 </div>
             </div>

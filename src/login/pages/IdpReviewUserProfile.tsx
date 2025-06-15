@@ -7,7 +7,7 @@ import type { UserProfileFormFieldsProps } from "keycloakify/login/UserProfileFo
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { CardContent, CardTitle, CardHeader } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 type IdpReviewUserProfileProps = PageProps<Extract<KcContext, { pageId: "idp-review-user-profile.ftl" }>, I18n> & {
     UserProfileFormFields: LazyOrNot<(props: UserProfileFormFieldsProps) => JSX.Element>;
@@ -17,7 +17,7 @@ type IdpReviewUserProfileProps = PageProps<Extract<KcContext, { pageId: "idp-rev
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle>
+            <CardTitle id="card-title">
                 <b>Update your account information</b>
             </CardTitle>
         </CardHeader>
@@ -49,7 +49,7 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
             headerNode={header()}
         >
             <CardContent>
-                <form id="kc-idp-review-profile-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
+                <form id="kc-idp-review-profile-form" className="grid w-full max-w-sm items-center gap-3" action={url.loginAction} method="post">
                     <UserProfileFormFields
                         kcContext={kcContext}
                         i18n={i18n}
@@ -61,9 +61,9 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
                         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
                             <div className={kcClsx("kcFormOptionsWrapperClass")} />
                         </div>
-                        <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
+                        <div id="kc-form-buttons" className={`kcClsx("kcFormButtonsClass") my-5`}>
                             <Button
-                                className={`${buttonVariants({})} w-full`}
+                                className="w-full"
                                 type="submit"
                                 disabled={!isFomSubmittable}
                                 id="kc-submit"

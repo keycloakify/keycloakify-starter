@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { assert } from "keycloakify/tools/assert";
-import { clsx } from "keycloakify/tools/clsx";
+// import { clsx } from "keycloakify/tools/clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import { getKcClsx } from "keycloakify/login/lib/kcClsx";
@@ -71,24 +71,10 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         <div className="bg-muted min-h-screen flex flex-col gap-6 items-center justify-center prose dark:prose-invert max-w-none">
             {import.meta.env.LOGO_URL?.trim() && <img src={`${import.meta.env.LOGO_URL}`} width={300} />}
             <Card className="px-3 md:-[40rem] shadow-2xl w-full min-h-screen  md:w-[30rem] sm:min-h-fit ">
-                <CardContent className="space-y-8 pb-5 ">
+                <CardContent className="space-y-8 mb-2">
                     <header>
                         {(() => {
                             const node = <div id="kc-page-title">{headerNode}</div>;
-                            // const node = !(auth !== undefined && auth.showUsername && !auth.showResetCredentials) ? (
-                            //     <h1 id="kc-page-title">{headerNode}</h1>
-                            // ) : (
-                            //     <div id="kc-username" className={kcClsx("kcFormGroupClass")}>
-                            //         <Label id="kc-attempted-username">{auth.attemptedUsername}</Label>
-                            //         <a id="reset-login" href={url.loginRestartFlowUrl} aria-label={msgStr("restartLoginTooltip")}>
-                            //             <div className="kc-login-tooltip">
-                            //                 <i className={kcClsx("kcResetFlowIcon")}></i>
-                            //                 <span className="kc-tooltip-text">{msg("restartLoginTooltip")}</span>
-                            //             </div>
-                            //         </a>
-                            //     </div>
-                            // );
-
                             if (displayRequiredFields) {
                                 return (
                                     // <div className={kcClsx("kcContentWrapperClass")}>
@@ -112,7 +98,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                     <div id="kc-content">
                         <div id="kc-content-wrapper">
                             {displayMessage && message !== undefined && (message.type !== "warning" || !isAppInitiatedAction) && (
-                                <div className="alertClass">
+                                <div className="alertClass mb-3 px-3 w-full">
                                     <Alert
                                         variant={`${message.type}`} // Just added KC specific message types to Alert class
                                         className="kcAlertClass" // eh

@@ -19,11 +19,15 @@
   --muted-foreground: oklch(0.5560 0 0);
   --accent: oklch(0.9700 0 0);
   --accent-foreground: oklch(0.2050 0 0);
+  --info: oklch(0.95 0.007 219.56);
+  --info-foreground: oklch(0.37 0.0087 219.71);
   --destructive: oklch(0.5770 0.2450 27.3250);
   --destructive-foreground: oklch(1 0 0);
   --error: oklch(0.9492 0.0177 26.09);
   --warning: oklch(0.9663 0.0209 72.15);
-  --warning-foreground: oklch(0.5555 0 0);
+  --warning-foreground: oklch(0.37 0.0087 219.71);
+  --success: oklch(0.9559 0.0186 145.43);
+  --success-foreground: oklch(0.5184 0.127 142.04);
   --border: oklch(0.9220 0 0);
   --input: oklch(0.9220 0 0);
   --ring: oklch(0.7080 0 0);
@@ -69,11 +73,14 @@
   --muted-foreground: oklch(0.7080 0 0);
   --accent: oklch(0.3710 0 0);
   --accent-foreground: oklch(0.9850 0 0);
+  --info: oklch(0.7904 0.0385 208.25);
+  --info-foreground: oklch(0.37 0.0087 219.71);
   --destructive: oklch(0.7040 0.1910 22.2160);
   --destructive-foreground: oklch(0.9850 0 0);
-  
+  --success: oklch(0.9559 0.0186 145.43);
+  --success-foreground: oklch(0.5184 0.127 142.04);
   --warning: oklch(0.9663 0.0209 72.15);
-  --warning-foreground: oklch(0.5555 0 0);
+  --warning-foreground: oklch(0.37 0.0087 219.71);
   --border: oklch(0.2750 0 0);
   --input: oklch(0.3250 0 0);
   --ring: oklch(0.5560 0 0);
@@ -119,10 +126,15 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-error: var(--error);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -163,25 +175,26 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground text-base;
   }
 }
 
 @layer components {
-	.link-style {
-		@apply underline underline-offset-4 font-semibold;
-	}
+  .link-style {
+    @apply underline underline-offset-4 font-semibold;
+  }
 }
 
 @layer components {
-	.input-error {
-		@apply text-lg mt-2 text-red-500 font-bold py-0.5 px-1 ;
-	}
+  .input-error {
+    @apply text-lg mt-2 text-red-500 font-bold py-0.5 px-1;
+  }
 }
 
 #card-title {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: bold;
 }
 
@@ -190,12 +203,35 @@
 }
 
 .kc-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.kcInputErrorMessageClass {
+  color: var(--destructive);
+  font-size: var(--text-sm);
 }
 
 .alertClass {
   padding-bottom: 12px;
+}
+
+.kcInputWrapperClass {
+  display: grid;
+  width: 100%;
+  max-width: 24rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kcFormClass {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.kcFormGroupClass {
+  margin-top: 21px;
+  margin-bottom: 10px;
 }
 
 .kcInfoAreaWrapperClass {
@@ -212,12 +248,16 @@
   text-decoration: underline;
 }
 
-input[type="checkbox"], input[type="radio"] {
-	margin: 0; /* Remove the extra margin */
-	vertical-align: middle; /* Vertically align checkbox and radio buttons with text */
-	line-height: normal; /* Ensure normal line height */
+input[type="checkbox"],
+input[type="radio"] {
+  margin: 0;
+  /* Remove the extra margin */
+  vertical-align: middle;
+  /* Vertically align checkbox and radio buttons with text */
+  line-height: normal;
+  /* Ensure normal line height */
 }
 
 .responsive-container {
-	@apply flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 items-center;
+  @apply flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 items-center;
 }

@@ -37,7 +37,7 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
             displayMessage
             headerNode={header()}
         >
-            <CardContent className="py-6">
+            <CardContent>
                 <form id="kc-error-credential-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
                     <input type="hidden" id="executionValue" name="authenticationExecution" />
                     <input type="hidden" id="isSetRetry" name="isSetRetry" />
@@ -63,7 +63,7 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
                             id="cancelWebAuthnAIA"
                             name="cancel-aia"
                             value="true"
-                            variant={"secondary"}
+                            variant="outline"
                             className="w-full"
                         >
                             {msgStr("doCancel")}
