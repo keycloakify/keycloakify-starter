@@ -3,6 +3,7 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const header = () => {
     return (
@@ -36,9 +37,11 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
                     <p className="instruction" dangerouslySetInnerHTML={{ __html: kcSanitize(message.summary) }} />
                     {!skipLink && client !== undefined && client.baseUrl !== undefined && (
                         <p>
+                            <Button asChild variant="ghost">
                             <a id="backToApplication" href={client.baseUrl}>
                                 {msg("backToApplication")}
                             </a>
+                            </Button>
                         </p>
                     )}
                 </div>

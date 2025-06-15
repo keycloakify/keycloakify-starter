@@ -44,7 +44,7 @@ export default function LoginIdpLinkConfirm(props: PageProps<Extract<KcContext, 
                     </Button>
                     <Button
                         type="submit"
-                        className={`${buttonVariants({})} `}
+                        
                         name="submitAction"
                         id="linkAccount"
                         value="linkAccount"

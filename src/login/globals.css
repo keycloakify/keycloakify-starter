@@ -1,8 +1,6 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilitiies;
 @import "tw-animate-css";
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -23,6 +21,9 @@
   --accent-foreground: oklch(0.2050 0 0);
   --destructive: oklch(0.5770 0.2450 27.3250);
   --destructive-foreground: oklch(1 0 0);
+  --error: oklch(0.9492 0.0177 26.09);
+  --warning: oklch(0.9663 0.0209 72.15);
+  --warning-foreground: oklch(0.5555 0 0);
   --border: oklch(0.9220 0 0);
   --input: oklch(0.9220 0 0);
   --ring: oklch(0.7080 0 0);
@@ -42,7 +43,7 @@
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif: Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.4rem;
+  --radius: 0.75rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
@@ -70,6 +71,9 @@
   --accent-foreground: oklch(0.9850 0 0);
   --destructive: oklch(0.7040 0.1910 22.2160);
   --destructive-foreground: oklch(0.9850 0 0);
+  
+  --warning: oklch(0.9663 0.0209 72.15);
+  --warning-foreground: oklch(0.5555 0 0);
   --border: oklch(0.2750 0 0);
   --input: oklch(0.3250 0 0);
   --ring: oklch(0.5560 0 0);
@@ -89,7 +93,7 @@
   --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif: Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --radius: 0.4rem;
+  --radius: 0.75rem;
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.10), 0 1px 2px -1px hsl(0 0% 0% / 0.10);
@@ -117,6 +121,8 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -183,16 +189,28 @@
   font-size: 15px;
 }
 
-/* #kc-login, #kc-logout, #saveTOTPBtn, #kc-submit, #linkAccount, #authenticateWebAuthnButton, #kc-try-again {
-  color: var(--primary-foreground);
-  background-color: var(--primary);
+.kc-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-#cancelTOTPBtn {
-  color: var(--secondary);
-  background-color: var(--secondary-foreground);
-  
-} */
+.alertClass {
+  padding-bottom: 12px;
+}
+
+.kcInfoAreaWrapperClass {
+  padding: 10px;
+  font-size: 12px;
+}
+
+.instruction {
+  padding-bottom: 20px;
+}
+
+.instruction a {
+  color: var(--primary);
+  text-decoration: underline;
+}
 
 input[type="checkbox"], input[type="radio"] {
 	margin: 0; /* Remove the extra margin */

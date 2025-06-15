@@ -3,13 +3,12 @@ import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const header = () => {
     return (
         <CardHeader>
-            <CardTitle id="card-title">
-                Heads up
-            </CardTitle>
+            <CardTitle id="card-title">Heads up</CardTitle>
         </CardHeader>
     );
 };
@@ -49,14 +48,18 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                         if (pageRedirectUri) {
                             return (
                                 <p>
-                                    <a href={pageRedirectUri}>{msg("backToApplication")}</a>
+                                    <Button asChild>
+                                        <a href={pageRedirectUri}>{msg("backToApplication")}</a>
+                                    </Button>
                                 </p>
                             );
                         }
                         if (actionUri) {
                             return (
                                 <p>
-                                    <a href={actionUri}>Continue</a>
+                                    <Button asChild>
+                                        <a href={actionUri}>Continue</a>
+                                    </Button>
                                 </p>
                             );
                         }
@@ -64,7 +67,9 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                         if (client.baseUrl) {
                             return (
                                 <p>
-                                    <a href={client.baseUrl}>{msg("backToApplication")}</a>
+                                    <Button asChild>
+                                        <a href={client.baseUrl}>{msg("backToApplication")}</a>
+                                    </Button>
                                 </p>
                             );
                         }

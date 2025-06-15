@@ -175,7 +175,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                                     tabIndex={5}
                                                     id="rememberMe"
                                                     name="rememberMe"
-                                                    className="data-[state=checked]:bg-accent dark:bg-white"
+                                                    className="data-[state=checked]:bg-primary dark:bg-primary"
                                                     defaultChecked={!!login.rememberMe}
                                                 />
                                                 <Label htmlFor="rememberMe" className="text-sm">
@@ -198,9 +198,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 </div>
 
                                 <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
-                                <Button tabIndex={7} disabled={isLoginButtonDisabled} className="bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full" name="login" id="kc-login" type="submit">
+                                <div>
+                                <Button tabIndex={7} disabled={isLoginButtonDisabled} className="kc-primary w-full" name="login" id="kc-login" variant="default" type="submit">
                                     <b>Login</b>
                                 </Button>
+                                </div>
                             </form>
                         )}
                     </div>
