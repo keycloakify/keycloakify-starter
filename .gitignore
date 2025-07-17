@@ -55,3 +55,6 @@ jspm_packages
 /dist_keycloak
 /build
 /storybook-static
+
+# build output of `jsx-email`
+/.rendered
