@@ -1,258 +1,228 @@
 import { createGetKcClsx } from "./getKcClsx";
 
 export type ClassKey =
-    | "kcBodyClass"
-    | "kcHeaderWrapperClass"
-    | "kcLocaleWrapperClass"
-    | "kcInfoAreaWrapperClass"
-    | "kcFormButtonsWrapperClass"
-    | "kcFormOptionsWrapperClass"
-    | "kcCheckboxInputClass"
-    | "kcLocaleDropDownClass"
-    | "kcLocaleListItemClass"
-    | "kcContentWrapperClass"
-    | "kcLogoIdP-facebook"
-    | "kcAuthenticatorOTPClass"
-    | "kcLogoIdP-bitbucket"
-    | "kcAuthenticatorWebAuthnClass"
-    | "kcWebAuthnDefaultIcon"
-    | "kcLogoIdP-stackoverflow"
-    | "kcSelectAuthListItemClass"
-    | "kcLogoIdP-microsoft"
-    | "kcLoginOTPListItemHeaderClass"
-    | "kcLocaleItemClass"
-    | "kcLoginOTPListItemIconBodyClass"
-    | "kcInputHelperTextAfterClass"
-    | "kcFormClass"
-    | "kcSelectAuthListClass"
-    | "kcInputClassRadioCheckboxLabelDisabled"
-    | "kcSelectAuthListItemIconClass"
-    | "kcRecoveryCodesWarning"
-    | "kcFormSettingClass"
-    | "kcWebAuthnBLE"
-    | "kcInputWrapperClass"
-    | "kcSelectAuthListItemArrowIconClass"
-    | "kcFeedbackAreaClass"
-    | "kcFormPasswordVisibilityButtonClass"
-    | "kcLogoIdP-google"
-    | "kcCheckLabelClass"
-    | "kcSelectAuthListItemFillClass"
-    | "kcAuthenticatorDefaultClass"
-    | "kcLogoIdP-gitlab"
-    | "kcFormAreaClass"
-    | "kcFormButtonsClass"
-    | "kcInputClassRadioLabel"
-    | "kcAuthenticatorWebAuthnPasswordlessClass"
-    | "kcSelectAuthListItemHeadingClass"
-    | "kcInfoAreaClass"
-    | "kcContainerClass"
-    | "kcSelectAuthListItemTitle"
-    | "kcHtmlClass"
-    | "kcLoginOTPListItemTitleClass"
-    | "kcLogoIdP-openshift-v4"
-    | "kcWebAuthnUnknownIcon"
-    | "kcFormSocialAccountNameClass"
-    | "kcLogoIdP-openshift-v3"
-    | "kcLoginOTPListInputClass"
-    | "kcWebAuthnUSB"
-    | "kcInputClassRadio"
-    | "kcWebAuthnKeyIcon"
-    | "kcFeedbackInfoIcon"
-    | "kcCommonLogoIdP"
-    | "kcRecoveryCodesActions"
-    | "kcFormGroupHeader"
-    | "kcFormSocialAccountSectionClass"
-    | "kcLogoIdP-instagram"
-    | "kcAlertClass"
-    | "kcHeaderClass"
-    | "kcLabelWrapperClass"
-    | "kcFormPasswordVisibilityIconShow"
-    | "kcFormSocialAccountLinkClass"
-    | "kcLocaleMainClass"
-    | "kcInputGroup"
-    | "kcTextareaClass"
-    | "kcButtonBlockClass"
-    | "kcButtonClass"
-    | "kcWebAuthnNFC"
-    | "kcLocaleClass"
-    | "kcInputClassCheckboxInput"
-    | "kcFeedbackErrorIcon"
-    | "kcInputLargeClass"
-    | "kcInputErrorMessageClass"
-    | "kcRecoveryCodesList"
-    | "kcFormSocialAccountListClass"
-    | "kcAlertTitleClass"
-    | "kcAuthenticatorPasswordClass"
-    | "kcCheckInputClass"
-    | "kcLogoIdP-linkedin"
-    | "kcLogoIdP-twitter"
-    | "kcFeedbackWarningIcon"
-    | "kcResetFlowIcon"
-    | "kcSelectAuthListItemIconPropertyClass"
-    | "kcFeedbackSuccessIcon"
-    | "kcLoginOTPListClass"
-    | "kcSrOnlyClass"
-    | "kcFormSocialAccountListGridClass"
-    | "kcButtonDefaultClass"
-    | "kcFormGroupErrorClass"
-    | "kcSelectAuthListItemDescriptionClass"
-    | "kcSelectAuthListItemBodyClass"
-    | "kcWebAuthnInternal"
-    | "kcSelectAuthListItemArrowClass"
-    | "kcCheckClass"
-    | "kcContentClass"
-    | "kcLogoClass"
-    | "kcLoginOTPListItemIconClass"
-    | "kcLoginClass"
-    | "kcSignUpClass"
-    | "kcButtonLargeClass"
-    | "kcFormCardClass"
-    | "kcLocaleListClass"
-    | "kcInputClass"
-    | "kcFormGroupClass"
-    | "kcLogoIdP-paypal"
-    | "kcInputClassCheckbox"
-    | "kcRecoveryCodesConfirmation"
-    | "kcFormPasswordVisibilityIconHide"
-    | "kcInputClassRadioInput"
-    | "kcFormSocialAccountListButtonClass"
-    | "kcInputClassCheckboxLabel"
-    | "kcFormOptionsClass"
-    | "kcFormHeaderClass"
-    | "kcFormSocialAccountGridItem"
-    | "kcButtonPrimaryClass"
-    | "kcInputHelperTextBeforeClass"
-    | "kcLogoIdP-github"
-    | "kcLabelClass";
+  | "kcFormGroupClass"
+  | "kcFormGroupLabelClass"
+  | "kcFormLabelClass"
+  | "kcFormLabelTextClass"
+  | "kcLabelClass"
+  | "kcInputClass"
+  | "kcInputGroup"
+  | "kcFormHelperTextClass"
+  | "kcInputHelperTextClass"
+  | "kcInputHelperTextItemClass"
+  | "kcInputHelperTextItemTextClass"
+  | "kcInputGroupItemClass"
+  | "kcFill"
+  | "kcError"
+  | "kcLoginFooterBand"
+  | "kcLoginFooterBandItem"
+  | "kcCheckboxClass"
+  | "kcCheckboxInputClass"
+  | "kcCheckboxLabelClass"
+  | "kcCheckboxLabelRequiredClass"
+  | "kcInputRequiredClass"
+  | "kcInputErrorMessageClass"
+  | "kcFormControlUtilClass"
+  | "kcInputErrorIconStatusClass"
+  | "kcInputErrorIconClass"
+  | "kcAlertClass"
+  | "kcAlertIconClass"
+  | "kcAlertTitleClass"
+  | "kcAlertDescriptionClass"
+  | "kcFormPasswordVisibilityButtonClass"
+  | "kcFormControlToggleIcon"
+  | "kcFormActionGroupClass"
+  | "kcFormReadOnlyClass"
+  | "kcPanelClass"
+  | "kcPanelMainClass"
+  | "kcPanelMainBodyClass"
+  | "kcListClass"
+  | "kcButtonClass"
+  | "kcButtonPrimaryClass"
+  | "kcButtonSecondaryClass"
+  | "kcButtonBlockClass"
+  | "kcButtonLinkClass"
+  | "kcCommonLogoIdP"
+  | "kcFormSocialAccountListClass"
+  | "kcFormSocialAccountListItemClass"
+  | "kcFormSocialAccountNameClass"
+  | "kcFormSocialAccountListButtonClass"
+  | "kcFormSocialAccountListButtonDisabledClass"
+  | "kcFormSocialAccountListGridClass"
+  | "kcFormSocialAccountGridItem"
+  | "kcLoginClass"
+  | "kcFormClass"
+  | "kcFormCardClass"
+  | "kcResetFlowIcon"
+  | "kcSelectAuthListClass"
+  | "kcSelectAuthListItemWrapperClass"
+  | "kcSelectAuthListItemClass"
+  | "kcSelectAuthListItemHeadingClass"
+  | "kcSelectAuthListItemBodyClass"
+  | "kcSelectAuthListItemIconClass"
+  | "kcSelectAuthListItemFillClass"
+  | "kcSelectAuthListItemDescriptionClass"
+  | "kcRecoveryCodesWarning"
+  | "kcLogin"
+  | "kcLoginContainer"
+  | "kcLoginMain"
+  | "kcLoginMainHeader"
+  | "kcLoginMainFooter"
+  | "kcLoginMainFooterBand"
+  | "kcLoginMainFooterBandItem"
+  | "kcLoginMainFooterHelperText"
+  | "kcLoginMainTitle"
+  | "kcLoginMainHeaderUtilities"
+  | "kcLoginMainBody"
+  | "kcContentWrapperClass"
+  | "kcWebAuthnDefaultIcon"
+  | "kcMarginTopClass"
+  | "kcLoginOTPListClass"
+  | "kcLoginOTPListItemHeaderClass"
+  | "kcLoginOTPListItemIconBodyClass"
+  | "kcLoginOTPListItemIconClass"
+  | "kcLoginOTPListItemTitleClass"
+  | "kcLoginOTPListSelectedClass"
+  | "kcDarkModeClass"
+  | "kcHtmlClass"
+  | "kcLogoIdP-facebook"
+  | "kcLogoIdP-google"
+  | "kcLogoIdP-github"
+  | "kcLogoIdP-linkedin"
+  | "kcLogoIdP-instagram"
+  | "kcLogoIdP-microsoft"
+  | "kcLogoIdP-bitbucket"
+  | "kcLogoIdP-gitlab"
+  | "kcLogoIdP-paypal"
+  | "kcLogoIdP-stackoverflow"
+  | "kcLogoIdP-twitter"
+  | "kcLogoIdP-openshift-v4";
 
 export const { getKcClsx } = createGetKcClsx<ClassKey>({
-    defaultClasses: {
-        kcHtmlClass: "login-pf",
-        kcBodyClass: undefined,
-        kcHeaderWrapperClass: undefined,
-        kcLocaleWrapperClass: undefined,
-        kcInfoAreaWrapperClass: undefined,
-        kcFormButtonsWrapperClass: undefined,
-        kcFormOptionsWrapperClass: undefined,
-        kcLocaleDropDownClass: undefined,
-        kcLocaleListItemClass: undefined,
-        kcContentWrapperClass: undefined,
-        kcCheckboxInputClass: undefined,
+  defaultClasses: {
+    kcFormGroupClass: "pf-v5-c-form__group",
+    kcFormGroupLabelClass: "pf-v5-c-form__group-label pf-v5-u-pb-xs",
+    kcFormLabelClass: "pf-v5-c-form__label",
+    kcFormLabelTextClass: "pf-v5-c-form__label-text",
 
-        "kcLogoIdP-facebook": "fa fa-facebook",
-        kcAuthenticatorOTPClass: "fa fa-mobile list-view-pf-icon-lg",
-        "kcLogoIdP-bitbucket": "fa fa-bitbucket",
-        kcAuthenticatorWebAuthnClass: "fa fa-key list-view-pf-icon-lg",
-        kcWebAuthnDefaultIcon: "pficon pficon-key",
-        "kcLogoIdP-stackoverflow": "fa fa-stack-overflow",
-        kcSelectAuthListItemClass: "pf-l-stack__item select-auth-box-parent pf-l-split",
-        "kcLogoIdP-microsoft": "fa fa-windows",
-        kcLoginOTPListItemHeaderClass: "pf-c-tile__header",
-        kcLocaleItemClass: "pf-c-dropdown__menu-item",
-        kcLoginOTPListItemIconBodyClass: "pf-c-tile__icon",
-        kcInputHelperTextAfterClass: "pf-c-form__helper-text pf-c-form__helper-text-after",
-        kcFormClass: "form-horizontal",
-        kcSelectAuthListClass: "pf-l-stack select-auth-container",
-        kcInputClassRadioCheckboxLabelDisabled: "pf-m-disabled",
-        kcSelectAuthListItemIconClass: "pf-l-split__item select-auth-box-icon",
-        kcRecoveryCodesWarning: "kc-recovery-codes-warning",
-        kcFormSettingClass: "login-pf-settings",
-        kcWebAuthnBLE: "fa fa-bluetooth-b",
-        kcInputWrapperClass: "col-xs-12 col-sm-12 col-md-12 col-lg-12",
-        kcSelectAuthListItemArrowIconClass: "fa fa-angle-right fa-lg",
-        kcFeedbackAreaClass: "col-md-12",
-        kcFormPasswordVisibilityButtonClass: "pf-c-button pf-m-control",
-        "kcLogoIdP-google": "fa fa-google",
-        kcCheckLabelClass: "pf-c-check__label",
-        kcSelectAuthListItemFillClass: "pf-l-split__item pf-m-fill",
-        kcAuthenticatorDefaultClass: "fa fa-list list-view-pf-icon-lg",
-        "kcLogoIdP-gitlab": "fa fa-gitlab",
-        kcFormAreaClass: "col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2",
-        kcFormButtonsClass: "col-xs-12 col-sm-12 col-md-12 col-lg-12",
-        kcInputClassRadioLabel: "pf-c-radio__label",
-        kcAuthenticatorWebAuthnPasswordlessClass: "fa fa-key list-view-pf-icon-lg",
-        kcSelectAuthListItemHeadingClass: "pf-l-stack__item select-auth-box-headline pf-c-title",
-        kcInfoAreaClass: "col-xs-12 col-sm-4 col-md-4 col-lg-5 details",
-        kcContainerClass: "container-fluid",
-        kcSelectAuthListItemTitle: "select-auth-box-paragraph",
-        kcLoginOTPListItemTitleClass: "pf-c-tile__title",
-        "kcLogoIdP-openshift-v4": "pf-icon pf-icon-openshift",
-        kcWebAuthnUnknownIcon: "pficon pficon-key unknown-transport-class",
-        kcFormSocialAccountNameClass: "kc-social-provider-name",
-        "kcLogoIdP-openshift-v3": "pf-icon pf-icon-openshift",
-        kcLoginOTPListInputClass: "pf-c-tile__input",
-        kcWebAuthnUSB: "fa fa-usb",
-        kcInputClassRadio: "pf-c-radio",
-        kcWebAuthnKeyIcon: "pficon pficon-key",
-        kcFeedbackInfoIcon: "fa fa-fw fa-info-circle",
-        kcCommonLogoIdP: "kc-social-provider-logo kc-social-gray",
-        kcRecoveryCodesActions: "kc-recovery-codes-actions",
-        kcFormGroupHeader: "pf-c-form__group",
-        kcFormSocialAccountSectionClass: "kc-social-section kc-social-gray",
-        "kcLogoIdP-instagram": "fa fa-instagram",
-        kcAlertClass: "pf-c-alert pf-m-inline",
-        kcHeaderClass: "login-pf-page-header",
-        kcLabelWrapperClass: "col-xs-12 col-sm-12 col-md-12 col-lg-12",
-        kcFormPasswordVisibilityIconShow: "fa fa-eye",
-        kcFormSocialAccountLinkClass: "pf-c-login__main-footer-links-item-link",
-        kcLocaleMainClass: "pf-c-dropdown",
-        kcInputGroup: "pf-c-input-group",
-        kcTextareaClass: "form-control",
-        kcButtonBlockClass: "pf-m-block",
-        kcButtonClass: "pf-c-button",
-        kcWebAuthnNFC: "fa fa-wifi",
-        kcLocaleClass: "col-xs-12 col-sm-1",
-        kcInputClassCheckboxInput: "pf-c-check__input",
-        kcFeedbackErrorIcon: "fa fa-fw fa-exclamation-circle",
-        kcInputLargeClass: "input-lg",
-        kcInputErrorMessageClass: "pf-c-form__helper-text pf-m-error required kc-feedback-text",
-        kcRecoveryCodesList: "kc-recovery-codes-list",
-        kcFormSocialAccountListClass: "pf-c-login__main-footer-links kc-social-links",
-        kcAlertTitleClass: "pf-c-alert__title kc-feedback-text",
-        kcAuthenticatorPasswordClass: "fa fa-unlock list-view-pf-icon-lg",
-        kcCheckInputClass: "pf-c-check__input",
-        "kcLogoIdP-linkedin": "fa fa-linkedin",
-        "kcLogoIdP-twitter": "fa fa-twitter",
-        kcFeedbackWarningIcon: "fa fa-fw fa-exclamation-triangle",
-        kcResetFlowIcon: "pficon pficon-arrow fa",
-        kcSelectAuthListItemIconPropertyClass: "fa-2x select-auth-box-icon-properties",
-        kcFeedbackSuccessIcon: "fa fa-fw fa-check-circle",
-        kcLoginOTPListClass: "pf-c-tile",
-        kcSrOnlyClass: "sr-only",
-        kcFormSocialAccountListGridClass: "pf-l-grid kc-social-grid",
-        kcButtonDefaultClass: "btn-default",
-        kcFormGroupErrorClass: "has-error",
-        kcSelectAuthListItemDescriptionClass: "pf-l-stack__item select-auth-box-desc",
-        kcSelectAuthListItemBodyClass: "pf-l-split__item pf-l-stack",
-        kcWebAuthnInternal: "pficon pficon-key",
-        kcSelectAuthListItemArrowClass: "pf-l-split__item select-auth-box-arrow",
-        kcCheckClass: "pf-c-check",
-        kcContentClass: "col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3",
-        kcLogoClass: "login-pf-brand",
-        kcLoginOTPListItemIconClass: "fa fa-mobile",
-        kcLoginClass: "login-pf-page",
-        kcSignUpClass: "login-pf-signup",
-        kcButtonLargeClass: "btn-lg",
-        kcFormCardClass: "card-pf",
-        kcLocaleListClass: "pf-c-dropdown__menu pf-m-align-right",
-        kcInputClass: "pf-c-form-control",
-        kcFormGroupClass: "form-group",
-        "kcLogoIdP-paypal": "fa fa-paypal",
-        kcInputClassCheckbox: "pf-c-check",
-        kcRecoveryCodesConfirmation: "kc-recovery-codes-confirmation",
-        kcFormPasswordVisibilityIconHide: "fa fa-eye-slash",
-        kcInputClassRadioInput: "pf-c-radio__input",
-        kcFormSocialAccountListButtonClass:
-            "pf-c-button pf-m-control pf-m-block kc-social-item kc-social-gray",
-        kcInputClassCheckboxLabel: "pf-c-check__label",
-        kcFormOptionsClass: "col-xs-12 col-sm-12 col-md-12 col-lg-12",
-        kcFormHeaderClass: "login-pf-header",
-        kcFormSocialAccountGridItem: "pf-l-grid__item",
-        kcButtonPrimaryClass: "pf-m-primary",
-        kcInputHelperTextBeforeClass: "pf-c-form__helper-text pf-c-form__helper-text-before",
-        "kcLogoIdP-github": "fa fa-github",
-        kcLabelClass: "pf-c-form__label pf-c-form__label-text"
-    }
+    kcLabelClass: "pf-v5-c-form__label",
+    kcInputClass: "pf-v5-c-form-control",
+    kcInputGroup: "pf-v5-c-input-group",
+    kcFormHelperTextClass: "pf-v5-c-form__helper-text",
+    kcInputHelperTextClass:
+      "pf-v5-c-helper-text pf-v5-u-display-flex pf-v5-u-justify-content-space-between",
+    kcInputHelperTextItemClass: "pf-v5-c-helper-text__item",
+    kcInputHelperTextItemTextClass: "pf-v5-c-helper-text__item-text",
+    kcInputGroupItemClass: "pf-v5-c-input-group__item",
+    kcFill: "pf-m-fill",
+    kcError: "pf-m-error",
+    kcLoginFooterBand: "pf-v5-c-login__main-footer-band",
+    kcLoginFooterBandItem: "pf-v5-c-login__main-footer-band-item",
+
+    kcCheckboxClass: "pf-v5-c-check",
+    kcCheckboxInputClass: "pf-v5-c-check__input",
+    kcCheckboxLabelClass: "pf-v5-c-check__label",
+    kcCheckboxLabelRequiredClass: "pf-v5-c-check__label-required",
+
+    kcInputRequiredClass: "pf-v5-c-form__label-required",
+    kcInputErrorMessageClass:
+      "pf-v5-c-helper-text__item-text pf-m-error kc-feedback-text",
+    kcFormControlUtilClass: "pf-v5-c-form-control__utilities",
+    kcInputErrorIconStatusClass: "pf-v5-c-form-control__icon pf-m-status",
+    kcInputErrorIconClass: "fas fa-exclamation-circle",
+    kcAlertClass: "pf-v5-c-alert pf-m-inline pf-v5-u-mb-md",
+    kcAlertIconClass: "pf-v5-c-alert__icon",
+    kcAlertTitleClass: "pf-v5-c-alert__title",
+    kcAlertDescriptionClass: "pf-v5-c-alert__description",
+    kcFormPasswordVisibilityButtonClass: "pf-v5-c-button pf-m-control",
+    kcFormControlToggleIcon: "pf-v5-c-form-control__toggle-icon",
+    kcFormActionGroupClass: "pf-v5-c-form__actions pf-v5-u-pt-xs",
+    kcFormReadOnlyClass: "pf-m-readonly",
+
+    kcPanelClass: "pf-v5-c-panel pf-m-raised",
+    kcPanelMainClass: "pf-v5-c-panel__main",
+    kcPanelMainBodyClass: "pf-v5-c-panel__main-body",
+    kcListClass: "pf-v5-c-list",
+
+    kcButtonClass: "pf-v5-c-button",
+    kcButtonPrimaryClass: "pf-v5-c-button pf-m-primary",
+    kcButtonSecondaryClass: "pf-v5-c-button pf-m-secondary",
+    kcButtonBlockClass: "pf-m-block",
+    kcButtonLinkClass: "pf-v5-c-button pf-m-link",
+    kcCommonLogoIdP: "pf-v5-c-login__main-footer-links-item",
+    kcFormSocialAccountListClass:
+      "pf-v5-c-login__main-body pf-v5-u-pl-0 pf-v5-u-pr-0",
+    kcFormSocialAccountListItemClass: "pf-v5-u-pb-sm",
+    kcFormSocialAccountNameClass: "pf-v5-u-m-auto",
+    kcFormSocialAccountListButtonClass:
+      "pf-v5-c-button pf-m-secondary pf-m-block pf-v5-u-display-flex pf-v5-u-align-items-center pf-v5-u-justify-content-space-between",
+    kcFormSocialAccountListButtonDisabledClass: "pf-m-aria-disabled",
+    kcFormSocialAccountListGridClass:
+      "pf-v5-l-grid pf-m-gutter pf-m-all-6-col-on-xl pf-m-all-6-col-on-sm",
+    kcFormSocialAccountGridItem: "pf-v5-l-grid__item",
+
+    kcLoginClass: "pf-v5-c-login__main",
+    kcFormClass: "pf-v5-c-form pf-v5-u-w-100",
+    kcFormCardClass: "card-pf",
+
+    kcResetFlowIcon: "pf-icon fas fa-share-square",
+
+    kcSelectAuthListClass: "pf-v5-c-data-list select-auth-container",
+    kcSelectAuthListItemWrapperClass: "pf-v5-c-data-list__item pf-m-clickable",
+    kcSelectAuthListItemClass:
+      "pf-v5-c-data-list__item-row select-auth-box-parent",
+    kcSelectAuthListItemHeadingClass:
+      "pf-v5-u-font-family-heading select-auth-box-headline",
+    kcSelectAuthListItemBodyClass:
+      "pf-v5-c-data-list__cell pf-m-no-fill pf-v5-u-pt-md pf-v5-u-pb-md",
+    kcSelectAuthListItemIconClass:
+      "pf-v5-c-data-list__cell pf-m-icon pf-v5-u-display-flex pf-v5-u-pt-0 pf-v5-u-align-items-center",
+    kcSelectAuthListItemFillClass: "pf-v5-c-data-list__item-action",
+    kcSelectAuthListItemDescriptionClass:
+      "pf-v5-c-data-list__cell pf-m-no-fill select-auth-box-desc",
+
+    kcRecoveryCodesWarning:
+      "pf-v5-c-alert pf-m-warning pf-m-inline pf-v5-u-mb-md kc-recovery-codes-warning",
+    kcLogin: "pf-v5-c-login",
+    kcLoginContainer: "pf-v5-c-login__container",
+    kcLoginMain: "pf-v5-c-login__main",
+    kcLoginMainHeader: "pf-v5-c-login__main-header",
+    kcLoginMainFooter: "pf-v5-c-login__main-footer",
+    kcLoginMainFooterBand: "pf-v5-c-login__main-footer-band",
+    kcLoginMainFooterBandItem: "pf-v5-c-login__main-footer-band-item",
+    kcLoginMainFooterHelperText: "pf-v5-u-font-size-sm pf-v5-u-color-200",
+    kcLoginMainTitle: "pf-v5-c-title pf-m-3xl",
+    kcLoginMainHeaderUtilities: "pf-v5-c-login__main-header-utilities",
+    kcLoginMainBody: "pf-v5-c-login__main-body",
+
+    kcContentWrapperClass: "pf-v5-u-mb-md-on-md",
+    kcWebAuthnDefaultIcon: "pf-v5-c-icon pf-m-lg",
+    kcMarginTopClass: "pf-v5-u-mt-md-on-md",
+
+    kcLoginOTPListClass: "pf-v5-c-tile",
+    kcLoginOTPListItemHeaderClass: "pf-v5-c-tile__header pf-m-stacked",
+    kcLoginOTPListItemIconBodyClass: "pf-v5-c-tile__icon",
+    kcLoginOTPListItemIconClass: "fa fa-mobile",
+    kcLoginOTPListItemTitleClass: "pf-v5-c-tile__title",
+    kcLoginOTPListSelectedClass: "pf-m-selected",
+
+    kcDarkModeClass: "pf-v5-theme-dark",
+
+    kcHtmlClass: "login-pf",
+    "kcLogoIdP-facebook": undefined,
+    "kcLogoIdP-google": undefined,
+    "kcLogoIdP-github": undefined,
+    "kcLogoIdP-linkedin": undefined,
+    "kcLogoIdP-instagram": undefined,
+    "kcLogoIdP-microsoft": undefined,
+    "kcLogoIdP-bitbucket": undefined,
+    "kcLogoIdP-gitlab": undefined,
+    "kcLogoIdP-paypal": undefined,
+    "kcLogoIdP-stackoverflow": undefined,
+    "kcLogoIdP-twitter": undefined,
+    "kcLogoIdP-openshift-v4": undefined,
+  },
 });
 
 export type KcClsx = ReturnType<typeof getKcClsx>["kcClsx"];
