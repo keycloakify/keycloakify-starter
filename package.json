@@ -18,7 +18,8 @@
     "react-dom": "^19.1.0",
     "keycloakify": "^11.8.51",
     "@keycloakify/login-ui": "~250004.1.2",
-    "tsafe": "^1.8.5"
+    "tsafe": "^1.8.5",
+    "dompurify": "^3.1.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

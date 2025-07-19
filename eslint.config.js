@@ -13,6 +13,7 @@ export default tseslint.config([globalIgnores(['dist']), {
   }
 }], {
   linterOptions: {
-    reportUnusedDisableDirectives: "off"
+    reportUnusedDisableDirectives: "off",
+    "@typescript-eslint/no-empty-object-type": "off"
   }
 });
