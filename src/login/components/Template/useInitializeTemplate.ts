@@ -11,23 +11,22 @@ import { useEffect } from "react";
 import { useInsertScriptTags } from "../../../@keycloakify/login-ui/tools/useInsertScriptTags";
 import { useInsertLinkTags } from "../../../@keycloakify/login-ui/tools/useInsertLinkTags";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
+import { useInitializeDarkMode } from "../../../@keycloakify/login-ui/useInitializeDarkMode";
 import { BASE_URL } from "../../../kc.gen";
 import { useKcContext } from "../../KcContext";
 
 export function useInitializeTemplate() {
     const { kcContext } = useKcContext();
 
-    const { doUseDefaultCss } = useKcClsx();
+    const { doUseDefaultCss, kcClsx } = useKcClsx();
 
     const { areAllStyleSheetsLoaded } = useInsertLinkTags({
         effectId: "Template",
         hrefs: !doUseDefaultCss
             ? []
             : [
-                  `${BASE_URL}keycloak-theme/login/resources-common/node_modules/@patternfly/patternfly/patternfly.min.css`,
-                  `${BASE_URL}keycloak-theme/login/resources-common/node_modules/patternfly/dist/css/patternfly.min.css`,
-                  `${BASE_URL}keycloak-theme/login/resources-common/node_modules/patternfly/dist/css/patternfly-additions.min.css`,
-                  `${BASE_URL}keycloak-theme/login/resources-common/lib/pficon/pficon.css`,
+                  `${BASE_URL}keycloak-theme/login/resources-common/vendor/patternfly-v5/patternfly.min.css`,
+                  `${BASE_URL}keycloak-theme/login/resources-common/vendor/patternfly-v5/patternfly-addons.css`,
                   `${BASE_URL}keycloak-theme/login/css/login.css`
               ]
     });
@@ -35,11 +34,6 @@ export function useInitializeTemplate() {
     const { insertScriptTags } = useInsertScriptTags({
         effectId: "Template",
         scriptTags: [
-            // NOTE: The importmap is added in by the FTL script because it's too late to add it here.
-            {
-                type: "module",
-                src: `${BASE_URL}keycloak-theme/login/js/menu-button-links.js`
-            },
             ...(kcContext.scripts === undefined
                 ? []
                 : kcContext.scripts.map(src => ({
@@ -49,12 +43,33 @@ export function useInitializeTemplate() {
             {
                 type: "module",
                 textContent: `
-                    import { checkCookiesAndSetTimer } from "${BASE_URL}keycloak-theme/login/js/authChecker.js";
+                    import { startSessionPolling } from "${BASE_URL}keycloak-theme/login/js/authChecker.js";
 
-                    checkCookiesAndSetTimer("${kcContext.url.ssoLoginInOtherTabsUrl}");
+                    startSessionPolling("${kcContext.url.ssoLoginInOtherTabsUrl}");
+                `
+            },
+            ...(kcContext.authenticationSession === undefined ? [] :
+            [{
+                type: "module" as const,
+                textContent: `
+                    import { checkAuthSession } from "${BASE_URL}keycloak-theme/login/js/authChecker.js";
+
+                    checkAuthSession("${kcContext.authenticationSession.authSessionIdHash}");
+                `
+            }]),
+            {
+                type: "text/javascript",
+                textContent: `
+                    // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=1404468
+                    const isFirefox = true;
                 `
             }
         ]
+    });
+
+    useInitializeDarkMode({
+        doEnableDarkModeIfPreferred: kcContext.darkMode ?? true,
+        htmlDarkModeClassName: kcClsx("kcDarkModeClass")
     });
 
     useEffect(() => {

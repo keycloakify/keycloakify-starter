@@ -63,6 +63,15 @@ export type KcContext =
 
 export declare namespace KcContext {
     export type Common = {
+
+        // NEW: 
+        darkMode?: boolean;
+        authenticationSession?: {
+            authSessionIdHash: string;
+        };
+
+
+
         themeVersion: string;
         keycloakifyVersion: string;
         themeType: "login";
