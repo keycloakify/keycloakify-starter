@@ -1,10 +1,3 @@
-/**
- * This file has been claimed for ownership from @keycloakify/login-ui version 250004.1.2.
- * To relinquish ownership and restore this file to its original content, run the following command:
- * 
- * $ npx keycloakify own --path "login/js/passwordVisibility.js" --public --revert
- */
-
 const toggle = (button) =>  {
     const passwordElement = document.getElementById(button.getAttribute('aria-controls'));
     if (passwordElement.type === "password") {

@@ -1,11 +1,4 @@
-/**
- * This file has been claimed for ownership from @keycloakify/login-ui version 250004.1.2.
- * To relinquish ownership and restore this file to its original content, run the following command:
- * 
- * $ npx keycloakify own --path "login/js/webauthnRegister.js" --public --revert
- */
-
-import { base64url } from "rfc4648";
+import { base64url } from "./rfc4648.js";
 
 export async function registerByWebAuthn(input) {
 
@@ -138,10 +131,10 @@ function returnSuccess(result, initLabel, initLabelPrompt) {
     }
     document.getElementById("authenticatorLabel").value = labelResult;
 
-    document.getElementById("register").submit();
+    document.getElementById("register").requestSubmit();
 }
 
 function returnFailure(err) {
     document.getElementById("error").value = err;
-    document.getElementById("register").submit();
+    document.getElementById("register").requestSubmit();
 }
