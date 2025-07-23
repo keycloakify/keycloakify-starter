@@ -1,15 +1,7 @@
 import { insertOrUpdateMetaTag, removeMetaTag } from "../tools/metaTag";
 
-declare global {
-  interface Window {
-    __keycloakify_login_ui_clearAllDarkModeSetup: (() => void) | undefined;
-  }
-}
-
 export function initializeDarkMode(params: { htmlDarkModeClassName: string }) {
   const { htmlDarkModeClassName } = params;
-
-  window.__keycloakify_login_ui_clearAllDarkModeSetup?.();
 
   const setColorScheme = (params: { isDark: boolean }) => {
     const { isDark } = params;
@@ -37,7 +29,7 @@ export function initializeDarkMode(params: { htmlDarkModeClassName: string }) {
 
   mediaQuery.addEventListener("change", onChange);
 
-  window.__keycloakify_login_ui_clearAllDarkModeSetup = () => {
+  function cleanup() {
     mediaQuery.removeEventListener("change", onChange);
 
     setColorScheme({
@@ -45,9 +37,7 @@ export function initializeDarkMode(params: { htmlDarkModeClassName: string }) {
     });
 
     removeMetaTag({ name: "color-scheme" });
-  };
-}
+  }
 
-export function cleanupDarkModeInitialization() {
-  window.__keycloakify_login_ui_clearAllDarkModeSetup?.();
+  return { cleanup };
 }

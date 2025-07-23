@@ -1,15 +1,6 @@
-/**
- * This file has been claimed for ownership from @keycloakify/login-ui version 250004.1.2.
- * To relinquish ownership and restore this file to its original content, run the following command:
- * 
- * $ npx keycloakify own --path "login/components/Template/Template.tsx" --revert
- */
 
-import type { ReactNode } from "react";
-import { useEffect } from "react";
 import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
 import { kcSanitize } from "../../../@keycloakify/login-ui/kcSanitize";
-import { useSetClassName } from "../../../@keycloakify/login-ui/tools/useSetClassName";
 import { useInitializeTemplate } from "./useInitializeTemplate";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { useI18n } from "../../i18n";
@@ -19,23 +10,11 @@ export function Template(props: {
     displayInfo?: boolean;
     displayMessage?: boolean;
     displayRequiredFields?: boolean;
-    headerNode: ReactNode;
-    socialProvidersNode?: ReactNode;
-    infoNode?: ReactNode;
-    documentTitle?: string;
-    bodyClassName?: string;
-    children: ReactNode;
 }) {
     const {
         displayInfo = false,
         displayMessage = true,
-        displayRequiredFields = false,
-        headerNode,
-        socialProvidersNode = null,
-        infoNode = null,
-        documentTitle,
-        bodyClassName,
-        children
+        displayRequiredFields = false
     } = props;
 
     const { kcContext } = useKcContext();
@@ -43,20 +22,6 @@ export function Template(props: {
     const { msg, msgStr, currentLanguage, enabledLanguages } = useI18n();
 
     const { kcClsx } = useKcClsx();
-
-    useEffect(() => {
-        document.title = documentTitle ?? msgStr("loginTitle", kcContext.realm.displayName);
-    }, []);
-
-    useSetClassName({
-        qualifiedName: "html",
-        className: kcClsx("kcHtmlClass")
-    });
-
-    useSetClassName({
-        qualifiedName: "body",
-        className: bodyClassName ?? kcClsx("kcBodyClass")
-    });
 
     const { isReadyToRender } = useInitializeTemplate();
 

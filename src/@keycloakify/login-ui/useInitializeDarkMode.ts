@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-import {
-  initializeDarkMode,
-  cleanupDarkModeInitialization,
-} from "./core/darkMode";
+import { useLayoutEffect } from "react";
+import { initializeDarkMode } from "./core/darkMode";
 
 export function useInitializeDarkMode(params: {
   doEnableDarkModeIfPreferred: boolean;
@@ -10,17 +7,15 @@ export function useInitializeDarkMode(params: {
 }) {
   const { doEnableDarkModeIfPreferred, htmlDarkModeClassName } = params;
 
-  useState(() => {
-    if (doEnableDarkModeIfPreferred) {
-      initializeDarkMode({ htmlDarkModeClassName });
+  useLayoutEffect(() => {
+    if (!doEnableDarkModeIfPreferred) {
+      return;
     }
-  });
 
-  useEffect(() => {
-    if (doEnableDarkModeIfPreferred) {
-      return () => {
-        cleanupDarkModeInitialization();
-      };
-    }
+    const { cleanup } = initializeDarkMode({ htmlDarkModeClassName });
+
+    return () => {
+      cleanup();
+    };
   }, []);
 }
