@@ -4,13 +4,15 @@ import { MainBody } from "./MainBody";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 
 type Props = {
+  displayMessage: boolean;
+  displayRequiredFields: boolean;
   headerNode: ReactNode;
   showUsernameNode: ReactNode;
   children: ReactNode;
 };
 
 export function Main(props: Props) {
-  const { headerNode, showUsernameNode, children } = props;
+  const { displayMessage, displayRequiredFields, headerNode, showUsernameNode, children } = props;
 
   const { kcClsx } = useKcClsx();
 
@@ -18,7 +20,10 @@ export function Main(props: Props) {
     <main className={kcClsx("kcLoginMain")}>
       <MainHeader>{headerNode}</MainHeader>
 
-      <MainBody showUsernameNode={showUsernameNode}>{children}</MainBody>
+      <MainBody 
+      displayMessage={displayMessage}
+      displayRequiredFields={displayRequiredFields}
+      showUsernameNode={showUsernameNode}>{children}</MainBody>
 
       <div className={kcClsx("kcLoginMainFooter")}></div>
     </main>

@@ -3,6 +3,12 @@ import { createGetKcClsx } from "./getKcClsx";
 export type ClassKey =
   | "kcBodyClass"
   | "kcLabelWrapperClass"
+  | "kcFeedbackSuccessIcon"
+  | "kcFeedbackWarningIcon"
+  | "kcFeedbackErrorIcon"
+  | "kcFeedbackInfoIcon"
+
+
   | "kcFormGroupClass"
   | "kcFormGroupLabelClass"
   | "kcFormLabelClass"

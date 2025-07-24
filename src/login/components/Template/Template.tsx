@@ -33,7 +33,12 @@ export function Template(props: {
     <div className={kcClsx("kcLogin")}>
       <div className={kcClsx("kcLoginContainer")}>
         <Header />
-        <Main headerNode={headerNode} showUsernameNode={showUsernameNode}>
+        <Main
+          displayMessage={displayMessage}
+          displayRequiredFields={displayRequiredFields}
+          headerNode={headerNode}
+          showUsernameNode={showUsernameNode}
+        >
           {children}
         </Main>
       </div>
