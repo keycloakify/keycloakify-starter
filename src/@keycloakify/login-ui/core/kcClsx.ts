@@ -2,6 +2,7 @@ import { createGetKcClsx } from "./getKcClsx";
 
 export type ClassKey =
   | "kcBodyClass"
+  | "kcLabelWrapperClass"
   | "kcFormGroupClass"
   | "kcFormGroupLabelClass"
   | "kcFormLabelClass"
@@ -103,6 +104,7 @@ export type ClassKey =
 export const { getKcClsx } = createGetKcClsx<ClassKey>({
   defaultClasses: {
     kcBodyClass: undefined,
+    kcLabelWrapperClass: undefined,
 
     kcFormGroupClass: "pf-v5-c-form__group",
     kcFormGroupLabelClass: "pf-v5-c-form__group-label pf-v5-u-pb-xs",

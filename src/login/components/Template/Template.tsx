@@ -9,6 +9,7 @@ export function Template(props: {
   displayMessage?: boolean;
   displayRequiredFields?: boolean;
   headerNode: ReactNode;
+  showUsernameNode: ReactNode;
   children: ReactNode;
 }) {
   const {
@@ -16,6 +17,7 @@ export function Template(props: {
     displayMessage = true,
     displayRequiredFields = false,
     headerNode,
+    showUsernameNode,
     children,
   } = props;
 
@@ -31,7 +33,9 @@ export function Template(props: {
     <div className={kcClsx("kcLogin")}>
       <div className={kcClsx("kcLoginContainer")}>
         <Header />
-        <Main headerNode={headerNode}>{children}</Main>
+        <Main headerNode={headerNode} showUsernameNode={showUsernameNode}>
+          {children}
+        </Main>
       </div>
     </div>
   );

@@ -1,30 +1,26 @@
 import type { ReactNode } from "react";
+import { MainHeader } from "./MainHeader";
+import { MainBody } from "./MainBody";
+import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 
 type Props = {
-    headerNode: ReactNode;
-    children: ReactNode;
+  headerNode: ReactNode;
+  showUsernameNode: ReactNode;
+  children: ReactNode;
 };
 
-export function Main(props: Props){
+export function Main(props: Props) {
+  const { headerNode, showUsernameNode, children } = props;
 
-    const { headerNode, children } = props;
+  const { kcClsx } = useKcClsx();
 
+  return (
+    <main className={kcClsx("kcLoginMain")}>
+      <MainHeader>{headerNode}</MainHeader>
 
-    return (
-        <main className={kcClsx("kcLoginMain")}>
-            <div className={kcClsx("kcLoginMainHeader")}>
-                <h1 className={kcClsx("kcLoginMainTitle")} id="kc-page-title">
-                    {headerNode}
-                </h1>
-                <LanguageSelect />
-            </div>
+      <MainBody showUsernameNode={showUsernameNode}>{children}</MainBody>
 
-            <div className={kcClsx("kcLoginMainBody")}>
-            </div>
-
-            <div className={kcClsx("kcLoginMainFooter")}>
-            </div>
-        </main>
-    );
-
+      <div className={kcClsx("kcLoginMainFooter")}></div>
+    </main>
+  );
 }

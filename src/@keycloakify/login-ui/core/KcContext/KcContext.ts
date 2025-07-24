@@ -83,6 +83,10 @@ export declare namespace KcContext {
             ssoLoginInOtherTabsUrl: string;
         };
         realm: {
+
+            // NEW
+            loginWithEmailAllowed?: boolean;
+
             name: string;
             displayName: string;
             displayNameHtml: string;
