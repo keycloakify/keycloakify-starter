@@ -5,7 +5,7 @@ import { Header } from "./Header";
 import { LanguageSelect } from "./LanguageSelect";
 import { UsernameBlockAndRequiredFieldsNotice } from "./UsernameBlockAndRequiredFieldsNotice";
 import { AlertMessage } from "./AlertMessage";
-import { TryAnotherWayLinkBlock } from "./TryAnotherWayLinkBlock";
+import { TryAnotherWayLink } from "./TryAnotherWayLink";
 
 export function Template(props: {
   displayInfo?: boolean;
@@ -13,7 +13,7 @@ export function Template(props: {
   displayRequiredFields?: boolean;
   slots: {
     header: ReactNode;
-  }
+  };
   children: ReactNode;
 }) {
   const {
@@ -21,7 +21,7 @@ export function Template(props: {
     displayMessage = true,
     displayRequiredFields = false,
     slots,
-    children,
+    children: slots_pageForm,
   } = props;
 
   const { kcClsx } = useKcClsx();
@@ -48,8 +48,8 @@ export function Template(props: {
               displayRequiredFields={displayRequiredFields}
             />
             <AlertMessage displayMessage={displayMessage} />
-            {children}
-            <TryAnotherWayLinkBlock />
+            {slots_pageForm}
+            <TryAnotherWayLink />
           </div>
         </main>
       </div>

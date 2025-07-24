@@ -4,7 +4,7 @@ import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 
-export function TryAnotherWayLinkBlock() {
+export function TryAnotherWayLink() {
   const { kcContext } = useKcContext();
   const { msg } = useI18n();
   const { kcClsx } = useKcClsx();
