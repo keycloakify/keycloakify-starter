@@ -3,23 +3,16 @@ import { useKcContext } from "../../KcContext";
 import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
 import { kcSanitize } from "../../../@keycloakify/login-ui/kcSanitize";
 
-type Props = {
-  displayMessage: boolean;
-};
-
-export function AlertMessage(props: Props) {
-  const { displayMessage } = props;
-
+export function AlertMessage() {
   const { kcClsx } = useKcClsx();
   const { kcContext } = useKcContext();
 
-  if (
-    !(
-      displayMessage &&
-      kcContext.message !== undefined &&
-      (kcContext.message.type !== "warning" || !kcContext.isAppInitiatedAction)
-    )
-  ) {
+  if (kcContext.message === undefined) {
+    return null;
+  }
+
+  // App-initiated actions should not see warning messages about the need to complete the action during login.
+  if (kcContext.isAppInitiatedAction && kcContext.message.type === "warning") {
     return null;
   }
 

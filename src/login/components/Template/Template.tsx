@@ -8,16 +8,16 @@ import { AlertMessage } from "./AlertMessage";
 import { TryAnotherWayLink } from "./TryAnotherWayLink";
 
 export function Template(props: {
-  displayInfo?: boolean;
   displayMessage?: boolean;
   displayRequiredFields?: boolean;
   slots: {
     header: ReactNode;
+    socialProviders?: ReactNode;
+    info?: ReactNode;
   };
   children: ReactNode;
 }) {
   const {
-    displayInfo = false,
     displayMessage = true,
     displayRequiredFields = false,
     slots,
@@ -47,9 +47,27 @@ export function Template(props: {
             <UsernameBlockAndRequiredFieldsNotice
               displayRequiredFields={displayRequiredFields}
             />
-            <AlertMessage displayMessage={displayMessage} />
+            {displayMessage && <AlertMessage />}
             {children}
             <TryAnotherWayLink />
+
+            <div className={kcClsx("kcLoginMainFooter")}>
+              {slots.socialProviders !== undefined && slots.socialProviders}
+
+              {slots.info !== undefined && (
+                <div
+                  id="kc-info"
+                  className={kcClsx("kcLoginMainFooterBand", "kcFormClass")}
+                >
+                  <div
+                    id="kc-info-wrapper"
+                    className={kcClsx("kcLoginMainFooterBandItem")}
+                  >
+                    {slots.info}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </main>
       </div>
