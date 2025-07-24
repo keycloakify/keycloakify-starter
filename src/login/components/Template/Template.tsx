@@ -21,7 +21,7 @@ export function Template(props: {
     displayMessage = true,
     displayRequiredFields = false,
     slots,
-    children: slots_pageForm,
+    children,
   } = props;
 
   const { kcClsx } = useKcClsx();
@@ -48,7 +48,7 @@ export function Template(props: {
               displayRequiredFields={displayRequiredFields}
             />
             <AlertMessage displayMessage={displayMessage} />
-            {slots_pageForm}
+            {children}
             <TryAnotherWayLink />
           </div>
         </main>
