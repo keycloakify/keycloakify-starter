@@ -1,0 +1,25 @@
+:root {
+  --spark-of-light-dark-color: #00a7c4;
+  --spark-of-light-dark-top: #00517e;
+  --spark-of-light-dark-bottom: #00a7c4;
+
+    --pf-global--primary-color--100: #00ae31;
+
+    --pf-global--primary-color--200: #00952a;
+    --pf-global--primary-color--300: #007b23;
+}
+
+body {
+  background: radial-gradient(circle, var(--spark-of-light-dark-bottom) 0, var(--spark-of-light-dark-top) 100%) !important;
+}
+
+.kcFormCardClass {
+  border-top: none;
+}
+
+.kcButtonClass {
+  border-radius: 50px;
+}
+a {
+    color: #00c5e7;
+}
