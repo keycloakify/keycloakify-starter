@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 import { clsx } from "../../../../@keycloakify/login-ui/tools/clsx";
 import { useKcContext } from "../../../KcContext";
@@ -6,20 +5,13 @@ import { FieldGroup } from "../../FieldGroup";
 import { useI18n } from "../../../i18n";
 import { assert } from "tsafe/assert";
 
-type Props = {
-  children: ReactNode;
-};
-
-export function UsernameBlockWrapper(props: Props) {
-  const { children } = props;
-
+export function UsernameBlock() {
   const { kcClsx } = useKcClsx();
   const { kcContext } = useKcContext();
   const { msg } = useI18n();
 
   return (
     <div className={kcClsx("kcFormClass", "kcContentWrapperClass")}>
-      {children}
       <FieldGroup
         name="username"
         label={msg(

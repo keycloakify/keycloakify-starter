@@ -1,49 +1,41 @@
-import type { ReactNode } from "react";
 import { RequiredFieldsNotice } from "./RequiredFieldsNotice";
-import { UsernameBlockWrapper } from "./UsernameBlockWrapper";
+import { UsernameBlock } from "./UsernameBlock";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 import { useKcContext } from "../../../KcContext";
 
 type Props = {
-  showUsernameNode: ReactNode;
   displayRequiredFields: boolean;
 };
 
 export function UsernameBlockAndRequiredFieldsNotice(props: Props) {
-  const { showUsernameNode, displayRequiredFields } = props;
+  const { displayRequiredFields } = props;
   const { kcClsx } = useKcClsx();
   const { kcContext } = useKcContext();
 
-  const requiredFieldsNoticeNode = !displayRequiredFields ? undefined : (
-    <RequiredFieldsNotice />
-  );
+  const node1 = !displayRequiredFields ? undefined : <RequiredFieldsNotice />;
 
-  const usernameNode = !(
+  const node2 = !(
     kcContext.auth?.showUsername && !kcContext.auth.showResetCredentials
   ) ? undefined : (
-    <UsernameBlockWrapper>{showUsernameNode}</UsernameBlockWrapper>
+    <UsernameBlock />
   );
 
-  if (usernameNode === undefined && requiredFieldsNoticeNode === undefined) {
+  if (node1 === undefined && node2 === undefined) {
     return null;
   }
 
-  if (usernameNode === undefined && requiredFieldsNoticeNode !== undefined) {
-    return (
-      <div className={kcClsx("kcContentWrapperClass")}>
-        {requiredFieldsNoticeNode}
-      </div>
-    );
+  if (node1 !== undefined && node2 === undefined) {
+    return <div className={kcClsx("kcContentWrapperClass")}>{node1}</div>;
   }
 
-  if (usernameNode !== undefined && requiredFieldsNoticeNode === undefined) {
-    return usernameNode;
+  if (node1 === undefined && node2 !== undefined) {
+    return node2;
   }
 
   return (
     <div className={kcClsx("kcContentWrapperClass")}>
-      {requiredFieldsNoticeNode}
-      {usernameNode}
+      {node1}
+      {node2}
     </div>
   );
 }

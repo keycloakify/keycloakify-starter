@@ -11,16 +11,16 @@ export function Template(props: {
   displayInfo?: boolean;
   displayMessage?: boolean;
   displayRequiredFields?: boolean;
-  headerNode: ReactNode;
-  showUsernameNode: ReactNode;
+  slots: {
+    header: ReactNode;
+  }
   children: ReactNode;
 }) {
   const {
     displayInfo = false,
     displayMessage = true,
     displayRequiredFields = false,
-    headerNode,
-    showUsernameNode,
+    slots,
     children,
   } = props;
 
@@ -39,14 +39,13 @@ export function Template(props: {
         <main className={kcClsx("kcLoginMain")}>
           <div className={kcClsx("kcLoginMainHeader")}>
             <h1 className={kcClsx("kcLoginMainTitle")} id="kc-page-title">
-              {headerNode}
+              {slots.header}
             </h1>
             <LanguageSelect />
           </div>
           <div className={kcClsx("kcLoginMainBody")}>
             <UsernameBlockAndRequiredFieldsNotice
               displayRequiredFields={displayRequiredFields}
-              showUsernameNode={showUsernameNode}
             />
             <AlertMessage displayMessage={displayMessage} />
             {children}
