@@ -2,7 +2,10 @@ import type { ReactNode } from "react";
 import { useInitializeTemplate } from "./useInitializeTemplate";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { Header } from "./Header";
-import { Main } from "./Main";
+import { LanguageSelect } from "./LanguageSelect";
+import { UsernameBlockAndRequiredFieldsNotice } from "./UsernameBlockAndRequiredFieldsNotice";
+import { AlertMessage } from "./AlertMessage";
+import { TryAnotherWayLinkBlock } from "./TryAnotherWayLinkBlock";
 
 export function Template(props: {
   displayInfo?: boolean;
@@ -33,14 +36,23 @@ export function Template(props: {
     <div className={kcClsx("kcLogin")}>
       <div className={kcClsx("kcLoginContainer")}>
         <Header />
-        <Main
-          displayMessage={displayMessage}
-          displayRequiredFields={displayRequiredFields}
-          headerNode={headerNode}
-          showUsernameNode={showUsernameNode}
-        >
-          {children}
-        </Main>
+        <main className={kcClsx("kcLoginMain")}>
+          <div className={kcClsx("kcLoginMainHeader")}>
+            <h1 className={kcClsx("kcLoginMainTitle")} id="kc-page-title">
+              {headerNode}
+            </h1>
+            <LanguageSelect />
+          </div>
+          <div className={kcClsx("kcLoginMainBody")}>
+            <UsernameBlockAndRequiredFieldsNotice
+              displayRequiredFields={displayRequiredFields}
+              showUsernameNode={showUsernameNode}
+            />
+            <AlertMessage displayMessage={displayMessage} />
+            {children}
+            <TryAnotherWayLinkBlock />
+          </div>
+        </main>
       </div>
     </div>
   );

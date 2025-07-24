@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { useKcClsx } from "../../../../../../@keycloakify/login-ui/useKcClsx";
-import { clsx } from "../../../../../../@keycloakify/login-ui/tools/clsx";
-import { useKcContext } from "../../../../../KcContext";
-import { FieldGroup } from "../../../../FieldGroup";
-import { useI18n } from "../../../../../i18n";
+import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
+import { clsx } from "../../../../@keycloakify/login-ui/tools/clsx";
+import { useKcContext } from "../../../KcContext";
+import { FieldGroup } from "../../FieldGroup";
+import { useI18n } from "../../../i18n";
 import { assert } from "tsafe/assert";
 
 type Props = {

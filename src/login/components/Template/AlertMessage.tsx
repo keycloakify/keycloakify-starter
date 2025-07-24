@@ -1,7 +1,7 @@
-import { useKcClsx } from "../../../../../@keycloakify/login-ui/useKcClsx";
-import { useKcContext } from "../../../../KcContext";
-import { clsx } from "../../../../../@keycloakify/login-ui/tools/clsx";
-import { kcSanitize } from "../../../../../@keycloakify/login-ui/kcSanitize";
+import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
+import { useKcContext } from "../../KcContext";
+import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
+import { kcSanitize } from "../../../@keycloakify/login-ui/kcSanitize";
 
 type Props = {
   displayMessage: boolean;

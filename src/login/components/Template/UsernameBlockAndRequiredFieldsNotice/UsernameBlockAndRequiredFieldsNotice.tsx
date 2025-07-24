@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import { RequiredFieldsNotice } from "./RequiredFieldsNotice";
 import { UsernameBlockWrapper } from "./UsernameBlockWrapper";
-import { useKcClsx } from "../../../../../../@keycloakify/login-ui/useKcClsx";
-import { useKcContext } from "../../../../../KcContext";
+import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
+import { useKcContext } from "../../../KcContext";
 
 type Props = {
   showUsernameNode: ReactNode;

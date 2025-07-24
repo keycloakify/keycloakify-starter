@@ -1,5 +1,5 @@
-import { useI18n } from "../../../../i18n";
-import { useKcClsx } from "../../../../../@keycloakify/login-ui/useKcClsx";
+import { useI18n } from "../../i18n";
+import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { assert } from "tsafe/assert";
 
 export function LanguageSelect() {
