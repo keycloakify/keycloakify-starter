@@ -1,14 +1,22 @@
-import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
-import { clsx } from "../../../../@keycloakify/login-ui/tools/clsx";
-import { useKcContext } from "../../../KcContext";
-import { FieldGroup } from "../../FieldGroup";
-import { useI18n } from "../../../i18n";
+import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
+import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
+import { useKcContext } from "../../KcContext";
+import { FieldGroup } from "../FieldGroup";
+import { useI18n } from "../../i18n";
 import { assert } from "tsafe/assert";
 
 export function UsernameBlock() {
   const { kcClsx } = useKcClsx();
   const { kcContext } = useKcContext();
   const { msg } = useI18n();
+
+  if (!kcContext.auth?.showUsername) {
+    return null;
+  }
+
+  if (kcContext.auth.showResetCredentials) {
+    return null;
+  }
 
   return (
     <div className={kcClsx("kcFormClass", "kcContentWrapperClass")}>

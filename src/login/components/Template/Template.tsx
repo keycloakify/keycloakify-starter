@@ -4,7 +4,9 @@ import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { useI18n } from "../../i18n";
 import { useKcContext } from "../../KcContext";
 import { LanguageSelect } from "./LanguageSelect";
-import { UsernameBlockAndRequiredFieldsNotice } from "./UsernameBlockAndRequiredFieldsNotice";
+import { UsernameRequiredFieldsWrapper } from "./UsernameRequiredFieldsWrapper";
+import { UsernameBlock } from "./UsernameBlock";
+import { RequiredFieldsNotice } from "./RequiredFieldsNotice";
 import { AlertMessage } from "./AlertMessage";
 import { TryAnotherWayLink } from "./TryAnotherWayLink";
 
@@ -40,7 +42,7 @@ export function Template(props: {
       <div className={kcClsx("kcLoginContainer")}>
         <header id="kc-header" className="pf-v5-c-login__header">
           <div id="kc-header-wrapper" className="pf-v5-c-brand">
-            {msg("loginTitleHtml", kcContext.realm.displayNameHtml || "")}
+            {msg("loginTitleHtml", kcContext.realm.displayNameHtml)}
           </div>
         </header>
         <main className={kcClsx("kcLoginMain")}>
@@ -51,8 +53,13 @@ export function Template(props: {
             <LanguageSelect />
           </div>
           <div className={kcClsx("kcLoginMainBody")}>
-            <UsernameBlockAndRequiredFieldsNotice
-              displayRequiredFields={displayRequiredFields}
+            <UsernameRequiredFieldsWrapper
+              slots={{
+                requiredFields: displayRequiredFields && (
+                  <RequiredFieldsNotice />
+                ),
+                username: <UsernameBlock />,
+              }}
             />
             {displayMessage && <AlertMessage />}
             {children}

@@ -1,6 +1,6 @@
-import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
-import { useI18n } from "../../../i18n";
-import { clsx } from "../../../../@keycloakify/login-ui/tools/clsx";
+import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
+import { useI18n } from "../../i18n";
+import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
 
 export function RequiredFieldsNotice() {
   const { kcClsx } = useKcClsx();
