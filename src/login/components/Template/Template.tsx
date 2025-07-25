@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { useInitializeTemplate } from "./useInitializeTemplate";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
-import { Header } from "./Header";
+import { useI18n } from "../../i18n";
+import { useKcContext } from "../../KcContext";
 import { LanguageSelect } from "./LanguageSelect";
 import { UsernameBlockAndRequiredFieldsNotice } from "./UsernameBlockAndRequiredFieldsNotice";
 import { AlertMessage } from "./AlertMessage";
@@ -25,6 +26,8 @@ export function Template(props: {
   } = props;
 
   const { kcClsx } = useKcClsx();
+  const { msg } = useI18n();
+  const { kcContext } = useKcContext();
 
   const { isReadyToRender } = useInitializeTemplate();
 
@@ -35,7 +38,11 @@ export function Template(props: {
   return (
     <div className={kcClsx("kcLogin")}>
       <div className={kcClsx("kcLoginContainer")}>
-        <Header />
+        <header id="kc-header" className="pf-v5-c-login__header">
+          <div id="kc-header-wrapper" className="pf-v5-c-brand">
+            {msg("loginTitleHtml", kcContext.realm.displayNameHtml || "")}
+          </div>
+        </header>
         <main className={kcClsx("kcLoginMain")}>
           <div className={kcClsx("kcLoginMainHeader")}>
             <h1 className={kcClsx("kcLoginMainTitle")} id="kc-page-title">
@@ -50,10 +57,8 @@ export function Template(props: {
             {displayMessage && <AlertMessage />}
             {children}
             <TryAnotherWayLink />
-
             <div className={kcClsx("kcLoginMainFooter")}>
               {slots.socialProviders !== undefined && slots.socialProviders}
-
               {slots.info !== undefined && (
                 <div
                   id="kc-info"
