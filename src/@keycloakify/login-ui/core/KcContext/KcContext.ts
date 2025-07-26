@@ -62,6 +62,7 @@ export type KcContext =
     | KcContext.LoginIdpLinkConfirmOverride;
 
 export declare namespace KcContext {
+
     export type Common = {
 
         // NEW: 
@@ -78,6 +79,7 @@ export declare namespace KcContext {
                 iconClasses?: string;
             }[];
         };
+
 
 
 
@@ -167,7 +169,22 @@ export declare namespace KcContext {
         "x-keycloakify": {
             messages: Record<string, string>;
         };
-    };
+    } & Common.ConditionalUIData;
+
+    export namespace Common {
+
+        type ConditionalUIData = {
+            enableWebAuthnConditionalUI: true;
+            isUserIdentified: "true" | "false";
+            challenge: string;
+            userVerification: string;
+            rpId: string;
+            createTimeout: number | string;
+        } | {
+            enableWebAuthnConditionalUI?: false;
+        };
+
+    }
 
     export type SamlPostForm = Common & {
         pageId: "saml-post-form.ftl";

@@ -20,7 +20,7 @@ export function Page() {
       slots={{
         header: msg("loginAccountTitle"),
         info: <Info />,
-        form: <Form />
+        form: <Form />,
       }}
     />
   );
