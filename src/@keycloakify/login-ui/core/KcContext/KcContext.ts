@@ -69,6 +69,15 @@ export declare namespace KcContext {
         authenticationSession?: {
             authSessionIdHash: string;
         };
+        social?: {
+            providers?: {
+                loginUrl: string;
+                alias: string;
+                providerId: string;
+                displayName: string;
+                iconClasses?: string;
+            }[];
+        };
 
 
 
@@ -193,16 +202,6 @@ export declare namespace KcContext {
             password?: string;
         };
         usernameHidden?: boolean;
-        social?: {
-            displayInfo: boolean;
-            providers?: {
-                loginUrl: string;
-                alias: string;
-                providerId: string;
-                displayName: string;
-                iconClasses?: string;
-            }[];
-        };
     };
 
     export type Register = Common & {

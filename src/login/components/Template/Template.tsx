@@ -9,22 +9,23 @@ import { UsernameBlock } from "./UsernameBlock";
 import { RequiredFieldsNotice } from "./RequiredFieldsNotice";
 import { AlertMessage } from "./AlertMessage";
 import { TryAnotherWayLink } from "./TryAnotherWayLink";
+import { SocialProviders } from "./SocialProviders";
 
 export function Template(props: {
   displayMessage?: boolean;
   displayRequiredFields?: boolean;
+  displaySocialProviders?: boolean;
   slots: {
     header: ReactNode;
-    socialProviders?: ReactNode;
     info?: ReactNode;
+    form: ReactNode;
   };
-  children: ReactNode;
 }) {
   const {
     displayMessage = true,
     displayRequiredFields = false,
+    displaySocialProviders = false,
     slots,
-    children,
   } = props;
 
   const { kcClsx } = useKcClsx();
@@ -62,11 +63,11 @@ export function Template(props: {
               }}
             />
             {displayMessage && <AlertMessage />}
-            {children}
+            {slots.form}
             <TryAnotherWayLink />
             <div className={kcClsx("kcLoginMainFooter")}>
-              {slots.socialProviders !== undefined && slots.socialProviders}
-              {slots.info !== undefined && (
+              {displaySocialProviders && <SocialProviders />}
+              {slots.info && (
                 <div
                   id="kc-info"
                   className={kcClsx("kcLoginMainFooterBand", "kcFormClass")}

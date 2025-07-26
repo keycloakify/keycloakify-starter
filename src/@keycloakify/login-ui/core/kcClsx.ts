@@ -7,6 +7,7 @@ export type ClassKey =
   | "kcFeedbackWarningIcon"
   | "kcFeedbackErrorIcon"
   | "kcFeedbackInfoIcon"
+  | "kcFormSocialAccountSectionClass"
 
 
   | "kcFormGroupClass"
@@ -111,6 +112,11 @@ export const { getKcClsx } = createGetKcClsx<ClassKey>({
   defaultClasses: {
     kcBodyClass: undefined,
     kcLabelWrapperClass: undefined,
+    kcFeedbackErrorIcon: undefined,
+    kcFeedbackInfoIcon: undefined,
+    kcFeedbackSuccessIcon: undefined,
+    kcFeedbackWarningIcon: undefined,
+    kcFormSocialAccountSectionClass: undefined,
 
     kcFormGroupClass: "pf-v5-c-form__group",
     kcFormGroupLabelClass: "pf-v5-c-form__group-label pf-v5-u-pb-xs",
