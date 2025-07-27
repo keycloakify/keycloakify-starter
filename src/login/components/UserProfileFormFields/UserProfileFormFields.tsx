@@ -1,12 +1,11 @@
 /**
  * This file has been claimed for ownership from @keycloakify/login-ui version 250004.1.2.
  * To relinquish ownership and restore this file to its original content, run the following command:
- * 
+ *
  * $ npx keycloakify own --path "login/components/UserProfileFormFields/UserProfileFormFields.tsx" --revert
  */
 
-import type { JSX } from "../../../@keycloakify/login-ui/tools/JSX";
-import { useEffect, Fragment } from "react";
+import { useEffect, Fragment, type ReactNode } from "react";
 import {
     useUserProfileForm,
     type FormAction,
@@ -21,14 +20,15 @@ import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { DO_MAKE_USER_CONFIRM_PASSWORD } from "./DO_MAKE_USER_CONFIRM_PASSWORD";
 import { assert } from "tsafe/assert";
+import { FieldGroup } from "../FieldGroup";
 
 export type UserProfileFormFieldsProps = {
     onIsFormSubmittableValueChange: (isFormSubmittable: boolean) => void;
-    BeforeField?: (props: BeforeAfterFieldProps) => JSX.Element | null;
-    AfterField?: (props: BeforeAfterFieldProps) => JSX.Element | null;
+    renderBeforeField?: (props: ParamsOfBeforeAfterFields) => ReactNode;
+    renderAfterField?: (props: ParamsOfBeforeAfterFields) => ReactNode;
 };
 
-type BeforeAfterFieldProps = {
+type ParamsOfBeforeAfterFields = {
     attribute: Attribute;
     dispatchFormAction: React.Dispatch<FormAction>;
     displayableErrors: FormFieldError[];
@@ -36,7 +36,7 @@ type BeforeAfterFieldProps = {
 };
 
 export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
-    const { onIsFormSubmittableValueChange, BeforeField, AfterField } = props;
+    const { onIsFormSubmittableValueChange, renderBeforeField, renderAfterField } = props;
 
     const { kcContext } = useKcContext();
 
@@ -69,68 +69,55 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                 return (
                     <Fragment key={attribute.name}>
                         <GroupLabel attribute={attribute} groupNameRef={groupNameRef} />
-                        {BeforeField !== undefined && (
-                            <BeforeField
-                                attribute={attribute}
-                                dispatchFormAction={dispatchFormAction}
-                                displayableErrors={displayableErrors}
-                                valueOrValues={valueOrValues}
-                            />
-                        )}
-                        <div
-                            className={kcClsx("kcFormGroupClass")}
+                        {renderBeforeField?.({
+                            attribute,
+                            dispatchFormAction,
+                            displayableErrors,
+                            valueOrValues
+                        }) ?? null}
+
+                        <FieldGroup
+                            name={`${attribute.name}`}
+                            label={advancedMsg(attribute.displayName ?? "")}
+                            required={attribute.required}
                             style={{
                                 display:
                                     attribute.annotations.inputType === "hidden" ? "none" : undefined
                             }}
+                            error={<FieldErrors displayableErrors={displayableErrors} />}
                         >
-                            <div className={kcClsx("kcLabelWrapperClass")}>
-                                <label htmlFor={attribute.name} className={kcClsx("kcLabelClass")}>
-                                    {advancedMsg(attribute.displayName ?? "")}
-                                </label>
-                                {attribute.required && <> *</>}
-                            </div>
-                            <div className={kcClsx("kcInputWrapperClass")}>
-                                {attribute.annotations.inputHelperTextBefore !== undefined && (
-                                    <div
-                                        className={kcClsx("kcInputHelperTextBeforeClass")}
-                                        id={`form-help-text-before-${attribute.name}`}
-                                        aria-live="polite"
-                                    >
-                                        {advancedMsg(attribute.annotations.inputHelperTextBefore)}
-                                    </div>
-                                )}
-                                <InputFieldByType
-                                    attribute={attribute}
-                                    valueOrValues={valueOrValues}
-                                    displayableErrors={displayableErrors}
-                                    dispatchFormAction={dispatchFormAction}
-                                />
-                                <FieldErrors
-                                    attribute={attribute}
-                                    displayableErrors={displayableErrors}
-                                    fieldIndex={undefined}
-                                />
-                                {attribute.annotations.inputHelperTextAfter !== undefined && (
-                                    <div
-                                        className={kcClsx("kcInputHelperTextAfterClass")}
-                                        id={`form-help-text-after-${attribute.name}`}
-                                        aria-live="polite"
-                                    >
-                                        {advancedMsg(attribute.annotations.inputHelperTextAfter)}
-                                    </div>
-                                )}
-                                {AfterField !== undefined && (
-                                    <AfterField
-                                        attribute={attribute}
-                                        dispatchFormAction={dispatchFormAction}
-                                        displayableErrors={displayableErrors}
-                                        valueOrValues={valueOrValues}
-                                    />
-                                )}
-                                {/* NOTE: Downloading of html5DataAnnotations scripts is done in the useUserProfileForm hook */}
-                            </div>
-                        </div>
+                            {attribute.annotations.inputHelperTextBefore && (
+                                <div
+                                    className={kcClsx("kcInputHelperTextBeforeClass")}
+                                    id={`form-help-text-before-${attribute.name}`}
+                                    aria-live="polite"
+                                >
+                                    {advancedMsg(attribute.annotations.inputHelperTextBefore)}
+                                </div>
+                            )}
+                            <InputFieldByType
+                                attribute={attribute}
+                                valueOrValues={valueOrValues}
+                                displayableErrors={displayableErrors}
+                                dispatchFormAction={dispatchFormAction}
+                            />
+                            {attribute.annotations.inputHelperTextAfter && (
+                                <div
+                                    className={kcClsx("kcInputHelperTextAfterClass")}
+                                    id={`form-help-text-after-${attribute.name}`}
+                                    aria-live="polite"
+                                >
+                                    {advancedMsg(attribute.annotations.inputHelperTextAfter)}
+                                </div>
+                            )}
+                        </FieldGroup>
+                        {renderAfterField?.({
+                            attribute,
+                            dispatchFormAction,
+                            displayableErrors,
+                            valueOrValues
+                        }) ?? null}
+                        {/* NOTE: Downloading of html5DataAnnotations scripts is done in the useUserProfileForm hook */}
                     </Fragment>
                 );
             })}
