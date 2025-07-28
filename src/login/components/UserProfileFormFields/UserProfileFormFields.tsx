@@ -1,10 +1,3 @@
-/**
- * This file has been claimed for ownership from @keycloakify/login-ui version 250004.1.2.
- * To relinquish ownership and restore this file to its original content, run the following command:
- *
- * $ npx keycloakify own --path "login/components/UserProfileFormFields/UserProfileFormFields.tsx" --revert
- */
-
 import { useEffect, Fragment, type ReactNode } from "react";
 import {
     useUserProfileForm,
@@ -12,7 +5,7 @@ import {
     type FormFieldError
 } from "../../../@keycloakify/login-ui/useUserProfileForm";
 import { GroupLabel } from "./GroupLabel";
-import { FieldErrors } from "./FieldErrors";
+import { DisplayableErrors } from "./DisplayableErrors";
 import { InputFieldByType } from "./InputFieldByType";
 import type { Attribute } from "../../../@keycloakify/login-ui/KcContext";
 import { useKcContext } from "../../KcContext";
@@ -20,7 +13,7 @@ import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { DO_MAKE_USER_CONFIRM_PASSWORD } from "./DO_MAKE_USER_CONFIRM_PASSWORD";
 import { assert } from "tsafe/assert";
-import { FieldGroup } from "../FieldGroup";
+import { Group } from "../field/Group";
 
 export type UserProfileFormFieldsProps = {
     onIsFormSubmittableValueChange: (isFormSubmittable: boolean) => void;
@@ -76,7 +69,7 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                             valueOrValues
                         }) ?? null}
 
-                        <FieldGroup
+                        <Group
                             name={`${attribute.name}`}
                             label={advancedMsg(attribute.displayName ?? "")}
                             required={attribute.required}
@@ -84,7 +77,7 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                                 display:
                                     attribute.annotations.inputType === "hidden" ? "none" : undefined
                             }}
-                            error={<FieldErrors displayableErrors={displayableErrors} />}
+                            error={<DisplayableErrors displayableErrors={displayableErrors} />}
                         >
                             {attribute.annotations.inputHelperTextBefore && (
                                 <div
@@ -110,7 +103,7 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                                     {advancedMsg(attribute.annotations.inputHelperTextAfter)}
                                 </div>
                             )}
-                        </FieldGroup>
+                        </Group>
                         {renderAfterField?.({
                             attribute,
                             dispatchFormAction,

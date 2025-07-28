@@ -1,27 +1,51 @@
-/**
- * This file has been claimed for ownership from @keycloakify/login-ui version 250004.1.2.
- * To relinquish ownership and restore this file to its original content, run the following command:
- * 
- * $ npx keycloakify own --path "login/components/UserProfileFormFields/InputTag.tsx" --revert
- */
-
+import type { ReactNode } from "react";
 import { assert } from "tsafe/assert";
-import { FieldErrors } from "./FieldErrors";
+import { DisplayableErrors } from "./DisplayableErrors";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
 import { AddRemoveButtonsMultiValuedAttribute } from "./AddRemoveButtonsMultiValuedAttribute";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
+import { ErrorContainer } from "../field/Group/ErrorContainer";
 
-export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | undefined }) {
-    const { attribute, fieldIndex, dispatchFormAction, valueOrValues, displayableErrors } = props;
+export function InputTag(
+    props: InputFieldByTypeProps & {
+        fieldIndex?: number;
+        renderInput?: (
+            inputProps: {
+                type: string;
+                id: string;
+                name: string;
+                value: string;
+                className: string;
+                "aria-invalid": boolean;
+                disabled: boolean;
+                autoComplete: string | undefined;
+                placeholder: string | undefined;
+                pattern: string | undefined;
+                size: number | undefined;
+                maxLength: number | undefined;
+                minLength: number | undefined;
+                max: string | undefined;
+                min: string | undefined;
+                step: string | undefined;
+                onChange: NonNullable<React.ComponentProps<"input">["onChange"]>;
+                onBlur: NonNullable<React.ComponentProps<"input">["onBlur"]>;
+            } & {
+                [key in `data-${string}`]: string;
+            }
+        ) => ReactNode;
+    }
+) {
+    const { attribute, fieldIndex, dispatchFormAction, valueOrValues, displayableErrors, renderInput = inputProps => <input {...inputProps} /> } =
+        props;
 
     const { advancedMsgStr } = useI18n();
     const { kcClsx } = useKcClsx();
 
     return (
         <>
-            <input
-                type={(() => {
+            {renderInput({
+                type: (() => {
                     const { inputType } = attribute.annotations;
 
                     if (inputType?.startsWith("html5-")) {
@@ -29,10 +53,10 @@ export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | u
                     }
 
                     return inputType ?? "text";
-                })()}
-                id={attribute.name}
-                name={attribute.name}
-                value={(() => {
+                })(),
+                id: attribute.name,
+                name: attribute.name,
+                value: (() => {
                     if (fieldIndex !== undefined) {
                         assert(valueOrValues instanceof Array);
                         return valueOrValues[fieldIndex];
@@ -41,44 +65,39 @@ export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | u
                     assert(typeof valueOrValues === "string");
 
                     return valueOrValues;
-                })()}
-                className={kcClsx("kcInputClass")}
-                aria-invalid={
-                    displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined
-                }
-                disabled={attribute.readOnly}
-                autoComplete={attribute.autocomplete}
-                placeholder={
+                })(),
+                className: kcClsx("kcInputClass"),
+                "aria-invalid":
+                    displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined,
+                disabled: attribute.readOnly,
+                autoComplete: attribute.autocomplete,
+                placeholder:
                     attribute.annotations.inputTypePlaceholder === undefined
                         ? undefined
-                        : advancedMsgStr(attribute.annotations.inputTypePlaceholder)
-                }
-                pattern={attribute.annotations.inputTypePattern}
-                size={
+                        : advancedMsgStr(attribute.annotations.inputTypePlaceholder),
+                pattern: attribute.annotations.inputTypePattern,
+                size:
                     attribute.annotations.inputTypeSize === undefined
                         ? undefined
-                        : parseInt(`${attribute.annotations.inputTypeSize}`)
-                }
-                maxLength={
+                        : parseInt(`${attribute.annotations.inputTypeSize}`),
+                maxLength:
                     attribute.annotations.inputTypeMaxlength === undefined
                         ? undefined
-                        : parseInt(`${attribute.annotations.inputTypeMaxlength}`)
-                }
-                minLength={
+                        : parseInt(`${attribute.annotations.inputTypeMaxlength}`),
+                minLength:
                     attribute.annotations.inputTypeMinlength === undefined
                         ? undefined
-                        : parseInt(`${attribute.annotations.inputTypeMinlength}`)
-                }
-                max={attribute.annotations.inputTypeMax}
-                min={attribute.annotations.inputTypeMin}
-                step={attribute.annotations.inputTypeStep}
-                {...Object.fromEntries(
+                        : parseInt(`${attribute.annotations.inputTypeMinlength}`),
+                max: attribute.annotations.inputTypeMax,
+                min: attribute.annotations.inputTypeMin,
+                step: attribute.annotations.inputTypeStep,
+                ...Object.fromEntries(
                     Object.entries(attribute.html5DataAnnotations ?? {}).map(([key, value]) => [
                         `data-${key}`,
                         value
                     ])
-                )}
-                onChange={event =>
+                ),
+                onChange: event =>
                     dispatchFormAction({
                         action: "update",
                         name: attribute.name,
@@ -97,16 +116,15 @@ export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | u
 
                             return event.target.value;
                         })()
-                    })
-                }
-                onBlur={() =>
+                    }),
+
+                onBlur: () =>
                     dispatchFormAction({
                         action: "focus lost",
                         name: attribute.name,
                         fieldIndex: fieldIndex
                     })
-                }
-            />
+            })}
             {(() => {
                 if (fieldIndex === undefined) {
                     return null;
@@ -118,11 +136,12 @@ export function InputTag(props: InputFieldByTypeProps & { fieldIndex: number | u
 
                 return (
                     <>
-                        <FieldErrors
-                            attribute={attribute}
-                            displayableErrors={displayableErrors}
-                            fieldIndex={fieldIndex}
-                        />
+                        <ErrorContainer name={fieldIndex === undefined ? "" : `-${fieldIndex}`}>
+                            <DisplayableErrors
+                                displayableErrors={displayableErrors}
+                                fieldIndex={fieldIndex}
+                            />
+                        </ErrorContainer>
                         <AddRemoveButtonsMultiValuedAttribute
                             attribute={attribute}
                             values={values}

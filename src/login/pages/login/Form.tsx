@@ -53,8 +53,6 @@ export function Form() {
                     ? undefined
                     : kcContext.messagesPerField.get("password")
                 }
-                autoFocus={!!kcContext.usernameHidden}
-                autoComplete={"current-password"}
                 rememberMe={
                   kcContext.realm.rememberMe &&
                   !kcContext.usernameHidden && (
@@ -65,8 +63,14 @@ export function Form() {
                     />
                   )
                 }
+                renderInput={inputProps => (
+                  <input
+                    {...inputProps}
+                    autoFocus={!!kcContext.usernameHidden}
+                    autoComplete={"current-password"}
+                  />
+                )}
               />
-
               <input
                 type="hidden"
                 id="id-hidden-input"
