@@ -1683,7 +1683,7 @@
         "strictTransportSecurity": "max-age=31536000; includeSubDomains"
     },
     "smtpServer": {},
-    "loginTheme": "keycloak.v2",
+    "loginTheme": "keycloakify-starter",
     "accountTheme": "",
     "adminTheme": "",
     "emailTheme": "",

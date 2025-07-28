@@ -21,15 +21,41 @@ body {
         var(--spark-of-light-dark-bottom) 0,
         var(--spark-of-light-dark-top) 100%
     ) !important;
+    font-size: 16px;
 }
 
 .kcFormCardClass {
     border-top: none;
+    border-radius: 15px;
 }
 
 .kcButtonClass {
     border-radius: 50px;
 }
+
+.kcFormHeaderClass {
+  display: none !important;
+}
+
+.kcHeaderClass {
+  color: white !important;
+}
+
 a {
     color: #00c5e7;
+}
+
+.kcLocaleMainClass {
+    display: none;
+}
+
+.kcInfoAreaWrapperClass {
+    background-color: white !important;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.kcHeaderWrapperClass {
+  text-transform:none !important;
+  font-weight: bold;
 }
