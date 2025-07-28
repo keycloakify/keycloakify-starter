@@ -1,17 +1,9 @@
-/**
- * This file has been claimed for ownership from @keycloakify/login-ui version 250004.1.2.
- * To relinquish ownership and restore this file to its original content, run the following command:
- *
- * $ npx keycloakify own --path "login/components/UserProfileFormFields/InputFieldByType.tsx" --revert
- */
-
 import { TextareaTag } from "./TextareaTag";
 import { SelectTag } from "./SelectTag";
 import { InputTagSelects } from "./InputTagSelects";
 import { InputTag } from "./InputTag";
 import type { FormAction, FormFieldError } from "../../../@keycloakify/login-ui/useUserProfileForm";
 import type { Attribute } from "../../../@keycloakify/login-ui/KcContext";
-import { PasswordWrapperInner } from "../field/Password/PasswordWrapperInner";
 
 export type InputFieldByTypeProps = {
     attribute: Attribute;
@@ -47,28 +39,8 @@ export function InputFieldByType(props: InputFieldByTypeProps) {
                 );
             }
 
-            const inputNode = <InputTag {...props} fieldIndex={undefined} />;
-
-            if (attribute.name === "password" || attribute.name === "password-confirm") {
-                return (
-                    <InputTag
-                        {...props}
-                        renderInput={inputProps => (
-                            <PasswordWrapperInner
-                                inputId={inputProps.id}
-                                hasError={inputProps["aria-invalid"]}
-                                renderInput={inputProps_password => (
-                                    <input {...inputProps} {...inputProps_password} />
-                                )}
-                            />
-                        )}
-                    />
-                );
-            }
-
             return <InputTag {...props} />;
 
-            return inputNode;
         }
     }
 }

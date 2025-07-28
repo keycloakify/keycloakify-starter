@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { assert } from "tsafe/assert";
 import { DisplayableErrors } from "./DisplayableErrors";
 import type { InputFieldByTypeProps } from "./InputFieldByType";
@@ -6,125 +5,120 @@ import { AddRemoveButtonsMultiValuedAttribute } from "./AddRemoveButtonsMultiVal
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { ErrorContainer } from "../field/Group/ErrorContainer";
+import { PasswordWrapperInner } from "../field/Password/PasswordWrapperInner";
 
 export function InputTag(
     props: InputFieldByTypeProps & {
         fieldIndex?: number;
-        renderInput?: (
-            inputProps: {
-                type: string;
-                id: string;
-                name: string;
-                value: string;
-                className: string;
-                "aria-invalid": boolean;
-                disabled: boolean;
-                autoComplete: string | undefined;
-                placeholder: string | undefined;
-                pattern: string | undefined;
-                size: number | undefined;
-                maxLength: number | undefined;
-                minLength: number | undefined;
-                max: string | undefined;
-                min: string | undefined;
-                step: string | undefined;
-                onChange: NonNullable<React.ComponentProps<"input">["onChange"]>;
-                onBlur: NonNullable<React.ComponentProps<"input">["onBlur"]>;
-            } & {
-                [key in `data-${string}`]: string;
-            }
-        ) => ReactNode;
     }
 ) {
-    const { attribute, fieldIndex, dispatchFormAction, valueOrValues, displayableErrors, renderInput = inputProps => <input {...inputProps} /> } =
-        props;
+    const { attribute, fieldIndex, dispatchFormAction, valueOrValues, displayableErrors } = props;
 
     const { advancedMsgStr } = useI18n();
     const { kcClsx } = useKcClsx();
 
-    return (
-        <>
-            {renderInput({
-                type: (() => {
-                    const { inputType } = attribute.annotations;
+    const inputProps = {
+        type: (() => {
+            const { inputType } = attribute.annotations;
 
-                    if (inputType?.startsWith("html5-")) {
-                        return inputType.slice(6);
-                    }
+            if (inputType?.startsWith("html5-")) {
+                return inputType.slice(6);
+            }
 
-                    return inputType ?? "text";
-                })(),
-                id: attribute.name,
+            return inputType ?? "text";
+        })(),
+        id: attribute.name,
+        name: attribute.name,
+        value: (() => {
+            if (fieldIndex !== undefined) {
+                assert(valueOrValues instanceof Array);
+                return valueOrValues[fieldIndex];
+            }
+
+            assert(typeof valueOrValues === "string");
+
+            return valueOrValues;
+        })(),
+        className: kcClsx("kcInputClass"),
+        "aria-invalid": displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined,
+        disabled: attribute.readOnly,
+        autoComplete: attribute.autocomplete,
+        placeholder:
+            attribute.annotations.inputTypePlaceholder === undefined
+                ? undefined
+                : advancedMsgStr(attribute.annotations.inputTypePlaceholder),
+        pattern: attribute.annotations.inputTypePattern,
+        size:
+            attribute.annotations.inputTypeSize === undefined
+                ? undefined
+                : parseInt(`${attribute.annotations.inputTypeSize}`),
+        maxLength:
+            attribute.annotations.inputTypeMaxlength === undefined
+                ? undefined
+                : parseInt(`${attribute.annotations.inputTypeMaxlength}`),
+        minLength:
+            attribute.annotations.inputTypeMinlength === undefined
+                ? undefined
+                : parseInt(`${attribute.annotations.inputTypeMinlength}`),
+        max: attribute.annotations.inputTypeMax,
+        min: attribute.annotations.inputTypeMin,
+        step: attribute.annotations.inputTypeStep,
+        ...Object.fromEntries(
+            Object.entries(attribute.html5DataAnnotations ?? {}).map(([key, value]) => [
+                `data-${key}`,
+                value
+            ])
+        ),
+        onChange: event =>
+            dispatchFormAction({
+                action: "update",
                 name: attribute.name,
-                value: (() => {
+                valueOrValues: (() => {
                     if (fieldIndex !== undefined) {
                         assert(valueOrValues instanceof Array);
-                        return valueOrValues[fieldIndex];
-                    }
 
-                    assert(typeof valueOrValues === "string");
-
-                    return valueOrValues;
-                })(),
-                className: kcClsx("kcInputClass"),
-                "aria-invalid":
-                    displayableErrors.find(error => error.fieldIndex === fieldIndex) !== undefined,
-                disabled: attribute.readOnly,
-                autoComplete: attribute.autocomplete,
-                placeholder:
-                    attribute.annotations.inputTypePlaceholder === undefined
-                        ? undefined
-                        : advancedMsgStr(attribute.annotations.inputTypePlaceholder),
-                pattern: attribute.annotations.inputTypePattern,
-                size:
-                    attribute.annotations.inputTypeSize === undefined
-                        ? undefined
-                        : parseInt(`${attribute.annotations.inputTypeSize}`),
-                maxLength:
-                    attribute.annotations.inputTypeMaxlength === undefined
-                        ? undefined
-                        : parseInt(`${attribute.annotations.inputTypeMaxlength}`),
-                minLength:
-                    attribute.annotations.inputTypeMinlength === undefined
-                        ? undefined
-                        : parseInt(`${attribute.annotations.inputTypeMinlength}`),
-                max: attribute.annotations.inputTypeMax,
-                min: attribute.annotations.inputTypeMin,
-                step: attribute.annotations.inputTypeStep,
-                ...Object.fromEntries(
-                    Object.entries(attribute.html5DataAnnotations ?? {}).map(([key, value]) => [
-                        `data-${key}`,
-                        value
-                    ])
-                ),
-                onChange: event =>
-                    dispatchFormAction({
-                        action: "update",
-                        name: attribute.name,
-                        valueOrValues: (() => {
-                            if (fieldIndex !== undefined) {
-                                assert(valueOrValues instanceof Array);
-
-                                return valueOrValues.map((value, i) => {
-                                    if (i === fieldIndex) {
-                                        return event.target.value;
-                                    }
-
-                                    return value;
-                                });
+                        return valueOrValues.map((value, i) => {
+                            if (i === fieldIndex) {
+                                return event.target.value;
                             }
 
-                            return event.target.value;
-                        })()
-                    }),
+                            return value;
+                        });
+                    }
 
-                onBlur: () =>
-                    dispatchFormAction({
-                        action: "focus lost",
-                        name: attribute.name,
-                        fieldIndex: fieldIndex
-                    })
-            })}
+                    return event.target.value;
+                })()
+            }),
+
+        onBlur: () =>
+            dispatchFormAction({
+                action: "focus lost",
+                name: attribute.name,
+                fieldIndex: fieldIndex
+            })
+    } satisfies React.ComponentProps<"input">;
+
+    return (
+        <>
+            {(() => {
+                if (attribute.name === "password" || attribute.name === "password-confirm") {
+                    return (
+                        <PasswordWrapperInner
+                            hasError={inputProps["aria-invalid"]}
+                            inputId={inputProps.id}
+                            renderInput={inputProps_password => (
+                                <input {...inputProps} {...inputProps_password} />
+                            )}
+                        />
+                    );
+                }
+
+                return (
+                    <span className={kcClsx("kcInputClass", inputProps["aria-invalid"] && "kcError")}>
+                        <input {...inputProps} />
+                    </span>
+                );
+            })()}
             {(() => {
                 if (fieldIndex === undefined) {
                     return null;
