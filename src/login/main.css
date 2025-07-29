@@ -38,9 +38,13 @@ a {
 
 .kcButtonClass {
     border-radius: 50px;
-    height: 60px;
-    font-size: 22px !important;
+}
+
+.kcButtonLargeClass {
     font-weight: bold;
+    font-size: 22px !important;
+    height: 60px;
+    min-width: 80px;
 }
 
 .kcButtonPrimaryClass:active {
@@ -56,6 +60,8 @@ a {
     padding: 12px !important;
 }
 
+.kcInputClass[name="password-confirm"],
+.kcInputClass[name="password-new"],
 .kcInputClass[name="password"] {
     font-size: 18px !important;
     border: none !important;
