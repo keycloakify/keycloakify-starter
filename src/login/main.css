@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
-body {
-    font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
-}
-
 :root {
     --spark-of-light-dark-color: #00a7c4;
     --spark-of-light-dark-top: #00517e;
@@ -15,6 +11,7 @@ body {
 }
 
 body {
+    font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
     background: radial-gradient(
         circle,
         var(--spark-of-light-dark-bottom) 0,
