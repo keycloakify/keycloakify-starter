@@ -24,25 +24,39 @@ body {
     font-size: 16px;
 }
 
-.kcFormCardClass {
-    border-top: none;
-    border-radius: 15px;
+a {
+    color: #00c5e7;
+}
+
+.login-pf-page {
+    padding-top: initial !important;
 }
 
 .kcButtonClass {
     border-radius: 50px;
+    height: 60px;
+    font-size: 22px !important;
+    font-weight: bold;
 }
 
-.kcFormHeaderClass {
-  display: none !important;
+.kcInputClass,
+.kcInputGroup {
+    font-size: 18px !important;
+    height: 69px !important;
+    border: 1px solid #c4c4c4 !important;
+    border-radius: 4px !important;
+    padding: 12px !important;
 }
 
-.kcHeaderClass {
-  color: white !important;
+.kcInputClass[name="password"] {
+    font-size: 18px !important;
+    border: none !important;
+    padding: 0 !important;
+    height: 100% !important;
 }
 
-a {
-    color: #00c5e7;
+.kcFormPasswordVisibilityButtonClass::after {
+    border: none !important;
 }
 
 .kcLocaleMainClass {
@@ -51,11 +65,84 @@ a {
 
 .kcInfoAreaWrapperClass {
     background-color: white !important;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+    font-size: initial !important;
+}
+
+.kcHeaderWrapperClass span {
+    font-weight: 700;
+    color: white;
+}
+
+.kcHeaderClass {
+    margin-top: 85px;
+}
+
+.kcHeaderClass::before {
+    content: " ";
+    height: 85px;
+    background: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: block;
+    background-image: url(/src/login/logo.svg);
+    background-size: 180px 66px;
+    background-repeat: no-repeat;
+    background-position: 30px 10px;
 }
 
 .kcHeaderWrapperClass {
-  text-transform:none !important;
-  font-weight: bold;
+    font-size: 29px !important;
+    text-transform: none !important;
+    letter-spacing: 3px !important;
+    line-height: 1.2em !important;
+    padding: 62px 10px 20px !important;
+    white-space: normal !important;
+}
+
+@media (max-width: 767px) {
+    .kcHeaderWrapperClass {
+        font-size: 20px !important;
+    }
+}
+
+#kc-header {
+    text-align: center;
+}
+
+.kcFormCardClass {
+    position: relative;
+    border-top: none;
+    border-radius: 15px;
+    padding: 20px 40px 20px 40px !important;
+}
+
+.kcFormCardClass:after {
+    content: "";
+    position: absolute;
+    background: url(dots.svg) no-repeat;
+    right: -57px;
+    top: -57px;
+    height: 192px;
+    width: 170px;
+    z-index: -1;
+}
+
+@media (max-width: 767px) {
+    .kcFormCardClass {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        padding: 10px 20px 10px 20px !important;
+    }
+}
+
+.kcFormHeaderClass {
+    display: none !important;
+}
+
+.kcSignUpClass {
+    margin: initial !important;
 }
