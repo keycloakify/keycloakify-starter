@@ -11,6 +11,7 @@ body {
     --pf-global--primary-color--100: #00ae31;
     --pf-global--primary-color--200: #00952a;
     --pf-global--primary-color--300: #007b23;
+    --weteam-sky-blue: #00c5e7;
 }
 
 body {
@@ -40,6 +41,10 @@ a {
     height: 60px;
     font-size: 22px !important;
     font-weight: bold;
+}
+
+.kcButtonPrimaryClass:active {
+    background-color: #007b23;
 }
 
 .kcInputClass,
@@ -148,4 +153,19 @@ a {
 
 .kcSignUpClass {
     margin: initial !important;
+}
+
+.kcFormSocialAccountListButtonClass {
+    padding: 19px;
+}
+.kcFormSocialAccountListButtonClass::after {
+    border-radius: 50px !important;
+    border: solid 1px #c4c4c4 !important;
+}
+.kcFormSocialAccountListButtonClass::after {
+    border-radius: 50px !important;
+    border: solid 1px #c4c4c4 !important;
+}
+.kcFormSocialAccountListButtonClass:hover::after {
+    border-color: var(--weteam-sky-blue) !important;
 }
