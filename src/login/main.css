@@ -23,6 +23,10 @@ body {
     line-height: 20px;
 }
 
+.kcAlertClass {
+    --pf-c-alert--BorderTopWidth: 0px !important;
+}
+
 a {
     color: #00c5e7;
 }
