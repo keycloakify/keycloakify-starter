@@ -21,74 +21,18 @@ body {
     line-height: 20px;
 }
 
-.kcAlertClass {
-    --pf-c-alert--BorderTopWidth: 0px !important;
-}
-
 a {
     color: #00c5e7;
 }
 
-.login-pf-page {
-    padding-top: initial !important;
+/*
+We.Team Header
+*/
+.kcLoginClass {
+    margin-top: 35px;
 }
 
-.kcButtonClass {
-    border-radius: 50px;
-}
-
-.kcButtonLargeClass {
-    font-weight: bold;
-    font-size: 22px !important;
-    height: 60px;
-    min-width: 80px;
-}
-
-.kcButtonPrimaryClass:active {
-    background-color: #007b23;
-}
-
-.kcInputClass,
-.kcInputGroup {
-    font-size: 18px !important;
-    height: 69px !important;
-    border: 1px solid #c4c4c4 !important;
-    border-radius: 4px !important;
-    padding: 12px !important;
-}
-
-.kcInputClass[name="password-confirm"],
-.kcInputClass[name="password-new"],
-.kcInputClass[name="password"] {
-    font-size: 18px !important;
-    border: none !important;
-    padding: 0 !important;
-    height: 100% !important;
-}
-
-.kcFormPasswordVisibilityButtonClass::after {
-    border: none !important;
-}
-
-.kcLocaleMainClass {
-    display: none;
-}
-
-.kcInfoAreaWrapperClass {
-    background-color: white !important;
-    font-size: initial !important;
-}
-
-.kcHeaderWrapperClass span {
-    font-weight: 700;
-    color: white;
-}
-
-.kcHeaderClass {
-    margin-top: 85px;
-}
-
-.kcHeaderClass::before {
+.kcLoginClass::before {
     content: " ";
     height: 85px;
     background: white;
@@ -103,6 +47,18 @@ a {
     background-size: 180px 66px;
     background-repeat: no-repeat;
     background-position: 30px 10px;
+}
+
+/*
+Page header
+*/
+
+.kcHeaderClass {
+    text-align: center !important;
+}
+.kcHeaderWrapperClass span {
+    font-weight: 700;
+    color: white;
 }
 
 .kcHeaderWrapperClass {
@@ -120,10 +76,67 @@ a {
     }
 }
 
-#kc-header {
-    text-align: center;
+/*
+Alerts
+*/
+.kcAlertClass {
+    --pf-c-alert--BorderTopWidth: 0px !important;
 }
 
+/*
+Buttons
+*/
+.kcButtonClass {
+    border-radius: 50px;
+}
+.kcButtonLargeClass {
+    font-weight: bold;
+    font-size: 22px !important;
+    height: 60px;
+    min-width: 80px;
+}
+.kcButtonPrimaryClass:active {
+    background-color: #007b23;
+}
+
+/*
+Language picker
+*/
+.kcLocaleMainClass {
+    display: none;
+}
+
+/*
+Inputs
+*/
+.kcTextareaClass,
+.kcInputClass {
+    font-size: 18px !important;
+    height: 69px !important;
+    border: 1px solid #c4c4c4 !important;
+    border-radius: 4px !important;
+    padding: 12px !important;
+}
+
+.kcInputGroup {
+    position: relative;
+}
+
+.kcFormPasswordVisibilityButtonClass {
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.kcFormPasswordVisibilityButtonClass::after {
+    border: none !important;
+}
+
+/*
+Form Card
+*/
 .kcFormCardClass {
     position: relative;
     border-top: none;
@@ -150,14 +163,20 @@ a {
     }
 }
 
-.kcFormHeaderClass {
-    display: none !important;
+/*
+Sign up
+*/
+.kcInfoAreaWrapperClass {
+    background-color: white !important;
+    font-size: initial !important;
 }
-
 .kcSignUpClass {
     margin: initial !important;
 }
 
+/*
+Social logins
+*/
 .kcFormSocialAccountListButtonClass {
     padding: 19px;
 }
