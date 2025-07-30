@@ -34,7 +34,7 @@ We.Team Header
 
 .kcLoginClass::before {
     content: " ";
-    height: 85px;
+    height: 80px;
     background: white;
     position: absolute;
     top: 0;
@@ -44,9 +44,9 @@ We.Team Header
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     display: block;
     background-image: url(/src/login/logo.svg);
-    background-size: 180px 66px;
+    background-size: 196px 72px;
     background-repeat: no-repeat;
-    background-position: 30px 10px;
+    background-position: 30px 3px;
 }
 
 /*
