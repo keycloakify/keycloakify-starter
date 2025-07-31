@@ -1,0 +1,9 @@
+/*
+Buttons
+*/
+.kcButtonLargeClass {
+    font-weight: bold;
+    font-size: 22px !important;
+    height: 60px;
+    min-width: 80px;
+}

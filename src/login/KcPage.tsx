@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useMemo } from "react";
 import type { ClassKey } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
@@ -17,6 +17,8 @@ export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;
 
     const { i18n } = useI18n({ kcContext });
+
+    useCustomCss(kcContext);
 
     return (
         <Suspense>
@@ -41,3 +43,21 @@ export default function KcPage(props: { kcContext: KcContext }) {
 }
 
 const classes = {} satisfies { [key in ClassKey]?: string };
+
+/**
+ * We can apply css to specific pages or specific themes
+ */
+function useCustomCss(kcContext: KcContext) {
+    useMemo(() => {
+        switch (kcContext.pageId) {
+            case "login.ftl":
+                import("./login.css");
+                break;
+        }
+        switch (kcContext.themeName) {
+            case "weteam-hide-idp":
+                import("./hide-identity-providers.css");
+                break;
+        }
+    }, []);
+}

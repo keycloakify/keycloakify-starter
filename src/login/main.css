@@ -89,12 +89,6 @@ Buttons
 .kcButtonClass {
     border-radius: 50px;
 }
-.kcButtonLargeClass {
-    font-weight: bold;
-    font-size: 22px !important;
-    height: 60px;
-    min-width: 80px;
-}
 .kcButtonPrimaryClass:active {
     background-color: #007b23;
 }
