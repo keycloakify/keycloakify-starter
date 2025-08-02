@@ -70,7 +70,7 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                         }) ?? null}
 
                         <Group
-                            name={`${attribute.name}`}
+                            inputId={attribute.name}
                             label={advancedMsg(attribute.displayName ?? "")}
                             required={attribute.required}
                             style={{
