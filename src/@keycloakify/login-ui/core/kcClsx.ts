@@ -162,7 +162,8 @@ export type ClassKey =
     | "kcLoginOTPListItemTitleClass"
     | "kcLoginOTPListSelectedClass"
     | "kcDarkModeClass"
-    | "kcHtmlClass";
+    | "kcHtmlClass"
+    | "kcFormOptionsWrapperClass";
 
 export const { getKcClsx } = createGetKcClsx<ClassKey>({
     defaultClasses: {
@@ -366,7 +367,9 @@ export const { getKcClsx } = createGetKcClsx<ClassKey>({
         kcCheckLabelClass: "pf-c-check__label",
 
         kcFormPasswordVisibilityIconShow: "fa fa-eye",
-        kcFormPasswordVisibilityIconHide: "fa fa-eye-slash"
+        kcFormPasswordVisibilityIconHide: "fa fa-eye-slash",
+
+        kcFormOptionsWrapperClass: undefined
     }
 });
 

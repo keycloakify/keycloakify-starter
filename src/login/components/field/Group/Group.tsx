@@ -6,7 +6,7 @@ import { ErrorContainer } from "./ErrorContainer";
 type Props = {
     className?: string;
     style?: CSSProperties;
-    name: string;
+    inputId: string;
     label: ReactNode;
     error?: ReactNode;
     required?: boolean;
@@ -14,14 +14,14 @@ type Props = {
 };
 
 export function Group(props: Props) {
-    const { className, style, name, label, error, required = false, children } = props;
+    const { className, style, inputId, label, error, required = false, children } = props;
 
     const { kcClsx } = useKcClsx();
 
     return (
         <div className={clsx(kcClsx("kcFormGroupClass"), className)} style={style}>
             <div className={kcClsx("kcFormGroupLabelClass")}>
-                <label htmlFor={name} className={kcClsx("kcFormLabelClass")}>
+                <label htmlFor={inputId} className={kcClsx("kcFormLabelClass")}>
                     <span className={kcClsx("kcFormLabelTextClass")}>{label}</span>
                     {required && (
                         <span className={kcClsx("kcInputRequiredClass")} aria-hidden="true">
@@ -33,7 +33,7 @@ export function Group(props: Props) {
 
             {children}
 
-            {error && <ErrorContainer name={name}>{error}</ErrorContainer>}
+            {error && <ErrorContainer>{error}</ErrorContainer>}
         </div>
     );
 }

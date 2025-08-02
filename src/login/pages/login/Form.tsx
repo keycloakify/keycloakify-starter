@@ -9,81 +9,91 @@ import { Password } from "../../components/field/Password";
 import { Checkbox } from "../../components/field/Checkbox";
 
 export function Form() {
-  const { kcContext } = useKcContext();
-  assert(kcContext.pageId === "login.ftl");
+    const { kcContext } = useKcContext();
+    assert(kcContext.pageId === "login.ftl");
 
-  const { msg } = useI18n();
+    const { msg } = useI18n();
 
-  const { kcClsx } = useKcClsx();
+    const { kcClsx } = useKcClsx();
 
-  return (
-    <>
-      <div id="kc-form">
-        <div id="kc-form-wrapper">
-          {kcContext.realm.password && (
-            <form
-              id="kc-form-login"
-              className={kcClsx("kcFormClass")}
-              action={kcContext.url.loginAction}
-              method="post"
-              noValidate={true}
-            >
-              {!kcContext.usernameHidden && (
-                <Input
-                  name="username"
-                  label={null}
-                  error={kcContext.messagesPerField.getFirstError(
-                    "username",
-                    "password"
-                  )}
-                  autoFocus={true}
-                  autoComplete={
-                    kcContext.enableWebAuthnConditionalUI
-                      ? "username webauthn"
-                      : "username"
-                  }
-                  defaultValue={kcContext.login.username}
-                />
-              )}
-              <Password
-                name="password"
-                label={msg("password")}
-                error={
-                  !kcContext.usernameHidden
-                    ? undefined
-                    : kcContext.messagesPerField.get("password")
-                }
-                rememberMe={
-                  kcContext.realm.rememberMe &&
-                  !kcContext.usernameHidden && (
-                    <Checkbox
-                      name="rememberMe"
-                      label={msg("rememberMe")}
-                      defaultChecked={!!kcContext.login.rememberMe}
-                    />
-                  )
-                }
-                renderInput={inputProps => (
-                  <input
-                    {...inputProps}
-                    autoFocus={!!kcContext.usernameHidden}
-                    autoComplete={"current-password"}
-                  />
-                )}
-              />
-              <input
-                type="hidden"
-                id="id-hidden-input"
-                name="credentialId"
-                value={kcContext.auth.selectedCredential ?? undefined}
-                readOnly
-              />
-              <LoginButton />
-            </form>
-          )}
-        </div>
-      </div>
-      <ConditionalUIData />
-    </>
-  );
+    return (
+        <>
+            <div id="kc-form">
+                <div id="kc-form-wrapper">
+                    {kcContext.realm.password && (
+                        <form
+                            id="kc-form-login"
+                            className={kcClsx("kcFormClass")}
+                            action={kcContext.url.loginAction}
+                            method="post"
+                            noValidate={true}
+                        >
+                            {!kcContext.usernameHidden && (
+                                <Input
+                                    label={null}
+                                    error={kcContext.messagesPerField.getFirstError(
+                                        "username",
+                                        "password"
+                                    )}
+                                    renderInput={inputProps => (
+                                        <input
+                                            {...inputProps}
+                                            name="username"
+                                            defaultValue={kcContext.login.username}
+                                            autoFocus={true}
+                                            autoComplete={
+                                                kcContext.enableWebAuthnConditionalUI
+                                                    ? "username webauthn"
+                                                    : "username"
+                                            }
+                                        />
+                                    )}
+                                />
+                            )}
+                            <Password
+                                name="password"
+                                label={msg("password")}
+                                error={
+                                    !kcContext.usernameHidden
+                                        ? undefined
+                                        : kcContext.messagesPerField.get("password")
+                                }
+                                rememberMe={
+                                    kcContext.realm.rememberMe &&
+                                    !kcContext.usernameHidden && (
+                                        <Checkbox
+                                            label={msg("rememberMe")}
+                                            renderInput={inputProps => (
+                                                <input
+                                                    {...inputProps}
+                                                    name="rememberMe"
+                                                    defaultChecked={!!kcContext.login.rememberMe}
+                                                />
+                                            )}
+                                        />
+                                    )
+                                }
+                                renderInput={inputProps => (
+                                    <input
+                                        {...inputProps}
+                                        autoFocus={!!kcContext.usernameHidden}
+                                        autoComplete={"current-password"}
+                                    />
+                                )}
+                            />
+                            <input
+                                type="hidden"
+                                id="id-hidden-input"
+                                name="credentialId"
+                                value={kcContext.auth.selectedCredential ?? undefined}
+                                readOnly
+                            />
+                            <LoginButton />
+                        </form>
+                    )}
+                </div>
+            </div>
+            <ConditionalUIData />
+        </>
+    );
 }
