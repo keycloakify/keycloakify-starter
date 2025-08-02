@@ -17,7 +17,7 @@ export function Form() {
     const [isFormSubmittable, setIsFormSubmittable] = useState(false);
     const [areTermsAccepted, setAreTermsAccepted] = useState(false);
 
-    const recaptcha = useRecaptchaIfEnabled();
+    const recaptcha = useRecaptchaIfEnabled({ iAmNotARobotSize: "compact" });
 
     return (
         <form
@@ -26,9 +26,7 @@ export function Form() {
             action={kcContext.url.registrationAction}
             method="post"
         >
-            <UserProfileFormFields 
-            onIsFormSubmittableValueChange={setIsFormSubmittable} 
-            />
+            <UserProfileFormFields onIsFormSubmittableValueChange={setIsFormSubmittable} />
             {kcContext.termsAcceptanceRequired && (
                 <TermsAcceptance
                     hasError={
@@ -45,9 +43,11 @@ export function Form() {
                 />
             )}
 
-            {recaptcha && (
+            {recaptcha?.iAmNotARobotPlaceholder && (
                 <div className="form-group">
-                    <div className={kcClsx("kcInputWrapperClass")}>{recaptcha.recaptchaPlaceholder}</div>
+                    <div className={kcClsx("kcInputWrapperClass")}>
+                        {recaptcha.iAmNotARobotPlaceholder}
+                    </div>
                 </div>
             )}
 
@@ -61,12 +61,14 @@ export function Form() {
                             "kcButtonBlockClass",
                             "kcButtonLargeClass"
                         ),
-                        recaptcha?.submitButtonProps.className
+                        recaptcha?.submitButtonProps?.className
                     )}
                     type="submit"
                     id="kc-submit"
                     disabled={
-                        !isFormSubmittable || (kcContext.termsAcceptanceRequired && !areTermsAccepted)
+                        !isFormSubmittable || 
+                        (kcContext.termsAcceptanceRequired && !areTermsAccepted) ||
+                        recaptcha?.isIAmNotARobotChecked === false
                     }
                 >
                     {msg("doRegister")}
