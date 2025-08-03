@@ -8,7 +8,10 @@ const SESSION_STORAGE_ENTRY_NAME_ENCRYPTION_KEY= "keycloakify-mPdKdPdx";
 
 let cleanup: (() => void) | undefined;
 
-export function persistPasswordOnFormSubmit() {
+export function persistPasswordOnFormSubmit(params: { fieldName: string; }) {
+
+    const { fieldName } = params;
+
     cleanup?.();
 
     const { prElement, cancel} = getElementNowOrWhenMounted({ selector: 'input[name="password"]' });

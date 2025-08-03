@@ -6,6 +6,15 @@ import type { KcContextLike as KcContextLike_i18n } from "../i18n/getI18n";
 import type { MessageKey as MessageKey_defaultSet } from "../i18n/messages_defaultSet/types";
 import { persistPasswordOnFormSubmit, getPersistedPassword } from "./passwordRestoration";
 import { createGetInputValue } from "./getInputValue";
+import type * as userProfileApi from "../userProfileApi";
+
+export type Attribute = {
+    name: string;
+    annotations: {
+        inputType: "hidden" | undefined;
+    };
+    value: string | undefined;
+};
 
 export type FormFieldError = {
     advancedMsgArgs: readonly [string, ...string[]];
@@ -32,9 +41,7 @@ export namespace FormFieldError {
 }
 
 export type FormFieldState = {
-    attribute: {
-        name: "password" | "password-confirm";
-    };
+    attribute: Attribute;
     displayableErrors: FormFieldError[];
     value: string;
 };
@@ -47,7 +54,7 @@ export type FormState = {
 export type FormAction =
     | {
           action: "update";
-          name: "password" | "password-confirm";
+          name: string;
           value: string;
           /** Default false */
           displayErrorsImmediately?: boolean;
@@ -66,10 +73,16 @@ type KcContextLike_useGetErrors = KcContextLike_i18n & {
 };
 
 assert<
-    Extract<Extract<KcContext, { profile: unknown }>, { pageId: "register.ftl" }> extends KcContextLike
+    KcContext.Register extends KcContextLike
         ? true
         : false
 >();
+assert<
+    KcContext.LoginUpdatePassword extends KcContextLike
+        ? true
+        : false
+>();
+
 
 export type UserProfileApi = {
     getFormState: () => FormState;
@@ -79,13 +92,21 @@ export type UserProfileApi = {
 
 const cachedUserProfileApiByKcContext = new WeakMap<KcContextLike, UserProfileApi>();
 
+export type UserProfileApiLike = Omit<userProfileApi.UserProfileApi, "dispatchFormAction">;;
+
+assert<userProfileApi.UserProfileApi extends UserProfileApiLike ? true : false>();
+
+
 export type ParamsOfGetUserProfileApi = {
     kcContext: KcContextLike;
-    requirePasswordConfirmation: boolean;
+    fieldName: string;
+    confirmationFieldName: string;
+    makeConfirmationFieldHiddenAndAutoFilled: boolean;
+    userProfileApi: UserProfileApiLike | undefined;
 };
 
 export function getNewPasswordApi(params: ParamsOfGetUserProfileApi): UserProfileApi {
-    const { kcContext, requirePasswordConfirmation } = params;
+    const { kcContext } = params;
 
     use_cache: {
         const userProfileApi_cache = cachedUserProfileApiByKcContext.get(kcContext);
@@ -97,20 +118,13 @@ export function getNewPasswordApi(params: ParamsOfGetUserProfileApi): UserProfil
         return userProfileApi_cache;
     }
 
-    const userProfileApi = getNewPasswordApi_noCache({ kcContext, requirePasswordConfirmation });
+    const newPasswordApi = getNewPasswordApi_noCache(params);
 
-    cachedUserProfileApiByKcContext.set(kcContext, userProfileApi);
+    cachedUserProfileApiByKcContext.set(kcContext, newPasswordApi);
 
-    return userProfileApi;
+    return newPasswordApi;
 }
 
-type Attribute = {
-    name: "password" | "password-confirm";
-    annotations: {
-        inputType: "hidden" | undefined;
-    };
-    value: string | undefined;
-};
 
 namespace internal {
     export type FormFieldState = {
@@ -126,7 +140,7 @@ namespace internal {
 }
 
 function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): UserProfileApi {
-    const { kcContext, requirePasswordConfirmation } = params;
+    const { kcContext, userProfileApi, confirmation } = params;
 
     persistPasswordOnFormSubmit();
 
@@ -371,7 +385,7 @@ function reducer(params: {
     return { ...state };
 }
 
-function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
+function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
     const { kcContext } = params;
 
     const { messagesPerField, passwordPolicies } = kcContext;

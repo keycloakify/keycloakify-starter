@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import { assert } from "tsafe/assert";
 import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
 import { useKcContext } from "../../KcContext";
@@ -7,7 +7,7 @@ import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { UserProfileFormFields } from "../../components/UserProfileFormFields";
 import { TermsAcceptance } from "../../components/TermsAcceptance";
 import { useRecaptchaIfEnabled } from "./useRecaptcha";
-import { NewPasswordField } from "./NewPasswordFormField";
+import { NewPasswordField } from "../../components/NewPasswordFormField";
 import { REQUIRE_CONFIRM_PASSWORD } from "./REQUIRE_CONFIRM_PASSWORD";
 
 export function Form() {
@@ -18,6 +18,8 @@ export function Form() {
 
     const [areTermsAccepted, setAreTermsAccepted] = useState(false);
     const [areAllUserProfileChecksPassed, setAreAllUserProfileChecksPassed] = useState(false);
+    const [areAllNewPasswordChecksPassed, setAreAllNewPasswordChecksPassed] = useState(false);
+    const [hasFormBeenSubmitted, setFormSubmitted] = useReducer(()=> true, false);
 
     const recaptcha = useRecaptchaIfEnabled({ iAmNotARobotSize: "compact" });
 
@@ -27,22 +29,26 @@ export function Form() {
             className={kcClsx("kcFormClass")}
             action={kcContext.url.registrationAction}
             method="post"
+            onSubmit={()=> setFormSubmitted()}
         >
             <UserProfileFormFields
                 onAreAllChecksPassedValueChange={setAreAllUserProfileChecksPassed}
-                renderAfterField={({ attributeName, userProfileForm }) => {
+                renderAfterField={({ attributeName, userProfileForm: { userProfileApi } }) => {
                     if (
                         kcContext.passwordRequired &&
                         (attributeName === "username" ||
                             (attributeName === "email" && kcContext.realm.registrationEmailAsUsername))
                     ) {
-                        return <NewPasswordField 
-                            testUserPatienceWithConfirmationLikeIts1998={REQUIRE_CONFIRM_PASSWORD}
-                            registerFormState={{
-                                username: userProfileForm.formState.formFieldStates.find(({ attribute })=> attribute.name === "username")?.valueOrValues as string
-                            }}
-
-                        />;
+                        return (
+                            <NewPasswordField
+                                testUserPatienceWithConfirmationLikeIts1998={REQUIRE_CONFIRM_PASSWORD}
+                                onAreAllCheckPassedValueChange={setAreAllNewPasswordChecksPassed}
+                                usecase={{
+                                    pageId: "register.ftl",
+                                    userProfileApi
+                                }}
+                            />
+                        );
                     }
 
                     return null;
@@ -87,7 +93,9 @@ export function Form() {
                     type="submit"
                     id="kc-submit"
                     disabled={
+                        hasFormBeenSubmitted ||
                         !areAllUserProfileChecksPassed ||
+                        !areAllNewPasswordChecksPassed ||
                         (kcContext.termsAcceptanceRequired && !areTermsAccepted) ||
                         recaptcha?.isIAmNotARobotChecked === false
                     }

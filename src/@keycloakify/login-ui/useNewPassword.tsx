@@ -1,11 +1,11 @@
 import type { JSX } from "./tools/JSX";
-import type { Attribute, Validators } from "./core/KcContext/KcContext";
+import type { PasswordPolicies } from "./core/KcContext/KcContext";
 import { useEffect, useState, useMemo, Fragment } from "react";
 import { assert, type Equals } from "tsafe/assert";
-export { getButtonToDisplayForMultivaluedAttributeField } from "./core/userProfileApi/index";
 import type { MessageKey_defaultSet } from "./i18n";
 import type { GenericI18n } from "./i18n/GenericI18n";
-import * as coreApi from "./core/userProfileApi/index";
+import * as coreApi from "./core/newPasswordApi/index";
+import * as userProfileForm from "./useUserProfileForm";
 
 type I18n = GenericI18n<MessageKey_defaultSet, string>;
 
@@ -13,7 +13,6 @@ export type FormFieldError = {
     errorMessage: JSX.Element;
     errorMessageStr: string;
     source: FormFieldError.Source;
-    fieldIndex: number | undefined;
 };
 
 {
@@ -24,19 +23,20 @@ export type FormFieldError = {
 }
 
 export namespace FormFieldError {
-    export type Source = Source.Validator | Source.Server | Source.RequiredField;
+    export type Source = Source.PasswordPolicy | Source.Other | Source.Server;
 
     export namespace Source {
-        export type Validator = {
-            type: "validator";
-            name: keyof Validators;
-        };
-        export type Server = {
-            type: "server";
+        export type PasswordPolicy = {
+            type: "passwordPolicy";
+            name: keyof PasswordPolicies;
         };
 
-        export type RequiredField = {
-            type: "required field";
+        export type Other = {
+            type: "passwordConfirmMatchesPassword";
+        };
+
+        export type Server = {
+            type: "server";
         };
     }
 }
@@ -49,9 +49,9 @@ export namespace FormFieldError {
 }
 
 export type FormFieldState = {
-    attribute: Attribute;
+    attribute: coreApi.Attribute;
     displayableErrors: FormFieldError[];
-    valueOrValues: string | string[];
+    value: string;
 };
 
 {
@@ -76,15 +76,14 @@ export type FormState = {
 export type FormAction =
     | {
           action: "update";
-          name: string;
-          valueOrValues: string | string[];
+          name: "password" | "password-confirm";
+          value: string;
           /** Default false */
           displayErrorsImmediately?: boolean;
       }
     | {
           action: "focus lost";
           name: string;
-          fieldIndex: number | undefined;
       };
 
 {
@@ -100,6 +99,8 @@ export type I18nLike = Pick<I18n, "advancedMsg" | "advancedMsgStr">;
 
 export type ParamsOfUseUserProfileForm = {
     kcContext: KcContextLike;
+    requirePasswordConfirmation: boolean;
+    userProfileApi: coreApi.UserProfileApiLike | undefined;
     i18n: I18nLike;
 };
 
@@ -113,10 +114,9 @@ export type ParamsOfUseUserProfileForm = {
 export type ReturnTypeOfUseUserProfileForm = {
     formState: FormState;
     dispatchFormAction: (action: FormAction) => void;
-    userProfileApi: coreApi.UserProfileApi;
 };
 
-export function useUserProfileForm(params: ParamsOfUseUserProfileForm): ReturnTypeOfUseUserProfileForm {
+export function useNewPassword(params: ParamsOfUseUserProfileForm): ReturnTypeOfUseUserProfileForm {
     const { i18n, kcContext } = params;
 
     const api = coreApi.getUserProfileApi({ kcContext });
@@ -158,7 +158,6 @@ export function useUserProfileForm(params: ParamsOfUseUserProfileForm): ReturnTy
 
     return {
         formState,
-        dispatchFormAction: api.dispatchFormAction,
-        userProfileApi: api
+        dispatchFormAction: api.dispatchFormAction
     };
 }

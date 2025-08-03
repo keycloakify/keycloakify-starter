@@ -19,8 +19,8 @@ export type UserProfileFormFieldsProps = {
 };
 
 type ParamsOfBeforeAfterFields = {
-    userProfileForm: ReturnTypeOfUseUserProfileForm;
     attributeName: string;
+    userProfileForm: ReturnTypeOfUseUserProfileForm;
 };
 
 export function UserProfileFormFields(props: UserProfileFormFieldsProps) {

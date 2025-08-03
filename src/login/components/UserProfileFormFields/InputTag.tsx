@@ -5,7 +5,6 @@ import { AddRemoveButtonsMultiValuedAttribute } from "./AddRemoveButtonsMultiVal
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { ErrorContainer } from "../field/Group/ErrorContainer";
-import { PasswordWrapperInner } from "../field/Password/PasswordWrapperInner";
 
 export function InputTag(
     props: InputFieldByTypeProps & {

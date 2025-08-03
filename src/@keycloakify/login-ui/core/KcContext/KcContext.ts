@@ -424,6 +424,7 @@ export declare namespace KcContext {
 
     export type LoginUpdatePassword = Common & {
         pageId: "login-update-password.ftl";
+        passwordPolicies?: PasswordPolicies;
     };
 
     export type LoginIdpLinkConfirm = Common & {
@@ -489,19 +490,16 @@ export declare namespace KcContext {
     export type LoginUpdateProfile = Common & {
         pageId: "login-update-profile.ftl";
         profile: UserProfile;
-        passwordPolicies?: PasswordPolicies;
     };
 
     export type IdpReviewUserProfile = Common & {
         pageId: "idp-review-user-profile.ftl";
         profile: UserProfile;
-        passwordPolicies?: PasswordPolicies;
     };
 
     export type UpdateEmail = Common & {
         pageId: "update-email.ftl";
         profile: UserProfile;
-        passwordPolicies?: PasswordPolicies;
     };
 
     export type SelectAuthenticator = Common & {
