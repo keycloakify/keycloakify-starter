@@ -100,25 +100,9 @@ export function InputTag(
 
     return (
         <>
-            {(() => {
-                if (attribute.name === "password" || attribute.name === "password-confirm") {
-                    return (
-                        <PasswordWrapperInner
-                            hasError={inputProps["aria-invalid"]}
-                            inputId={inputProps.id}
-                            renderInput={inputProps_password => (
-                                <input {...inputProps} {...inputProps_password} />
-                            )}
-                        />
-                    );
-                }
-
-                return (
-                    <span className={kcClsx("kcInputClass", inputProps["aria-invalid"] && "kcError")}>
-                        <input {...inputProps} />
-                    </span>
-                );
-            })()}
+            <span className={kcClsx("kcInputClass", inputProps["aria-invalid"] && "kcError")}>
+                <input {...inputProps} />
+            </span>
             {(() => {
                 if (fieldIndex === undefined) {
                     return null;

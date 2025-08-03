@@ -51,7 +51,6 @@ export function Form() {
                                 />
                             )}
                             <Password
-                                name="password"
                                 label={msg("password")}
                                 error={
                                     !kcContext.usernameHidden
@@ -76,6 +75,7 @@ export function Form() {
                                 renderInput={inputProps => (
                                     <input
                                         {...inputProps}
+                                        name="password"
                                         autoFocus={!!kcContext.usernameHidden}
                                         autoComplete={"current-password"}
                                     />

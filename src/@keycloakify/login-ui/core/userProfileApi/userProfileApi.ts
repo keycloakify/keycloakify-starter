@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "../../tools/Array.prototype.every";
 import { assert, type Equals } from "tsafe/assert";
-import type { KcContext, PasswordPolicies, Attribute, Validators } from "../KcContext/KcContext";
+import type { KcContext, Attribute, Validators } from "../KcContext/KcContext";
 import type { KcContextLike as KcContextLike_i18n } from "../i18n/getI18n";
 import type { MessageKey as MessageKey_defaultSet } from "../i18n/messages_defaultSet/types";
 import { emailRegexp } from "../../tools/emailRegExp";
@@ -16,24 +16,19 @@ export type FormFieldError = {
 };
 
 export namespace FormFieldError {
-    export type Source = Source.Validator | Source.PasswordPolicy | Source.Server | Source.Other;
+    export type Source = Source.Validator | Source.Server | Source.RequiredField;
 
     export namespace Source {
         export type Validator = {
             type: "validator";
             name: keyof Validators;
         };
-        export type PasswordPolicy = {
-            type: "passwordPolicy";
-            name: keyof PasswordPolicies;
-        };
         export type Server = {
             type: "server";
         };
 
-        export type Other = {
-            type: "other";
-            rule: "passwordConfirmMatchesPassword" | "requiredField";
+        export type RequiredField = {
+            type: "required field";
         };
     }
 }
@@ -45,7 +40,7 @@ export type FormFieldState = {
 };
 
 export type FormState = {
-    isFormSubmittable: boolean;
+    areAllChecksPassed: boolean;
     formFieldStates: FormFieldState[];
 };
 
@@ -69,13 +64,11 @@ export type KcContextLike = KcContextLike_i18n &
             attributesByName: Record<string, Attribute>;
             html5DataAnnotations?: Record<string, string>;
         };
-        passwordRequired?: boolean;
         realm: { registrationEmailAsUsername: boolean };
     };
 
 type KcContextLike_useGetErrors = KcContextLike_i18n & {
     messagesPerField: Pick<KcContext["messagesPerField"], "existsError" | "get">;
-    passwordPolicies?: PasswordPolicies;
 };
 
 assert<
@@ -94,11 +87,10 @@ const cachedUserProfileApiByKcContext = new WeakMap<KcContextLike, UserProfileAp
 
 export type ParamsOfGetUserProfileApi = {
     kcContext: KcContextLike;
-    doMakeUserConfirmPassword: boolean;
 };
 
 export function getUserProfileApi(params: ParamsOfGetUserProfileApi): UserProfileApi {
-    const { kcContext, doMakeUserConfirmPassword } = params;
+    const { kcContext } = params;
 
     use_cache: {
         const userProfileApi_cache = cachedUserProfileApiByKcContext.get(kcContext);
@@ -110,7 +102,7 @@ export function getUserProfileApi(params: ParamsOfGetUserProfileApi): UserProfil
         return userProfileApi_cache;
     }
 
-    const userProfileApi = getUserProfileApi_noCache({ kcContext, doMakeUserConfirmPassword });
+    const userProfileApi = getUserProfileApi_noCache({ kcContext });
 
     cachedUserProfileApiByKcContext.set(kcContext, userProfileApi);
 
@@ -131,16 +123,16 @@ namespace internal {
 }
 
 function getUserProfileApi_noCache(params: ParamsOfGetUserProfileApi): UserProfileApi {
-    const { kcContext, doMakeUserConfirmPassword } = params;
+    const { kcContext } = params;
 
     unFormatNumberOnSubmit();
 
-    let state: internal.State = getInitialState({ kcContext, doMakeUserConfirmPassword });
+    let state: internal.State = getInitialState({ kcContext });
     const callbacks = new Set<() => void>();
 
     return {
         dispatchFormAction: action => {
-            state = reducer({ action, kcContext, doMakeUserConfirmPassword, state });
+            state = reducer({ action, kcContext, state });
 
             callbacks.forEach(callback => callback());
         },
@@ -158,15 +150,13 @@ function getUserProfileApi_noCache(params: ParamsOfGetUserProfileApi): UserProfi
 
 function getInitialState(params: {
     kcContext: KcContextLike;
-    doMakeUserConfirmPassword: boolean;
 }): internal.State {
     const { kcContext } = params;
 
     const { getErrors } = createGetErrors({ kcContext });
 
     // NOTE: We don't use te kcContext.profile.attributes directly because
-    // they don't includes the password and password confirm fields and we want to add them.
-    // We also want to apply some retro-compatibility and consistency patches.
+    // want to apply some retro-compatibility and consistency patches.
     const attributes: Attribute[] = (() => {
         mock_user_profile_attributes_for_older_keycloak_versions: {
             if (
@@ -290,9 +280,6 @@ function getInitialState(params: {
     }
 
     attributes.forEach(attribute => {
-        if (attribute.name === "password-confirm") {
-            attribute.annotations.inputType = "hidden";
-        }
 
         if (attribute.name === "locale") {
             assert(kcContext.locale !== undefined);
@@ -358,47 +345,6 @@ function getInitialState(params: {
             }
         }
     });
-
-    add_password_and_password_confirm: {
-        if (!kcContext.passwordRequired) {
-            break add_password_and_password_confirm;
-        }
-
-        attributes.forEach((attribute, i) => {
-            if (
-                attribute.name !== (kcContext.realm.registrationEmailAsUsername ? "email" : "username")
-            ) {
-                // NOTE: We want to add password and password-confirm after the field that identifies the user.
-                // It's either email or username.
-                return;
-            }
-
-            attributes.splice(
-                i + 1,
-                0,
-                {
-                    name: "password",
-                    displayName: id<`\${${MessageKey_defaultSet}}`>("${password}"),
-                    required: true,
-                    readOnly: false,
-                    validators: {},
-                    annotations: {},
-                    autocomplete: "new-password",
-                    html5DataAnnotations: {}
-                },
-                {
-                    name: "password-confirm",
-                    displayName: id<`\${${MessageKey_defaultSet}}`>("${passwordConfirm}"),
-                    required: true,
-                    readOnly: false,
-                    validators: {},
-                    annotations: {},
-                    html5DataAnnotations: {},
-                    autocomplete: "new-password"
-                }
-            );
-        });
-    }
 
     const initialFormFieldState: {
         attribute: Attribute;
@@ -501,69 +447,39 @@ function formStateSelector(params: { state: internal.State }): FormState {
                     switch (error.source.type) {
                         case "server":
                             return true;
-                        case "other":
-                            switch (error.source.rule) {
-                                case "requiredField":
-                                    return hasLostFocusAtLeastOnce;
-                                case "passwordConfirmMatchesPassword":
-                                    return hasLostFocusAtLeastOnce;
-                            }
-                            assert<Equals<typeof error.source.rule, never>>(false);
-                            break;
-                        case "passwordPolicy":
-                            switch (error.source.name) {
-                                case "length":
-                                    return hasLostFocusAtLeastOnce;
-                                case "maxLength":
-                                    return hasLostFocusAtLeastOnce;
-                                case "digits":
-                                    return hasLostFocusAtLeastOnce;
-                                case "lowerCase":
-                                    return hasLostFocusAtLeastOnce;
-                                case "upperCase":
-                                    return hasLostFocusAtLeastOnce;
-                                case "specialChars":
-                                    return hasLostFocusAtLeastOnce;
-                                case "notUsername":
-                                    return true;
-                                case "notEmail":
-                                    return true;
-                            }
-                            assert<Equals<typeof error.source, never>>(false);
-                            break;
+                        case "required field":
+                            return hasLostFocusAtLeastOnce;
                         case "validator":
                             switch (error.source.name) {
                                 case "length":
-                                    return hasLostFocusAtLeastOnce;
                                 case "pattern":
-                                    return hasLostFocusAtLeastOnce;
                                 case "email":
-                                    return hasLostFocusAtLeastOnce;
                                 case "integer":
-                                    return hasLostFocusAtLeastOnce;
                                 case "multivalued":
-                                    return hasLostFocusAtLeastOnce;
                                 case "options":
                                     return hasLostFocusAtLeastOnce;
+                                default:
+                                    assert<Equals<typeof error.source.name, never>>(false);
                             }
+                        default:
                             assert<Equals<typeof error.source, never>>(false);
+
                     }
                 }),
                 attribute,
                 ...valueOrValuesWrap
             })
         ),
-        isFormSubmittable: state.formFieldStates.every(({ errors }) => errors.length === 0)
+        areAllChecksPassed: state.formFieldStates.every(({ errors }) => errors.length === 0)
     };
 }
 
 function reducer(params: {
     state: internal.State;
     kcContext: KcContextLike;
-    doMakeUserConfirmPassword: boolean;
     action: FormAction;
 }): internal.State {
-    const { kcContext, doMakeUserConfirmPassword, action } = params;
+    const { kcContext, action } = params;
     let { state } = params;
 
     const { getErrors } = createGetErrors({ kcContext });
@@ -616,7 +532,6 @@ function reducer(params: {
                         state = reducer({
                             state,
                             kcContext,
-                            doMakeUserConfirmPassword,
                             action: {
                                 action: "focus lost",
                                 name: action.name,
@@ -625,59 +540,6 @@ function reducer(params: {
                         });
                     }
                 }
-
-                update_password_confirm: {
-                    if (doMakeUserConfirmPassword) {
-                        break update_password_confirm;
-                    }
-
-                    if (action.name !== "password") {
-                        break update_password_confirm;
-                    }
-
-                    state = reducer({
-                        state,
-                        kcContext,
-                        doMakeUserConfirmPassword,
-                        action: {
-                            action: "update",
-                            name: "password-confirm",
-                            valueOrValues: action.valueOrValues,
-                            displayErrorsImmediately: action.displayErrorsImmediately
-                        }
-                    });
-                }
-
-                trigger_password_confirm_validation_on_password_change: {
-                    if (!doMakeUserConfirmPassword) {
-                        break trigger_password_confirm_validation_on_password_change;
-                    }
-
-                    if (action.name !== "password") {
-                        break trigger_password_confirm_validation_on_password_change;
-                    }
-
-                    state = reducer({
-                        state,
-                        kcContext,
-                        doMakeUserConfirmPassword,
-                        action: {
-                            action: "update",
-                            name: "password-confirm",
-                            valueOrValues: (() => {
-                                const formFieldState = state.formFieldStates.find(
-                                    ({ attribute }) => attribute.name === "password-confirm"
-                                );
-
-                                assert(formFieldState !== undefined);
-
-                                return formFieldState.valueOrValues;
-                            })(),
-                            displayErrorsImmediately: action.displayErrorsImmediately
-                        }
-                    });
-                }
-
                 return;
             case "focus lost":
                 if (formFieldState.hasLostFocusAtLeastOnce instanceof Array) {
@@ -699,7 +561,7 @@ function reducer(params: {
 function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
     const { kcContext } = params;
 
-    const { messagesPerField, passwordPolicies } = kcContext;
+    const { messagesPerField } = kcContext;
 
     function getErrors(params: {
         attributeName: string;
@@ -828,7 +690,7 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
 
                     return specificValueErrors
                         .filter(error => {
-                            if (error.source.type === "other" && error.source.rule === "requiredField") {
+                            if (error.source.type === "required field") {
                                 return false;
                             }
 
@@ -858,8 +720,7 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                     ] as const,
                     fieldIndex: undefined,
                     source: {
-                        type: "other",
-                        rule: "requiredField"
+                        type: "required field"
                     }
                 });
             }
@@ -926,328 +787,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
 
         const errors: FormFieldError[] = [];
 
-        check_password_policies: {
-            if (attributeName !== "password") {
-                break check_password_policies;
-            }
-
-            if (passwordPolicies === undefined) {
-                break check_password_policies;
-            }
-
-            check_password_policy_x: {
-                const policyName = "length";
-
-                const policy = passwordPolicies[policyName];
-
-                if (!policy) {
-                    break check_password_policy_x;
-                }
-
-                const minLength = policy;
-
-                if (value.length >= minLength) {
-                    break check_password_policy_x;
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordMinLengthMessage" satisfies MessageKey_defaultSet,
-                        `${minLength}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-
-            check_password_policy_x: {
-                const policyName = "maxLength";
-
-                const policy = passwordPolicies[policyName];
-
-                if (!policy) {
-                    break check_password_policy_x;
-                }
-
-                const maxLength = policy;
-
-                if (value.length <= maxLength) {
-                    break check_password_policy_x;
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordMaxLengthMessage" satisfies MessageKey_defaultSet,
-                        `${maxLength}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-
-            check_password_policy_x: {
-                const policyName = "digits";
-
-                const policy = passwordPolicies[policyName];
-
-                if (!policy) {
-                    break check_password_policy_x;
-                }
-
-                const minNumberOfDigits = policy;
-
-                if (value.split("").filter(char => !isNaN(parseInt(char))).length >= minNumberOfDigits) {
-                    break check_password_policy_x;
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordMinDigitsMessage" satisfies MessageKey_defaultSet,
-                        `${minNumberOfDigits}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-
-            check_password_policy_x: {
-                const policyName = "lowerCase";
-
-                const policy = passwordPolicies[policyName];
-
-                if (!policy) {
-                    break check_password_policy_x;
-                }
-
-                const minNumberOfLowerCaseChar = policy;
-
-                if (
-                    value
-                        .split("")
-                        .filter(char => char === char.toLowerCase() && char !== char.toUpperCase())
-                        .length >= minNumberOfLowerCaseChar
-                ) {
-                    break check_password_policy_x;
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordMinLowerCaseCharsMessage" satisfies MessageKey_defaultSet,
-                        `${minNumberOfLowerCaseChar}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-
-            check_password_policy_x: {
-                const policyName = "upperCase";
-
-                const policy = passwordPolicies[policyName];
-
-                if (!policy) {
-                    break check_password_policy_x;
-                }
-
-                const minNumberOfUpperCaseChar = policy;
-
-                if (
-                    value
-                        .split("")
-                        .filter(char => char === char.toUpperCase() && char !== char.toLowerCase())
-                        .length >= minNumberOfUpperCaseChar
-                ) {
-                    break check_password_policy_x;
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordMinUpperCaseCharsMessage" satisfies MessageKey_defaultSet,
-                        `${minNumberOfUpperCaseChar}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-
-            check_password_policy_x: {
-                const policyName = "specialChars";
-
-                const policy = passwordPolicies[policyName];
-
-                if (!policy) {
-                    break check_password_policy_x;
-                }
-
-                const minNumberOfSpecialChar = policy;
-
-                if (
-                    value.split("").filter(char => !char.match(/[a-zA-Z0-9]/)).length >=
-                    minNumberOfSpecialChar
-                ) {
-                    break check_password_policy_x;
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordMinSpecialCharsMessage" satisfies MessageKey_defaultSet,
-                        `${minNumberOfSpecialChar}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-
-            check_password_policy_x: {
-                const policyName = "notUsername";
-
-                const notUsername = passwordPolicies[policyName];
-
-                if (!notUsername) {
-                    break check_password_policy_x;
-                }
-
-                const usernameFormFieldState = formFieldStates.find(
-                    formFieldState => formFieldState.attribute.name === "username"
-                );
-
-                if (!usernameFormFieldState) {
-                    break check_password_policy_x;
-                }
-
-                const usernameValue = (() => {
-                    let { valueOrValues } = usernameFormFieldState;
-
-                    assert(typeof valueOrValues === "string");
-
-                    unFormat_number: {
-                        const { kcNumberUnFormat } = attribute.html5DataAnnotations ?? {};
-
-                        if (!kcNumberUnFormat) {
-                            break unFormat_number;
-                        }
-
-                        valueOrValues = formatNumber(valueOrValues, kcNumberUnFormat);
-                    }
-
-                    return valueOrValues;
-                })();
-
-                if (usernameValue === "") {
-                    break check_password_policy_x;
-                }
-
-                if (value !== usernameValue) {
-                    break check_password_policy_x;
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordNotUsernameMessage" satisfies MessageKey_defaultSet
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-
-            check_password_policy_x: {
-                const policyName = "notEmail";
-
-                const notEmail = passwordPolicies[policyName];
-
-                if (!notEmail) {
-                    break check_password_policy_x;
-                }
-
-                const emailFormFieldState = formFieldStates.find(
-                    formFieldState => formFieldState.attribute.name === "email"
-                );
-
-                if (!emailFormFieldState) {
-                    break check_password_policy_x;
-                }
-
-                assert(typeof emailFormFieldState.valueOrValues === "string");
-
-                {
-                    const emailValue = emailFormFieldState.valueOrValues;
-
-                    if (emailValue === "") {
-                        break check_password_policy_x;
-                    }
-
-                    if (value !== emailValue) {
-                        break check_password_policy_x;
-                    }
-                }
-
-                errors.push({
-                    advancedMsgArgs: [
-                        "invalidPasswordNotEmailMessage" satisfies MessageKey_defaultSet
-                    ] as const,
-                    fieldIndex: undefined,
-                    source: {
-                        type: "passwordPolicy",
-                        name: policyName
-                    }
-                });
-            }
-        }
-
-        password_confirm_matches_password: {
-            if (attributeName !== "password-confirm") {
-                break password_confirm_matches_password;
-            }
-
-            const passwordFormFieldState = formFieldStates.find(
-                formFieldState => formFieldState.attribute.name === "password"
-            );
-
-            assert(passwordFormFieldState !== undefined);
-
-            assert(typeof passwordFormFieldState.valueOrValues === "string");
-
-            {
-                const passwordValue = passwordFormFieldState.valueOrValues;
-
-                if (value === passwordValue) {
-                    break password_confirm_matches_password;
-                }
-            }
-
-            errors.push({
-                advancedMsgArgs: [
-                    "invalidPasswordConfirmMessage" satisfies MessageKey_defaultSet
-                ] as const,
-                fieldIndex: undefined,
-                source: {
-                    type: "other",
-                    rule: "passwordConfirmMatchesPassword"
-                }
-            });
-        }
-
         const { validators } = attribute;
 
         required_field: {
@@ -1265,8 +804,7 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                 ] as const,
                 fieldIndex: undefined,
                 source: {
-                    type: "other",
-                    rule: "requiredField"
+                    type: "required field",
                 }
             });
         }

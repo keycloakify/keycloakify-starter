@@ -1,11 +1,10 @@
-import { type ReactNode } from "react";
+import { type ReactNode, useId } from "react";
 import { Group } from "../Group";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 import { PasswordWrapperInner } from "./PasswordWrapperInner";
 
 type Props = {
     className?: string;
-    name: string;
     label: ReactNode;
     required?: boolean;
 
@@ -17,14 +16,12 @@ type Props = {
         id: string;
         type: "text" | "password";
         "aria-invalid": "true" | undefined;
-        name: string;
     }) => ReactNode;
 };
 
 export function Password(props: Props) {
     const {
         className,
-        name,
         label,
         required = false,
         error,
@@ -35,17 +32,14 @@ export function Password(props: Props) {
 
     const { kcClsx } = useKcClsx();
 
+    const inputId = `password-${useId()}`;
+
     return (
-        <Group className={className} name={name} label={label} error={error} required={required}>
+        <Group className={className} inputId={inputId} label={label} error={error} required={required}>
             <PasswordWrapperInner
-                inputId={name}
+                inputId={inputId}
                 hasError={!!error}
-                renderInput={inputProps =>
-                    renderInput({
-                        ...inputProps,
-                        name
-                    })
-                }
+                renderInput={renderInput}
             />
             <div className={kcClsx("kcFormHelperTextClass")} aria-live="polite">
                 <div className={kcClsx("kcInputHelperTextClass")}>

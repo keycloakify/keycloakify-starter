@@ -1,5 +1,5 @@
 import type { JSX } from "./tools/JSX";
-import type { PasswordPolicies, Attribute, Validators } from "./core/KcContext/KcContext";
+import type { Attribute, Validators } from "./core/KcContext/KcContext";
 import { useEffect, useState, useMemo, Fragment } from "react";
 import { assert, type Equals } from "tsafe/assert";
 export { getButtonToDisplayForMultivaluedAttributeField } from "./core/userProfileApi/index";
@@ -24,24 +24,19 @@ export type FormFieldError = {
 }
 
 export namespace FormFieldError {
-    export type Source = Source.Validator | Source.PasswordPolicy | Source.Server | Source.Other;
+    export type Source = Source.Validator | Source.Server | Source.RequiredField;
 
     export namespace Source {
         export type Validator = {
             type: "validator";
             name: keyof Validators;
         };
-        export type PasswordPolicy = {
-            type: "passwordPolicy";
-            name: keyof PasswordPolicies;
-        };
         export type Server = {
             type: "server";
         };
 
-        export type Other = {
-            type: "other";
-            rule: "passwordConfirmMatchesPassword" | "requiredField";
+        export type RequiredField = {
+            type: "required field";
         };
     }
 }
@@ -67,13 +62,13 @@ export type FormFieldState = {
 }
 
 export type FormState = {
-    isFormSubmittable: boolean;
+    areAllChecksPassed: boolean;
     formFieldStates: FormFieldState[];
 };
 
 {
     type A = Omit<FormState, "formFieldStates">;
-    type B = Omit<FormState, "formFieldStates">;
+    type B = Omit<coreApi.FormState, "formFieldStates">;
 
     assert<Equals<A, B>>();
 }
@@ -105,7 +100,6 @@ export type I18nLike = Pick<I18n, "advancedMsg" | "advancedMsgStr">;
 
 export type ParamsOfUseUserProfileForm = {
     kcContext: KcContextLike;
-    doMakeUserConfirmPassword: boolean;
     i18n: I18nLike;
 };
 
@@ -122,12 +116,9 @@ export type ReturnTypeOfUseUserProfileForm = {
 };
 
 export function useUserProfileForm(params: ParamsOfUseUserProfileForm): ReturnTypeOfUseUserProfileForm {
-    const { doMakeUserConfirmPassword, i18n, kcContext } = params;
+    const { i18n, kcContext } = params;
 
-    const api = coreApi.getUserProfileApi({
-        kcContext,
-        doMakeUserConfirmPassword
-    });
+    const api = coreApi.getUserProfileApi({ kcContext });
 
     const [formState_reactless, setFormState_reactless] = useState(() => api.getFormState());
 
@@ -143,7 +134,7 @@ export function useUserProfileForm(params: ParamsOfUseUserProfileForm): ReturnTy
 
     const formState = useMemo(
         (): FormState => ({
-            isFormSubmittable: formState_reactless.isFormSubmittable,
+            areAllChecksPassed: formState_reactless.areAllChecksPassed,
             formFieldStates: formState_reactless.formFieldStates.map(formFieldState_reactless => ({
                 attribute: formFieldState_reactless.attribute,
                 valueOrValues: formFieldState_reactless.valueOrValues,

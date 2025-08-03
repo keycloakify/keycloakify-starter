@@ -14,8 +14,8 @@ export function Form() {
     const { kcClsx } = useKcClsx();
     const { msg } = useI18n();
 
-    const [isFormSubmittable, setIsFormSubmittable] = useState(false);
     const [areTermsAccepted, setAreTermsAccepted] = useState(false);
+    const [areAllUserProfileChecksPassed, setAreAllUserProfileChecksPassed] = useState(false);
 
     const recaptcha = useRecaptchaIfEnabled({ iAmNotARobotSize: "compact" });
 
@@ -26,7 +26,20 @@ export function Form() {
             action={kcContext.url.registrationAction}
             method="post"
         >
-            <UserProfileFormFields onIsFormSubmittableValueChange={setIsFormSubmittable} />
+            <UserProfileFormFields
+                onAreAllChecksPassedValueChange={setAreAllUserProfileChecksPassed}
+                renderAfterField={({ attribute }) => {
+                    if (
+                        kcContext.passwordRequired &&
+                        (attribute.name === "username" ||
+                            (attribute.name === "email" && kcContext.realm.registrationEmailAsUsername))
+                    ) {
+                        return <></>;
+                    }
+
+                    return null;
+                }}
+            />
             {kcContext.termsAcceptanceRequired && (
                 <TermsAcceptance
                     hasError={
@@ -66,7 +79,7 @@ export function Form() {
                     type="submit"
                     id="kc-submit"
                     disabled={
-                        !isFormSubmittable || 
+                        !areAllUserProfileChecksPassed ||
                         (kcContext.termsAcceptanceRequired && !areTermsAccepted) ||
                         recaptcha?.isIAmNotARobotChecked === false
                     }

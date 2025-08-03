@@ -11,12 +11,11 @@ import type { Attribute } from "../../../@keycloakify/login-ui/KcContext";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
-import { DO_MAKE_USER_CONFIRM_PASSWORD } from "./DO_MAKE_USER_CONFIRM_PASSWORD";
 import { assert } from "tsafe/assert";
 import { Group } from "../field/Group";
 
 export type UserProfileFormFieldsProps = {
-    onIsFormSubmittableValueChange: (isFormSubmittable: boolean) => void;
+    onAreAllChecksPassedValueChange: (areAllChecksPassed: boolean) => void;
     renderBeforeField?: (props: ParamsOfBeforeAfterFields) => ReactNode;
     renderAfterField?: (props: ParamsOfBeforeAfterFields) => ReactNode;
 };
@@ -29,7 +28,7 @@ type ParamsOfBeforeAfterFields = {
 };
 
 export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
-    const { onIsFormSubmittableValueChange, renderBeforeField, renderAfterField } = props;
+    const { onAreAllChecksPassedValueChange, renderBeforeField, renderAfterField } = props;
 
     const { kcContext } = useKcContext();
 
@@ -40,17 +39,16 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
     const { advancedMsg } = i18n;
 
     const {
-        formState: { formFieldStates, isFormSubmittable },
+        formState: { formFieldStates, areAllChecksPassed },
         dispatchFormAction
     } = useUserProfileForm({
         kcContext,
-        i18n,
-        doMakeUserConfirmPassword: DO_MAKE_USER_CONFIRM_PASSWORD
+        i18n
     });
 
     useEffect(() => {
-        onIsFormSubmittableValueChange(isFormSubmittable);
-    }, [isFormSubmittable]);
+        onAreAllChecksPassedValueChange(areAllChecksPassed);
+    }, [areAllChecksPassed]);
 
     const { kcClsx } = useKcClsx();
 
