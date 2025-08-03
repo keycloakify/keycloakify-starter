@@ -7,6 +7,8 @@ import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { UserProfileFormFields } from "../../components/UserProfileFormFields";
 import { TermsAcceptance } from "../../components/TermsAcceptance";
 import { useRecaptchaIfEnabled } from "./useRecaptcha";
+import { NewPasswordField } from "./NewPasswordFormField";
+import { REQUIRE_CONFIRM_PASSWORD } from "./REQUIRE_CONFIRM_PASSWORD";
 
 export function Form() {
     const { kcContext } = useKcContext();
@@ -28,13 +30,19 @@ export function Form() {
         >
             <UserProfileFormFields
                 onAreAllChecksPassedValueChange={setAreAllUserProfileChecksPassed}
-                renderAfterField={({ attribute }) => {
+                renderAfterField={({ attributeName, userProfileForm }) => {
                     if (
                         kcContext.passwordRequired &&
-                        (attribute.name === "username" ||
-                            (attribute.name === "email" && kcContext.realm.registrationEmailAsUsername))
+                        (attributeName === "username" ||
+                            (attributeName === "email" && kcContext.realm.registrationEmailAsUsername))
                     ) {
-                        return <></>;
+                        return <NewPasswordField 
+                            testUserPatienceWithConfirmationLikeIts1998={REQUIRE_CONFIRM_PASSWORD}
+                            registerFormState={{
+                                username: userProfileForm.formState.formFieldStates.find(({ attribute })=> attribute.name === "username")?.valueOrValues as string
+                            }}
+
+                        />;
                     }
 
                     return null;

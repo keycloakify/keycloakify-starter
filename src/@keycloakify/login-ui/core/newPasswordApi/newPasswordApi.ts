@@ -4,8 +4,8 @@ import { assert, type Equals } from "tsafe/assert";
 import type { KcContext, PasswordPolicies } from "../KcContext/KcContext";
 import type { KcContextLike as KcContextLike_i18n } from "../i18n/getI18n";
 import type { MessageKey as MessageKey_defaultSet } from "../i18n/messages_defaultSet/types";
-import { emailRegexp } from "../../tools/emailRegExp";
 import { persistPasswordOnFormSubmit, getPersistedPassword } from "./passwordRestoration";
+import { createGetInputValue } from "./getInputValue";
 
 export type FormFieldError = {
     advancedMsgArgs: readonly [string, ...string[]];
@@ -109,8 +109,7 @@ type Attribute = {
     annotations: {
         inputType: "hidden" | undefined;
     };
-    // Default value.
-    value: string;
+    value: string | undefined;
 };
 
 namespace internal {
@@ -160,18 +159,22 @@ function getInitialState(params: {
 
     const { getErrors } = createGetErrors({ kcContext });
 
+    const defaultValue = getPersistedPassword();
+
     const attributes: Attribute[] = [
         {
             name: "password",
             annotations: {
                 inputType: undefined
-            }
+            },
+            value: defaultValue
         },
         {
             name: "password-confirm",
             annotations: {
                 inputType: requirePasswordConfirmation ? undefined : "hidden"
-            }
+            },
+            value: defaultValue
         }
     ];
 
@@ -180,15 +183,11 @@ function getInitialState(params: {
         value: string;
     }[] = [];
 
-    {
-        const value = getPersistedPassword();
-
-        for (const attribute of attributes) {
-            initialFormFieldState.push({
-                attribute,
-                value: value ?? ""
-            });
-        }
+    for (const attribute of attributes) {
+        initialFormFieldState.push({
+            attribute,
+            value: attribute.value ?? ""
+        });
     }
 
     const initialState: internal.State = {
@@ -224,12 +223,7 @@ function formStateSelector(params: { state: internal.State }): FormState {
 
     return {
         formFieldStates: state.formFieldStates.map(
-            ({
-                errors,
-                hasLostFocusAtLeastOnce,
-                attribute,
-                value
-            }) => ({
+            ({ errors, hasLostFocusAtLeastOnce, attribute, value }) => ({
                 displayableErrors: errors.filter(error => {
                     switch (error.source.type) {
                         case "passwordConfirmMatchesPassword":
@@ -237,19 +231,13 @@ function formStateSelector(params: { state: internal.State }): FormState {
                         case "passwordPolicy":
                             switch (error.source.name) {
                                 case "length":
-                                    return hasLostFocusAtLeastOnce;
                                 case "maxLength":
-                                    return hasLostFocusAtLeastOnce;
                                 case "digits":
-                                    return hasLostFocusAtLeastOnce;
                                 case "lowerCase":
-                                    return hasLostFocusAtLeastOnce;
                                 case "upperCase":
-                                    return hasLostFocusAtLeastOnce;
                                 case "specialChars":
                                     return hasLostFocusAtLeastOnce;
                                 case "notUsername":
-                                    return true;
                                 case "notEmail":
                                     return true;
                             }
@@ -388,6 +376,14 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
 
     const { messagesPerField, passwordPolicies } = kcContext;
 
+    const { getInputValue: getUsernameInputValue } = createGetInputValue({
+        inputName: "username"
+    });
+
+    const {} = createGetInputValue({
+        inputName: "email"
+    });
+
     function getErrors(params: {
         attributeName: string;
         formFieldStates: {
@@ -401,17 +397,13 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
 
         assert(formFieldState !== undefined);
 
-        const { attribute } = formFieldState;
+        const { attribute, value } = formFieldState;
 
         assert(attribute !== undefined);
 
         server_side_error: {
             {
                 const defaultValue = attribute.value ?? "";
-
-                assert(typeof valueOrValues === "string");
-
-                const value = valueOrValues;
 
                 if (defaultValue !== value) {
                     break server_side_error;
@@ -435,20 +427,12 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
             return [
                 {
                     advancedMsgArgs: [errorMessageStr],
-                    fieldIndex: undefined,
                     source: {
                         type: "server"
                     }
                 }
             ];
         }
-
-
-
-
-        assert(typeof valueOrValues === "string");
-
-        const value = valueOrValues;
 
         const errors: FormFieldError[] = [];
 
@@ -481,7 +465,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                         "invalidPasswordMinLengthMessage" satisfies MessageKey_defaultSet,
                         `${minLength}`
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -509,7 +492,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                         "invalidPasswordMaxLengthMessage" satisfies MessageKey_defaultSet,
                         `${maxLength}`
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -537,7 +519,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                         "invalidPasswordMinDigitsMessage" satisfies MessageKey_defaultSet,
                         `${minNumberOfDigits}`
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -570,7 +551,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                         "invalidPasswordMinLowerCaseCharsMessage" satisfies MessageKey_defaultSet,
                         `${minNumberOfLowerCaseChar}`
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -603,7 +583,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                         "invalidPasswordMinUpperCaseCharsMessage" satisfies MessageKey_defaultSet,
                         `${minNumberOfUpperCaseChar}`
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -634,7 +613,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                         "invalidPasswordMinSpecialCharsMessage" satisfies MessageKey_defaultSet,
                         `${minNumberOfSpecialChar}`
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -796,216 +774,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                 }
             });
         }
-
-        validator_x: {
-            const validatorName = "length";
-
-            const validator = validators[validatorName];
-
-            if (!validator) {
-                break validator_x;
-            }
-
-            const { "ignore.empty.value": ignoreEmptyValue = false, max, min } = validator;
-
-            if (ignoreEmptyValue && value === "") {
-                break validator_x;
-            }
-
-            const source: FormFieldError.Source = {
-                type: "validator",
-                name: validatorName
-            };
-
-            if (max && value.length > parseInt(`${max}`)) {
-                errors.push({
-                    advancedMsgArgs: [
-                        "error-invalid-length-too-long" satisfies MessageKey_defaultSet,
-                        `${max}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source
-                });
-            }
-
-            if (min && value.length < parseInt(`${min}`)) {
-                errors.push({
-                    advancedMsgArgs: [
-                        "error-invalid-length-too-short" satisfies MessageKey_defaultSet,
-                        `${min}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source
-                });
-            }
-        }
-
-        validator_x: {
-            const validatorName = "pattern";
-
-            const validator = validators[validatorName];
-
-            if (validator === undefined) {
-                break validator_x;
-            }
-
-            const {
-                "ignore.empty.value": ignoreEmptyValue = false,
-                pattern,
-                "error-message": errorMessageKey
-            } = validator;
-
-            if (ignoreEmptyValue && value === "") {
-                break validator_x;
-            }
-
-            if (new RegExp(pattern).test(value)) {
-                break validator_x;
-            }
-
-            const msgArgs = [
-                errorMessageKey ?? ("shouldMatchPattern" satisfies MessageKey_defaultSet),
-                pattern
-            ] as const;
-
-            errors.push({
-                advancedMsgArgs: msgArgs,
-                fieldIndex: undefined,
-                source: {
-                    type: "validator",
-                    name: validatorName
-                }
-            });
-        }
-
-        validator_x: {
-            {
-                const lastError = errors[errors.length - 1];
-                if (
-                    lastError !== undefined &&
-                    lastError.source.type === "validator" &&
-                    lastError.source.name === "pattern"
-                ) {
-                    break validator_x;
-                }
-            }
-
-            const validatorName = "email";
-
-            const validator = validators[validatorName];
-
-            if (validator === undefined) {
-                break validator_x;
-            }
-
-            const { "ignore.empty.value": ignoreEmptyValue = false } = validator;
-
-            if (ignoreEmptyValue && value === "") {
-                break validator_x;
-            }
-
-            if (emailRegexp.test(value)) {
-                break validator_x;
-            }
-
-            errors.push({
-                advancedMsgArgs: ["invalidEmailMessage" satisfies MessageKey_defaultSet] as const,
-                fieldIndex: undefined,
-                source: {
-                    type: "validator",
-                    name: validatorName
-                }
-            });
-        }
-
-        validator_x: {
-            const validatorName = "integer";
-
-            const validator = validators[validatorName];
-
-            if (validator === undefined) {
-                break validator_x;
-            }
-
-            const { "ignore.empty.value": ignoreEmptyValue = false, max, min } = validator;
-
-            if (ignoreEmptyValue && value === "") {
-                break validator_x;
-            }
-
-            const intValue = parseInt(value);
-
-            const source: FormFieldError.Source = {
-                type: "validator",
-                name: validatorName
-            };
-
-            if (isNaN(intValue)) {
-                const msgArgs = ["mustBeAnInteger"] as const;
-
-                errors.push({
-                    advancedMsgArgs: msgArgs,
-                    fieldIndex: undefined,
-                    source
-                });
-
-                break validator_x;
-            }
-
-            if (max && intValue > parseInt(`${max}`)) {
-                errors.push({
-                    advancedMsgArgs: [
-                        "error-number-out-of-range-too-big" satisfies MessageKey_defaultSet,
-                        `${max}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source
-                });
-
-                break validator_x;
-            }
-
-            if (min && intValue < parseInt(`${min}`)) {
-                errors.push({
-                    advancedMsgArgs: [
-                        "error-number-out-of-range-too-small" satisfies MessageKey_defaultSet,
-                        `${min}`
-                    ] as const,
-                    fieldIndex: undefined,
-                    source
-                });
-                break validator_x;
-            }
-        }
-
-        validator_x: {
-            const validatorName = "options";
-
-            const validator = validators[validatorName];
-
-            if (validator === undefined) {
-                break validator_x;
-            }
-
-            if (value === "") {
-                break validator_x;
-            }
-
-            if (validator.options.indexOf(value) >= 0) {
-                break validator_x;
-            }
-
-            errors.push({
-                advancedMsgArgs: ["notAValidOption" satisfies MessageKey_defaultSet] as const,
-                fieldIndex: undefined,
-                source: {
-                    type: "validator",
-                    name: validatorName
-                }
-            });
-        }
-
-        //TODO: Implement missing validators. See Validators type definition.
 
         return errors;
     }

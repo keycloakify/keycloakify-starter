@@ -1,13 +1,11 @@
 import { useEffect, Fragment, type ReactNode } from "react";
 import {
     useUserProfileForm,
-    type FormAction,
-    type FormFieldError
+    type ReturnTypeOfUseUserProfileForm
 } from "../../../@keycloakify/login-ui/useUserProfileForm";
 import { GroupLabel } from "./GroupLabel";
 import { DisplayableErrors } from "./DisplayableErrors";
 import { InputFieldByType } from "./InputFieldByType";
-import type { Attribute } from "../../../@keycloakify/login-ui/KcContext";
 import { useKcContext } from "../../KcContext";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
@@ -21,10 +19,8 @@ export type UserProfileFormFieldsProps = {
 };
 
 type ParamsOfBeforeAfterFields = {
-    attribute: Attribute;
-    dispatchFormAction: React.Dispatch<FormAction>;
-    displayableErrors: FormFieldError[];
-    valueOrValues: string | string[];
+    userProfileForm: ReturnTypeOfUseUserProfileForm;
+    attributeName: string;
 };
 
 export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
@@ -38,13 +34,14 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
 
     const { advancedMsg } = i18n;
 
-    const {
-        formState: { formFieldStates, areAllChecksPassed },
-        dispatchFormAction
-    } = useUserProfileForm({
+    const userProfileForm = useUserProfileForm({
         kcContext,
         i18n
     });
+    const {
+        formState: { formFieldStates, areAllChecksPassed },
+        dispatchFormAction
+    } = userProfileForm;
 
     useEffect(() => {
         onAreAllChecksPassedValueChange(areAllChecksPassed);
@@ -61,10 +58,8 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                     <Fragment key={attribute.name}>
                         <GroupLabel attribute={attribute} groupNameRef={groupNameRef} />
                         {renderBeforeField?.({
-                            attribute,
-                            dispatchFormAction,
-                            displayableErrors,
-                            valueOrValues
+                            userProfileForm,
+                            attributeName: attribute.name
                         }) ?? null}
 
                         <Group
@@ -103,10 +98,8 @@ export function UserProfileFormFields(props: UserProfileFormFieldsProps) {
                             )}
                         </Group>
                         {renderAfterField?.({
-                            attribute,
-                            dispatchFormAction,
-                            displayableErrors,
-                            valueOrValues
+                            userProfileForm,
+                            attributeName: attribute.name
                         }) ?? null}
                         {/* NOTE: Downloading of html5DataAnnotations scripts is done in the useUserProfileForm hook */}
                     </Fragment>

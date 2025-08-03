@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Password } from "../../components/field/Password";
 import { useI18n } from "../../i18n";
+import { useKcContext } from "../../KcContext";
 
 export function NewPasswordField(props: {
     /**
@@ -18,8 +19,12 @@ export function NewPasswordField(props: {
      * Keeping this enabled only makes sense in, recovery-less environments.
      */
     testUserPatienceWithConfirmationLikeIts1998: boolean;
+    registerFormState: {
+        username: string;
+        email: string;
+    } | undefined;
 }) {
-    const { testUserPatienceWithConfirmationLikeIts1998 } = props;
+    const { testUserPatienceWithConfirmationLikeIts1998, registerFormState } = props;
 
     const { msg } = useI18n();
 

@@ -25,8 +25,8 @@ export function persistPasswordOnFormSubmit() {
 
         assert(formElement instanceof HTMLFormElement);
 
-        const onSubmit = () => {
-            const passwordValue: string = passwordInputElement.value;
+        const persistPassword = () => {
+            const passwordValue = passwordInputElement.value;
 
             const key = generateEncryptionKey();
 
@@ -42,15 +42,16 @@ export function persistPasswordOnFormSubmit() {
             sessionStorage.setItem(SESSION_STORAGE_ENTRY_NAME_ENCRYPTION_KEY, key);
         };
 
-        formElement.addEventListener("submit", onSubmit);
+        formElement.addEventListener("submit", persistPassword);
 
         cleanup= ()=> {
-            formElement.removeEventListener("submit", onSubmit);
+            formElement.removeEventListener("submit", persistPassword);
+            cleanup = undefined;
         };
 
     });
 
-    cleanup = cancel;
+    cleanup = ()=> {cancel(); cleanup=undefined; };
 
 }
 
