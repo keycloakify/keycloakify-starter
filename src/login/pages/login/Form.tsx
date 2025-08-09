@@ -30,7 +30,13 @@ export function Form() {
                         >
                             {!kcContext.usernameHidden && (
                                 <Input
-                                    label={null}
+                                    label={
+                                        !kcContext.realm.loginWithEmailAllowed
+                                            ? msg("username")
+                                            : !kcContext.realm.registrationEmailAsUsername
+                                            ? msg("usernameOrEmail")
+                                            : msg("email")
+                                    }
                                     error={kcContext.messagesPerField.getFirstError(
                                         "username",
                                         "password"

@@ -16,20 +16,17 @@ export type FormFieldError = {
 };
 
 export namespace FormFieldError {
-    export type Source = Source.Validator | Source.Server | Source.RequiredField;
+    export type Source = Source.Validator | Source.Other;
 
     export namespace Source {
         export type Validator = {
             type: "validator";
             name: keyof Validators;
         };
-        export type Server = {
-            type: "server";
+        export type Other = {
+            type: "server" | "required field";
         };
 
-        export type RequiredField = {
-            type: "required field";
-        };
     }
 }
 
@@ -127,13 +124,15 @@ function getUserProfileApi_noCache(params: ParamsOfGetUserProfileApi): UserProfi
 
     unFormatNumberOnSubmit();
 
-    let state: internal.State = getInitialState({ kcContext });
+    const { getErrors } = createGetErrors({ kcContext });
+    const { reducer } = createReducer({ getErrors });
+
+    let state = getInitialState({ kcContext, getErrors });
     const callbacks = new Set<() => void>();
 
     return {
         dispatchFormAction: action => {
-            state = reducer({ action, kcContext, state });
-
+            state = reducer({ action, state });
             callbacks.forEach(callback => callback());
         },
         getFormState: () => formStateSelector({ state }),
@@ -150,10 +149,9 @@ function getUserProfileApi_noCache(params: ParamsOfGetUserProfileApi): UserProfi
 
 function getInitialState(params: {
     kcContext: KcContextLike;
+    getErrors: ReturnType<typeof createGetErrors>["getErrors"];
 }): internal.State {
-    const { kcContext } = params;
-
-    const { getErrors } = createGetErrors({ kcContext });
+    const { kcContext, getErrors } = params;
 
     // NOTE: We don't use te kcContext.profile.attributes directly because
     // want to apply some retro-compatibility and consistency patches.
@@ -474,21 +472,19 @@ function formStateSelector(params: { state: internal.State }): FormState {
     };
 }
 
-function reducer(params: {
-    state: internal.State;
-    kcContext: KcContextLike;
-    action: FormAction;
-}): internal.State {
-    const { kcContext, action } = params;
-    let { state } = params;
+function createReducer(params: { getErrors: ReturnType<typeof createGetErrors>["getErrors"] }) {
+    const { getErrors } = params;
 
-    const { getErrors } = createGetErrors({ kcContext });
+    function reducer(params: { state: internal.State; action: FormAction }): internal.State {
+        const { action } = params;
+        let { state } = params;
 
-    const formFieldState = state.formFieldStates.find(({ attribute }) => attribute.name === action.name);
+        const formFieldState = state.formFieldStates.find(
+            ({ attribute }) => attribute.name === action.name
+        );
 
-    assert(formFieldState !== undefined);
+        assert(formFieldState !== undefined);
 
-    (() => {
         switch (action.action) {
             case "update":
                 formFieldState.valueOrValues = action.valueOrValues;
@@ -531,7 +527,6 @@ function reducer(params: {
                         : [undefined]) {
                         state = reducer({
                             state,
-                            kcContext,
                             action: {
                                 action: "focus lost",
                                 name: action.name,
@@ -540,22 +535,25 @@ function reducer(params: {
                         });
                     }
                 }
-                return;
+                break;
             case "focus lost":
                 if (formFieldState.hasLostFocusAtLeastOnce instanceof Array) {
                     const { fieldIndex } = action;
                     assert(fieldIndex !== undefined);
                     formFieldState.hasLostFocusAtLeastOnce[fieldIndex] = true;
-                    return;
+                    break;
                 }
 
                 formFieldState.hasLostFocusAtLeastOnce = true;
-                return;
+                break;
+            default:
+                assert<Equals<typeof action, never>>(false);
         }
-        assert<Equals<typeof action, never>>(false);
-    })();
 
-    return { ...state };
+        return { ...state };
+    }
+
+    return { reducer };
 }
 
 function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
@@ -804,7 +802,7 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors }) {
                 ] as const,
                 fieldIndex: undefined,
                 source: {
-                    type: "required field",
+                    type: "required field"
                 }
             });
         }

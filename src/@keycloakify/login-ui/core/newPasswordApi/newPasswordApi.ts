@@ -5,8 +5,7 @@ import type { KcContext, PasswordPolicies } from "../KcContext/KcContext";
 import type { KcContextLike as KcContextLike_i18n } from "../i18n/getI18n";
 import type { MessageKey as MessageKey_defaultSet } from "../i18n/messages_defaultSet/types";
 import { persistPasswordOnFormSubmit, getPersistedPassword } from "./passwordRestoration";
-import { createGetInputValue } from "./getInputValue";
-import type * as userProfileApi from "../userProfileApi";
+import { formatNumber } from "../userProfileApi/kcNumberUnFormat";
 
 export type Attribute = {
     name: string;
@@ -14,6 +13,7 @@ export type Attribute = {
         inputType: "hidden" | undefined;
     };
     value: string | undefined;
+    required: true;
 };
 
 export type FormFieldError = {
@@ -22,7 +22,7 @@ export type FormFieldError = {
 };
 
 export namespace FormFieldError {
-    export type Source = Source.PasswordPolicy | Source.Other | Source.Server;
+    export type Source = Source.PasswordPolicy | Source.Other;
 
     export namespace Source {
         export type PasswordPolicy = {
@@ -31,12 +31,9 @@ export namespace FormFieldError {
         };
 
         export type Other = {
-            type: "passwordConfirmMatchesPassword";
+            type: "server" | "required field" | "passwordConfirmMatchesPassword";
         };
 
-        export type Server = {
-            type: "server";
-        };
     }
 }
 
@@ -84,32 +81,31 @@ assert<
 >();
 
 
-export type UserProfileApi = {
+export type NewPasswordApi = {
     getFormState: () => FormState;
     subscribeToFormState: (callback: () => void) => { unsubscribe: () => void };
     dispatchFormAction: (action: FormAction) => void;
 };
 
-const cachedUserProfileApiByKcContext = new WeakMap<KcContextLike, UserProfileApi>();
+const cache = new WeakMap<KcContextLike, NewPasswordApi>();
 
-export type UserProfileApiLike = Omit<userProfileApi.UserProfileApi, "dispatchFormAction">;;
-
-assert<userProfileApi.UserProfileApi extends UserProfileApiLike ? true : false>();
 
 
 export type ParamsOfGetUserProfileApi = {
     kcContext: KcContextLike;
-    fieldName: string;
-    confirmationFieldName: string;
+    passwordFieldName: string;
+    passwordConfirmFieldName: string;
     makeConfirmationFieldHiddenAndAutoFilled: boolean;
-    userProfileApi: UserProfileApiLike | undefined;
+    userProfileApi:
+        | Omit<import("../userProfileApi").UserProfileApi, "dispatchFormAction">
+        | undefined;
 };
 
-export function getNewPasswordApi(params: ParamsOfGetUserProfileApi): UserProfileApi {
+export function getNewPasswordApi(params: ParamsOfGetUserProfileApi): NewPasswordApi {
     const { kcContext } = params;
 
     use_cache: {
-        const userProfileApi_cache = cachedUserProfileApiByKcContext.get(kcContext);
+        const userProfileApi_cache = cache.get(kcContext);
 
         if (userProfileApi_cache === undefined) {
             break use_cache;
@@ -120,7 +116,7 @@ export function getNewPasswordApi(params: ParamsOfGetUserProfileApi): UserProfil
 
     const newPasswordApi = getNewPasswordApi_noCache(params);
 
-    cachedUserProfileApiByKcContext.set(kcContext, newPasswordApi);
+    cache.set(kcContext, newPasswordApi);
 
     return newPasswordApi;
 }
@@ -139,17 +135,36 @@ namespace internal {
     };
 }
 
-function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): UserProfileApi {
-    const { kcContext, userProfileApi, confirmation } = params;
+function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): NewPasswordApi {
+    const {
+        kcContext,
+        passwordFieldName,
+        passwordConfirmFieldName,
+        makeConfirmationFieldHiddenAndAutoFilled,
+        userProfileApi
+    } = params;
 
     persistPasswordOnFormSubmit();
 
-    let state: internal.State = getInitialState({ kcContext, requirePasswordConfirmation });
+    const { getErrors } = createGetErrors({
+        kcContext,
+        passwordFieldName,
+        passwordConfirmFieldName,
+        userProfileApi
+    });
+    const { reducer } = createReducer({
+        getErrors,
+        makeConfirmationFieldHiddenAndAutoFilled,
+        passwordConfirmFieldName,
+        passwordFieldName
+    });
+
+    let state = getInitialState({ kcContext, requirePasswordConfirmation });
     const callbacks = new Set<() => void>();
 
-    return {
+    const api: NewPasswordApi = {
         dispatchFormAction: action => {
-            state = reducer({ action, kcContext, doMakeUserConfirmPassword, state });
+            state = reducer({ state, action });
 
             callbacks.forEach(callback => callback());
         },
@@ -163,6 +178,22 @@ function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): UserProfi
             };
         }
     };
+
+    userProfileApi?.subscribeToFormState(() => {
+        api.dispatchFormAction({
+            action: "update",
+            name: passwordFieldName,
+            value: (() => {
+                const formFieldState = api
+                    .getFormState()
+                    .formFieldStates.find(({ attribute }) => attribute.name === passwordFieldName);
+                assert(formFieldState !== undefined);
+                return formFieldState.value;
+            })()
+        });
+    });
+
+    return api;
 }
 
 function getInitialState(params: {
@@ -267,22 +298,29 @@ function formStateSelector(params: { state: internal.State }): FormState {
     };
 }
 
-function reducer(params: {
-    state: internal.State;
-    kcContext: KcContextLike;
-    doMakeUserConfirmPassword: boolean;
-    action: FormAction;
-}): internal.State {
-    const { kcContext, doMakeUserConfirmPassword, action } = params;
-    let { state } = params;
+function createReducer(params: {
+    passwordFieldName: string;
+    passwordConfirmFieldName: string;
+    getErrors: ReturnType<typeof createGetErrors>["getErrors"];
+    makeConfirmationFieldHiddenAndAutoFilled: boolean;
+}) {
+    const {
+        passwordFieldName,
+        passwordConfirmFieldName,
+        getErrors,
+        makeConfirmationFieldHiddenAndAutoFilled
+    } = params;
 
-    const { getErrors } = createGetErrors({ kcContext });
+    function reducer(params: { state: internal.State; action: FormAction }): internal.State {
+        const { action } = params;
+        let { state } = params;
 
-    const formFieldState = state.formFieldStates.find(({ attribute }) => attribute.name === action.name);
+        const formFieldState = state.formFieldStates.find(
+            ({ attribute }) => attribute.name === action.name
+        );
 
-    assert(formFieldState !== undefined);
+        assert(formFieldState !== undefined);
 
-    (() => {
         switch (action.action) {
             case "update":
                 formFieldState.value = action.value;
@@ -299,104 +337,86 @@ function reducer(params: {
                         break simulate_focus_lost;
                     }
 
-                    for (const fieldIndex of action.valueOrValues instanceof Array
-                        ? action.valueOrValues.map((...[, index]) => index)
-                        : [undefined]) {
-                        state = reducer({
-                            state,
-                            kcContext,
-                            doMakeUserConfirmPassword,
-                            action: {
-                                action: "focus lost",
-                                name: action.name,
-                                fieldIndex
-                            }
-                        });
-                    }
+                    state = reducer({
+                        state,
+                        action: {
+                            action: "focus lost",
+                            name: action.name
+                        }
+                    });
                 }
 
                 update_password_confirm: {
-                    if (doMakeUserConfirmPassword) {
+                    if (!makeConfirmationFieldHiddenAndAutoFilled) {
                         break update_password_confirm;
                     }
 
-                    if (action.name !== "password") {
+                    if (action.name !== passwordConfirmFieldName) {
                         break update_password_confirm;
                     }
 
                     state = reducer({
                         state,
-                        kcContext,
-                        doMakeUserConfirmPassword,
                         action: {
                             action: "update",
-                            name: "password-confirm",
-                            valueOrValues: action.valueOrValues,
+                            name: passwordConfirmFieldName,
+                            value: action.value,
                             displayErrorsImmediately: action.displayErrorsImmediately
                         }
                     });
                 }
 
                 trigger_password_confirm_validation_on_password_change: {
-                    if (!doMakeUserConfirmPassword) {
+                    if (makeConfirmationFieldHiddenAndAutoFilled) {
                         break trigger_password_confirm_validation_on_password_change;
                     }
 
-                    if (action.name !== "password") {
+                    if (action.name !== passwordFieldName) {
                         break trigger_password_confirm_validation_on_password_change;
                     }
 
                     state = reducer({
                         state,
-                        kcContext,
-                        doMakeUserConfirmPassword,
                         action: {
                             action: "update",
-                            name: "password-confirm",
-                            valueOrValues: (() => {
+                            name: passwordConfirmFieldName,
+                            value: (() => {
                                 const formFieldState = state.formFieldStates.find(
-                                    ({ attribute }) => attribute.name === "password-confirm"
+                                    ({ attribute }) => attribute.name === passwordConfirmFieldName
                                 );
 
                                 assert(formFieldState !== undefined);
 
-                                return formFieldState.valueOrValues;
+                                return formFieldState.value;
                             })(),
                             displayErrorsImmediately: action.displayErrorsImmediately
                         }
                     });
                 }
 
-                return;
+                break;
             case "focus lost":
-                if (formFieldState.hasLostFocusAtLeastOnce instanceof Array) {
-                    const { fieldIndex } = action;
-                    assert(fieldIndex !== undefined);
-                    formFieldState.hasLostFocusAtLeastOnce[fieldIndex] = true;
-                    return;
-                }
-
                 formFieldState.hasLostFocusAtLeastOnce = true;
-                return;
+                break;
+            default:
+                assert<Equals<typeof action, never>>(false);
         }
-        assert<Equals<typeof action, never>>(false);
-    })();
 
-    return { ...state };
+        return { ...state };
+    }
+
+    return { reducer };
 }
 
-function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
-    const { kcContext } = params;
+function createGetErrors(params: {
+    kcContext: KcContextLike_useGetErrors;
+    userProfileApi: ParamsOfGetUserProfileApi["userProfileApi"] | undefined;
+    passwordFieldName: string;
+    passwordConfirmFieldName: string;
+}) {
+    const { kcContext, userProfileApi, passwordFieldName, passwordConfirmFieldName } = params;
 
     const { messagesPerField, passwordPolicies } = kcContext;
-
-    const { getInputValue: getUsernameInputValue } = createGetInputValue({
-        inputName: "username"
-    });
-
-    const {} = createGetInputValue({
-        inputName: "email"
-    });
 
     function getErrors(params: {
         attributeName: string;
@@ -451,7 +471,7 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
         const errors: FormFieldError[] = [];
 
         check_password_policies: {
-            if (attributeName !== "password") {
+            if (attributeName !== passwordFieldName) {
                 break check_password_policies;
             }
 
@@ -643,11 +663,15 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
                     break check_password_policy_x;
                 }
 
-                const usernameFormFieldState = formFieldStates.find(
-                    formFieldState => formFieldState.attribute.name === "username"
-                );
+                if (userProfileApi === undefined) {
+                    break check_password_policy_x;
+                }
 
-                if (!usernameFormFieldState) {
+                const usernameFormFieldState = userProfileApi
+                    .getFormState()
+                    .formFieldStates.find(({ attribute }) => attribute.name === "username");
+
+                if (usernameFormFieldState === undefined) {
                     break check_password_policy_x;
                 }
 
@@ -657,7 +681,8 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
                     assert(typeof valueOrValues === "string");
 
                     unFormat_number: {
-                        const { kcNumberUnFormat } = attribute.html5DataAnnotations ?? {};
+                        const { kcNumberUnFormat } =
+                            usernameFormFieldState.attribute.html5DataAnnotations ?? {};
 
                         if (!kcNumberUnFormat) {
                             break unFormat_number;
@@ -681,7 +706,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
                     advancedMsgArgs: [
                         "invalidPasswordNotUsernameMessage" satisfies MessageKey_defaultSet
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -698,9 +722,13 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
                     break check_password_policy_x;
                 }
 
-                const emailFormFieldState = formFieldStates.find(
-                    formFieldState => formFieldState.attribute.name === "email"
-                );
+                if (userProfileApi === undefined) {
+                    break check_password_policy_x;
+                }
+
+                const emailFormFieldState = userProfileApi
+                    .getFormState()
+                    .formFieldStates.find(formFieldState => formFieldState.attribute.name === "email");
 
                 if (!emailFormFieldState) {
                     break check_password_policy_x;
@@ -724,7 +752,6 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
                     advancedMsgArgs: [
                         "invalidPasswordNotEmailMessage" satisfies MessageKey_defaultSet
                     ] as const,
-                    fieldIndex: undefined,
                     source: {
                         type: "passwordPolicy",
                         name: policyName
@@ -734,20 +761,18 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
         }
 
         password_confirm_matches_password: {
-            if (attributeName !== "password-confirm") {
+            if (attributeName !== passwordConfirmFieldName) {
                 break password_confirm_matches_password;
             }
 
             const passwordFormFieldState = formFieldStates.find(
-                formFieldState => formFieldState.attribute.name === "password"
+                formFieldState => formFieldState.attribute.name === passwordFieldName
             );
 
             assert(passwordFormFieldState !== undefined);
 
-            assert(typeof passwordFormFieldState.valueOrValues === "string");
-
             {
-                const passwordValue = passwordFormFieldState.valueOrValues;
+                const passwordValue = passwordFormFieldState.value;
 
                 if (value === passwordValue) {
                     break password_confirm_matches_password;
@@ -758,15 +783,11 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
                 advancedMsgArgs: [
                     "invalidPasswordConfirmMessage" satisfies MessageKey_defaultSet
                 ] as const,
-                fieldIndex: undefined,
                 source: {
-                    type: "other",
-                    rule: "passwordConfirmMatchesPassword"
+                    type: "passwordConfirmMatchesPassword"
                 }
             });
         }
-
-        const { validators } = attribute;
 
         required_field: {
             if (!attribute.required) {
@@ -781,10 +802,8 @@ function createGetErrors(params: { kcContext: KcContextLike_useGetErrors;  }) {
                 advancedMsgArgs: [
                     "error-user-attribute-required" satisfies MessageKey_defaultSet
                 ] as const,
-                fieldIndex: undefined,
                 source: {
-                    type: "other",
-                    rule: "requiredField"
+                    type: "required field"
                 }
             });
         }
