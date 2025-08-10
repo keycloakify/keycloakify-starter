@@ -3,7 +3,7 @@ import { Password } from "./field/Password";
 import { useI18n } from "../i18n";
 import {
     useNewPassword,
-    type ParamsOfUseUserProfileForm
+    type ParamsOfGetNewPasswordApi
 } from "../../@keycloakify/login-ui/useNewPassword";
 import { useKcContext } from "../KcContext";
 import { assert } from "tsafe/assert";
@@ -26,7 +26,7 @@ export function NewPasswordField(props: {
     testUserPatienceWithConfirmationLikeIts1998: boolean;
     usecase: {
         pageId: "register.ftl";
-        userProfileApi: ParamsOfUseUserProfileForm["userProfileApi"] | undefined;
+        userProfileApi: ParamsOfGetNewPasswordApi["userProfileApi"] | undefined;
     } | {
         pageId: "login-update-password.ftl";
     };
@@ -47,15 +47,15 @@ export function NewPasswordField(props: {
     } = useNewPassword({
         kcContext,
         i18n,
-        fieldName: (()=>{
+        passwordFieldName: (()=>{
             switch(usecase.pageId){
                 case "register.ftl":
                     return "password";
                 case "login-update-password.ftl":
                     return "password-new";
             }
-        })()
-        confirmationFieldName: "password-confirm",
+        })(),
+        passwordConfirmFieldName: "password-confirm",
         makeConfirmationFieldHiddenAndAutoFilled: !testUserPatienceWithConfirmationLikeIts1998,
         userProfileApi: usecase.pageId === "register.ftl" ? usecase.userProfileApi : undefined
     });
