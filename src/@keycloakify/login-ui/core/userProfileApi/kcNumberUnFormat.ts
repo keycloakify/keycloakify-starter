@@ -1,13 +1,33 @@
-import { assert } from "tsafe/assert";
-let cleanup: (() => void) | undefined;
+import { assert, is } from "tsafe/assert";
 const handledElements = new WeakSet<HTMLElement>();
 const KC_NUMBER_UNFORMAT = "kcNumberUnFormat";
 const SELECTOR = `input[data-${KC_NUMBER_UNFORMAT}]`;
 
-export function unFormatNumberOnSubmit() {
-    cleanup?.();
 
-    const handleElement = (element: HTMLInputElement) => {
+declare global {
+    interface Window {
+        "__keycloakify.unFormatNumberOnSubmit.GlobalContext": {
+            hasBeenCalled: boolean;
+        };
+    }
+}
+
+window["__keycloakify.unFormatNumberOnSubmit.GlobalContext"] ??= {
+    hasBeenCalled: false
+};
+
+const globalContext = window["__keycloakify.unFormatNumberOnSubmit.GlobalContext"];
+
+
+export function unFormatNumberOnSubmit() {
+
+    if( globalContext.hasBeenCalled ){
+        return;
+    }
+
+    globalContext.hasBeenCalled = true;
+
+    const handleInputElement = (element: HTMLInputElement) => {
         if (handledElements.has(element)) {
             return;
         }
@@ -29,29 +49,40 @@ export function unFormatNumberOnSubmit() {
     };
 
     document.querySelectorAll(SELECTOR).forEach(element => {
-        assert(element instanceof HTMLInputElement);
-        handleElement(element);
+        assert(is<HTMLInputElement>(element));
+        handleInputElement(element);
     });
 
     const observer = new MutationObserver(mutationsList => {
         for (const mutation of mutationsList) {
-            if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-                mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === Node.ELEMENT_NODE) {
-                        const element = (node as HTMLElement).querySelector(SELECTOR);
-                        if (element !== null) {
-                            assert(element instanceof HTMLInputElement);
-                            handleElement(element);
-                        }
-                    }
-                });
+            if (mutation.type !== "childList") {
+                continue;
+            }
+
+            if (mutation.addedNodes.length === 0) {
+                continue;
+            }
+
+            for (const addedNode of mutation.addedNodes) {
+                if (addedNode.nodeType !== Node.ELEMENT_NODE) {
+                    continue;
+                }
+                assert(is<HTMLElement>(addedNode));
+
+                const element = addedNode.querySelector(SELECTOR);
+
+                if (element === null) {
+                    continue;
+                }
+
+                assert(is<HTMLInputElement>(element));
+                handleInputElement(element);
             }
         }
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
 
-    cleanup = () => observer.disconnect();
 }
 
 // NOTE: Keycloak code

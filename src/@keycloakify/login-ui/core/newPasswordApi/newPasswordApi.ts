@@ -91,7 +91,7 @@ const cache = new WeakMap<KcContextLike, NewPasswordApi>();
 
 
 
-export type ParamsOfGetUserProfileApi = {
+export type ParamsOfGetNewPasswordApi = {
     kcContext: KcContextLike;
     passwordFieldName: string;
     passwordConfirmFieldName: string;
@@ -101,7 +101,7 @@ export type ParamsOfGetUserProfileApi = {
         | undefined;
 };
 
-export function getNewPasswordApi(params: ParamsOfGetUserProfileApi): NewPasswordApi {
+export function getNewPasswordApi(params: ParamsOfGetNewPasswordApi): NewPasswordApi {
     const { kcContext } = params;
 
     use_cache: {
@@ -135,7 +135,7 @@ namespace internal {
     };
 }
 
-function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): NewPasswordApi {
+function getNewPasswordApi_noCache(params: ParamsOfGetNewPasswordApi): NewPasswordApi {
     const {
         kcContext,
         passwordFieldName,
@@ -144,22 +144,31 @@ function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): NewPasswo
         userProfileApi
     } = params;
 
-    persistPasswordOnFormSubmit();
+    persistPasswordOnFormSubmit({ passwordFieldName });
+
+    const scopedDownUserProfileApi =
+        userProfileApi === undefined ? undefined : createScopedDownUserProfileApi(userProfileApi);
 
     const { getErrors } = createGetErrors({
         kcContext,
         passwordFieldName,
         passwordConfirmFieldName,
-        userProfileApi
+        scopedDownUserProfileApi
     });
     const { reducer } = createReducer({
         getErrors,
-        makeConfirmationFieldHiddenAndAutoFilled,
+        passwordFieldName,
         passwordConfirmFieldName,
-        passwordFieldName
+        makeConfirmationFieldHiddenAndAutoFilled
     });
 
-    let state = getInitialState({ kcContext, requirePasswordConfirmation });
+    let state = getInitialState({
+        getErrors,
+        passwordFieldName,
+        passwordConfirmFieldName,
+        makeConfirmationFieldHiddenAndAutoFilled
+    });
+
     const callbacks = new Set<() => void>();
 
     const api: NewPasswordApi = {
@@ -179,7 +188,7 @@ function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): NewPasswo
         }
     };
 
-    userProfileApi?.subscribeToFormState(() => {
+    scopedDownUserProfileApi?.subscribeToStateChange(() =>
         api.dispatchFormAction({
             action: "update",
             name: passwordFieldName,
@@ -190,36 +199,43 @@ function getNewPasswordApi_noCache(params: ParamsOfGetUserProfileApi): NewPasswo
                 assert(formFieldState !== undefined);
                 return formFieldState.value;
             })()
-        });
-    });
+        })
+    );
 
     return api;
 }
 
 function getInitialState(params: {
-    kcContext: KcContextLike;
-    requirePasswordConfirmation: boolean;
+    getErrors: ReturnType<typeof createGetErrors>["getErrors"];
+    passwordFieldName: string;
+    passwordConfirmFieldName: string;
+    makeConfirmationFieldHiddenAndAutoFilled: boolean;
 }): internal.State {
-    const { kcContext, requirePasswordConfirmation } = params;
+    const {
+        passwordFieldName,
+        passwordConfirmFieldName,
+        makeConfirmationFieldHiddenAndAutoFilled,
+        getErrors
+    } = params;
 
-    const { getErrors } = createGetErrors({ kcContext });
-
-    const defaultValue = getPersistedPassword();
+    const password_persisted = getPersistedPassword();
 
     const attributes: Attribute[] = [
         {
-            name: "password",
+            name: passwordFieldName,
             annotations: {
                 inputType: undefined
             },
-            value: defaultValue
+            value: password_persisted,
+            required: true
         },
         {
-            name: "password-confirm",
+            name: passwordConfirmFieldName,
             annotations: {
-                inputType: requirePasswordConfirmation ? undefined : "hidden"
+                inputType: makeConfirmationFieldHiddenAndAutoFilled ? "hidden" : undefined
             },
-            value: defaultValue
+            value: password_persisted,
+            required: true
         }
     ];
 
@@ -236,17 +252,14 @@ function getInitialState(params: {
     }
 
     const initialState: internal.State = {
-        formFieldStates: initialFormFieldState.map(({ attribute, valueOrValues }) => ({
+        formFieldStates: initialFormFieldState.map(({ attribute, value }) => ({
             attribute,
             errors: getErrors({
                 attributeName: attribute.name,
                 formFieldStates: initialFormFieldState
             }),
-            hasLostFocusAtLeastOnce:
-                valueOrValues instanceof Array && !getIsMultivaluedSingleField({ attribute })
-                    ? valueOrValues.map(() => false)
-                    : false,
-            valueOrValues: valueOrValues
+            hasLostFocusAtLeastOnce: false,
+            value
         }))
     };
 
@@ -285,9 +298,15 @@ function formStateSelector(params: { state: internal.State }): FormState {
                                 case "notUsername":
                                 case "notEmail":
                                     return true;
+                                default:
+                                    assert<Equals<typeof error.source.name, never>>(false);
                             }
-                            assert<Equals<typeof error.source.name, never>>;
-                            break;
+                        case "required field":
+                            return hasLostFocusAtLeastOnce;
+                        case "server":
+                            return true;
+                        default:
+                            assert<Equals<typeof error.source, never>>(false);
                     }
                 }),
                 attribute,
@@ -299,9 +318,9 @@ function formStateSelector(params: { state: internal.State }): FormState {
 }
 
 function createReducer(params: {
+    getErrors: ReturnType<typeof createGetErrors>["getErrors"];
     passwordFieldName: string;
     passwordConfirmFieldName: string;
-    getErrors: ReturnType<typeof createGetErrors>["getErrors"];
     makeConfirmationFieldHiddenAndAutoFilled: boolean;
 }) {
     const {
@@ -410,11 +429,11 @@ function createReducer(params: {
 
 function createGetErrors(params: {
     kcContext: KcContextLike_useGetErrors;
-    userProfileApi: ParamsOfGetUserProfileApi["userProfileApi"] | undefined;
+    scopedDownUserProfileApi: Pick<ScopedDownUserProfileApi, "getState"> | undefined;
     passwordFieldName: string;
     passwordConfirmFieldName: string;
 }) {
-    const { kcContext, userProfileApi, passwordFieldName, passwordConfirmFieldName } = params;
+    const { kcContext, scopedDownUserProfileApi, passwordFieldName, passwordConfirmFieldName } = params;
 
     const { messagesPerField, passwordPolicies } = kcContext;
 
@@ -663,35 +682,30 @@ function createGetErrors(params: {
                     break check_password_policy_x;
                 }
 
-                if (userProfileApi === undefined) {
+                if (scopedDownUserProfileApi === undefined) {
                     break check_password_policy_x;
                 }
 
-                const usernameFormFieldState = userProfileApi
-                    .getFormState()
-                    .formFieldStates.find(({ attribute }) => attribute.name === "username");
+                const usernameFormFieldState = scopedDownUserProfileApi.getState().username;
 
                 if (usernameFormFieldState === undefined) {
                     break check_password_policy_x;
                 }
 
                 const usernameValue = (() => {
-                    let { valueOrValues } = usernameFormFieldState;
-
-                    assert(typeof valueOrValues === "string");
+                    let { value } = usernameFormFieldState;
 
                     unFormat_number: {
-                        const { kcNumberUnFormat } =
-                            usernameFormFieldState.attribute.html5DataAnnotations ?? {};
+                        const { kcNumberUnFormat } = usernameFormFieldState;
 
                         if (!kcNumberUnFormat) {
                             break unFormat_number;
                         }
 
-                        valueOrValues = formatNumber(valueOrValues, kcNumberUnFormat);
+                        value = formatNumber(value, kcNumberUnFormat);
                     }
 
-                    return valueOrValues;
+                    return value;
                 })();
 
                 if (usernameValue === "") {
@@ -722,30 +736,21 @@ function createGetErrors(params: {
                     break check_password_policy_x;
                 }
 
-                if (userProfileApi === undefined) {
+                if (scopedDownUserProfileApi === undefined) {
                     break check_password_policy_x;
                 }
 
-                const emailFormFieldState = userProfileApi
-                    .getFormState()
-                    .formFieldStates.find(formFieldState => formFieldState.attribute.name === "email");
+                const emailValue = scopedDownUserProfileApi.getState().email;
 
-                if (!emailFormFieldState) {
+                if (emailValue === undefined) {
+                    break check_password_policy_x;
+                }
+                if (emailValue === "") {
                     break check_password_policy_x;
                 }
 
-                assert(typeof emailFormFieldState.valueOrValues === "string");
-
-                {
-                    const emailValue = emailFormFieldState.valueOrValues;
-
-                    if (emailValue === "") {
-                        break check_password_policy_x;
-                    }
-
-                    if (value !== emailValue) {
-                        break check_password_policy_x;
-                    }
+                if (value !== emailValue) {
+                    break check_password_policy_x;
                 }
 
                 errors.push({
@@ -813,4 +818,97 @@ function createGetErrors(params: {
 
     return { getErrors };
 }
+
+type ScopedDownUserProfileApi = {
+    getState: () => ScopedDownUserProfileApi.State;
+    subscribeToStateChange: (callback: () => void) => void;
+};
+
+namespace ScopedDownUserProfileApi {
+    export type State = {
+        username:
+            | {
+                  value: string;
+                  kcNumberUnFormat: string | undefined;
+              }
+            | undefined;
+        email: string | undefined;
+    };
+}
+
+const { createScopedDownUserProfileApi } = (() => {
+    function readState(
+        state_userProfile: ReturnType<
+            NonNullable<ParamsOfGetNewPasswordApi["userProfileApi"]>["getFormState"]
+        >
+    ): ScopedDownUserProfileApi.State {
+        const state: ScopedDownUserProfileApi.State = {
+            username: undefined,
+            email: undefined
+        };
+
+        for (const name of ["username", "email"] as const) {
+            const formFieldState = state_userProfile.formFieldStates.find(
+                ({ attribute }) => attribute.name === name
+            );
+
+            if (formFieldState === undefined) {
+                continue;
+            }
+
+            const value = formFieldState.valueOrValues;
+
+            assert(typeof value === "string");
+
+            switch (name) {
+                case "email":
+                    state[name] = value;
+                    break;
+                case "username":
+                    state[name] = {
+                        value,
+                        kcNumberUnFormat: formFieldState.attribute.html5DataAnnotations?.kcNumberUnFormat
+                    };
+                    break;
+                default:
+                    assert<Equals<typeof name, never>>(false);
+            }
+        }
+
+        return state;
+    }
+
+    function createScopedDownUserProfileApi(
+        userProfileApi: NonNullable<ParamsOfGetNewPasswordApi["userProfileApi"]>
+    ): ScopedDownUserProfileApi {
+        let state = readState(userProfileApi.getFormState());
+
+        const callbacks = new Set<() => void>();
+
+        const api: ScopedDownUserProfileApi = {
+            getState: () => state,
+            subscribeToStateChange: callback => {
+                callbacks.add(callback);
+            }
+        };
+
+        userProfileApi.subscribeToFormState(() => {
+            const state_new = readState(userProfileApi.getFormState());
+
+            if (JSON.stringify(state_new) === JSON.stringify(state)) {
+                return;
+            }
+
+            for (const callback of callbacks) {
+                callback();
+            }
+        });
+
+        return api;
+    }
+
+    return { createScopedDownUserProfileApi };
+})();
+
+
 

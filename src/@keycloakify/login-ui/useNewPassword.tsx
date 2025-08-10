@@ -5,7 +5,6 @@ import { assert, type Equals } from "tsafe/assert";
 import type { MessageKey_defaultSet } from "./i18n";
 import type { GenericI18n } from "./i18n/GenericI18n";
 import * as coreApi from "./core/newPasswordApi/index";
-import * as userProfileForm from "./useUserProfileForm";
 
 type I18n = GenericI18n<MessageKey_defaultSet, string>;
 
@@ -19,11 +18,11 @@ export type FormFieldError = {
     type A = Omit<FormFieldError, "errorMessage" | "errorMessageStr">;
     type B = Omit<coreApi.FormFieldError, "advancedMsgArgs">;
 
-    assert<Equals<A, B>>();
+    assert<Equals<A, B>>;
 }
 
 export namespace FormFieldError {
-    export type Source = Source.PasswordPolicy | Source.Other | Source.Server;
+    export type Source = Source.PasswordPolicy | Source.Other;
 
     export namespace Source {
         export type PasswordPolicy = {
@@ -32,11 +31,7 @@ export namespace FormFieldError {
         };
 
         export type Other = {
-            type: "passwordConfirmMatchesPassword";
-        };
-
-        export type Server = {
-            type: "server";
+            type: "server" | "required field" | "passwordConfirmMatchesPassword";
         };
     }
 }
@@ -45,7 +40,7 @@ export namespace FormFieldError {
     type A = FormFieldError.Source;
     type B = coreApi.FormFieldError.Source;
 
-    assert<Equals<A, B>>();
+    assert<Equals<A, B>>;
 }
 
 export type FormFieldState = {
@@ -58,7 +53,7 @@ export type FormFieldState = {
     type A = Omit<FormFieldState, "displayableErrors">;
     type B = Omit<coreApi.FormFieldState, "displayableErrors">;
 
-    assert<Equals<A, B>>();
+    assert<Equals<A, B>>;
 }
 
 export type FormState = {
@@ -76,7 +71,7 @@ export type FormState = {
 export type FormAction =
     | {
           action: "update";
-          name: "password" | "password-confirm";
+          name: string;
           value: string;
           /** Default false */
           displayErrorsImmediately?: boolean;
@@ -90,25 +85,29 @@ export type FormAction =
     type A = FormAction;
     type B = coreApi.FormAction;
 
-    assert<Equals<A, B>>();
+    assert<Equals<A, B>>;
 }
 
 export type KcContextLike = coreApi.KcContextLike;
 
 export type I18nLike = Pick<I18n, "advancedMsg" | "advancedMsgStr">;
 
-export type ParamsOfUseUserProfileForm = {
+export type ParamsOfGetNewPasswordApi = {
     kcContext: KcContextLike;
-    requirePasswordConfirmation: boolean;
-    userProfileApi: coreApi.UserProfileApiLike | undefined;
+    passwordFieldName: string;
+    passwordConfirmFieldName: string;
+    makeConfirmationFieldHiddenAndAutoFilled: boolean;
+    userProfileApi:
+        | Omit<import("./core/userProfileApi").UserProfileApi, "dispatchFormAction">
+        | undefined;
     i18n: I18nLike;
 };
 
 {
-    type A = Omit<ParamsOfUseUserProfileForm, "i18n">;
-    type B = coreApi.ParamsOfGetUserProfileApi;
+    type A = Omit<ParamsOfGetNewPasswordApi, "i18n">;
+    type B = coreApi.ParamsOfGetNewPasswordApi;
 
-    assert<Equals<A, B>>();
+    assert<Equals<A, B>>;
 }
 
 export type ReturnTypeOfUseUserProfileForm = {
@@ -116,10 +115,10 @@ export type ReturnTypeOfUseUserProfileForm = {
     dispatchFormAction: (action: FormAction) => void;
 };
 
-export function useNewPassword(params: ParamsOfUseUserProfileForm): ReturnTypeOfUseUserProfileForm {
-    const { i18n, kcContext } = params;
+export function useNewPassword(params: ParamsOfGetNewPasswordApi): ReturnTypeOfUseUserProfileForm {
+    const { i18n } = params;
 
-    const api = coreApi.getUserProfileApi({ kcContext });
+    const api = coreApi.getNewPasswordApi(params);
 
     const [formState_reactless, setFormState_reactless] = useState(() => api.getFormState());
 
@@ -136,9 +135,10 @@ export function useNewPassword(params: ParamsOfUseUserProfileForm): ReturnTypeOf
     const formState = useMemo(
         (): FormState => ({
             areAllChecksPassed: formState_reactless.areAllChecksPassed,
+
             formFieldStates: formState_reactless.formFieldStates.map(formFieldState_reactless => ({
                 attribute: formFieldState_reactless.attribute,
-                valueOrValues: formFieldState_reactless.valueOrValues,
+                value: formFieldState_reactless.value,
                 displayableErrors: formFieldState_reactless.displayableErrors.map(
                     (formFieldError_reactless, i) => ({
                         errorMessage: (
@@ -147,8 +147,7 @@ export function useNewPassword(params: ParamsOfUseUserProfileForm): ReturnTypeOf
                             </Fragment>
                         ),
                         errorMessageStr: advancedMsgStr(...formFieldError_reactless.advancedMsgArgs),
-                        source: formFieldError_reactless.source,
-                        fieldIndex: formFieldError_reactless.fieldIndex
+                        source: formFieldError_reactless.source
                     })
                 )
             }))
