@@ -1,6 +1,6 @@
 import { getProxyFetchOptions } from "keycloakify/src/bin/tools/fetchProxyOptions";
-import { getThisCodebaseRootDirPath } from "../tools/getThisCodebaseRootDirPath";
-import { cacheDirPath } from "./cacheDirPath";
+import { getThisCodebaseRootDirPath } from "../../tools/getThisCodebaseRootDirPath";
+import { cacheDirPath } from "../cacheDirPath";
 import { relative as pathRelative } from "path";
 import { downloadAndExtractArchive } from "keycloakify/src/bin/tools/downloadAndExtractArchive";
 import { join as pathJoin } from "path";
