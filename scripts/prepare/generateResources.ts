@@ -1,20 +1,23 @@
 import { join as pathJoin } from "path";
-import { downloadKeycloakDefaultTheme } from "../shared/downloadKeycloakDefaultTheme.overridable";
+import { downloadKeycloakDefaultTheme } from "../shared/downloadKeycloakDefaultTheme";
 import { transformCodebase } from "keycloakify/src/bin/tools/transformCodebase";
 import { existsAsync } from "keycloakify/src/bin/tools/fs.existsAsync";
-import { getThisCodebaseRootDirPath } from "../tools/getThisCodebaseRootDirPath.overridable";
-import { THEME_TYPE } from "./generateResources.overridable";
+import { getThisCodebaseRootDirPath } from "../tools/getThisCodebaseRootDirPath";
+//import { THEME_TYPE } from "./generateResources.overridable";
 import * as fsPr from "fs/promises";
 
-export async function generateResources() {
-    const { extractedDirPath } = await downloadKeycloakDefaultTheme();
+export async function generateResources(params: { themeType: "login" | "account"; }) {
 
-    const destDirPath = pathJoin(getThisCodebaseRootDirPath(), "keycloak-theme", "public", THEME_TYPE);
+    const { themeType } = params;
+
+    const { extractedDirPath } = await downloadKeycloakDefaultTheme({ themeType });
+
+    const destDirPath = pathJoin(getThisCodebaseRootDirPath(), "public", "keycloak-theme", themeType);
 
     await fsPr.rm(destDirPath, { recursive: true, force: true });
 
     base_resources: {
-        const srcDirPath = pathJoin(extractedDirPath, "base", THEME_TYPE, "resources");
+        const srcDirPath = pathJoin(extractedDirPath, "base", themeType, "resources");
 
         if (!(await existsAsync(srcDirPath))) {
             break base_resources;
@@ -27,7 +30,7 @@ export async function generateResources() {
     }
 
     transformCodebase({
-        srcDirPath: pathJoin(extractedDirPath, "keycloak", THEME_TYPE, "resources"),
+        srcDirPath: pathJoin(extractedDirPath, "keycloak", themeType, "resources"),
         destDirPath
     });
 

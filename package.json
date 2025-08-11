@@ -4,7 +4,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "disabled:postinstall": "keycloakify sync-extensions",
+        "prepare": "tsx scripts/prepare/main.ts",
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
@@ -14,9 +14,6 @@
         "build-storybook": "storybook build"
     },
     "dependencies": {
-        "@keycloakify/login-ui": "~250004.1.2",
-        "dompurify": "^3.1.6",
-        "evt": "^2.5.9",
         "keycloakify": "^11.8.51",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
@@ -24,7 +21,6 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.30.1",
-        "@keycloakify/login-ui-storybook": "~250004.0.5",
         "@storybook/react-vite": "^9.0.4",
         "@types/react": "^19.1.8",
         "@types/react-dom": "^19.1.6",
@@ -38,6 +34,9 @@
         "typescript-eslint": "^8.35.1",
         "vite": "^7.0.4",
         "properties-parser": "^0.6.0",
-        "@types/properties-parser": "^0.3.3"
+        "@types/properties-parser": "^0.3.3",
+        "dompurify": "^3.1.6",
+        "evt": "^2.5.9",
+        "tsx": "^4.20.3"
     }
 }

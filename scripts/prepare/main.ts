@@ -5,12 +5,11 @@ import { createAccountV1Dir } from "./createAccountV1Dir";
 
 (async () => {
     await generateAccountMultiPageUiCodeFromLoginUi();
+    await createAccountV1Dir();
 
     for (const themeType of ["login", "account"] as const) {
         await generateI18nMessages({ themeType });
+        await generateResources({ themeType });
     }
 
-    await generateResources();
-
-    await createAccountV1Dir();
 })();
