@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { assert } from "tsafe/assert";
-import { useKcContext } from "../../../KcContext";
+import { useKcContext } from "../../../KcContext.gen";
 
 type Recaptcha = {
     submitButtonProps: {

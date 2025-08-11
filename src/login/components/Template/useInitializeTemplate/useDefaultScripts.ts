@@ -1,6 +1,6 @@
 import { useInsertScriptTags } from "../../../../@keycloakify/login-ui/tools/useInsertScriptTags";
 import { BASE_URL } from "../../../../kc.gen";
-import { useKcContext } from "../../../KcContext";
+import { useKcContext } from "../../../KcContext.gen";
 
 export function useDefaultScripts() {
   const { kcContext } = useKcContext();

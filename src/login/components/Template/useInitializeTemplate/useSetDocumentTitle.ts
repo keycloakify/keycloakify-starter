@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { useKcContext } from "../../../KcContext";
+import { useKcContext } from "../../../KcContext.gen";
 import { useI18n } from "../../../i18n";
 
 export function useSetDocumentTitle() {

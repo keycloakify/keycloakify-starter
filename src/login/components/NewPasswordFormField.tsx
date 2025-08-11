@@ -5,7 +5,7 @@ import {
     useNewPassword,
     type ParamsOfGetNewPasswordApi
 } from "../../@keycloakify/login-ui/useNewPassword";
-import { useKcContext } from "../KcContext";
+import { useKcContext } from "../KcContext.gen";
 import { assert } from "tsafe/assert";
 
 export function NewPasswordField(props: {

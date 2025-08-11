@@ -1,9 +1,9 @@
 import type { JSX } from "./tools/JSX";
-import type { PasswordPolicies } from "./core/KcContext/KcContext";
 import { useEffect, useState, useMemo, Fragment } from "react";
 import { assert, type Equals } from "tsafe/assert";
 import type { MessageKey_defaultSet } from "./i18n";
 import type { GenericI18n } from "./i18n/GenericI18n";
+import type { PasswordPolicies } from "./core/newPasswordApi/index";
 import * as coreApi from "./core/newPasswordApi/index";
 
 type I18n = GenericI18n<MessageKey_defaultSet, string>;
@@ -13,13 +13,6 @@ export type FormFieldError = {
     errorMessageStr: string;
     source: FormFieldError.Source;
 };
-
-{
-    type A = Omit<FormFieldError, "errorMessage" | "errorMessageStr">;
-    type B = Omit<coreApi.FormFieldError, "advancedMsgArgs">;
-
-    assert<Equals<A, B>>;
-}
 
 export namespace FormFieldError {
     export type Source = Source.PasswordPolicy | Source.Other;
@@ -35,6 +28,14 @@ export namespace FormFieldError {
         };
     }
 }
+
+{
+    type A = Omit<FormFieldError, "errorMessage" | "errorMessageStr">;
+    type B = Omit<coreApi.FormFieldError, "advancedMsgArgs">;
+
+    assert<Equals<A, B>>;
+}
+
 
 {
     type A = FormFieldError.Source;

@@ -1,6 +1,6 @@
 import { assert } from "tsafe/assert";
 import { useI18n } from "../../i18n";
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { LoginButton } from "../../components/buttons/LoginButton";
 import { Input } from "../../components/field/Input";

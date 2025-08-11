@@ -7,7 +7,7 @@ import { ErrorIcon } from "./ErrorIcon";
 
 type Props = {
     className?: string;
-    style: CSSProperties;
+    style?: CSSProperties;
     label: ReactNode;
     required?: boolean;
 

@@ -4,7 +4,7 @@ import { assert } from "tsafe/assert";
 import { waitForElementMountedOnDom } from "../../../@keycloakify/login-ui/tools/waitForElementMountedOnDom";
 import { useI18n } from "../../i18n";
 import { BASE_URL } from "../../../kc.gen";
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 
 export function useScript(params: { authButtonId: string; }) {
     const { authButtonId } = params;

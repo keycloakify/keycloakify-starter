@@ -1,5 +1,5 @@
 import { useInitializeDarkMode as useInitializeDarkMode_base } from "../../../../@keycloakify/login-ui/useInitializeDarkMode";
-import { useKcContext } from "../../../KcContext";
+import { useKcContext } from "../../../KcContext.gen";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 
 export function useInitializeDarkMode() {

@@ -1,7 +1,7 @@
 import { useState, useReducer } from "react";
 import { assert } from "tsafe/assert";
 import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { UserProfileFormFields } from "../../components/UserProfileFormFields";

@@ -1,6 +1,6 @@
 
 import { useLayoutEffect } from "react";
-import { useKcContext } from "../../../KcContext";
+import { useKcContext } from "../../../KcContext.gen";
 
 export function useSetBodyPageIdAttribute(){
 

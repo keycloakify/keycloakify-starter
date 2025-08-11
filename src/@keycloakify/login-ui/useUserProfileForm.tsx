@@ -1,10 +1,10 @@
 import type { JSX } from "./tools/JSX";
-import type { Attribute, Validators } from "./core/KcContext/KcContext";
 import { useEffect, useState, useMemo, Fragment } from "react";
 import { assert, type Equals } from "tsafe/assert";
 export { getButtonToDisplayForMultivaluedAttributeField } from "./core/userProfileApi/index";
 import type { MessageKey_defaultSet } from "./i18n";
 import type { GenericI18n } from "./i18n/GenericI18n";
+import type { Attribute, Validators } from "./core/userProfileApi/index";
 import * as coreApi from "./core/userProfileApi/index";
 
 type I18n = GenericI18n<MessageKey_defaultSet, string>;
@@ -16,6 +16,21 @@ export type FormFieldError = {
     fieldIndex: number | undefined;
 };
 
+export namespace FormFieldError {
+    export type Source = Source.Validator | Source.Other;
+
+    export namespace Source {
+        export type Validator = {
+            type: "validator";
+            name: keyof Validators;
+        };
+        export type Other = {
+            type: "server" | "required field";
+        };
+
+    }
+}
+
 {
     type A = Omit<FormFieldError, "errorMessage" | "errorMessageStr">;
     type B = Omit<coreApi.FormFieldError, "advancedMsgArgs">;
@@ -23,23 +38,6 @@ export type FormFieldError = {
     assert<Equals<A, B>>();
 }
 
-export namespace FormFieldError {
-    export type Source = Source.Validator | Source.Server | Source.RequiredField;
-
-    export namespace Source {
-        export type Validator = {
-            type: "validator";
-            name: keyof Validators;
-        };
-        export type Server = {
-            type: "server";
-        };
-
-        export type RequiredField = {
-            type: "required field";
-        };
-    }
-}
 
 {
     type A = FormFieldError.Source;

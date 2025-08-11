@@ -1,5 +1,5 @@
 import { useScript } from "./useScript";
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { assert } from "tsafe/assert";
 import { useI18n } from "../../i18n";

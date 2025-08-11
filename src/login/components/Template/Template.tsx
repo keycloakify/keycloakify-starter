@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { useInitializeTemplate } from "./useInitializeTemplate";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { useI18n } from "../../i18n";
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 import { LanguageSelect } from "./LanguageSelect";
 import { UsernameRequiredFieldsWrapper } from "./UsernameRequiredFieldsWrapper";
 import { UsernameBlock } from "./UsernameBlock";

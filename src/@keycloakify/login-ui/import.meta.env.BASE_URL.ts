@@ -9,7 +9,6 @@ export const BASE_URL = (() => {
         let BASE_URL: string;
 
         try {
-            // @ts-expect-error
             BASE_URL = import.meta.env.BASE_URL;
 
             assert(typeof BASE_URL === "string");
@@ -26,6 +25,7 @@ export const BASE_URL = (() => {
         const kcContext: { "x-keycloakify": { resourcesPath: string } } | undefined = (window as any)
             .kcContext;
 
+        // @ts-expect-error
         if (kcContext === undefined || process.env.NODE_ENV === "development") {
             break use_kcContext;
         }

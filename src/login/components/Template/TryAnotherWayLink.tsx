@@ -1,6 +1,6 @@
 
 
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 
