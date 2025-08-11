@@ -3,7 +3,9 @@ import { generateResources } from "./generateResources";
 import { extraSteps } from "./main.overridable";
 
 (async () => {
-    await generateI18nMessages();
+    for (const themeType of ["login", "account"] as const) {
+        await generateI18nMessages({ themeType });
+    }
     await generateResources();
     await extraSteps();
 })();
