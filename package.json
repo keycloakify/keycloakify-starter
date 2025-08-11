@@ -4,7 +4,7 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "prepare": "tsx scripts/prepare/main.ts",
+        "disabled:prepare": "tsx scripts/prepare/main.ts",
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
