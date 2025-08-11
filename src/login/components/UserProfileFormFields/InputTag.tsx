@@ -113,7 +113,7 @@ export function InputTag(
 
                 return (
                     <>
-                        <ErrorContainer name={fieldIndex === undefined ? "" : `-${fieldIndex}`}>
+                        <ErrorContainer>
                             <DisplayableErrors
                                 displayableErrors={displayableErrors}
                                 fieldIndex={fieldIndex}

@@ -6,6 +6,7 @@ import type { MessageKey_defaultSet } from "./i18n";
 import type { GenericI18n } from "./i18n/GenericI18n";
 import type { Attribute, Validators } from "./core/userProfileApi/index";
 import * as coreApi from "./core/userProfileApi/index";
+export type { Attribute, Validators };
 
 type I18n = GenericI18n<MessageKey_defaultSet, string>;
 

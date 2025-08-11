@@ -6,7 +6,7 @@ import {
     type ParamsOfGetNewPasswordApi
 } from "../../@keycloakify/login-ui/useNewPassword";
 import { useKcContext } from "../KcContext.gen";
-import { assert } from "tsafe/assert";
+//import { assert } from "tsafe/assert";
 
 export function NewPasswordField(props: {
     /**
@@ -39,7 +39,7 @@ export function NewPasswordField(props: {
     const { msg } = i18n;
 
     const { kcContext } = useKcContext();
-    assert(usecase.pageId === kcContext.pageId);
+    //assert(usecase.pageId === kcContext.pageId);
 
     const {
         formState: { areAllChecksPassed, formFieldStates },

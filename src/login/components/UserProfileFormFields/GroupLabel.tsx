@@ -1,5 +1,5 @@
 import { assert } from "tsafe/assert";
-import type { Attribute } from "../../../@keycloakify/login-ui/KcContext";
+import type { Attribute } from "../../../@keycloakify/login-ui/useUserProfileForm";
 import { useI18n } from "../../i18n";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 

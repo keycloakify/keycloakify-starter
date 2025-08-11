@@ -1,4 +1,4 @@
-import { type ReactNode, useId } from "react";
+import type { ReactNode } from "react";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 
 type Props = {
@@ -11,16 +11,11 @@ export function ErrorContainer(props: Props) {
 
     const { kcClsx } = useKcClsx();
 
-    const inputId = `input-error-container-${useId()}`;
-
     return (
-        <div className={className} id={inputId}>
+        <div className={className}>
             <div className={kcClsx("kcFormHelperTextClass")} aria-live="polite">
                 <div className={kcClsx("kcInputHelperTextClass")}>
-                    <div
-                        className={kcClsx("kcInputHelperTextItemClass", "kcError")}
-                        id={inputId}
-                    >
+                    <div className={kcClsx("kcInputHelperTextItemClass", "kcError")}>
                         <span className={kcClsx("kcInputErrorMessageClass")}>{children}</span>
                     </div>
                 </div>

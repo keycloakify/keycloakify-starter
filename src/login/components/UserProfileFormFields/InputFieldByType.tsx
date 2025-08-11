@@ -2,8 +2,7 @@ import { TextareaTag } from "./TextareaTag";
 import { SelectTag } from "./SelectTag";
 import { InputTagSelects } from "./InputTagSelects";
 import { InputTag } from "./InputTag";
-import type { FormAction, FormFieldError } from "../../../@keycloakify/login-ui/useUserProfileForm";
-import type { Attribute } from "../../../@keycloakify/login-ui/KcContext";
+import type { FormAction, FormFieldError, Attribute } from "../../../@keycloakify/login-ui/useUserProfileForm";
 
 export type InputFieldByTypeProps = {
     attribute: Attribute;

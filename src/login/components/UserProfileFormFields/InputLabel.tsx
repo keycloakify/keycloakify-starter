@@ -5,7 +5,7 @@
  * $ npx keycloakify own --path "login/components/UserProfileFormFields/InputLabel.tsx" --revert
  */
 
-import type { Attribute } from "../../../@keycloakify/login-ui/KcContext";
+import type { Attribute } from "../../../@keycloakify/login-ui/useUserProfileForm";
 import { useI18n } from "../../i18n";
 
 export function InputLabel(props: { attribute: Attribute; option: string }) {
