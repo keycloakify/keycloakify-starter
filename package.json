@@ -2,7 +2,6 @@
     "name": "keycloakify-starter",
     "private": true,
     "version": "0.0.0",
-    "type": "module",
     "scripts": {
         "disabled:prepare": "tsx scripts/prepare/main.ts",
         "dev": "vite",
@@ -37,6 +36,9 @@
         "@types/properties-parser": "^0.3.3",
         "dompurify": "^3.1.6",
         "evt": "^2.5.9",
-        "tsx": "^4.20.3"
+        "tsx": "^4.20.3",
+        "make-fetch-happen": "^11.0.3",
+        "yauzl": "^2.10.0",
+        "zod": "^3.24.4"
     }
 }
