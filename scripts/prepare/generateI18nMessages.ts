@@ -563,30 +563,34 @@ const keycloakifyExtraMessages_login: Record<
     /* spell-checker: enable */
 };
 
+export const supportedLanguages_account = [
+    "en",
+    "ar",
+    "ca",
+    "cs",
+    "da",
+    "de",
+    "es",
+    "fi",
+    "fr",
+    "hu",
+    "it",
+    "ja",
+    "lt",
+    "lv",
+    "nl",
+    "no",
+    "pl",
+    "pt-BR",
+    "ru",
+    "sk",
+    "sv",
+    "tr",
+    "zh-CN"
+];
+
 const keycloakifyExtraMessages_account: Record<
-    | "en"
-    | "ar"
-    | "ca"
-    | "cs"
-    | "da"
-    | "de"
-    | "es"
-    | "fi"
-    | "fr"
-    | "hu"
-    | "it"
-    | "ja"
-    | "lt"
-    | "lv"
-    | "nl"
-    | "no"
-    | "pl"
-    | "pt-BR"
-    | "ru"
-    | "sk"
-    | "sv"
-    | "tr"
-    | "zh-CN",
+    typeof supportedLanguages_account[number],
     Record<"newPasswordSameAsOld" | "passwordConfirmNotMatch", string>
 > = {
     en: {

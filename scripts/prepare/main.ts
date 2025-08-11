@@ -1,6 +1,7 @@
 import { generateAccountMultiPageUiCodeFromLoginUi } from "./generateAccountMultiPageUiCodeFromLoginUi";
 import { generateI18nMessages } from "./generateI18nMessages";
 import { generateResources } from "./generateResources";
+import { createAccountV1Dir } from "./createAccountV1Dir";
 
 (async () => {
     await generateAccountMultiPageUiCodeFromLoginUi();
@@ -10,4 +11,6 @@ import { generateResources } from "./generateResources";
     }
 
     await generateResources();
+
+    await createAccountV1Dir();
 })();
