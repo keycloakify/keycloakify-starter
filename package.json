@@ -2,6 +2,7 @@
     "name": "keycloakify-starter",
     "private": true,
     "version": "0.0.0",
+    "type": "module",
     "scripts": {
         "disabled:prepare": "tsx scripts/prepare/main.ts",
         "dev": "vite",

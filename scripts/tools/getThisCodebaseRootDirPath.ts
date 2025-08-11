@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 function getThisCodebaseRootDirPath_rec(dirPath: string): string {
-    if (fs.existsSync(path.join(dirPath, "package.json"))) {
+    if (fs.existsSync(path.join(dirPath, "LICENSE"))) {
         return dirPath;
     }
     return getThisCodebaseRootDirPath_rec(path.join(dirPath, ".."));
