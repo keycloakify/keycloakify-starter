@@ -1,5 +1,5 @@
 import { join as pathJoin } from "path";
-import { downloadKeycloakDefaultTheme } from "../shared/downloadKeycloakDefaultTheme";
+import { downloadKeycloakDefaultTheme } from "../shared/downloadKeycloakDefaultTheme.overridable";
 import { transformCodebase } from "keycloakify/src/bin/tools/transformCodebase";
 import { existsAsync } from "keycloakify/src/bin/tools/fs.existsAsync";
 import { getThisCodebaseRootDirPath } from "../tools/getThisCodebaseRootDirPath.overridable";

@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+/src/@keycloakify/account-multi-page-ui/*
+!/src/@keycloakify/account-multi-page-ui/core/
+/src/@keycloakify/account-multi-page-ui/core/*
+!/src/@keycloakify/account-multi-page-ui/core/kcClsx.ts
+
+!/src/@keycloakify/account-multi-page-ui/core/i18n/
+/src/@keycloakify/account-multi-page-ui/core/i18n/*
+!/src/@keycloakify/account-multi-page-ui/core/i18n/messages_defaultSet/
+
+/login-ui
+/account-multi-page-ui

@@ -9,14 +9,13 @@ import { assert } from "tsafe/assert";
 import { same } from "evt/tools/inDepth";
 import { crawl } from "keycloakify/src/bin/tools/crawl";
 import { downloadKeycloakDefaultTheme } from "../shared/downloadKeycloakDefaultTheme";
-import { getThisCodebaseRootDirPath } from "../tools/getThisCodebaseRootDirPath.overridable";
+import { getThisCodebaseRootDirPath } from "../tools/getThisCodebaseRootDirPath";
 import { deepAssign } from "keycloakify/src/tools/deepAssign";
 import propertiesParser from "properties-parser";
+//import { keycloakifyExtraMessages, THEME_NAME } from "./generateI18nMessages.overridable";
 import { runPrettier } from "keycloakify/src/bin/tools/runPrettier";
 
-export async function generateI18nMessages(params: {
-    themeType: "login" | "account"
-}) {
+export async function generateI18nMessages(params: { themeType: "login" | "account"; }) {
 
     const { themeType } = params;
 
@@ -24,7 +23,7 @@ export async function generateI18nMessages(params: {
 
     const messages: { [language: string]: Dictionary } = {};
 
-    const { extractedDirPath } = await downloadKeycloakDefaultTheme();
+    const { extractedDirPath } = await downloadKeycloakDefaultTheme({ themeType });
 
     {
         const baseThemeDirPath = pathJoin(extractedDirPath, "base");
@@ -186,7 +185,7 @@ export async function generateI18nMessages(params: {
     }
 }
 
-export const keycloakifyExtraMessages_login: Record<
+const keycloakifyExtraMessages_login: Record<
     | "en"
     | "ar"
     | "ca"
