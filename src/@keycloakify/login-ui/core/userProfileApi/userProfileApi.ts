@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "../../tools/Array.prototype.every";
 import { assert, type Equals } from "tsafe/assert";
-import type { KcContext, Attribute, Validators } from "../KcContext/KcContext";
 import type { KcContextLike as KcContextLike_i18n } from "../i18n/getI18n";
 import type { MessageKey as MessageKey_defaultSet } from "../i18n/messages_defaultSet/types";
 import { emailRegexp } from "../../tools/emailRegExp";
@@ -14,6 +13,59 @@ export type FormFieldError = {
     source: FormFieldError.Source;
     fieldIndex: number | undefined;
 };
+
+export type Validators = {
+    length?: Validators.DoIgnoreEmpty & Validators.Range;
+    integer?: Validators.DoIgnoreEmpty & Validators.Range;
+    email?: Validators.DoIgnoreEmpty;
+    pattern?: Validators.DoIgnoreEmpty & Validators.ErrorMessage & { pattern: string };
+    options?: Validators.Options;
+    multivalued?: Validators.DoIgnoreEmpty & Validators.Range;
+    // NOTE: Following are the validators for which we don't implement client side validation yet
+    // or for which the validation can't be performed on the client side.
+    /*
+    double?: Validators.DoIgnoreEmpty & Validators.Range;
+    "up-immutable-attribute"?: {};
+    "up-attribute-required-by-metadata-value"?: {};
+    "up-username-has-value"?: {};
+    "up-duplicate-username"?: {};
+    "up-username-mutation"?: {};
+    "up-email-exists-as-username"?: {};
+    "up-blank-attribute-value"?: Validators.ErrorMessage & { "fail-on-null": boolean; };
+    "up-duplicate-email"?: {};
+    "local-date"?: Validators.DoIgnoreEmpty;
+    "person-name-prohibited-characters"?: Validators.DoIgnoreEmpty & Validators.ErrorMessage;
+    uri?: Validators.DoIgnoreEmpty;
+    "username-prohibited-characters"?: Validators.DoIgnoreEmpty & Validators.ErrorMessage;
+    */
+};
+
+
+// @keycloakify: remove start
+{
+    type Actual = Validators;
+    type Expected = import("../../../../login/components/Template/KcContextCommon").Validators;
+    assert<Equals<Actual, Expected>>;
+}
+// @keycloakify: remove end
+
+export declare namespace Validators {
+    export type DoIgnoreEmpty = {
+        "ignore.empty.value"?: boolean;
+    };
+
+    export type ErrorMessage = {
+        "error-message"?: string;
+    };
+
+    export type Range = {
+        min?: `${number}` | number;
+        max?: `${number}` | number;
+    };
+    export type Options = {
+        options: string[];
+    };
+}
 
 export namespace FormFieldError {
     export type Source = Source.Validator | Source.Other;
@@ -29,6 +81,109 @@ export namespace FormFieldError {
 
     }
 }
+
+export type Attribute = {
+    name: string;
+    displayName?: string;
+    required: boolean;
+    value?: string;
+    values?: string[];
+    group?: {
+        annotations: Record<string, string>;
+        html5DataAnnotations: Record<string, string>;
+        displayHeader?: string;
+        name: string;
+        displayDescription?: string;
+    };
+    html5DataAnnotations?: {
+        kcNumberFormat?: string;
+        kcNumberUnFormat?: string;
+    };
+    readOnly: boolean;
+    validators: Validators;
+    annotations: {
+        inputType?: string;
+        inputTypeSize?: `${number}` | number;
+        inputOptionsFromValidation?: string;
+        inputOptionLabels?: Record<string, string | undefined>;
+        inputOptionLabelsI18nPrefix?: string;
+        inputTypeCols?: `${number}` | number;
+        inputTypeRows?: `${number}` | number;
+        inputTypeMaxlength?: `${number}` | number;
+        inputHelperTextBefore?: string;
+        inputHelperTextAfter?: string;
+        inputTypePlaceholder?: string;
+        inputTypePattern?: string;
+        inputTypeMinlength?: `${number}` | number;
+        inputTypeMax?: string;
+        inputTypeMin?: string;
+        inputTypeStep?: string;
+    };
+    multivalued?: boolean;
+    autocomplete?:
+        | "on"
+        | "off"
+        | "name"
+        | "honorific-prefix"
+        | "given-name"
+        | "additional-name"
+        | "family-name"
+        | "honorific-suffix"
+        | "nickname"
+        | "email"
+        | "username"
+        | "new-password"
+        | "current-password"
+        | "one-time-code"
+        | "organization-title"
+        | "organization"
+        | "street-address"
+        | "address-line1"
+        | "address-line2"
+        | "address-line3"
+        | "address-level4"
+        | "address-level3"
+        | "address-level2"
+        | "address-level1"
+        | "country"
+        | "country-name"
+        | "postal-code"
+        | "cc-name"
+        | "cc-given-name"
+        | "cc-additional-name"
+        | "cc-family-name"
+        | "cc-number"
+        | "cc-exp"
+        | "cc-exp-month"
+        | "cc-exp-year"
+        | "cc-csc"
+        | "cc-type"
+        | "transaction-currency"
+        | "transaction-amount"
+        | "language"
+        | "bday"
+        | "bday-day"
+        | "bday-month"
+        | "bday-year"
+        | "sex"
+        | "tel"
+        | "tel-country-code"
+        | "tel-national"
+        | "tel-area-code"
+        | "tel-local"
+        | "tel-extension"
+        | "impp"
+        | "url"
+        | "photo";
+};
+
+// @keycloakify: remove start
+{
+    type Actual = Attribute;
+    type Expected = import("../../../../login/components/Template/KcContextCommon").Attribute;
+    assert<Equals<Actual, Expected>>;
+}
+// @keycloakify: remove end
 
 export type FormFieldState = {
     attribute: Attribute;
@@ -65,14 +220,18 @@ export type KcContextLike = KcContextLike_i18n &
     };
 
 type KcContextLike_useGetErrors = KcContextLike_i18n & {
-    messagesPerField: Pick<KcContext["messagesPerField"], "existsError" | "get">;
+    messagesPerField: {
+        existsError: (fieldName: string, ...otherFiledNames: string[]) => boolean;
+        get: (fieldName: string) => string;
+    };
 };
 
-assert<
-    Extract<Extract<KcContext, { profile: unknown }>, { pageId: "register.ftl" }> extends KcContextLike
-        ? true
-        : false
->();
+// @keycloakify: remove start
+{
+    type KcContext = import("../../../../login/KcContext.gen").KcContext;
+    assert<Extract<KcContext, { pageId: "register.ftl" }> extends KcContextLike ? true : false>();
+}
+// @keycloakify: remove end
 
 export type UserProfileApi = {
     getFormState: () => FormState;

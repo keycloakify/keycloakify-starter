@@ -3,7 +3,7 @@ import { assert, is } from "tsafe/assert";
 import { extractLastParenthesisContent } from "../../tools/extractLastParenthesisContent";
 import messages_defaultSet_fallbackLanguage from "./messages_defaultSet/en";
 import { fetchMessages_defaultSet } from "./messages_defaultSet";
-import type { KcContext } from "../KcContext/KcContext";
+import type { KcContext } from "../../../../login/KcContext.gen";
 import { id } from "tsafe/id";
 import { Reflect } from "tsafe/Reflect";
 import {

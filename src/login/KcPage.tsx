@@ -10,11 +10,11 @@
 import type { ReactNode } from "react";
 import { assert } from "tsafe/assert";
 import { KcClsxProvider } from "../@keycloakify/login-ui/useKcClsx";
-import { type KcContext, KcContextProvider } from "./KcContext";
+import { type KcContext, KcContextProvider } from "./KcContext.gen";
 import { I18nProvider } from "./i18n";
 import { useExclusiveAppInstanceEffect } from "../@keycloakify/login-ui/tools/useExclusiveAppInstanceEffect";
 import { useStyleLevelCustomization } from "./styleLevelCustomization";
-import { PageIndex } from "./pages/PageIndex";
+import { PageIndex } from "./pages/PageIndex.gen";
 
 export default function KcPage(props: { kcContext: KcContext }) {
     const { kcContext } = props;

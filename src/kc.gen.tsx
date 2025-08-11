@@ -4,7 +4,6 @@
 
 /* eslint-disable */
 
-// @ts-nocheck
 
 // noinspection JSUnusedGlobalSymbols
 
@@ -26,7 +25,7 @@ export const kcEnvDefaults: Record<KcEnvName, string> = {};
  * Depending on the theme type you are working on.
  */
 export type KcContext =
-    | import("./login/KcContext").KcContext
+    | import("./login/KcContext.gen").KcContext
     ;
 
 declare global {

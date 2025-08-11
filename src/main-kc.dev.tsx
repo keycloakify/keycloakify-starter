@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import { KcPage } from "./kc.gen";
-import { getKcContextMock } from "./login/mocks/getKcContextMock";
+import { getKcContextMock } from "./login/mocks/getKcContextMock.gen";
 
 const kcContext = getKcContextMock({
     pageId: "login.ftl",

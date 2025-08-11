@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "../../tools/Array.prototype.every";
 import { assert, type Equals } from "tsafe/assert";
-import type { KcContext, PasswordPolicies } from "../KcContext/KcContext";
 import type { KcContextLike as KcContextLike_i18n } from "../i18n/getI18n";
 import type { MessageKey as MessageKey_defaultSet } from "../i18n/messages_defaultSet/types";
 import { persistPasswordOnFormSubmit, getPersistedPassword } from "./passwordRestoration";
@@ -15,6 +14,33 @@ export type Attribute = {
     value: string | undefined;
     required: true;
 };
+
+export type PasswordPolicies = {
+    /** The minimum length of the password */
+    length?: number;
+    /** The maximum length of the password */
+    maxLength?: number;
+    /** The minimum number of digits required in the password */
+    digits?: number;
+    /** The minimum number of lowercase characters required in the password */
+    lowerCase?: number;
+    /** The minimum number of uppercase characters required in the password */
+    upperCase?: number;
+    /** The minimum number of special characters required in the password */
+    specialChars?: number;
+    /** Whether the password can be the username */
+    notUsername?: boolean;
+    /** Whether the password can be the email address */
+    notEmail?: boolean;
+};
+
+// @keycloakify: remove start
+{
+    type Actual = PasswordPolicies;
+    type Expected = import("../../../../login/components/Template/KcContextCommon").PasswordPolicies;
+    assert<Equals<Actual, Expected>>;
+}
+// @keycloakify: remove end
 
 export type FormFieldError = {
     advancedMsgArgs: readonly [string, ...string[]];
@@ -33,7 +59,6 @@ export namespace FormFieldError {
         export type Other = {
             type: "server" | "required field" | "passwordConfirmMatchesPassword";
         };
-
     }
 }
 
@@ -61,25 +86,25 @@ export type FormAction =
           name: string;
       };
 
-export type KcContextLike = KcContextLike_i18n &
-    KcContextLike_useGetErrors;
+export type KcContextLike = KcContextLike_i18n & KcContextLike_useGetErrors;
 
 type KcContextLike_useGetErrors = KcContextLike_i18n & {
     passwordPolicies?: PasswordPolicies;
-    messagesPerField: Pick<KcContext["messagesPerField"], "existsError" | "get">;
+    messagesPerField: {
+        existsError: (fieldName: string, ...otherFiledNames: string[]) => boolean;
+        get: (fieldName: string) => string;
+    };
 };
 
-assert<
-    KcContext.Register extends KcContextLike
-        ? true
-        : false
->();
-assert<
-    KcContext.LoginUpdatePassword extends KcContextLike
-        ? true
-        : false
->();
-
+// @keycloakify: remove start
+{
+    type KcContext = import("../../../../login/KcContext.gen").KcContext;
+    assert<Extract<KcContext, { pageId: "register.ftl" }> extends KcContextLike ? true : false>();
+    assert<
+        Extract<KcContext, { pageId: "login-update-password.ftl" }> extends KcContextLike ? true : false
+    >();
+}
+// @keycloakify: remove end
 
 export type NewPasswordApi = {
     getFormState: () => FormState;
@@ -89,16 +114,12 @@ export type NewPasswordApi = {
 
 const cache = new WeakMap<KcContextLike, NewPasswordApi>();
 
-
-
 export type ParamsOfGetNewPasswordApi = {
     kcContext: KcContextLike;
     passwordFieldName: string;
     passwordConfirmFieldName: string;
     makeConfirmationFieldHiddenAndAutoFilled: boolean;
-    userProfileApi:
-        | Omit<import("../userProfileApi").UserProfileApi, "dispatchFormAction">
-        | undefined;
+    userProfileApi: Omit<import("../userProfileApi").UserProfileApi, "dispatchFormAction"> | undefined;
 };
 
 export function getNewPasswordApi(params: ParamsOfGetNewPasswordApi): NewPasswordApi {
@@ -120,7 +141,6 @@ export function getNewPasswordApi(params: ParamsOfGetNewPasswordApi): NewPasswor
 
     return newPasswordApi;
 }
-
 
 namespace internal {
     export type FormFieldState = {
@@ -909,6 +929,3 @@ const { createScopedDownUserProfileApi } = (() => {
 
     return { createScopedDownUserProfileApi };
 })();
-
-
-
