@@ -9,8 +9,7 @@ const preview: Preview = {
             }
         },
         options: {
-            storySort: (a, b)=> {
-
+            storySort: (a, b) => {
                 const orderedPagesPrefix = [
                     "Introduction",
                     "login/login.ftl",
@@ -57,11 +56,7 @@ const preview: Preview = {
 
                 function getHardCodedWeight(title) {
                     for (let i = 0; i < orderedPagesPrefix.length; i++) {
-                        if (
-                            title
-                                .toLowerCase()
-                                .startsWith(orderedPagesPrefix[i].toLowerCase())
-                        ) {
+                        if (title.toLowerCase().startsWith(orderedPagesPrefix[i].toLowerCase())) {
                             return orderedPagesPrefix.length - i;
                         }
                     }
@@ -70,9 +65,7 @@ const preview: Preview = {
                 }
 
                 return getHardCodedWeight(b.title) - getHardCodedWeight(a.title);
-
             }
-
         }
     }
 };

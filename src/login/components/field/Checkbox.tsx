@@ -1,4 +1,4 @@
-import  { type ReactNode, useId } from "react";
+import { type ReactNode, useId } from "react";
 import { useKcClsx } from "../../../@keycloakify/login-ui/useKcClsx";
 import { clsx } from "../../../@keycloakify/login-ui/tools/clsx";
 
@@ -6,11 +6,7 @@ type Props = {
     className?: string;
     label: ReactNode;
     required?: boolean;
-    renderInput: (inputProps: {
-        className: string;
-        type: "checkbox";
-        id: string;
-    }) => ReactNode;
+    renderInput: (inputProps: { className: string; type: "checkbox"; id: string }) => ReactNode;
 };
 
 export function Checkbox(props: Props) {

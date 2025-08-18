@@ -3,12 +3,12 @@ import { useKcContext } from "../../../KcContext.gen";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 
 export function useInitializeDarkMode() {
-  const { kcContext } = useKcContext();
+    const { kcContext } = useKcContext();
 
-  const { kcClsx } = useKcClsx();
+    const { kcClsx } = useKcClsx();
 
-  useInitializeDarkMode_base({
-    doEnableDarkModeIfPreferred: kcContext.darkMode ?? true,
-    htmlDarkModeClassName: kcClsx("kcDarkModeClass"),
-  });
+    useInitializeDarkMode_base({
+        doEnableDarkModeIfPreferred: kcContext.darkMode ?? true,
+        htmlDarkModeClassName: kcClsx("kcDarkModeClass")
+    });
 }

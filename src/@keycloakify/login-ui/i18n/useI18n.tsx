@@ -10,8 +10,6 @@ import type {
     MessageKey as MessageKey_defaultSet
 } from "../core/i18n/messages_defaultSet/types";
 
-
-
 export type ReturnTypeOfCreateUseI18n<
     MessageKey_themeDefined extends string,
     LanguageTag_notInDefaultSet extends string

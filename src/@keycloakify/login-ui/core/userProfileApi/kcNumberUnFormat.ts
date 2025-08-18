@@ -3,7 +3,6 @@ const handledElements = new WeakSet<HTMLElement>();
 const KC_NUMBER_UNFORMAT = "kcNumberUnFormat";
 const SELECTOR = `input[data-${KC_NUMBER_UNFORMAT}]`;
 
-
 declare global {
     interface Window {
         "__keycloakify.unFormatNumberOnSubmit.GlobalContext": {
@@ -18,10 +17,8 @@ window["__keycloakify.unFormatNumberOnSubmit.GlobalContext"] ??= {
 
 const globalContext = window["__keycloakify.unFormatNumberOnSubmit.GlobalContext"];
 
-
 export function unFormatNumberOnSubmit() {
-
-    if( globalContext.hasBeenCalled ){
+    if (globalContext.hasBeenCalled) {
         return;
     }
 
@@ -82,7 +79,6 @@ export function unFormatNumberOnSubmit() {
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
-
 }
 
 // NOTE: Keycloak code

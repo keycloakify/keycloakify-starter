@@ -5,8 +5,8 @@ import { useI18n } from "../i18n";
 
 type Props = {
     hasError: boolean;
-    renderInput: (inputProps: { 
-        type: "checkbox"; 
+    renderInput: (inputProps: {
+        type: "checkbox";
         id: string;
         className: string;
         "aria-invalid": true | undefined;

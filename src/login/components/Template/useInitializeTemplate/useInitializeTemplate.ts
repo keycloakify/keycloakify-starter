@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useInitializeDarkMode } from "./useInitializeDarkMode";
 import { useDefaultCss } from "./useDefaultCss";
@@ -10,7 +9,6 @@ import { useSetBodyPageIdAttribute } from "./useSetBodyPageIdAttribute";
 import { useSetBodyId } from "./useSetBodyId";
 
 export function useInitializeTemplate() {
-
     useInitializeDarkMode();
     useSetDocumentTitle();
     useSetRootHtmlElementClassName();

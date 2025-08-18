@@ -1,4 +1,3 @@
-
 import { assert } from "tsafe/assert";
 import { useKcContext } from "../../KcContext.gen";
 import { Template } from "../../components/Template";
@@ -16,9 +15,10 @@ export function Page() {
             displayMessage={kcContext.messagesPerField.exists("global")}
             displayRequiredFields
             slots={{
-                header: kcContext.messageHeader !== undefined
-                    ? advancedMsg(kcContext.messageHeader)
-                    : msg("registerTitle"),
+                header:
+                    kcContext.messageHeader !== undefined
+                        ? advancedMsg(kcContext.messageHeader)
+                        : msg("registerTitle"),
                 form: <Form />
             }}
         />

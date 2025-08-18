@@ -1,23 +1,18 @@
 import { useLayoutEffect } from "react";
 import { useKcClsx } from "../../../../@keycloakify/login-ui/useKcClsx";
 
-export function useSetBodyClassName(){
-
+export function useSetBodyClassName() {
     const { kcClsx } = useKcClsx();
 
-    useLayoutEffect(()=> {
-
+    useLayoutEffect(() => {
         const className = kcClsx("kcBodyClass");
 
-        const tokens= className.split(" ");
+        const tokens = className.split(" ");
 
         document.body.classList.add(...tokens);
 
-        return ()=> {
+        return () => {
             document.body.classList.remove(...tokens);
         };
-
     }, []);
-
-
 }

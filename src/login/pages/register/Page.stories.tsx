@@ -1,7 +1,7 @@
 /**
  * This file has been claimed for ownership from @keycloakify/login-ui-storybook version 250004.0.5.
  * To relinquish ownership and restore this file to its original content, run the following command:
- * 
+ *
  * $ npx keycloakify own --path "login/pages/register/Page.stories.tsx" --revert
  */
 

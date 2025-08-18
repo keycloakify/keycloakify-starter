@@ -4,11 +4,14 @@ import { join as pathJoin } from "path";
 
 export async function generateAccountMultiPageUiCodeFromLoginUi() {
     transformCodebase({
-        srcDirPath: 
-        pathJoin(getThisCodebaseRootDirPath(), "src", "@keycloakify", "login-ui"),
-        destDirPath: pathJoin(getThisCodebaseRootDirPath(), "src", "@keycloakify", "account-multi-page-ui"),
+        srcDirPath: pathJoin(getThisCodebaseRootDirPath(), "src", "@keycloakify", "login-ui"),
+        destDirPath: pathJoin(
+            getThisCodebaseRootDirPath(),
+            "src",
+            "@keycloakify",
+            "account-multi-page-ui"
+        ),
         transformSourceCode: ({ fileRelativePath, sourceCode }) => {
-
             if (fileRelativePath === "useUserProfileForm.tsx") {
                 return undefined;
             }

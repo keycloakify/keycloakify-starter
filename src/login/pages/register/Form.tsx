@@ -19,7 +19,7 @@ export function Form() {
     const [areTermsAccepted, setAreTermsAccepted] = useState(false);
     const [areAllUserProfileChecksPassed, setAreAllUserProfileChecksPassed] = useState(false);
     const [areAllNewPasswordChecksPassed, setAreAllNewPasswordChecksPassed] = useState(false);
-    const [hasFormBeenSubmitted, setFormSubmitted] = useReducer(()=> true, false);
+    const [hasFormBeenSubmitted, setFormSubmitted] = useReducer(() => true, false);
 
     const recaptcha = useRecaptchaIfEnabled({ iAmNotARobotSize: "compact" });
 
@@ -29,7 +29,7 @@ export function Form() {
             className={kcClsx("kcFormClass")}
             action={kcContext.url.registrationAction}
             method="post"
-            onSubmit={()=> setFormSubmitted()}
+            onSubmit={() => setFormSubmitted()}
         >
             <UserProfileFormFields
                 onAreAllChecksPassedValueChange={setAreAllUserProfileChecksPassed}

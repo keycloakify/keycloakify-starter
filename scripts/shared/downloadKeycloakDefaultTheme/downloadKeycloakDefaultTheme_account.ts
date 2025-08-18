@@ -9,7 +9,6 @@ import type { Param0 } from "tsafe";
 export const KEYCLOAK_VERSION = "21.1.2";
 
 export async function downloadKeycloakDefaultTheme_account() {
-
     const { onArchiveFile } = createOnArchiveFile();
 
     const { extractedDirPath } = await downloadAndExtractArchive({
@@ -126,4 +125,3 @@ function createOnArchiveFile() {
 
     return { onArchiveFile };
 }
-

@@ -5,49 +5,45 @@ import { assert } from "tsafe/assert";
 import { useI18n } from "../../i18n";
 
 export function ConditionalUIData() {
-  const { kcContext } = useKcContext();
+    const { kcContext } = useKcContext();
 
-  if (!kcContext.enableWebAuthnConditionalUI) {
-    return null;
-  }
+    if (!kcContext.enableWebAuthnConditionalUI) {
+        return null;
+    }
 
-  return <ActualConditionalUIData />;
+    return <ActualConditionalUIData />;
 }
 
 function ActualConditionalUIData() {
-  const { kcContext } = useKcContext();
-  assert(kcContext.enableWebAuthnConditionalUI);
+    const { kcContext } = useKcContext();
+    assert(kcContext.enableWebAuthnConditionalUI);
 
-  const { msg } = useI18n();
+    const { msg } = useI18n();
 
-  const authButtonId = "authenticateWebAuthnButton";
+    const authButtonId = "authenticateWebAuthnButton";
 
-  useScript({ authButtonId });
+    useScript({ authButtonId });
 
-  const { kcClsx } = useKcClsx();
+    const { kcClsx } = useKcClsx();
 
-  return (
-    <>
-      <form id="webauth" action={kcContext.url.loginAction} method="post">
-        <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
-        <input type="hidden" id="authenticatorData" name="authenticatorData" />
-        <input type="hidden" id="signature" name="signature" />
-        <input type="hidden" id="credentialId" name="credentialId" />
-        <input type="hidden" id="userHandle" name="userHandle" />
-        <input type="hidden" id="error" name="error" />
-      </form>
+    return (
+        <>
+            <form id="webauth" action={kcContext.url.loginAction} method="post">
+                <input type="hidden" id="clientDataJSON" name="clientDataJSON" />
+                <input type="hidden" id="authenticatorData" name="authenticatorData" />
+                <input type="hidden" id="signature" name="signature" />
+                <input type="hidden" id="credentialId" name="credentialId" />
+                <input type="hidden" id="userHandle" name="userHandle" />
+                <input type="hidden" id="error" name="error" />
+            </form>
 
-      <a
-        id="authenticateWebAuthnButton"
-        href="#"
-        className={kcClsx(
-          "kcButtonSecondaryClass",
-          "kcButtonBlockClass",
-          "kcMarginTopClass"
-        )}
-      >
-        {msg("webauthn-doAuthenticate")}
-      </a>
-    </>
-  );
+            <a
+                id="authenticateWebAuthnButton"
+                href="#"
+                className={kcClsx("kcButtonSecondaryClass", "kcButtonBlockClass", "kcMarginTopClass")}
+            >
+                {msg("webauthn-doAuthenticate")}
+            </a>
+        </>
+    );
 }

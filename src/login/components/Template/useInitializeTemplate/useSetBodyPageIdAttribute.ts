@@ -1,27 +1,16 @@
-
 import { useLayoutEffect } from "react";
 import { useKcContext } from "../../../KcContext.gen";
 
-export function useSetBodyPageIdAttribute(){
-
+export function useSetBodyPageIdAttribute() {
     const { kcContext } = useKcContext();
 
-    useLayoutEffect(
-        ()=> {
+    useLayoutEffect(() => {
+        const name = "data-page-id";
 
-            const name= "data-page-id";
+        document.body.setAttribute(name, `login-${kcContext.pageId.replace(/\.ftl$/, "")}`);
 
-            document.body.setAttribute(
-              name,
-              `login-${kcContext.pageId.replace(/\.ftl$/, "")}`
-            );
-
-            return ()=> {
-                document.body.removeAttribute(name);
-            };
-
-        },
-        []
-    );
-
+        return () => {
+            document.body.removeAttribute(name);
+        };
+    }, []);
 }

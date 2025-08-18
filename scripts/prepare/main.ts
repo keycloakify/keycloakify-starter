@@ -11,5 +11,4 @@ import { createAccountV1Dir } from "./createAccountV1Dir";
         await generateI18nMessages({ themeType });
         await generateResources({ themeType });
     }
-
 })();

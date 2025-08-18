@@ -40,7 +40,6 @@ export type Validators = {
     */
 };
 
-
 // @keycloakify: remove start
 {
     type Actual = Validators;
@@ -78,7 +77,6 @@ export namespace FormFieldError {
         export type Other = {
             type: "server" | "required field";
         };
-
     }
 }
 
@@ -437,7 +435,6 @@ function getInitialState(params: {
     }
 
     attributes.forEach(attribute => {
-
         if (attribute.name === "locale") {
             assert(kcContext.locale !== undefined);
             attribute.annotations.inputType = "hidden";
@@ -620,7 +617,6 @@ function formStateSelector(params: { state: internal.State }): FormState {
                             }
                         default:
                             assert<Equals<typeof error.source, never>>(false);
-
                     }
                 }),
                 attribute,

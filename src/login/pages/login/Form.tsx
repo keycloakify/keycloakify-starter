@@ -34,8 +34,8 @@ export function Form() {
                                         !kcContext.realm.loginWithEmailAllowed
                                             ? msg("username")
                                             : !kcContext.realm.registrationEmailAsUsername
-                                            ? msg("usernameOrEmail")
-                                            : msg("email")
+                                              ? msg("usernameOrEmail")
+                                              : msg("email")
                                     }
                                     error={kcContext.messagesPerField.getFirstError(
                                         "username",

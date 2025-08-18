@@ -1,10 +1,4 @@
-
-export const addCookie = (
-    name: string,
-    value: string,
-    maxAgeSeconds: number,
-    path: string
-) => {
+export const addCookie = (name: string, value: string, maxAgeSeconds: number, path: string) => {
     document.cookie = `${name}=${encodeURIComponent(value)}; max-age=${maxAgeSeconds}; path=${path}; Secure; SameSite=Strict`;
 };
 

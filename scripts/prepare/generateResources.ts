@@ -6,8 +6,7 @@ import { getThisCodebaseRootDirPath } from "../tools/getThisCodebaseRootDirPath"
 //import { THEME_TYPE } from "./generateResources.overridable";
 import * as fsPr from "fs/promises";
 
-export async function generateResources(params: { themeType: "login" | "account"; }) {
-
+export async function generateResources(params: { themeType: "login" | "account" }) {
     const { themeType } = params;
 
     const { extractedDirPath } = await downloadKeycloakDefaultTheme({ themeType });

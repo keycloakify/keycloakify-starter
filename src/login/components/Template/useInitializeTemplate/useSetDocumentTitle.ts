@@ -3,17 +3,17 @@ import { useKcContext } from "../../../KcContext.gen";
 import { useI18n } from "../../../i18n";
 
 export function useSetDocumentTitle() {
-  const { kcContext } = useKcContext();
+    const { kcContext } = useKcContext();
 
-  const { msgStr } = useI18n();
+    const { msgStr } = useI18n();
 
-  useLayoutEffect(() => {
-    const title_before = document.title;
+    useLayoutEffect(() => {
+        const title_before = document.title;
 
-    document.title = msgStr("loginTitle", kcContext.realm.displayName || "");
+        document.title = msgStr("loginTitle", kcContext.realm.displayName || "");
 
-    return () => {
-      document.title = title_before;
-    };
-  }, []);
+        return () => {
+            document.title = title_before;
+        };
+    }, []);
 }

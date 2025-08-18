@@ -6,7 +6,7 @@ import { useI18n } from "../../i18n";
 import { BASE_URL } from "../../../kc.gen";
 import { useKcContext } from "../../KcContext.gen";
 
-export function useScript(params: { authButtonId: string; }) {
+export function useScript(params: { authButtonId: string }) {
     const { authButtonId } = params;
 
     const { kcContext } = useKcContext();

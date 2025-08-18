@@ -15,8 +15,7 @@ import propertiesParser from "properties-parser";
 //import { keycloakifyExtraMessages, THEME_NAME } from "./generateI18nMessages.overridable";
 import { runPrettier } from "keycloakify/src/bin/tools/runPrettier";
 
-export async function generateI18nMessages(params: { themeType: "login" | "account"; }) {
-
+export async function generateI18nMessages(params: { themeType: "login" | "account" }) {
     const { themeType } = params;
 
     type Dictionary = { [idiomId: string]: string };
@@ -62,12 +61,18 @@ export async function generateI18nMessages(params: { themeType: "login" | "accou
 
     const languages = Object.keys(messages);
 
-    const keycloakifyExtraMessages= (()=>{
-        switch(themeType){
-            case "login": return keycloakifyExtraMessages_login;
-            case "account": return keycloakifyExtraMessages_account;
+    const keycloakifyExtraMessages = (() => {
+        switch (themeType) {
+            case "login":
+                return keycloakifyExtraMessages_login;
+            case "account":
+                return keycloakifyExtraMessages_account;
         }
     })();
+
+    console.log(themeType);
+    console.log([...languages].sort());
+    console.log([...Object.keys(keycloakifyExtraMessages)].sort());
 
     assert(
         same(languages, Object.keys(keycloakifyExtraMessages), {
@@ -83,10 +88,12 @@ export async function generateI18nMessages(params: { themeType: "login" | "accou
     const messagesDirPath = pathJoin(
         getThisCodebaseRootDirPath(),
         "@keycloakify",
-        (()=>{
-            switch(themeType){
-                case "login": return "login-ui";
-                case "account": return "account-multi-page-ui";
+        (() => {
+            switch (themeType) {
+                case "login":
+                    return "login-ui";
+                case "account":
+                    return "account-multi-page-ui";
             }
         })(),
         "core",
@@ -186,20 +193,24 @@ export async function generateI18nMessages(params: { themeType: "login" | "accou
 }
 
 const keycloakifyExtraMessages_login: Record<
-    | "en"
     | "ar"
     | "ca"
     | "cs"
     | "da"
     | "de"
     | "el"
+    | "en"
     | "es"
     | "fa"
     | "fi"
     | "fr"
+    | "hr"
     | "hu"
     | "it"
     | "ja"
+    | "ka"
+    | "ko"
+    | "ky"
     | "lt"
     | "lv"
     | "nl"
@@ -207,13 +218,14 @@ const keycloakifyExtraMessages_login: Record<
     | "pl"
     | "pt"
     | "pt-BR"
+    | "ro"
     | "ru"
     | "sk"
+    | "sl"
     | "sv"
     | "th"
     | "tr"
     | "uk"
-    | "ka"
     | "zh-CN"
     | "zh-TW",
     Record<
@@ -559,6 +571,63 @@ const keycloakifyExtraMessages_login: Record<
         remove: "移除",
         addValue: "添加值",
         languages: "語言"
+    },
+    hr: {
+        shouldBeEqual: "{0} treba biti jednako {1}",
+        shouldBeDifferent: "{0} treba biti različito od {1}",
+        shouldMatchPattern: "Uzorak treba odgovarati: `/{0}/`",
+        mustBeAnInteger: "Mora biti cijeli broj",
+        notAValidOption: "Nije valjana opcija",
+        selectAnOption: "Odaberi opciju",
+        remove: "Ukloni",
+        addValue: "Dodaj vrijednost",
+        languages: "Jezici"
+    },
+
+    ko: {
+        shouldBeEqual: "{0}은(는) {1}과(와) 같아야 합니다",
+        shouldBeDifferent: "{0}은(는) {1}과(와) 달라야 합니다",
+        shouldMatchPattern: "패턴이 일치해야 합니다: `/{0}/`",
+        mustBeAnInteger: "정수여야 합니다",
+        notAValidOption: "유효한 옵션이 아닙니다",
+        selectAnOption: "옵션을 선택하세요",
+        remove: "삭제",
+        addValue: "값 추가",
+        languages: "언어"
+    },
+
+    ky: {
+        shouldBeEqual: "{0} {1}ге барабар болушу керек",
+        shouldBeDifferent: "{0} {1}ден айырмаланышы керек",
+        shouldMatchPattern: "Шаблон дал келиши керек: `/{0}/`",
+        mustBeAnInteger: "Бүтүн сан болушу керек",
+        notAValidOption: "Жарактуу параметр эмес",
+        selectAnOption: "Параметрди тандаңыз",
+        remove: "Жок кылуу",
+        addValue: "Маани кошуу",
+        languages: "Тилдер"
+    },
+    ro: {
+        shouldBeEqual: "{0} ar trebui să fie egal cu {1}",
+        shouldBeDifferent: "{0} ar trebui să fie diferit de {1}",
+        shouldMatchPattern: "Modelul ar trebui să corespundă: `/{0}/`",
+        mustBeAnInteger: "Trebuie să fie un număr întreg",
+        notAValidOption: "Nu este o opțiune validă",
+        selectAnOption: "Selectează o opțiune",
+        remove: "Elimină",
+        addValue: "Adaugă valoare",
+        languages: "Limbi"
+    },
+    sl: {
+        shouldBeEqual: "{0} mora biti enako {1}",
+        shouldBeDifferent: "{0} mora biti različno od {1}",
+        shouldMatchPattern: "Vzorec se mora ujemati: `/{0}/`",
+        mustBeAnInteger: "Mora biti celo število",
+        notAValidOption: "Ni veljavna možnost",
+        selectAnOption: "Izberi možnost",
+        remove: "Odstrani",
+        addValue: "Dodaj vrednost",
+        languages: "Jeziki"
     }
     /* spell-checker: enable */
 };
@@ -590,7 +659,7 @@ export const supportedLanguages_account = [
 ];
 
 const keycloakifyExtraMessages_account: Record<
-    typeof supportedLanguages_account[number],
+    (typeof supportedLanguages_account)[number],
     Record<"newPasswordSameAsOld" | "passwordConfirmNotMatch", string>
 > = {
     en: {

@@ -357,7 +357,8 @@ export const kcContextCommonMock: KcContextCommon = {
         ).map(([languageTag, label]) => {
             {
                 type Got = typeof languageTag;
-                type Expected = import("../../../@keycloakify/login-ui/core/i18n/messages_defaultSet/types").LanguageTag;
+                type Expected =
+                    import("../../../@keycloakify/login-ui/core/i18n/messages_defaultSet/types").LanguageTag;
 
                 type Missing = Exclude<Expected, Got>;
                 type Unexpected = Exclude<Got, Expected>;
@@ -458,4 +459,3 @@ export const mockAttributesByName = Object.fromEntries(
         }
     ]).map(attribute => [attribute.name, attribute])
 );
-

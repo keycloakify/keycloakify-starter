@@ -11,7 +11,19 @@
         "preview": "vite preview",
         "build-keycloak-theme": "npm run build && keycloakify build",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build"
+        "build-storybook": "storybook build",
+        "_format": "prettier '**/*.{ts,tsx,json,md}'",
+        "format": "yarn _format --write"
+    },
+    "lint-staged": {
+        "*.{ts,tsx,json,md}": [
+            "prettier --write"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged -v"
+        }
     },
     "dependencies": {
         "keycloakify": "^11.8.51",
@@ -40,6 +52,9 @@
         "tsx": "^4.20.3",
         "make-fetch-happen": "^11.0.3",
         "yauzl": "^2.10.0",
-        "zod": "^3.24.4"
+        "zod": "^3.24.4",
+        "prettier": "^3.2.5",
+        "husky": "^4.3.8",
+        "lint-staged": "^11.0.0"
     }
 }

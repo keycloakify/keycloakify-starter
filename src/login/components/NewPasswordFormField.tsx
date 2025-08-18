@@ -24,15 +24,18 @@ export function NewPasswordField(props: {
      * Keeping this enabled only makes sense in, recovery-less environments.
      */
     testUserPatienceWithConfirmationLikeIts1998: boolean;
-    usecase: {
-        pageId: "register.ftl";
-        userProfileApi: ParamsOfGetNewPasswordApi["userProfileApi"] | undefined;
-    } | {
-        pageId: "login-update-password.ftl";
-    };
-    onAreAllCheckPassedValueChange: (areAllChecksPassed: boolean)=> void;
+    usecase:
+        | {
+              pageId: "register.ftl";
+              userProfileApi: ParamsOfGetNewPasswordApi["userProfileApi"] | undefined;
+          }
+        | {
+              pageId: "login-update-password.ftl";
+          };
+    onAreAllCheckPassedValueChange: (areAllChecksPassed: boolean) => void;
 }) {
-    const { usecase, testUserPatienceWithConfirmationLikeIts1998, onAreAllCheckPassedValueChange } = props;
+    const { usecase, testUserPatienceWithConfirmationLikeIts1998, onAreAllCheckPassedValueChange } =
+        props;
 
     const i18n = useI18n();
 
@@ -47,8 +50,8 @@ export function NewPasswordField(props: {
     } = useNewPassword({
         kcContext,
         i18n,
-        passwordFieldName: (()=>{
-            switch(usecase.pageId){
+        passwordFieldName: (() => {
+            switch (usecase.pageId) {
                 case "register.ftl":
                     return "password";
                 case "login-update-password.ftl":
@@ -60,12 +63,9 @@ export function NewPasswordField(props: {
         userProfileApi: usecase.pageId === "register.ftl" ? usecase.userProfileApi : undefined
     });
 
-    useEffect(
-        ()=> {
-            onAreAllCheckPassedValueChange(areAllChecksPassed);
-        },
-        [areAllChecksPassed]
-    );
+    useEffect(() => {
+        onAreAllCheckPassedValueChange(areAllChecksPassed);
+    }, [areAllChecksPassed]);
 
     return (
         <>
@@ -97,10 +97,12 @@ export function NewPasswordField(props: {
                             name={attribute.name}
                             autoComplete="new-password"
                             value={value}
-                            autoFocus={((): boolean=>{
-                                switch(usecase.pageId){
-                                    case "register.ftl": return false;
-                                    case "login-update-password.ftl": return true;
+                            autoFocus={((): boolean => {
+                                switch (usecase.pageId) {
+                                    case "register.ftl":
+                                        return false;
+                                    case "login-update-password.ftl":
+                                        return true;
                                 }
                             })()}
                             onChange={event =>
@@ -110,10 +112,10 @@ export function NewPasswordField(props: {
                                     value: event.target.value
                                 })
                             }
-                            onBlur={()=> 
+                            onBlur={() =>
                                 dispatchFormAction({
                                     action: "focus lost",
-                                    name: attribute.name,
+                                    name: attribute.name
                                 })
                             }
                         />
@@ -122,5 +124,4 @@ export function NewPasswordField(props: {
             ))}
         </>
     );
-
 }

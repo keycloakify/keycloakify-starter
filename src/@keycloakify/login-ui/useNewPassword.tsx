@@ -36,7 +36,6 @@ export namespace FormFieldError {
     assert<Equals<A, B>>;
 }
 
-
 {
     type A = FormFieldError.Source;
     type B = coreApi.FormFieldError.Source;

@@ -14,7 +14,6 @@ type Recaptcha = {
 const RECAPTCHA_CALLBACK_FUNCTION_NAME = "onRecaptchaSuccess";
 
 export function useInvisibleRecaptchaIfEnabled(): Recaptcha | undefined {
-
     const { kcContext } = useKcContext();
     assert(kcContext.pageId === "register.ftl");
 
@@ -45,7 +44,7 @@ export function useInvisibleRecaptchaIfEnabled(): Recaptcha | undefined {
         };
     }, []);
 
-    if( !isEnabled ){
+    if (!isEnabled) {
         return undefined;
     }
 

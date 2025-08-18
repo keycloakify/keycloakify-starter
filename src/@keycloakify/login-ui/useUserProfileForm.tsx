@@ -28,7 +28,6 @@ export namespace FormFieldError {
         export type Other = {
             type: "server" | "required field";
         };
-
     }
 }
 
@@ -38,7 +37,6 @@ export namespace FormFieldError {
 
     assert<Equals<A, B>>();
 }
-
 
 {
     type A = FormFieldError.Source;
