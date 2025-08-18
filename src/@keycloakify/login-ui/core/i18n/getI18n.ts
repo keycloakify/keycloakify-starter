@@ -3,7 +3,6 @@ import { assert, is } from "tsafe/assert";
 import { extractLastParenthesisContent } from "../../tools/extractLastParenthesisContent";
 import messages_defaultSet_fallbackLanguage from "./messages_defaultSet/en";
 import { fetchMessages_defaultSet } from "./messages_defaultSet";
-import type { KcContext } from "../../../../login/KcContext.gen";
 import { id } from "tsafe/id";
 import { Reflect } from "tsafe/Reflect";
 import {
@@ -28,7 +27,9 @@ export type KcContextLike = {
     };
 };
 
-assert<KcContext extends KcContextLike ? true : false>();
+// @keycloakify: remove start
+assert<import("../../../../login/KcContext.gen").KcContext extends KcContextLike ? true : false>();
+// @keycloakify: remove end
 
 export type ReturnTypeOfCreateGetI18n<
     MessageKey_themeDefined extends string,
