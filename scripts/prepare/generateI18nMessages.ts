@@ -70,10 +70,6 @@ export async function generateI18nMessages(params: { themeType: "login" | "accou
         }
     })();
 
-    console.log(themeType);
-    console.log([...languages].sort());
-    console.log([...Object.keys(keycloakifyExtraMessages)].sort());
-
     assert(
         same(languages, Object.keys(keycloakifyExtraMessages), {
             takeIntoAccountArraysOrdering: false
