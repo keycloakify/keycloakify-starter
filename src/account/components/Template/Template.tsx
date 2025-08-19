@@ -1,11 +1,8 @@
-import { useEffect } from "react";
-import { clsx } from "@keycloakify/account-multi-page-ui/tools/clsx";
-import { kcSanitize } from "@keycloakify/account-multi-page-ui/kcSanitize";
-import { useSetClassName } from "@keycloakify/account-multi-page-ui/tools/useSetClassName";
-import { useKcClsx } from "@keycloakify/account-multi-page-ui/useKcClsx";
+import { clsx } from "../../../@keycloakify/account-multi-page-ui/tools/clsx";
+import { kcSanitize } from "../../../@keycloakify/account-multi-page-ui/kcSanitize";
 import { useInitializeTemplate } from "./useInitializeTemplate";
 import { useI18n } from "../../i18n";
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 
 export function Template(props: {
     active: string;
@@ -20,25 +17,11 @@ export function Template(props: {
 
     const { active, kcBodyClass, message = kcContext.message, children } = props;
 
-    const { msg, msgStr, currentLanguage, enabledLanguages } = useI18n();
+    const { msg, currentLanguage, enabledLanguages } = useI18n();
 
-    const { kcClsx } = useKcClsx();
-
-    useEffect(() => {
-        document.title = msgStr("accountManagementTitle");
-    }, []);
-
-    useSetClassName({
-        qualifiedName: "html",
-        className: kcClsx("kcHtmlClass")
+    const { isReadyToRender } = useInitializeTemplate({
+        bodyClassName: kcBodyClass
     });
-
-    useSetClassName({
-        qualifiedName: "body",
-        className: clsx("admin-console", "user", kcClsx("kcBodyClass"), kcBodyClass)
-    });
-
-    const { isReadyToRender } = useInitializeTemplate();
 
     if (!isReadyToRender) {
         return null;

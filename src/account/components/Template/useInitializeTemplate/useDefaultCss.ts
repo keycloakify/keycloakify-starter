@@ -1,8 +1,8 @@
-import { useInsertLinkTags } from "@keycloakify/account-multi-page-ui/tools/useInsertLinkTags";
-import { useKcClsx } from "@keycloakify/account-multi-page-ui/useKcClsx";
-import { BASE_URL } from "../../../kc.gen";
+import { useInsertLinkTags } from "../../../../@keycloakify/account-multi-page-ui/tools/useInsertLinkTags";
+import { BASE_URL } from "../../../../kc.gen";
+import { useKcClsx } from "../../../../@keycloakify/account-multi-page-ui/useKcClsx";
 
-export function useInitializeTemplate() {
+export function useDefaultCss() {
     const { doUseDefaultCss } = useKcClsx();
 
     const { areAllStyleSheetsLoaded } = useInsertLinkTags({
@@ -16,5 +16,5 @@ export function useInitializeTemplate() {
               ]
     });
 
-    return { isReadyToRender: areAllStyleSheetsLoaded };
+    return { areAllStyleSheetsLoaded };
 }
