@@ -1,4 +1,4 @@
-import { i18nBuilder } from "../@keycloakify/login-ui/i18n";
+import { i18nBuilder } from "../@keycloakify/account-multi-page-ui/i18n";
 import type { ThemeName } from "../kc.gen";
 
 /** @see: https://docs.keycloakify.dev/features/i18n */

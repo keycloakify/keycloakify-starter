@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { ClassKey } from "../@keycloakify/login-ui/useKcClsx";
+import type { ClassKey } from "../@keycloakify/account-multi-page-ui/useKcClsx";
 
 type Classes = { [key in ClassKey]?: string };
 
