@@ -17,7 +17,7 @@ const messages = {
     doDecline: "Décliner",
     doForgotPassword: "Mot de passe oublié ?",
     doClickHere: "Cliquez ici",
-    doImpersonate: "Usurper l'identité",
+    doImpersonate: "Emprunter l'identité",
     doTryAgain: "Réessayer",
     doTryAnotherWay: "Essayer une autre méthode",
     doConfirmDelete: "Confirmer la suppression",
@@ -27,12 +27,10 @@ const messages = {
     kerberosNotConfigured: "Kerberos non configuré",
     kerberosNotConfiguredTitle: "Kerberos non configuré",
     bypassKerberosDetail:
-        "Si vous n'êtes pas connecté via Kerberos ou bien que votre navigateur n'est pas configuré pour la connexion via Kerberos.  Veuillez cliquer pour vous connecter via un autre moyen.",
+        "Si vous n'êtes pas connecté via Kerberos ou bien que votre navigateur n'est pas configuré pour la connexion via Kerberos. Veuillez cliquer pour vous connecter via un autre moyen",
     kerberosNotSetUp: "Kerberos n'est pas configuré. Connexion impossible.",
     registerTitle: "S'enregistrer",
     loginAccountTitle: "Connectez-vous à votre compte",
-    registerWithTitle: "Enregistrement avec {0}",
-    registerWithTitleHtml: "{0}",
     loginTitle: "Se connecter à {0}",
     loginTitleHtml: "{0}",
     impersonateTitle: "{0} utilisateur usurpé",
@@ -59,7 +57,7 @@ const messages = {
     emailUpdateConfirmationSentTitle: "Courriel de confirmation envoyé",
     emailUpdateConfirmationSent:
         "Un courriel de confirmation a été envoyé à {0}. Vous devez suivre les instructions de ce dernier afin de compléter la mise à jour.",
-    emailUpdatedTitle: "Adresse courriel mis à jour",
+    emailUpdatedTitle: "Adresse courriel mise à jour",
     emailUpdated: "La mise à jour de votre adresse courriel vers {0} a été complétée avec succès.",
     updatePasswordTitle: "Mise à jour du mot de passe",
     codeSuccessTitle: "Code succès",
@@ -67,12 +65,11 @@ const messages = {
     displayUnsupported: "Type d'affichage demandé non supporté",
     browserRequired: "Navigateur requis pour se connecter",
     browserContinue: "Navigateur requis pour continuer la connexion",
-    browserContinuePrompt: "Ouvrir le navigateur et continuer la connexion? [y/n]:",
+    browserContinuePrompt: "Ouvrir le navigateur et continuer la connexion ? [y/n] :",
     browserContinueAnswer: "y",
     termsTitle: "Termes et Conditions",
-    termsTitleHtml: "Termes et Conditions",
     termsText: "",
-    termsPlainText: "Termes et conditions à définir",
+    termsPlainText: "Termes et conditions à définir.",
     termsAcceptanceRequired: "Vous devez accepter les termes et conditions.",
     acceptTerms: "J'accepte les termes et conditions",
     recaptchaFailed: "Re-captcha invalide",
@@ -118,17 +115,16 @@ const messages = {
     restartLoginTooltip: "Redémarrer la connexion",
     loginTotpIntro:
         "Il est nécessaire de configurer un générateur One Time Password pour accéder à ce compte",
-    loginTotpStep1: "Installez une des applications suivantes sur votre mobile:",
-    loginTotpStep2: "Ouvrez l'application et scannez le code-barres ou entrez la clef.",
+    loginTotpStep1: "Installez une des applications suivantes sur votre mobile :",
+    loginTotpStep2: "Ouvrez l'application et scannez le code-barres :",
     loginTotpStep3:
         "Entrez le code à usage unique fourni par l'application et cliquez sur Sauvegarder pour terminer.",
-    loginTotpStep3DeviceName:
-        "Renseignez un nom d'appareil pour vous aider à gérer vos a appareils OTP.",
-    loginTotpManualStep2: "Ouvrez l'application et saisissez la clé",
+    loginTotpStep3DeviceName: "Renseignez un nom d'appareil pour vous aider à gérer vos appareils OTP.",
+    loginTotpManualStep2: "Ouvrez l'application et saisissez la clé :",
     loginTotpManualStep3:
-        "Utilisez la configuration de valeur suivante si l'application permet son édition",
-    loginTotpUnableToScan: "Impossible de scanner?",
-    loginTotpScanBarcode: "Scanner le code barre ?",
+        "Utilisez la configuration de valeur suivante si l'application permet son édition :",
+    loginTotpUnableToScan: "Impossible de scanner ?",
+    loginTotpScanBarcode: "Scanner le code-barres ?",
     loginCredential: "Accréditation",
     loginOtpOneTime: "Code à usage unique",
     loginTotpType: "Type",
@@ -144,7 +140,7 @@ const messages = {
     inResource: "dans",
     oauth2DeviceVerificationTitle: "Connexion de l'appareil",
     verifyOAuth2DeviceUserCode:
-        "Entrez le code à usage unique fourni par votre appareil et cliquez sur Soumettre.",
+        "Entrez le code à usage unique fourni par votre appareil et cliquez sur Soumettre",
     oauth2DeviceInvalidUserCodeMessage: "Code invalide, veuillez réessayer.",
     oauth2DeviceExpiredUserCodeMessage:
         "Le code a expiré. Veuillez réessayer de vous connecter depuis votre appareil.",
@@ -173,7 +169,7 @@ const messages = {
         "Entrez votre nom d'utilisateur ou votre courriel ; un courriel va vous être envoyé vous permettant de créer un nouveau mot de passe.",
     emailInstructionUsername:
         "Entrez votre nom d'utilisateur ; un courriel va vous être envoyé vous permettant de créer un nouveau mot de passe.",
-    copyCodeInstruction: "Copiez le code et recopiez le dans votre application :",
+    copyCodeInstruction: "Copiez le code et recopiez-le dans votre application :",
     pageExpiredTitle: "La page a expiré",
     pageExpiredMsg1: "Pour recommencer le processus d'authentification",
     pageExpiredMsg2: "Pour continuer le processus d'authentification",
@@ -212,8 +208,10 @@ const messages = {
     invalidPasswordMessage: "Mot de passe invalide.",
     invalidEmailMessage: "Courriel invalide.",
     accountDisabledMessage: "Compte désactivé, contactez votre administrateur.",
-    accountTemporarilyDisabledMessage:
-        "Ce compte est temporairement désactivé, contactez votre administrateur ou bien réessayez plus tard.",
+    accountTemporarilyDisabledMessage: "Nom d'utilisateur ou mot de passe invalide.",
+    accountPermanentlyDisabledMessage: "Nom d'utilisateur ou mot de passe invalide.",
+    accountTemporarilyDisabledMessageTotp: "Le code d'authentification est invalide.",
+    accountPermanentlyDisabledMessageTotp: "Le code d'authentification est invalide.",
     expiredCodeMessage: "Connexion expirée. Veuillez vous reconnecter.",
     expiredActionMessage: "Action expirée. Merci de continuer la connexion.",
     expiredActionTokenNoSessionMessage: "Action expirée.",
@@ -254,8 +252,6 @@ const messages = {
     emailExistsMessage: "Le courriel existe déjà.",
     federatedIdentityExistsMessage:
         "L'utilisateur avec {0} {1} existe déjà. Veuillez accéder à au gestionnaire de compte pour lier le compte.",
-    federatedIdentityEmailExistsMessage:
-        "Cet utilisateur avec ce courriel existe déjà. Veuillez vous connecter au gestionnaire de compte pour lier le compte.",
     confirmLinkIdpTitle: "Ce compte existe déjà",
     federatedIdentityConfirmLinkMessage: "L'utilisateur {0} {1} existe déjà. Que souhaitez-vous faire ?",
     federatedIdentityConfirmReauthenticateMessage: "Identifiez vous afin de lier votre compte avec {0}",
@@ -266,7 +262,7 @@ const messages = {
         "Vous devez configurer l'authentification par mobile pour activer votre compte.",
     updateProfileMessage: "Vous devez mettre à jour votre profil pour activer votre compte.",
     updatePasswordMessage: "Vous devez changer votre mot de passe pour activer votre compte.",
-    updateEmailMessage: "Vous devez mettre à votre addresse de courriel pour activer votre compte.",
+    updateEmailMessage: "Vous devez mettre à jour votre adresse de courriel pour activer votre compte.",
     resetPasswordMessage: "Vous devez changer votre mot de passe.",
     verifyEmailMessage: "Vous devez vérifier votre courriel pour activer votre compte.",
     linkIdpMessage: "Vous devez vérifier votre courriel pour lier votre compte avec {0}.",
@@ -292,7 +288,7 @@ const messages = {
         "Mot de passe invalide : doit contenir au moins {0} caractère(s) spéciaux.",
     invalidPasswordNotUsernameMessage:
         "Mot de passe invalide : ne doit pas être identique au nom d'utilisateur.",
-    invalidPasswordNotEmailMessage: "Mot de passe invalide: ne doit pas être identique au courriel.",
+    invalidPasswordNotEmailMessage: "Mot de passe invalide : ne doit pas être identique au courriel.",
     invalidPasswordRegexPatternMessage:
         "Mot de passe invalide : ne valide pas l'expression rationnelle.",
     invalidPasswordHistoryMessage:
@@ -304,11 +300,11 @@ const messages = {
     realmNotEnabledMessage: "Le domaine n'est pas activé",
     invalidRequestMessage: "Requête invalide",
     successLogout: "Vous êtes déconnecté",
-    failedLogout: "La déconnexion a échouée",
+    failedLogout: "La déconnexion a échoué",
     unknownLoginRequesterMessage: "Compte inconnu du demandeur",
     loginRequesterNotEnabledMessage: "La connexion du demandeur n'est pas active",
     bearerOnlyMessage:
-        "Les applications Bearer-only ne sont pas autorisées à initier la connexion par navigateur.",
+        "Les applications Bearer-only ne sont pas autorisées à initier la connexion par navigateur",
     standardFlowDisabledMessage:
         "Le client n'est pas autorisé à initier une connexion avec le navigateur avec ce response_type. Le flux standard est désactivé pour le client.",
     implicitFlowDisabledMessage:
@@ -329,7 +325,7 @@ const messages = {
     unexpectedErrorHandlingResponseMessage:
         "Erreur inattendue lors du traitement de la réponse provenant du fournisseur d'identité.",
     identityProviderAuthenticationFailedMessage:
-        "L'authentification a échouée. Impossible de s'authentifier avec le fournisseur d'identité.",
+        "L'authentification a échoué. Impossible de s'authentifier avec le fournisseur d'identité.",
     couldNotSendAuthenticationRequestMessage:
         "Impossible d'envoyer la requête d'authentification vers le fournisseur d'identité.",
     unexpectedErrorHandlingRequestMessage:
@@ -340,21 +336,21 @@ const messages = {
     cookieNotFoundMessage:
         "Cookie introuvable. Assurez-vous que les cookies soient activés dans votre navigateur.",
     identityProviderUnexpectedErrorMessage:
-        "Erreur inattendue lors de l'authentification avec fournisseur d'identité.",
+        "Erreur inattendue lors de l'authentification avec le fournisseur d'identité",
     identityProviderMissingStateMessage:
         "Paramètre d'état manquant dans la réponse du fournisseur d'identité.",
     identityProviderNotFoundMessage:
         "Impossible de trouver le fournisseur d'identité avec cet identifiant.",
     identityProviderLinkSuccess: "Votre compte a été correctement lié avec {0} compte {1} .",
     staleCodeMessage:
-        "Cette page n'est plus valide, merci de retourner à votre application et de vous connecter à nouveau.",
+        "Cette page n'est plus valide, merci de retourner dans votre application et de vous reconnecter",
     realmSupportsNoCredentialsMessage: "Ce domaine ne supporte aucun type d'accréditation.",
     credentialSetupRequired: "Connexion impossible, configuration d'accréditation requise.",
     identityProviderNotUniqueMessage:
         "Ce domaine autorise plusieurs fournisseurs d'identité. Impossible de déterminer le fournisseur d'identité avec lequel s'authentifier.",
     emailVerifiedMessage: "Votre courriel a été vérifié.",
     staleEmailVerificationLink:
-        "Le lien que vous avez cliqué est périmé et n'est plus valide. Peut-être avez vous déjà vérifié votre mot de passe ?",
+        "Le lien que vous avez cliqué est périmé et n'est plus valide. Peut-être, vous avez déjà vérifié votre mot de passe.",
     identityProviderAlreadyLinkedMessage:
         "L'identité fédérée retournée par {0} est déjà liée à un autre utilisateur.",
     confirmAccountLinking:
@@ -377,8 +373,8 @@ const messages = {
     "requiredAction.UPDATE_PASSWORD": "Mettre à jour votre mot de passe",
     "requiredAction.UPDATE_PROFILE": "Mettre à jour votre profil",
     "requiredAction.VERIFY_EMAIL": "Valider votre adresse email",
-    doX509Login: "Vous allez être connecté en tant que:",
-    clientCertificate: "X509 certificat client:",
+    doX509Login: "Vous allez être connecté en tant que  :",
+    clientCertificate: "Certificat client X509 :",
     noCertificate: "[Pas de certificat]",
     pageNotFound: "Page non trouvée",
     internalServerError: "Une erreur interne du serveur s'est produite",
@@ -388,21 +384,21 @@ const messages = {
     "idp-email-verification-help-text": "Lier votre compte en validant votre courriel.",
     "idp-username-password-form-display-name": "Nom d'utilisateur et mot de passe",
     "idp-username-password-form-help-text": "Lier votre compte en vous connectant.",
-    "console-username": "Nom d'utilisateur:",
-    "console-password": "Mot de passe:",
-    "console-otp": "Code à usage unique:",
-    "console-new-password": "Nouveau mot de passe:",
-    "console-confirm-password": "Confirmez les mot de passe:",
+    "console-username": "Nom d'utilisateur :",
+    "console-password": "Mot de passe :",
+    "console-otp": "Code à usage unique :",
+    "console-new-password": "Nouveau mot de passe :",
+    "console-confirm-password": "Confirmez le mot de passe :",
     "console-update-password": "La mise à jour de votre mot de passe est requise.",
     "console-verify-email":
         "Vous devez vérifier votre adresse courriel. Nous avons envoyé un courriel à {0} contenant un code de vérification. Veuillez saisir ce code ci-dessous.",
-    "console-email-code": "Code courriel:",
-    "console-accept-terms": "Accepter les conditions? [o/n]:",
+    "console-email-code": "Code courriel :",
+    "console-accept-terms": "Accepter les conditions ? [o/n] :",
     "console-accept": "o",
     "password-display-name": "Mot de passe",
     "password-help-text": "Connectez-vous en saisissant votre mot de passe.",
     "auth-username-form-display-name": "Nom d'utilisateur",
-    "auth-username-form-help-text": "Commencez la connexion en saisissant votre nom d'utilisateur.",
+    "auth-username-form-help-text": "Commencez la connexion en saisissant votre nom d'utilisateur",
     "auth-username-password-form-display-name": "Nom d'utilisateur et mot de passe",
     "auth-username-password-form-help-text":
         "Connectez-vous en saisissant votre nom d'utilisateur et votre mot de passe.",
@@ -419,20 +415,20 @@ const messages = {
     "webauthn-doAuthenticate": "Se connecter avec une Clé de Sécurité",
     "webauthn-createdAt-label": "Créé le",
     "webauthn-error-title": "Erreur lors de l'utilisation de la Clé de Sécurité",
-    "webauthn-error-registration": "L'enregistrement de la Clé de Sécurité a échoué.<br/> {0}",
-    "webauthn-error-api-get": "L'authentification via la Clé de Sécurité a échoué.<br/> {0}",
+    "webauthn-error-registration": "L'enregistrement de la Clé de Sécurité a échoué.<br /> {0}",
+    "webauthn-error-api-get": "L'authentification via la Clé de Sécurité a échoué.<br /> {0}",
     "webauthn-error-different-user":
         "Le premier utilisateur authentifié ne correspond pas à celui qui est authentifié par la Clé de Sécurité.",
     "webauthn-error-auth-verification":
-        "Le résultat de l'authentification produite par la clé de sécurité est invalide.<br/> {0}",
+        "Le résultat de l'authentification produite par la clé de sécurité est invalide.<br /> {0}",
     "webauthn-error-register-verification":
-        "Le résultat de l'enregistrement de la clé de sécurité est invalide.<br/> {0}",
+        "Le résultat de l'enregistrement de la clé de sécurité est invalide.<br /> {0}",
     "webauthn-error-user-not-found": "La Clé de Sécurité a authentifié un utilisateur inconnu.",
     finalDeletionConfirmation:
         "Si vous supprimez votre compte, il ne pourra pas être restauré. Pour conserver votre compte, cliquez sur Annuler.",
     irreversibleAction: "Cette action est irréversible",
     deleteAccountConfirm: "Confirmation de suppression de compte",
-    deletingImplies: "Supprimer votre compte implique:",
+    deletingImplies: "Supprimer votre compte implique :",
     errasingData: "Supprimer toutes vos données",
     loggingOutImmediately: "Vous déconnecter immédiatement",
     accountUnusable: "Toute utilisation future de l'application sera impossible avec ce compte",
@@ -443,6 +439,116 @@ const messages = {
     logoutConfirmTitle: "Déconnexion",
     logoutConfirmHeader: "Êtes-vous sûr de vouloir vous déconnecter ?",
     doLogout: "Se déconnecter",
+    authenticateStrong: "Une authentification forte est nécessaire pour continuer",
+    bluetooth: "Bluetooth",
+    identityProviderLogoutFailure: "Échec de la déconnexion du fournisseur d'identité SAML",
+    federatedIdentityUnavailableMessage:
+        "L'utilisateur {0} authentifié depuis le fournisseur d'identité {1} n'existe pas. Veuillez contacter votre administrateur.",
+    emailVerifiedAlreadyMessage: "Votre courriel a déjà été vérifié.",
+    "openshift.scope.user_check-access": "Information sur les accès de l'utilisateur",
+    "openshift.scope.user_full": "Accès complet",
+    "otp-help-text":
+        "Renseignez le code de vérification affiché par votre application d'authentification.",
+    readOnlyUsernameMessage:
+        "Vous ne pouvez pas mettre à jour votre nom d'utilisateur, il est en lecture seule.",
+    "organization.confirm-membership.title": "Vous allez rejoindre l'organisation ${kc.org.name}",
+    reauthenticate: "Merci de vous authentifier à nouveau pour continuer",
+    usb: "USB",
+    nfc: "NFC",
+    totpAppFreeOTPName: "FreeOTP",
+    organizationScopeConsentText: "Organisation",
+    totpAppGoogleName: "Google Authenticator",
+    totpAppMicrosoftAuthenticatorName: "Microsoft Authenticator",
+    sessionLimitExceeded: "Il y a trop de sessions",
+    "error-reset-otp-missing-id": "Merci de choisir une configuration OTP.",
+    "openshift.scope.user_info": "Informations de l'utilisateur",
+    configureBackupCodesMessage: "Vous devez définir des codes de secours pour activer votre compte.",
+    insufficientLevelOfAuthentication: "Le niveau d'authentification requis n'a pas été atteint.",
+    "requiredAction.CONFIGURE_RECOVERY_AUTHN_CODES": "Générer des codes de récupération",
+    "saml.post-form.js-disabled":
+        "JavaScript est désactivé. Il est fortement recommandé de l'activer. Cliquez sur le bouton ci-dessous pour continuer.",
+    "otp-display-name": "Application d'authentification",
+    "recovery-codes-copied": "Copiés",
+    "recovery-codes-error-invalid": "Code de récupération d'authentification invalide",
+    "recovery-code-config-warning-message":
+        "Assurez-vous d'imprimer, télécharger ou copier ces codes dans un gestionnaire de mot de passe et de les conserver durablement. L'annulation de ce paramètre supprimera ces codes de récupération de votre compte.",
+    "recovery-codes-confirmation-message": "J'ai enregistré ces codes dans un endroit sûr",
+    confirmOverrideIdpContinue: "Oui, remplacer le lien avec le compte actuel",
+    invalidPasswordNotContainsUsernameMessage:
+        "Mot de passe invalide : il ne doit pas contenir le nom d'utilisateur.",
+    "auth-x509-client-username-form-display-name": "Certificat X509",
+    "auth-x509-client-username-form-help-text": "Se connecter avec un certificat client X509.",
+    "auth-recovery-authn-code-form-display-name": "Code de récupération de l'authentification",
+    "auth-recovery-authn-code-form-help-text":
+        "Renseignez un code de récupération d'authentification depuis la liste générée précédemment.",
+    "recovery-code-config-header": "Codes de récupération d'authentification",
+    "recovery-code-config-warning-title":
+        "Ces codes de récupération ne seront jamais réaffichés une fois que vous aurez quitté cette page",
+    "recovery-codes-print": "Imprimer",
+    "recovery-codes-download": "Télécharger",
+    "recovery-codes-copy": "Copier",
+    "recovery-codes-action-cancel": "Paramétrage annulé",
+    "recovery-codes-action-complete": "Paramétrage terminé",
+    "recovery-codes-download-file-header": "Conserver ces codes de récupération dans un endroit sûr.",
+    "recovery-codes-download-file-date": "Ces codes ont été généré le",
+    "recovery-codes-label-default": "Codes de récupération",
+    "organization.confirm-membership":
+        "En cliquant sur le lien ci-dessous, vous allez devenir membre de l'organisation {0} :",
+    identityProviderInvalidResponseMessage: "Réponse invalide du fournisseur d'identités.",
+    identityProviderInvalidSignatureMessage:
+        "Signature invalide pour la réponse du fournisseur d'identités.",
+    "openshift.scope.list-projects": "Liste des projets",
+    "saml.post-form.message": "Redirection en cours, patientez.",
+    "otp-reset-description": "Quelle configuration OTP doit être supprimée ?",
+    internal: "Interne",
+    unknown: "Inconnu",
+    deleteCredentialTitle: "Supprimer {0}",
+    deleteCredentialMessage: "Voulez-vous supprimer {0} ?",
+    hidePassword: "Cacher le mot de passe",
+    showPassword: "Montrer le mot de passe",
+    federatedIdentityUnmatchedEssentialClaimMessage:
+        "Le jeton d'identité fourni par le fournisseur d'identité ne correspond pas à l'attribut essentiel configuré. Veuillez contacter votre administrateur.",
+    identityProviderMissingCodeOrErrorMessage:
+        "Code manquant ou erreur de paramètre dans la réponse du fournisseur d'identités.",
+    acrNotFulfilled: "Exigences liées à l'authentification non remplies",
+    invalidTokenRequiredActions: "Des actions nécessaires incluses dans le lien ne sont pas valides",
+    "requiredAction.webauthn-register": "Enregistrement WebAuthn",
+    "requiredAction.webauthn-register-passwordless": "Enregistrement WebAuthn sans mot de passe",
+    federatedIdentityConfirmOverrideMessage:
+        "Vous essayez de lier votre compte {0} avec le compte {1} {2}. Mais votre compte est déjà lié avec un compte différent {3} {4}. Pouvez-vous confirmer si vous souhaitez remplacer le lien existant avec le nouveau compte ?",
+    emailVerifyResend: "Renvoyer le courriel de vérification",
+    emailVerifySend: "Envoyer le courriel de vérification",
+    "error-invalid-multivalued-size":
+        "L'attribut {0} doit avoir au moins {1} et au plus {2} {2,choice,0#valeur|1#valeur|1<valeurs}.",
+    emailVerifyInstruction4:
+        "Afin de vérifier votre adresse de courriel, nous allons vous envoyer un courriel avec les instructions à l'adresse {0}.",
+    confirmOverrideIdpTitle: "Le lien du fournisseur existe déjà",
+    "saml.post-form.title": "Redirection de l'authentification",
+    "auth-recovery-code-info-message": "Renseigner le code de récupération spécifié.",
+    "auth-recovery-code-prompt": "Code de récupération #{0}",
+    "auth-recovery-code-header": "Se connecter à l'aide d'un code de récupération de l'authentification",
+    "recovery-codes-download-file-description":
+        "Les codes de récupération sont des codes à usage unique, permettant de se connecter à votre compte si vous n'avez pas la possibilité d'utiliser votre application d'authentification.",
+    "webauthn-registration-init-label-prompt":
+        "Merci de renseigner le libellé de votre clé d'accès enregistrée",
+    "webauthn-registration-init-label": "Clé d'accès (libellé par défaut)",
+    "passkey-login-title": "Identifiant de la clé d'accès",
+    "passkey-available-authenticators": "Clés d'accès disponibles",
+    "passkey-unsupported-browser-text":
+        "Les clés d'accès ne sont pas supportées par ce navigateur. Essayer depuis un autre navigateur ou contacter votre administrateur.",
+    "passkey-doAuthenticate": "S'enregistrer à l'aide d'une clé d'accès",
+    "passkey-createdAt-label": "Créée",
+    "passkey-autofill-select": "Sélectionner votre clé d'accès",
+    "access-denied-when-idp-auth": "Accès refusé en se connectant avec {0}",
+    "organization.member.register.title": "Créer un compte pour rejoindre l'organisation ${kc.org.name}",
+    "organization.select": "Sélectionner une organisation pour continuer :",
+    notMemberOfOrganization: "L'utilisateur n'est pas un membre de l'organisation {0}",
+    notMemberOfAnyOrganization: "L'utilisateur n'est membre d'aucune organisation",
+    linkIdpActionTitle: "Lien {0}",
+    linkIdpActionMessage: "Voulez-vous lier votre compte avec {0} ?",
+    "saml.artifactResolutionServiceInvalidResponse": "Impossible de trouver la dépendance technique.",
+    confirmAccountLinkingBody:
+        "Si vous liez le compte, vous serez aussi en mesure de vous connecter via le compte {0} du fournisseur d'identités {1}. Ne continuez pas si vous n'êtes pas à l'origine de cette action ou si vous ne souhaitez pas lier votre compte.",
     shouldBeEqual: "{0} devrait être égal à {1}",
     shouldBeDifferent: "{0} devrait être différent de {1}",
     shouldMatchPattern: "Le motif devrait correspondre: `/{0}/`",

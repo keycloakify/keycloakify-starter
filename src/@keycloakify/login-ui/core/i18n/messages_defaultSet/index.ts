@@ -27,6 +27,8 @@ export async function fetchMessages_defaultSet(currentLanguageTag: string) {
                 return import("./fi");
             case "fr":
                 return import("./fr");
+            case "hr":
+                return import("./hr");
             case "hu":
                 return import("./hu");
             case "it":
@@ -35,6 +37,10 @@ export async function fetchMessages_defaultSet(currentLanguageTag: string) {
                 return import("./ja");
             case "ka":
                 return import("./ka");
+            case "ko":
+                return import("./ko");
+            case "ky":
+                return import("./ky");
             case "lt":
                 return import("./lt");
             case "lv":
@@ -49,10 +55,14 @@ export async function fetchMessages_defaultSet(currentLanguageTag: string) {
                 return import("./pt");
             case "pt-BR":
                 return import("./pt-BR");
+            case "ro":
+                return import("./ro");
             case "ru":
                 return import("./ru");
             case "sk":
                 return import("./sk");
+            case "sl":
+                return import("./sl");
             case "sv":
                 return import("./sv");
             case "th":

@@ -70,8 +70,7 @@ const messages = {
     country: "Šalis",
     emailVerified: "El. pašto adresas patvirtintas",
     gssDelegationCredential: "GSS prisijungimo duomenų delegavimas",
-    loginTotpStep1:
-        'Įdiekite <a href="https://freeotp.github.io/" target="_blank">FreeOTP</a> arba Google Authenticator savo įrenginyje. Programėlės prieinamos <a href="https://play.google.com">Google Play</a> ir Apple App Store.',
+    loginTotpStep1: "Installa una delle seguenti applicazioni sul tuo cellulare:",
     loginTotpStep2: "Atidarykite programėlę ir nuskenuokite barkodą arba įveskite kodą.",
     loginTotpStep3:
         "Įveskite programėlėje sugeneruotą vieną kartą galiojantį kodą ir paspauskite Saugoti norėdami prisijungti.",
@@ -119,8 +118,10 @@ const messages = {
     invalidUserMessage: "Neteisingas naudotojo vardas arba slaptažodis.",
     invalidEmailMessage: "Neteisingas el. pašto adresas.",
     accountDisabledMessage: "Paskyros galiojimas sustabdytas, kreipkitės į administratorių.",
-    accountTemporarilyDisabledMessage:
-        "Paskyros galiojimas laikinai sustabdytas. Kreipkitės į administratorių arba pabandykite vėliau.",
+    accountTemporarilyDisabledMessage: "Neteisingas naudotojo vardas arba slaptažodis.",
+    accountPermanentlyDisabledMessage: "Neteisingas naudotojo vardas arba slaptažodis.",
+    accountTemporarilyDisabledMessageTotp: "Neteisingas autentifikacijos kodas.",
+    accountPermanentlyDisabledMessageTotp: "Neteisingas autentifikacijos kodas.",
     expiredCodeMessage: "Prisijungimo laikas baigėsi. Bandykite dar kartą.",
     missingFirstNameMessage: "Prašome įvesti vardą.",
     missingLastNameMessage: "Prašome įvesti pavardę.",

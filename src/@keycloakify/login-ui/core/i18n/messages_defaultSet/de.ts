@@ -24,11 +24,11 @@ const messages = {
     errorDeletingAccount: "Beim Löschen des Kontos ist ein Fehler aufgetreten",
     deletingAccountForbidden:
         "Sie haben nicht genügend Berechtigungen, um Ihr eigenes Konto zu löschen, wenden Sie sich an einen Administrator.",
-    kerberosNotConfigured: "Kerberos ist nicht konfiguriert.",
+    kerberosNotConfigured: "Kerberos ist nicht konfiguriert",
     kerberosNotConfiguredTitle: "Kerberos nicht konfiguriert",
     bypassKerberosDetail:
         "Sie sind entweder nicht mit Kerberos angemeldet, oder Ihr Browser ist nicht für eine Anmeldung mit Kerberos konfiguriert. Bitte klicken Sie auf Weiter, damit Sie sich auf eine andere Art anmelden können",
-    kerberosNotSetUp: "Kerberos ist nicht konfiguriert. Sie können sich damit nicht anmelden.",
+    kerberosNotSetUp: "Kerberos ist nicht eingerichtet. Sie können sich nicht anmelden.",
     registerTitle: "Registrierung",
     loginAccountTitle: "Bei Ihrem Konto anmelden",
     loginTitle: "Anmeldung bei {0}",
@@ -40,14 +40,15 @@ const messages = {
     loginTotpTitle: "Mehrfachauthentifizierung konfigurieren",
     loginProfileTitle: "Benutzerkonto Informationen aktualisieren",
     loginIdpReviewProfileTitle: "Benutzerkonto Informationen aktualisieren",
-    loginTimeout: "Sie haben zu lange gebraucht, um sich anzumelden. Bitte versuchen Sie es erneut.",
+    loginTimeout:
+        "Ihr Anmeldeversuch wurde wegen Zeitüberschreitung abgebrochen. Die Anmeldung beginnt von vorne.",
     reauthenticate: "Zum Fortsetzen bitte erneut anmelden",
     authenticateStrong: "Um fortzufahren wird ein stärkeres Authentifizierungsverfahren benötigt",
     oauthGrantTitle: "Zugang zu {0} gewähren",
     oauthGrantTitleHtml: "{0}",
     oauthGrantInformation:
         "Stellen Sie sicher, dass Sie {0} vertrauen können und informieren Sie sich darüber, wie {0} mit Ihren Daten umgeht.",
-    oauthGrantReview: "Prüfen Sie gerne die ",
+    oauthGrantReview: "Prüfen Sie gerne die",
     oauthGrantTos: "Nutzungsbedingungen.",
     oauthGrantPolicy: "Datenschutzrichtlinie.",
     errorTitle: "Es ist ein Fehler aufgetreten.",
@@ -76,7 +77,7 @@ const messages = {
     deleteCredentialTitle: "Lösche {0}",
     deleteCredentialMessage: "Wollen Sie {0} löschen?",
     recaptchaFailed: "Ungültiges Recaptcha",
-    recaptchaNotConfigured: "Recaptcha Eingabe ist erforderlich, jedoch noch nicht konfiguriert.",
+    recaptchaNotConfigured: "Recaptcha-Eingabe ist erforderlich, jedoch noch nicht konfiguriert.",
     consentDenied: "Zustimmung verweigert.",
     noAccount: "Neuer Benutzer?",
     username: "Benutzername",
@@ -131,7 +132,7 @@ const messages = {
         "Verwenden Sie die folgenden Konfigurationswerte, falls Sie diese für die Applikation anpassen können:",
     loginTotpUnableToScan: "Sie können den QR-Code nicht scannen?",
     loginTotpScanBarcode: "QR-Code scannen?",
-    loginCredential: "Anmeldeinformation",
+    loginCredential: "Zugangsdaten",
     loginOtpOneTime: "One-time code",
     loginTotpType: "Typ",
     loginTotpAlgorithm: "Algorithmus",
@@ -160,7 +161,7 @@ const messages = {
         "Der Client ist nicht berechtigt, den OAuth 2.0 Device Authorization Grant auszuführen. Der Flow wurde für diesen Client deaktiviert.",
     emailVerifyInstruction1:
         "Eine E-Mail mit Anweisungen, um Ihre E-Mail-Adresse zu überprüfen, wurde an Ihre Adresse geschickt {0}.",
-    emailVerifyInstruction2: "Sie haben keinen verifizierungs Code in Ihrer E-Mail erhalten?",
+    emailVerifyInstruction2: "Sie haben keinen Verifizierungs-Code in Ihrer E-Mail erhalten?",
     emailVerifyInstruction3: "um eine neue E-Mail versenden zu lassen.",
     emailLinkIdpTitle: "{0} verknüpfen",
     emailLinkIdp1:
@@ -213,8 +214,10 @@ const messages = {
     invalidPasswordMessage: "Ungültiges Passwort.",
     invalidEmailMessage: "Ungültige E-Mail-Adresse.",
     accountDisabledMessage: "Ihr Benutzerkonto ist gesperrt, bitte kontaktieren Sie den Admin.",
-    accountTemporarilyDisabledMessage:
-        "Ihr Benutzerkonto ist temporär gesperrt. Bitte kontaktieren Sie den Admin oder versuchen Sie es später noch einmal.",
+    accountTemporarilyDisabledMessage: "Ungültiger Benutzername oder Passwort.",
+    accountPermanentlyDisabledMessage: "Ungültiger Benutzername oder Passwort.",
+    accountTemporarilyDisabledMessageTotp: "Ungültiger One-time Code.",
+    accountPermanentlyDisabledMessageTotp: "Ungültiger One-time Code.",
     expiredCodeMessage: "Zeitüberschreitung bei der Anmeldung. Bitte melden Sie sich erneut an.",
     expiredActionMessage:
         "Die Aktion ist nicht mehr gültig. Bitte fahren Sie nun mit der Anmeldung fort.",
@@ -320,18 +323,18 @@ const messages = {
     invalidRequestMessage: "Ungültiger Request.",
     successLogout: "Sie sind abgemeldet.",
     failedLogout: "Logout fehlgeschlagen.",
-    unknownLoginRequesterMessage: "Ungültiger Login Requester.",
-    loginRequesterNotEnabledMessage: "Login Requester nicht aktiviert.",
+    unknownLoginRequesterMessage: "Ungültiger Login Requester",
+    loginRequesterNotEnabledMessage: "Login Requester nicht aktiviert",
     bearerOnlyMessage: "Bearer-only Clients können sich nicht via Browser anmelden.",
     standardFlowDisabledMessage:
         "Client darf sich mit diesem response_type nicht via Browser anmelden. Standard Flow ist für diesen Client deaktiviert.",
     implicitFlowDisabledMessage:
         "Client darf sich mit diesem response_type nicht via Browser anmelden. Implicit Flow ist für diesen Client deaktiviert.",
-    invalidRedirectUriMessage: "Ungültige Redirect Uri.",
+    invalidRedirectUriMessage: "Ungültige Redirect URI",
     unsupportedNameIdFormatMessage: "Nicht unterstütztes NameIDFormat.",
-    invalidRequesterMessage: "Ungültiger Requester.",
+    invalidRequesterMessage: "Ungültiger Requester",
     registrationNotAllowedMessage: "Registrierung nicht erlaubt.",
-    resetCredentialNotAllowedMessage: "Reset Credential nicht erlaubt.",
+    resetCredentialNotAllowedMessage: "Zurücksetzen der Zugangsdaten nicht erlaubt",
     permissionNotApprovedMessage: "Berechtigung nicht bestätigt.",
     noRelayStateInResponseMessage: "Kein Relay State in der Antwort von Identity Provider.",
     insufficientPermissionMessage: "Nicht genügend Rechte, um die Identität zu verknüpfen.",
@@ -367,10 +370,9 @@ const messages = {
     identityProviderLinkSuccess:
         "Sie haben Ihre E-Mail-Adresse erfolgreich verifiziert. Bitte kehren Sie zu Ihrem ursprünglichen Browser zurück und fahren Sie dort mit der Anmeldung fort.",
     staleCodeMessage:
-        "Diese Seite ist nicht mehr gültig, bitte kehren Sie zu Ihrer Applikation zurük und melden Sie sich erneut an.",
+        "Diese Seite ist nicht mehr gültig, bitte kehren Sie zu Ihrer Applikation zurück und melden Sie sich erneut an.",
     realmSupportsNoCredentialsMessage: "Realm unterstützt keine Credential Typen.",
-    credentialSetupRequired:
-        "Anmeldung nicht möglich, Einrichtung der Anmeldeinformationen erforderlich.",
+    credentialSetupRequired: "Anmeldung nicht möglich, Einrichtung der Zugangsdaten erforderlich.",
     identityProviderNotUniqueMessage:
         "Der Realm unterstützt mehrere Identity Provider. Es konnte kein eindeutiger Identity Provider zum Authentifizieren gewählt werden.",
     emailVerifiedMessage: "Ihre E-Mail-Adresse wurde erfolgreich verifiziert.",
@@ -415,7 +417,7 @@ const messages = {
     "console-confirm-password": "Passwort bestätigen:",
     "console-update-password": "Eine Aktualisierung Ihres Passworts ist erforderlich.",
     "console-verify-email":
-        "Sie müssen Ihre E-Mail-Adresse verifizieren.  Wir haben eine E-Mail an {0} gesendet, die einen Verifizierungscode enthält.  Bitte geben Sie diesen Code in das untenstehende Eingabefeld ein.",
+        "Sie müssen Ihre E-Mail-Adresse verifizieren. Wir haben eine E-Mail an {0} gesendet, die einen Verifizierungscode enthält. Bitte geben Sie diesen Code in das untenstehende Eingabefeld ein.",
     "console-email-code": "E-Mail Code:",
     "console-accept-terms": "Nutzungsbedingungen akzeptieren? [y/n]:",
     "console-accept": "y",
@@ -426,7 +428,7 @@ const messages = {
     "saml.post-form.title": "Authentifizierungsumleitung",
     "saml.post-form.message": "Sie werden weitergeleitet, bitte warten.",
     "saml.post-form.js-disabled":
-        "JavaScript ist deaktiviert. Wir empfehlen dringend, es zu aktivieren. Klicken Sie auf die Schaltfläche unten, um fortzufahren. ",
+        "JavaScript ist deaktiviert. Wir empfehlen dringend, es zu aktivieren. Klicken Sie auf die Schaltfläche unten, um fortzufahren.",
     "saml.artifactResolutionServiceInvalidResponse": "Artefakt konnte nicht aufgelöst werden.",
     "otp-display-name": "Authenticator-Anwendung",
     "otp-help-text": "Eingabe eines Verifizierungscodes aus der Authenticator-Anwendung.",
@@ -473,24 +475,24 @@ const messages = {
     "webauthn-unsupported-browser-text":
         "WebAuthn wird von diesem Browser nicht unterstützt. Versuchen Sie es mit einem anderen oder wenden Sie sich an Ihren Administrator.",
     "webauthn-doAuthenticate": "Anmelden mit Passkey",
-    "webauthn-createdAt-label": "Angelegt",
+    "webauthn-createdAt-label": "Erstellt",
     "webauthn-error-title": "Passkey Fehler",
-    "webauthn-error-registration": "Fehler beim Registrieren Ihres Passkeys.<br/> {0}",
-    "webauthn-error-api-get": "Fehler beim Authentifizieren mit dem Passkey.<br/> {0}",
+    "webauthn-error-registration": "Fehler beim Registrieren Ihres Passkeys.<br /> {0}",
+    "webauthn-error-api-get": "Fehler beim Authentifizieren mit dem Passkey.<br /> {0}",
     "webauthn-error-different-user":
         "Der erste authentifizierte Benutzer ist nicht derjenige, der durch den Passkey authentifiziert wurde.",
     "webauthn-error-auth-verification":
-        "Das Ergebnis der Passkey-Authentifizierung ist ungültig.<br/> {0}",
+        "Das Ergebnis der Passkey-Authentifizierung ist ungültig.<br /> {0}",
     "webauthn-error-register-verification":
-        "Das Ergebnis der Passkey-Registrierung ist ungültig.<br/> {0}",
+        "Das Ergebnis der Passkey-Registrierung ist ungültig.<br /> {0}",
     "webauthn-error-user-not-found": "Unbekannter Benutzer, der mit dem Passkey authentifiziert wurde.",
     "identity-provider-redirector": "Mit einem anderen Indentitätsprovider verbinden",
     "identity-provider-login-label": "Oder anmelden mit",
     "idp-email-verification-display-name": "E-Mail Verifizierung",
-    "idp-email-verification-help-text": "Bestätigen Sie Ihr Benutzerkonto über den Empfang einer E-Mail",
+    "idp-email-verification-help-text":
+        "Verknüpfen Sie Ihr Benutzerkonto durch die Bestätigung ihre E-Mail-Adresse.",
     "idp-username-password-form-display-name": "Passwort Verifizierung",
-    "idp-username-password-form-help-text":
-        "Bestätigen Sie Ihr Benutzerkonto mit Benutzername und Passwort",
+    "idp-username-password-form-help-text": "Verknüpfen Sie Ihr Benutzerkonto indem sie sich anmelden.",
     finalDeletionConfirmation:
         "Wenn Sie Ihr Konto löschen, kann es nicht wiederhergestellt werden. Um Ihr Konto zu behalten, klicken Sie auf Abbrechen.",
     irreversibleAction: "Diese Aktion ist unwiderruflich",
@@ -508,7 +510,8 @@ const messages = {
     logoutConfirmHeader: "Wollen Sie sich abmelden?",
     doLogout: "Abmelden",
     readOnlyUsernameMessage: "Sie können Ihren Benutzernamen nicht ändern, da er schreibgeschützt ist.",
-    "error-invalid-multivalued-size": "Attribut {0} muss mindestens {1} und höchstens {2} Werte haben.",
+    "error-invalid-multivalued-size":
+        "Attribut {0} muss mindestens {1} und darf höchstens {2} {2,choice,0#Werte|1#Wert|1<Werte} haben.",
     "webauthn-registration-init-label": "Passkey (Standard Bezeichnung)",
     nfc: "NFC",
     identityProviderLogoutFailure: "Fehler bei Logout mit SAML Identitätsanbieter",
@@ -528,6 +531,32 @@ const messages = {
     confirmOverrideIdpContinue: "Ja, die Verknüpfung mit dem neuen Benutzerkonto ersetzen.",
     invalidPasswordNotContainsUsernameMessage:
         "Ungültiges Passwort: darf nicht den Benutzernamen enthalten.",
+    "organization.confirm-membership":
+        "Durch Anklicken des unten stehenden Links werden Sie Mitglied der {0} Organization:",
+    "auth-x509-client-username-form-help-text": "Melden Sie sich mit einem X509 Client-Zertifikat an.",
+    "organization.member.register.title":
+        "Erstellen Sie ein Konto, um der Organization ${kc.org.name} beizutreten",
+    "auth-x509-client-username-form-display-name": "X509 Zertifikat",
+    "passkey-unsupported-browser-text":
+        "Passkey wird von diesem Browser nicht unterstützt. Probieren Sie einen anderen oder kontaktieren Sie Ihren Administrator.",
+    "organization.confirm-membership.title": "Sie sind dabei, der Organization ${kc.org} beizutreten",
+    "passkey-login-title": "Anmeldung mit Passkey",
+    "passkey-available-authenticators": "Verfügbare Passkeys",
+    "passkey-doAuthenticate": "Anmelden mit Passkey",
+    "passkey-createdAt-label": "Erstellt",
+    "passkey-autofill-select": "Wählen Sie Ihren Passkey",
+    "requiredAction.webauthn-register": "Passkey einrichten",
+    "organization.select": "Wählen Sie eine Organisation, um fortzufahren:",
+    notMemberOfAnyOrganization: "Benutzer ist kein Mitglied einer Organisation",
+    notMemberOfOrganization: "Benutzer ist kein Mitglied der Organisation {0}",
+    emailVerifyInstruction4:
+        "Um Ihre E-Mail-Adresse zu verifizieren werden wir eine E-Mail mit weiteren Hinweisen an {0} senden.",
+    emailVerifyResend: "Verifizierungs-E-Mail erneut senden",
+    emailVerifySend: "Verifizierungs-E-Mail senden",
+    linkIdpActionMessage: "Möchten Sie Ihren Account mit {0} verlinken?",
+    linkIdpActionTitle: "Verknüpfe {0}",
+    confirmAccountLinkingBody:
+        "Wenn sie das Konto verknüpfen, dann können sie sich auch mit Konto {0} des Identity Providers {1} anmelden. Fahren sie nicht fort wenn sie dies nicht veranlasst haben oder das Konto nicht verknüpfen wollen.",
     shouldBeEqual: "{0} sollte gleich {1} sein",
     shouldBeDifferent: "{0} sollte sich von {1} unterscheiden",
     shouldMatchPattern: "Muster sollte übereinstimmen: `/{0}/`",

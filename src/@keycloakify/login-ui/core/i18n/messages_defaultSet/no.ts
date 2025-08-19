@@ -70,8 +70,7 @@ const messages = {
     country: "Land",
     emailVerified: "E-postadresse bekreftet",
     gssDelegationCredential: "GSS legitimasjons-delegering",
-    loginTotpStep1:
-        'Installer <a href="https://freeotp.github.io/" target="_blank">FreeOTP</a> eller Google Authenticator på din mobiltelefon. Begge applikasjoner er tilgjengelige på <a href="https://play.google.com">Google Play</a> og Apple App Store.',
+    loginTotpStep1: "Installer en av følgende applikasjoner på mobilen din:",
     loginTotpStep2: "Åpne applikasjonen og skann strekkoden eller skriv inn koden",
     loginTotpStep3: "Skriv inn engangskoden fra applikasjonen og klikk send inn for å fullføre",
     loginOtpOneTime: "Engangskode",
@@ -119,8 +118,10 @@ const messages = {
     invalidUserMessage: "Ugyldig brukernavn eller passord.",
     invalidEmailMessage: "Ugyldig e-postadresse.",
     accountDisabledMessage: "Konto er deaktivert, kontakt administrator.",
-    accountTemporarilyDisabledMessage:
-        "Konto er midlertidig deaktivert, kontakt administrator eller prøv på nytt senere.",
+    accountTemporarilyDisabledMessage: "Ugyldig brukernavn eller passord.",
+    accountPermanentlyDisabledMessage: "Ugyldig brukernavn eller passord.",
+    accountTemporarilyDisabledMessageTotp: "Ugyldig engangskode.",
+    accountPermanentlyDisabledMessageTotp: "Ugyldig engangskode.",
     expiredCodeMessage: "Login ble tidsavbrutt. Vennligst logg inn på nytt.",
     missingFirstNameMessage: "Vennligst oppgi fornavn.",
     missingLastNameMessage: "Vennligst oppgi etternavn.",

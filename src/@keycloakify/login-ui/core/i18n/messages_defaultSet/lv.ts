@@ -145,8 +145,10 @@ const messages = {
     invalidUserMessage: "Nekorekts lietotājvārds vai parole.",
     invalidEmailMessage: "Nekorekta e-pasta adrese.",
     accountDisabledMessage: "Konts ir atspējots, sazinieties ar administratoru.",
-    accountTemporarilyDisabledMessage:
-        "Konts ir uz laiku atspējots, sazinieties ar administratoru vai mēģiniet vēlāk.",
+    accountTemporarilyDisabledMessage: "Nekorekts lietotājvārds vai parole.",
+    accountPermanentlyDisabledMessage: "Nekorekts lietotājvārds vai parole.",
+    accountTemporarilyDisabledMessageTotp: "Neder?gs autentifik?cijas kods.",
+    accountPermanentlyDisabledMessageTotp: "Neder?gs autentifik?cijas kods.",
     expiredCodeMessage: "Pieslēgšanās noilgums. Lūdzu pieslēdzieties atkārtoti.",
     expiredActionMessage: "Darbība noilgusi. Lūdzu turpiniet ar pieslēgšanos.",
     expiredActionTokenNoSessionMessage: "Darbība noilgusi.",
@@ -160,6 +162,7 @@ const messages = {
     invalidPasswordExistingMessage: "Nekorekta pašreizējā parole.",
     invalidPasswordBlacklistedMessage: "Nekorekta parole: parole ir melnajā sarakstā.",
     invalidPasswordConfirmMessage: "Paroles apstiprinājums nav pareizs.",
+    invalidTotpMessage: "Neder?gs autentifik?cijas kods.",
     usernameExistsMessage: "Lietotājvārds jau eksistē.",
     emailExistsMessage: "E-pasts jau eksistē.",
     federatedIdentityExistsMessage:

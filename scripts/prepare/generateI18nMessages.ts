@@ -83,6 +83,7 @@ export async function generateI18nMessages(params: { themeType: "login" | "accou
 
     const messagesDirPath = pathJoin(
         getThisCodebaseRootDirPath(),
+        "src",
         "@keycloakify",
         (() => {
             switch (themeType) {
