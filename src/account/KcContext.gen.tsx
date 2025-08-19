@@ -1,8 +1,13 @@
 import { createContext, useContext, type ReactNode } from "react";
 
 export type KcContext =
-    | import("./pages/login/KcContext").KcContext
-    | import("./pages/register/KcContext").KcContext;
+    | import("./pages/account/KcContext").KcContext
+    | import("./pages/applications/KcContext").KcContext
+    | import("./pages/federatedIdentity/KcContext").KcContext
+    | import("./pages/log/KcContext").KcContext
+    | import("./pages/password/KcContext").KcContext
+    | import("./pages/sessions/KcContext").KcContext
+    | import("./pages/totp/KcContext").KcContext;
 
 const context = createContext<KcContext | undefined>(undefined);
 

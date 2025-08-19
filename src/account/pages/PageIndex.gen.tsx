@@ -1,6 +1,6 @@
 import { assert, type Equals } from "tsafe/assert";
 import { Suspense, lazy } from "react";
-import { useKcContext } from "../KcContext";
+import { useKcContext } from "../KcContext.gen";
 
 const Page_account = lazy(() => import("./account"));
 const Page_applications = lazy(() => import("./applications"));
