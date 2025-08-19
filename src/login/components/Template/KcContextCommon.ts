@@ -1,7 +1,11 @@
 import { id } from "tsafe/id";
 import { assert, type Equals } from "tsafe/assert";
+import type { ThemeName, KcEnvName } from "../../../kc.gen";
 
 export type KcContextCommon = {
+    themeVersion: string;
+    properties: Record<KcEnvName, string>;
+
     // NEW:
     darkMode?: boolean;
     authenticationSession?: {
@@ -9,10 +13,9 @@ export type KcContextCommon = {
     };
     social?: Social;
 
-    themeVersion: string;
     keycloakifyVersion: string;
     themeType: "login";
-    themeName: string;
+    themeName: ThemeName;
     url: {
         loginAction: string;
         loginRestartFlowUrl: string;
@@ -90,7 +93,6 @@ export type KcContextCommon = {
 
         getFirstError: (...fieldNames: string[]) => string;
     };
-    properties: {};
     "x-keycloakify": {
         messages: Record<string, string>;
     };
