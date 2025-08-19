@@ -1,7 +1,7 @@
 import { assert } from "tsafe/assert";
-import { clsx } from "@keycloakify/account-multi-page-ui/tools/clsx";
-import { useKcClsx } from "@keycloakify/account-multi-page-ui/useKcClsx";
-import { useKcContext } from "../../KcContext";
+import { clsx } from "../../../@keycloakify/account-multi-page-ui/tools/clsx";
+import { useKcClsx } from "../../../@keycloakify/account-multi-page-ui/useKcClsx";
+import { useKcContext } from "../../KcContext.gen";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 

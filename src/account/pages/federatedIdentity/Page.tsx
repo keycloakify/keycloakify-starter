@@ -1,5 +1,5 @@
 import { assert } from "tsafe/assert";
-import { useKcContext } from "../../KcContext";
+import { useKcContext } from "../../KcContext.gen";
 import { useI18n } from "../../i18n";
 import { Template } from "../../components/Template";
 
