@@ -4415,10 +4415,10 @@ jsonfile@^6.0.1:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
-keycloakify@^11.9.2:
-  version "11.9.2"
-  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.9.2.tgz#f5fd42dad06899249120447ffdaa17fbc4548b0d"
-  integrity sha512-d0/+u7tVmLU25PtJcQyRp94pdDNjfqNHFnMSQut0ltk6aEEq5SA76rmw9N9hPnKiXPYBBranIZ5QGyqWAfjnYw==
+keycloakify@^11.9.3:
+  version "11.9.3"
+  resolved "https://registry.yarnpkg.com/keycloakify/-/keycloakify-11.9.3.tgz#aaf72ad9ff3bee721dc787beacf7fdd48437d1bf"
+  integrity sha512-x5xK+86PnLH6cNkqSfYQ82G3PGDO3RA6gjou2MZMcYku9tDWUICNCYPLp+LuQO2sbN2g5BL73av0KWtQs8zMgg==
   dependencies:
     tsafe "^1.8.5"
 
