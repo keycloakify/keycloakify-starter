@@ -44,7 +44,8 @@
         "react-i18next": "^15.4.1",
         "react-router-dom": "^6.30.0",
         "reactflow": "^11.11.4",
-        "use-react-router-breadcrumbs": "^4.0.1"
+        "use-react-router-breadcrumbs": "^4.0.1",
+        "oidc-spa": "^7.1.10"
     },
     "devDependencies": {
         "@eslint/js": "^9.15.0",
