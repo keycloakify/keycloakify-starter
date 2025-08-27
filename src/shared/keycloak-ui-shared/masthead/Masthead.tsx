@@ -26,7 +26,7 @@ import {
 } from "../../@patternfly/react-core";
 import { BarsIcon } from "../../@patternfly/react-icons";
 import { TFunction } from "i18next";
-import Keycloak, { type KeycloakTokenParsed } from "keycloak-js";
+import type { Keycloak, KeycloakTokenParsed } from "../../keycloak-js";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { DefaultAvatar } from "./DefaultAvatar";

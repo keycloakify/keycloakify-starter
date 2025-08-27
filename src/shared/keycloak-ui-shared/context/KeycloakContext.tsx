@@ -7,10 +7,8 @@
 
 /* eslint-disable */
 
-// @ts-nocheck
-
 import { Spinner } from "../../@patternfly/react-core";
-import Keycloak from "keycloak-js";
+import { type Keycloak, createKeycloak } from "../../keycloak-js";
 import {
     PropsWithChildren,
     createContext,
@@ -57,10 +55,11 @@ export const KeycloakProvider = <T extends BaseEnvironment>({
     const [init, setInit] = useState(false);
     const [error, setError] = useState<unknown>();
     const keycloak = useMemo(() => {
-        const keycloak = new Keycloak({
+        const keycloak = createKeycloak({
+            homeUrl: environment.consoleBaseUrl,
             url: environment.serverBaseUrl,
             realm: environment.realm,
-            clientId: environment.clientId
+            clientId: environment.clientId,
         });
 
         keycloak.onAuthLogout = () => keycloak.login();
@@ -76,9 +75,6 @@ export const KeycloakProvider = <T extends BaseEnvironment>({
 
         const init = () =>
             keycloak.init({
-                onLoad: "check-sso",
-                pkceMethod: "S256",
-                responseMode: "query",
                 scope: environment.scope
             });
 

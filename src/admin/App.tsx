@@ -34,6 +34,7 @@ import type { Environment } from "./environment";
 import { SubGroups } from "./groups/SubGroupsContext";
 import { AuthWall } from "./root/AuthWall";
 import { Banners } from "./Banners";
+import { AutoLogoutWarningOverlay } from "./AutoLogoutWarningOverlay";
 
 export const AppContexts = ({ children }: PropsWithChildren) => (
     <ErrorBoundaryProvider>
@@ -94,6 +95,7 @@ export const App = () => {
                         </Page>
                     </FlexItem>
                 </Flex>
+                <AutoLogoutWarningOverlay />
             </AppContexts>
         </AdminClientContext.Provider>
     );

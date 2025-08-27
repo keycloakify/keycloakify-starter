@@ -32,6 +32,8 @@ export type BaseEnvironment = {
     logoUrl: string;
     /** The scopes to be requested when sending authorization requests*/
     scope?: string;
+
+    consoleBaseUrl: string;
 };
 
 /**

@@ -939,12 +939,8 @@
             "enabled": true,
             "alwaysDisplayInConsole": false,
             "clientAuthenticatorType": "client-secret",
-            "redirectUris": [
-                "http://localhost*",
-                "http://127.0.0.1*",
-                "/admin/myrealm/console/*"
-            ],
-            "webOrigins": ["*"],
+            "redirectUris": ["/admin/myrealm/console/"],
+            "webOrigins": ["+"],
             "notBefore": 0,
             "bearerOnly": false,
             "consentRequired": false,
