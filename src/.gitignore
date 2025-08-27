@@ -1,11 +1,15 @@
 # This file is managed by Keycloakify, do not edit it manually.
 
 # === Owned files start ===
+# admin/App.tsx
+# admin/KcPage.tsx
+# shared/keycloak-ui-shared/context/environment.ts
+# shared/keycloak-ui-shared/context/KeycloakContext.tsx
+# shared/keycloak-ui-shared/masthead/Masthead.tsx
 # === Owned files end =====
 
 # === @keycloakify/keycloak-admin-ui v260200.0.3 ===
 /admin/admin-client.ts
-/admin/App.tsx
 /admin/banners.module.css
 /admin/Banners.tsx
 /admin/environment.ts
@@ -15,7 +19,6 @@
 /admin/index.css
 /admin/KcAdminUi.tsx
 /admin/KcContext.ts
-/admin/KcPage.tsx
 /admin/page-nav.css
 /admin/PageHeader.tsx
 /admin/PageHeaderClearCachesModal.tsx
@@ -634,10 +637,8 @@
 /shared/keycloak-ui-shared/alerts/AlertPanel.tsx
 /shared/keycloak-ui-shared/alerts/Alerts.tsx
 /shared/keycloak-ui-shared/buttons/FormSubmitButton.tsx
-/shared/keycloak-ui-shared/context/environment.ts
 /shared/keycloak-ui-shared/context/ErrorPage.tsx
 /shared/keycloak-ui-shared/context/HelpContext.tsx
-/shared/keycloak-ui-shared/context/KeycloakContext.tsx
 /shared/keycloak-ui-shared/continue-cancel/ContinueCancelModal.tsx
 /shared/keycloak-ui-shared/controls/FormErrorText.tsx
 /shared/keycloak-ui-shared/controls/FormLabel.tsx
@@ -653,7 +654,6 @@
 /shared/keycloak-ui-shared/icons/IconMapper.tsx
 /shared/keycloak-ui-shared/masthead/DefaultAvatar.tsx
 /shared/keycloak-ui-shared/masthead/KeycloakDropdown.tsx
-/shared/keycloak-ui-shared/masthead/Masthead.tsx
 /shared/keycloak-ui-shared/scroll-form/form-title.module.css
 /shared/keycloak-ui-shared/scroll-form/FormPanel.tsx
 /shared/keycloak-ui-shared/scroll-form/FormTitle.tsx
