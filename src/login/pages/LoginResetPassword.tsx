@@ -73,17 +73,18 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     </div>
                     <div>
                         <div id="kc-form-options">
-                            <div>
-                                <span>
-                                    <a className="text-sm" href={url.loginUrl}>{msg("backToLogin")}</a>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div id="kc-form-buttons" className="py-6">
-                            <Button id="kc-submit" className="w-full" type="submit" value={msgStr("doSubmit")}>
-                                Submit
+                        <div id="kc-form-buttons" className="py-4">
+                            <Button id="kc-submit" className="kc-primary w-full" type="submit" value={msgStr("doSubmit")}>
+                                Reset password
                             </Button>
+                        </div>
+                        <div>
+                            <Button
+                                variant="outline"
+                                className="kc-primary w-full">
+                                <a href={url.loginUrl}>Go back</a>
+                            </Button>
+                            </div>
                         </div>
                     </div>
                 </form>

@@ -48,8 +48,8 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                         if (pageRedirectUri) {
                             return (
                                 <p>
-                                    <Button asChild>
-                                        <a href={pageRedirectUri}>{msg("backToApplication")}</a>
+                                    <Button className="kc-primary w-full" asChild>
+                                        <a href={pageRedirectUri}>Go back</a>
                                     </Button>
                                 </p>
                             );
@@ -57,7 +57,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                         if (actionUri) {
                             return (
                                 <p>
-                                    <Button asChild>
+                                    <Button className="kc-primary w-full" asChild>
                                         <a href={actionUri}>Continue</a>
                                     </Button>
                                 </p>
@@ -67,8 +67,8 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                         if (client.baseUrl) {
                             return (
                                 <p>
-                                    <Button asChild>
-                                        <a href={client.baseUrl}>{msg("backToApplication")}</a>
+                                    <Button className="kc-primary w-full" asChild>
+                                        <a href={client.baseUrl}>Go back</a>
                                     </Button>
                                 </p>
                             );

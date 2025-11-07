@@ -18,7 +18,7 @@ const header = () => {
     return (
         <CardHeader>
             <CardTitle id="card-title">
-                <b>Update your account information</b>
+                Update your account information
             </CardTitle>
         </CardHeader>
     );
@@ -49,7 +49,7 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
             headerNode={header()}
         >
             <CardContent>
-                <form id="kc-idp-review-profile-form" className="grid w-full max-w-sm items-center gap-3" action={url.loginAction} method="post">
+                <form id="kc-idp-review-profile-form" className="grid w-full max-w-sm items-center" action={url.loginAction} method="post">
                     <UserProfileFormFields
                         kcContext={kcContext}
                         i18n={i18n}
@@ -61,7 +61,7 @@ export default function IdpReviewUserProfile(props: IdpReviewUserProfileProps) {
                         <div id="kc-form-options" className={kcClsx("kcFormOptionsClass")}>
                             <div className={kcClsx("kcFormOptionsWrapperClass")} />
                         </div>
-                        <div id="kc-form-buttons" className={`kcClsx("kcFormButtonsClass") my-5`}>
+                        <div id="kc-form-buttons" className={`kcClsx("kcFormButtonsClass") my-1`}>
                             <Button
                                 className="w-full"
                                 type="submit"
