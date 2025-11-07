@@ -21,8 +21,6 @@ export default function Error(props: PageProps<Extract<KcContext, { pageId: "err
 
     const { message, client, skipLink } = kcContext;
 
-    const { msg } = i18n;
-
     return (
         <Template
             kcContext={kcContext}
