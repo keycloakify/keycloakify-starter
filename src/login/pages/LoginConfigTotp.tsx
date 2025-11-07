@@ -96,7 +96,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                                 <Button variant="ghost">
                                     <a href={totp.manualUrl} id="mode-manual">
-                                        {msg("loginTotpUnableToScan")}
+                                        <u>{msg("loginTotpUnableToScan")}</u>
                                     </a>
                                 </Button>
                             </li>
@@ -159,7 +159,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
 
                         {isAppInitiatedAction ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <Button type="submit" className="w-full" id="saveTOTPBtn" value={msgStr("doSubmit")}>
+                                <Button type="submit" className="kc-primary w-full" id="saveTOTPBtn" value={msgStr("doSubmit")}>
                                     Submit
                                 </Button>
                                 <Button type="submit" id="cancelTOTPBtn" name="cancel-aia" value="true" variant="outline" className="w-full">
@@ -167,7 +167,7 @@ export default function LoginConfigTotp(props: PageProps<Extract<KcContext, { pa
                                 </Button>
                             </div>
                         ) : (
-                            <Button type="submit" id="saveTOTPBtn" className="w-full mt-3">
+                            <Button type="submit" id="saveTOTPBtn" className="kc-primary w-full mt-3">
                                 Submit
                             </Button>
                         )}

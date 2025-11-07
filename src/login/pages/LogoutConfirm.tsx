@@ -2,7 +2,7 @@ import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 
 const header = () => {
@@ -41,7 +41,7 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
                             <div id="kc-form-buttons" className={kcClsx("kcFormGroupClass")}>
                                 <Button
                                     tabIndex={4}
-                                    className={`${buttonVariants({})} w-full`}
+                                    className="kc-primary w-full"
                                     name="confirmLogout"
                                     id="kc-logout"
                                     type="submit"
@@ -54,9 +54,10 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
                     </form>
                     <div id="kc-info-message">
                         {!logoutConfirm.skipLink && client.baseUrl && (
-                            <p>
-                                <a href={client.baseUrl}>{msg("backToApplication")}</a>
-                            </p>
+                                <Button
+                                    variant="outline"
+                                    className="kc-primary w-full"
+                                > <a href={client.baseUrl}>Go back</a></Button>
                         )}
                     </div>
                 </div>

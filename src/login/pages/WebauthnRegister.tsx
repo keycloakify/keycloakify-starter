@@ -51,7 +51,7 @@ export default function WebauthnRegister(props: PageProps<Extract<KcContext, { p
                     </div>
                 </form>
 
-                <Button type="submit" id={authButtonId} className="w-full">
+                <Button type="submit" id={authButtonId} className="kc-primary w-full">
                     {msgStr("doRegisterSecurityKey")}
                 </Button>
 

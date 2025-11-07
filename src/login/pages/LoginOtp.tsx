@@ -113,7 +113,7 @@ export default function LoginOtp(props: PageProps<Extract<KcContext, { pageId: "
                         <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
                             <Button
                                 //className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                                className={clsx(buttonVariants(), "w-full")}
+                                className="w-full kc-primary"
                                 name="login"
                                 id="kc-login"
                                 type="submit"
