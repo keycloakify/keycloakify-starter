@@ -15,7 +15,7 @@ const header = () => {
 
 export default function Info(props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-    const { advancedMsgStr, msg } = i18n;
+    const { advancedMsgStr } = i18n;
     const { message, requiredActions, skipLink, pageRedirectUri, actionUri, client } = kcContext;
 
     return (

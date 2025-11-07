@@ -26,7 +26,7 @@ export default function LogoutConfirm(props: PageProps<Extract<KcContext, { page
 
     const { url, client, logoutConfirm } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msgStr } = i18n;
 
     return (
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={header()}>
