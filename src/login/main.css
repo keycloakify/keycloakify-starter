@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Raleway:wght@300;400;500;600;700&family=Lato:wght@300;400;600;700&display=swap");
+
+/* Light mode variables (default) */
+:root {
+    --bg-primary: #f1f5f9;
+    --bg-secondary: #e2e8f0;
+    --bg-tertiary: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --link-primary: #0d9488;
+    --link-hover: #14b8a6;
+    --border: #cbd5e1;
+    --input-bg: #ffffff;
+}
+
+/* Dark mode variables */
+:root[data-theme="dark"] {
+    --bg-primary: #1e293b;
+    --bg-secondary: #0f172a;
+    --bg-tertiary: #475569;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --link-primary: #14b8a6;
+    --link-hover: #0d9488;
+    --border: #334155;
+    --input-bg: #1e293b;
+}
+
+.kcBodyClass {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family:
+        "Raleway",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+.kcHeaderWrapperClass,
+.kcHeaderWrapperClass * {
+    text-align: center;
+    color: var(--text-primary) !important;
+    font-size: 2rem;
+    font-weight: 500;
+    font-family:
+        "Raleway",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif !important;
+    text-transform: none !important;
+}
+
+.kcFormCardClass {
+    border-top: none;
+}
+
+.kcButtonClass {
+    width: 100%; /* w-full */
+    padding: 0.5rem 1.5rem; /* px-6 py-3 */
+    background-color: var(--color-primary-600, #14b8a6);
+    color: #ffffff;
+    font-size: 1rem; /* text-base */
+    font-weight: 600; /* font-semibold */
+    border-radius: 0.5rem; /* rounded-lg */
+    border: none;
+    transition:
+        background-color 150ms,
+        color 150ms; /* transition-colors */
+    cursor: pointer;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+}
+
+.kcButtonClass:hover {
+    background-color: var(--color-primary-700, #0f766e); /* hover:bg-primary-700 */
+}
+
+.dark .kcButtonClass {
+    background-color: var(--color-primary-600, #14b8a6); /* dark:bg-primary-600 */
+}
+
+.dark .kcButtonClass:hover {
+    background-color: var(--color-primary-700, #0f766e); /* dark:hover:bg-primary-700 */
+}
+
+.kcButtonClass:focus {
+    outline: none; /* focus:outline-none */
+    /* emulate focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 */
+    box-shadow:
+        0 0 0 2px var(--color-white, #fff),
+        0 0 0 4px var(--color-primary-500, #14b8a6);
+}
+
+.kcButtonClass:disabled,
+.kcButtonClass[disabled] {
+    background-color: var(--color-slate-400, #94a3b8); /* disabled:bg-slate-400 */
+    cursor: not-allowed;
+    opacity: 0.9;
+}
+
+.kcFormCardClass {
+    background-color: var(--bg-secondary);
+}
+
+.kcInfoAreaWrapperClass {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+}
+
+.kcFormOptionsWrapperClass a {
+    color: var(--link-primary);
+}
+
+.kcFormOptionsWrapperClass a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+#kc-registration a {
+    color: var(--link-primary);
+}
+
+#kc-registration a:hover {
+    color: var(--link-hover);
+}
+
+.kcInputClass {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    transition: all 150ms;
+}
+
+.kcInputClass:focus {
+    outline: none;
+    border-color: transparent;
+}
+
+.kcInputClass::placeholder {
+    color: var(--text-secondary);
+}
+
+.kcLabelClass {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.kcInputErrorMessageClass {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #dc2626;
+}
+
+.kcInputClass[type="text"]#password {
+    padding-right: 3.25rem; /* room for the button */
+    border-radius: 0.5rem 0 0 0.5rem; /* left rounded, right square to join button */
+    box-sizing: border-box;
+}
+
+.kcInputClass[type="password"] {
+    padding-right: 3.25rem; /* room for the button */
+    border-radius: 0.5rem 0 0 0.5rem; /* left rounded, right square to join button */
+    box-sizing: border-box;
+}
+
+.kcInputGroup {
+    background-color: var(--bg-secondary);
+    border-radius: 0.5rem;
+}
+
+.kcFormPasswordVisibilityButtonClass {
+    padding: 1px;
+    margin: 0 0 0 0px;
+    border: 1px solid var(--border);
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    width: 3.25rem;
+    font-size: 120%;
+    border-radius: 0 0.5rem 0.5rem 0; /* left rounded, right square to join button */
+}
