@@ -4,53 +4,162 @@
 @tailwind components;
 @tailwind utilities;
 
-body.kcBodyClass {
-    @apply bg-[url(./assets/img/background.jpg)] bg-no-repeat bg-center bg-fixed;
-    @apply font-geist;
-    @apply w-screen h-screen items-center justify-center
+/* Theme Color Variables */
+:root {
+    /* Primary colors */
+    --color-primary: #2D4137;
+    --color-primary-400: #162C21;
+    --color-primary-500: #DF1F17;
+    
+    /* Secondary colors */
+    --color-secondary-300: #E5DDD2;
+    --color-secondary-400: #DACEBE;
+    --color-secondary-500: #999085;
+    
+    /* Call-to-action */
+    --color-cta-400: #D98351;
+    
+    /* Accent */
+    --color-accent-400: #AECBAE;
+    
+    /* Semantic color mappings */
+    --color-green-dark: var(--color-primary-400);
+    --color-beige: var(--color-secondary-300);
+    --color-beige-dark: var(--color-secondary-400);
+    --color-orange: var(--color-cta-400);
+    --color-orange-dark: #c97545;
+    --color-border: var(--color-secondary-500);
+    --color-text-primary: var(--color-primary);
+    --color-text-secondary: #666;
+    --color-text-tertiary: #888;
 }
 
+body.kcBodyClass {
+    @apply font-geist;
+    @apply m-0 p-0 overflow-hidden;
+}
+
+.kcLoginClass {
+    @apply m-0 p-0;
+}
 
 .kcHeaderWrapperClass {
     @apply hidden;
 }
 
-.kcInputClass {
-    @apply bg-[#F2F2F2] rounded-lg border-none focus:outline-none 
-}
-
-.kcFormOptionsWrapperClass{
-    @apply text-nowrap text-[#3A9573] italic
-}
-
-.kcFormGroupClass {
-    @apply no-underline flex flex-col items-start w-[60%] h-fit
-
-
-}
-
-#kc-login {
-    @apply bg-[#3A9573] w-fit px-3
-}
-
-.kcLabelClass {
-    @apply  text-[#204839] font-semibold
-}
-
 .kcFormCardClass {
-    @apply w-[666px] max-w-[800px] border-none rounded-xl mb-96
+    @apply border-none;
 }
 
-#kc-form-login {
-    @apply flex flex-col items-center
+/* Hide the default Keycloak styles that we don't need */
+#kc-header {
+    @apply hidden;
 }
 
-#kc-form-buttons {
-    @apply  items-end
+/* Ensure form inputs have consistent styling */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    @apply outline-none;
 }
+
+/* Custom checkbox styling (fully custom appearance) */
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 2px solid var(--color-green-dark);
+    border-radius: 6px;
+    display: inline-grid;
+    place-items: center;
+    position: relative;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px;
+    height: 10px;
+    border: solid var(--color-green-dark);
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -55%) rotate(45deg) scale(0.9);
+    opacity: 0;
+    transition: opacity 120ms ease, transform 120ms ease;
+}
+
+input[type="checkbox"]:checked {
+    background-color: transparent;
+    border-color: var(--color-green-dark);
+}
+
+input[type="checkbox"]:checked::after {
+    opacity: 1;
+    transform: translate(-50%, -55%) rotate(45deg) scale(1);
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(22, 44, 33, 0.12);
+}
+
+/* Ensure custom checkbox and its label align on one line */
+.custom-checkbox {
+    margin: 0;
+    display: inline-grid;
+    place-items: center;
+}
+
+.remember-label {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+
+/* Remove the orange focus ring applied inline / via tailwind on inputs */
+.template-input-scope input:focus, .template-input-scope textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--color-green-dark) !important;
+}
+
+/* Link styling */
+a {
+    @apply no-underline;
+}
+
+/* Keep underline for specific links (e.g. password reset) */
+.keep-underline-on-hover:hover,
+.keep-underline-on-hover:focus {
+    text-decoration: underline !important;
+}
+
+/* Remove the blue focus ring on mouse click for links, preserve keyboard focus */
+.kcLoginClass a:focus:not(:focus-visible) {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 1024px) {
+    .kcLoginClass {
+        background-color: var(--color-beige);
+    }
+}
+
 
 .kcLoginClass {
     @apply  flex w-screen h-screen items-center justify-center
+}
+
+/* Form label adjustments to match desired weight */
+.form-group label {
+    font-weight: 400;
 }
 
 .kcFormSocialAccountListButtonClass {
@@ -59,4 +168,13 @@ body.kcBodyClass {
 
 #kc-info-wrapper {
     @apply flex rounded-b-lg
+}
+
+body {
+  font-family: Geist;
+}
+
+/* Force regular weight for all text in the login theme */
+.kcLoginClass, .kcLoginClass * {
+        font-weight: 400 !important;
 }

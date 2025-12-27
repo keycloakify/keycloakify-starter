@@ -1,7 +1,6 @@
 import { useState, useEffect, useReducer } from "react";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { assert } from "keycloakify/tools/assert";
-import { clsx } from "keycloakify/tools/clsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { KcContext } from "../KcContext";
@@ -17,7 +16,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
     const { social, realm, url, usernameHidden, login, auth, registrationDisabled, messagesPerField } = kcContext;
 
-    const { msg, msgStr } = i18n;
+    const { msg } = i18n;
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
@@ -28,54 +27,66 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
             doUseDefaultCss={doUseDefaultCss}
             classes={classes}
             displayMessage={!messagesPerField.existsError("username", "password")}
-            headerNode={msg("loginAccountTitle")}
-            displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
-            infoNode={
-                <div id="kc-registration-container">
-                    <div id="kc-registration">
-                        <span>
-                            {msg("noAccount")}{" "}
-                            <a tabIndex={8} href={url.registrationUrl}>
-                                {msg("doRegister")}
-                            </a>
-                        </span>
-                    </div>
-                </div>
-            }
-            socialProvidersNode={
-                <>
-                    {realm.password && social?.providers !== undefined && social.providers.length !== 0 && (
-                        <div id="kc-social-providers" className={kcClsx("kcFormSocialAccountSectionClass")}>
-                            <hr />
-                            <h2>{msg("identity-provider-login-label")}</h2>
-                            <ul className={kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass")}>
-                                {social.providers.map((...[p, , providers]) => (
-                                    <li key={p.alias}>
-                                        <a
-                                            id={`social-${p.alias}`}
-                                            className={kcClsx(
-                                                "kcFormSocialAccountListButtonClass",
-                                                providers.length > 3 && "kcFormSocialAccountGridItem"
-                                            )}
-                                            type="button"
-                                            href={p.loginUrl}
-                                        >
-                                            {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>}
-                                            <span
-                                                className={clsx(kcClsx("kcFormSocialAccountNameClass"), p.iconClasses && "kc-social-icon-text")}
-                                                dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }}
-                                            ></span>
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                </>
-            }
+            headerNode="Welkom terug"
+            displayInfo={false}
+                    socialProvidersNode={
+                        <>
+                            {realm.password && (
+                                <>
+                                    <div className="relative my-6">
+                                        <div className="absolute inset-0 flex items-center">
+                                            <div className="w-full border-t" style={{borderColor: 'var(--color-border)'}}></div>
+                                        </div>
+                                        <div className="relative flex justify-center text-sm">
+                                            <span className="px-2" style={{backgroundColor: 'var(--color-beige-dark)', color: 'var(--color-text-tertiary)'}}>of</span>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        {social?.providers !== undefined && social.providers.length !== 0 ? (
+                                            social.providers.map((p) => (
+                                                <a
+                                                    key={p.alias}
+                                                    id={`social-${p.alias}`}
+                                                    className={`w-full flex items-center justify-center gap-3 py-3 px-4 border rounded-lg transition-colors no-underline hover:no-underline ${p.alias === 'google' ? 'pointer-events-none opacity-50 cursor-not-allowed' : ''}`}
+                                                    style={{borderColor: 'var(--color-border)', backgroundColor: 'transparent'}}
+                                                    href={p.alias === 'google' ? '#' : p.loginUrl}
+                                                    onClick={p.alias === 'google' ? (e) => e.preventDefault() : undefined}
+                                                    aria-disabled={p.alias === 'google'}
+                                                >
+                                                    <svg className="w-5 h-5" viewBox="0 0 24 24">
+                                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                                    </svg>
+                                                    <span className="text-lg font-medium" style={{color: 'var(--color-text-primary)'}}>Inloggen met Google</span>
+                                                </a>
+                                            ))
+                                        ) : (
+                                            <a
+                                                className="w-full flex items-center justify-center gap-3 py-3 px-4 border rounded-lg no-underline hover:no-underline pointer-events-none opacity-50 cursor-not-allowed"
+                                                style={{borderColor: 'var(--color-border)', backgroundColor: 'transparent'}}
+                                                href="#"
+                                                onClick={(e) => e.preventDefault()}
+                                                aria-disabled
+                                            >
+                                                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                                </svg>
+                                                <span className="text-lg font-medium" style={{color: 'var(--color-text-primary)'}}>Inloggen met Google</span>
+                                            </a>
+                                        )}
+                                    </div>
+                                </>
+                            )}
+                        </>
+                    }
         >
-            <div id="kc-form" className="flex flex-col">
-                <div className ="bg-[#204839] w-[32rem] h-1  self-center"></div>
+            <div id="kc-form">
                 <div id="kc-form-wrapper">
                     {realm.password && (
                         <form
@@ -86,20 +97,18 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             }}
                             action={url.loginAction}
                             method="post"
+                            className="space-y-5"
                         >
                             {!usernameHidden && (
-                                <div className={kcClsx("kcFormGroupClass")}>
-                                    <label htmlFor="username" className={kcClsx("kcLabelClass")}>
-                                        {!realm.loginWithEmailAllowed
-                                            ? msg("username")
-                                            : !realm.registrationEmailAsUsername
-                                              ? msg("usernameOrEmail")
-                                              : msg("email")}
+                                <div className="form-group">
+                                    <label htmlFor="username" className="block text-sm font-medium mb-2" style={{color: 'var(--color-text-primary)'}}>
+                                        E-mailadres
                                     </label>
                                     <input
                                         tabIndex={2}
                                         id="username"
-                                        className={kcClsx("kcInputClass")}
+                                        className="w-full px-4 py-3 rounded-lg border focus:outline-none"
+                                        style={{borderColor: 'var(--color-border)', backgroundColor: 'var(--color-beige)'} as React.CSSProperties}
                                         name="username"
                                         defaultValue={login.username ?? ""}
                                         type="text"
@@ -110,7 +119,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     {messagesPerField.existsError("username", "password") && (
                                         <span
                                             id="input-error"
-                                            className={kcClsx("kcInputErrorMessageClass")}
+                                            className="text-red-600 text-sm mt-1 block"
                                             aria-live="polite"
                                             dangerouslySetInnerHTML={{
                                                 __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
@@ -120,15 +129,16 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 </div>
                             )}
 
-                            <div className={kcClsx("kcFormGroupClass")}>
-                                <label htmlFor="password" className={kcClsx("kcLabelClass")}>
-                                    {msg("password")}
+                            <div className="form-group">
+                                <label htmlFor="password" className="block text-sm font-medium mb-2" style={{color: 'var(--color-text-primary)'}}>
+                                    Wachtwoord
                                 </label>
                                 <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password">
                                     <input
                                         tabIndex={3}
                                         id="password"
-                                        className={kcClsx("kcInputClass")}
+                                        className="w-full px-4 py-3 pr-12 rounded-lg border focus:outline-none"
+                                        style={{borderColor: 'var(--color-border)', backgroundColor: 'var(--color-beige)'} as React.CSSProperties}
                                         name="password"
                                         type="password"
                                         autoComplete="current-password"
@@ -138,7 +148,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 {usernameHidden && messagesPerField.existsError("username", "password") && (
                                     <span
                                         id="input-error"
-                                        className={kcClsx("kcInputErrorMessageClass")}
+                                        className="text-red-600 text-sm mt-1 block"
                                         aria-live="polite"
                                         dangerouslySetInnerHTML={{
                                             __html: kcSanitize(messagesPerField.getFirstError("username", "password"))
@@ -147,53 +157,54 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 )}
                             </div>
 
-                            <div className={kcClsx("kcFormGroupClass", "kcFormSettingClass")}>
-                                <div id="kc-form-options">
-                                    {realm.rememberMe && !usernameHidden && (
-                                        <div className="checkbox">
-                                            <label>
-                                                <input
-                                                    tabIndex={5}
-                                                    id="rememberMe"
-                                                    name="rememberMe"
-                                                    type="checkbox"
-                                                    defaultChecked={!!login.rememberMe}
-                                                />{" "}
-                                                {msg("rememberMe")}
+                            <div className="pt-2">
+                                <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
+                                <div className="flex items-center justify-between mb-3">
+                                    {realm.rememberMe && !usernameHidden ? (
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                tabIndex={5}
+                                                id="rememberMe"
+                                                name="rememberMe"
+                                                type="checkbox"
+                                                defaultChecked={!!login.rememberMe}
+                                                className="custom-checkbox"
+                                            />
+                                            <label htmlFor="rememberMe" className="text-sm font-normal remember-label" style={{color: 'var(--color-text-primary)'}}>
+                                                Ingelogd blijven
                                             </label>
                                         </div>
-                                    )}
-                                </div>
-                                
-                            </div>
+                                    ) : <div />}
 
-                            <div id="kc-form-buttons" className={kcClsx("kcFormGroupClass")}>
-                                <input type="hidden" id="id-hidden-input" name="credentialId" value={auth.selectedCredential} />
-                                <div className="flex items-center gap-3 justify-end">
-                                <div className={kcClsx("kcFormOptionsWrapperClass")}>
-                                    {realm.resetPasswordAllowed && (
-                                        <span>
-                                            <a tabIndex={6} href={url.loginResetCredentialsUrl}>
-                                                {msg("doForgotPassword")}
+                                    {realm.resetPasswordAllowed ? (
+                                        <div className="text-right">
+                                            <a tabIndex={6} href={url.loginResetCredentialsUrl} className="text-sm underline keep-underline-on-hover" style={{color: 'var(--color-text-primary)'}}>
+                                                Wachtwoord vergeten?
                                             </a>
-                                        </span>
-                                    )}
+                                        </div>
+                                    ) : <div />}
                                 </div>
-                                <input
+                                <button
                                     tabIndex={7}
                                     disabled={isLoginButtonDisabled}
-                                    className={clsx(
-                                        kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass"),
-                                        "rounded-full"
-                                    )}
+                                    className="w-full py-3 px-4 text-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    style={{backgroundColor: 'var(--color-orange)', borderRadius: '100px', color: 'var(--color-text-primary)'}}
                                     name="login"
                                     id="kc-login"
                                     type="submit"
-                                    value={msgStr("doLogIn")}
-                                />
-                                </div>
-                                
+                                >
+                                    Inloggen
+                                </button>
                             </div>
+
+                            {realm.password && realm.registrationAllowed && !registrationDisabled && (
+                                <div className="text-sm mt-4" style={{color: 'var(--color-text-primary)'}}>
+                                    Heb je nog geen account?{" "}
+                                    <a tabIndex={8} href={url.registrationUrl} className="underline keep-underline-on-hover" style={{color: 'var(--color-text-primary)'}}>
+                                        Registreer hier.
+                                    </a>
+                                </div>
+                            )}
                         </form>
                     )}
                 </div>
@@ -203,7 +214,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 }
 
 function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { kcClsx, i18n, passwordInputId, children } = props;
+    const { i18n, passwordInputId, children } = props;
 
     const { msgStr } = i18n;
 
@@ -218,16 +229,26 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
     }, [isPasswordRevealed]);
 
     return (
-        <div className={kcClsx("kcInputGroup")}>
+        <div className="relative">
             {children}
             <button
                 type="button"
-                className={kcClsx("kcFormPasswordVisibilityButtonClass")}
+                className="absolute right-3 top-1/2 -translate-y-1/2"
+                style={{color: 'var(--color-green-dark)'}}
                 aria-label={msgStr(isPasswordRevealed ? "hidePassword" : "showPassword")}
                 aria-controls={passwordInputId}
                 onClick={toggleIsPasswordRevealed}
             >
-                <i className={kcClsx(isPasswordRevealed ? "kcFormPasswordVisibilityIconHide" : "kcFormPasswordVisibilityIconShow")} aria-hidden />
+                {isPasswordRevealed ? (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                    </svg>
+                ) : (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                )}
             </button>
         </div>
     );
