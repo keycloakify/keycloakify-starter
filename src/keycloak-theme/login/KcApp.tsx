@@ -6,6 +6,7 @@ import { useI18n } from "./i18n";
 import Template from "./Template";
 import LoginIdpLinkEmail from "./pages/LoginIdpLinkEmail";
 import LoginIdpLinkConfirm from "./pages/LoginIdpLinkConfirm";
+import LoginOtp from "./pages/LoginOtp";
 
 const Login = lazy(() => import("./pages/Login"));
 const LogoutConfirm = lazy(() => import("./pages/LogoutConfirm"));
@@ -56,6 +57,13 @@ export default function KcApp(props: { kcContext: KcContext }) {
           case "logout-confirm.ftl":
             return (
               <LogoutConfirm
+                {...{ kcContext, i18n, Template, classes }}
+                doUseDefaultCss={true}
+              />
+            );
+          case "login-otp.ftl":
+            return (
+              <LoginOtp
                 {...{ kcContext, i18n, Template, classes }}
                 doUseDefaultCss={true}
               />
