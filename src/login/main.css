@@ -52,6 +52,10 @@
     text-transform: none !important;
 }
 
+.required {
+    color: var(--link-primary);
+}
+
 .kcFormCardClass {
     border-top: none;
 }
@@ -145,7 +149,7 @@
 }
 
 .kcLabelClass {
-    display: block;
+    display: inline;
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--text-secondary);

@@ -7,6 +7,8 @@ export default defineConfig({
     plugins: [
         react(),
         keycloakify({
+            themeName: "bible-bowl",
+            themeVersion: "0.1.0",
             accountThemeImplementation: "none"
         })
     ]
