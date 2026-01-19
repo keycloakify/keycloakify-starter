@@ -18,7 +18,7 @@ yarn install # Or use an other package manager, just be sure to delete the yarn.
 
 # How to customize the theme
 
-[Documentation](https://docs.keycloakify.dev/customization-strategies)
+[Documentation](https://docs.keycloakify.dev/css-customization)
 
 # Building the theme
 
