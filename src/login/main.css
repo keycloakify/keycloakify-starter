@@ -52,3 +52,20 @@
       display: none;
    }
 }
+
+#eodh-login-intro {
+   color: white;
+   margin-bottom: 1.5em;
+}
+
+#eodh-login-intro h1 {
+   color: white;
+   font-size: 1.4em;
+   margin: 0 0 0.5em;
+}
+
+#eodh-login-intro p {
+   color: white;
+   line-height: 1.45;
+   margin: 0 0 0.75em;
+}
