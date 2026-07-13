@@ -290,10 +290,14 @@ body.kcBodyClass #kc-info-wrapper {
     align-items: center;
     justify-content: center;
     gap: 0.5rem 2rem;
-    padding: 1.5rem 1rem;
+    align-self: stretch;
+    margin: 2rem -1rem 0;
+    padding: 1.25rem 2rem;
     text-align: center;
     font-size: 0.875rem;
     color: var(--eodh-footer-link);
+    background-color: rgb(26 39 63 / 0.7);
+    border-top: 1px solid rgb(255 255 255 / 12%);
 }
 
 #eodh-login-footer nav {
@@ -357,5 +361,9 @@ body.kcBodyClass #eodh-login-footer a:hover {
 
     body.kcBodyClass #kc-info-wrapper {
         padding: 1rem 1.25rem;
+    }
+
+    #eodh-login-footer {
+        margin: 1.75rem -0.75rem 0;
     }
 }

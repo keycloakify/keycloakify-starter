@@ -188,9 +188,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             <footer id="eodh-login-footer">
                 <span>© {new Date().getFullYear()} Earth Observation DataHub (EODH)</span>
                 <nav aria-label="EO Data Hub links">
-                    <a href="https://eodatahub.org.uk/">eodatahub.org.uk</a>
                     <a href="https://docs.eodatahub.org.uk" target="_blank" rel="noopener noreferrer">
                         Documentation
+                    </a>
+                    <a href="https://docs.eodatahub.org.uk/Help/community/" target="_blank" rel="noopener noreferrer">
+                        Contact us
                     </a>
                 </nav>
             </footer>
