@@ -1,54 +1,369 @@
-.kcFormHeaderClass {
-   display: none !important;
+:root {
+    --eodh-navy: #1a273f;
+    --eodh-accent: #4c72ba;
+    --eodh-accent-hover: #3f64ab;
+    --eodh-steel: #637189;
+    --eodh-label: #333;
+    --eodh-band-bg: #f3f3f3;
+    --eodh-button-text: #fff;
+    --eodh-button-disabled: #f0f0f3;
+    --eodh-card-shadow: 0 8px 16px rgb(0 0 0 / 15%);
+    --eodh-content-border: 1px solid rgb(128 128 128 / 15.8%);
+    --eodh-radius-sm: 4px;
+    --eodh-radius-md: 8px;
+    --eodh-radius-lg: 10px;
+    --eodh-footer-link: rgb(255 255 255 / 74%);
+    --eodh-footer-link-hover: #d5e1ff;
 }
 
-.kcFormGroupClass:has(> input#username) {
-   display: none;
+@font-face {
+    font-family: "Fira Sans";
+    src:
+        local("Fira Sans Regular"),
+        url("./assets/fonts/FiraSans-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
 }
 
-.kcFormGroupClass:has(input#password) {
-   display: none;
+@font-face {
+    font-family: "Fira Sans";
+    src:
+        local("Fira Sans Medium"),
+        url("./assets/fonts/FiraSans-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-display: swap;
 }
 
-.kcFormGroupClass:has(input#rememberMe) {
-   display: none;
+@font-face {
+    font-family: "Fira Sans";
+    src:
+        local("Fira Sans Bold"),
+        url("./assets/fonts/FiraSans-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-display: swap;
 }
 
-.kcButtonClass[name="login"] {
-   display: none;
+body.kcBodyClass {
+    font-family: "Fira Sans", sans-serif;
 }
 
-.kcLabelClass {
-   color: white;
+body.kcBodyClass input,
+body.kcBodyClass button,
+body.kcBodyClass select,
+body.kcBodyClass textarea {
+    font-family: inherit;
 }
 
-.instruction span {
-   color: white;
+body.kcBodyClass ::selection {
+    background-color: var(--eodh-accent);
+    color: #fff;
 }
 
-.kcBodyClass {
-   background: url("../../8e383cee22ad7d45e8852d095c829ee1.jpg") !important;
-   background-size: cover !important;
+body.kcBodyClass :focus-visible {
+    outline: 2px solid var(--eodh-accent);
+    outline-offset: 2px;
 }
 
-.kcFormCardClass {
-   background-color: rgba(67, 67, 67, 1);
+body.kcBodyClass a:not(.kcFormSocialAccountListButtonClass) {
+    color: var(--eodh-accent);
 }
 
-.kcInfoAreaWrapperClass {
-   background-color: rgb(26, 26, 26) !important;
-   color: white;
+body.kcBodyClass {
+    background: linear-gradient(rgb(26 39 63 / 0.75), rgb(26 39 63 / 0.6)),
+        url("./assets/space-hero.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
-.kcFormSocialAccountSectionClass {
-   color: white;
+body.kcBodyClass .kcLoginClass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100dvh;
+    padding: 2.5rem 1rem 0;
 }
 
-.kcFormSocialAccountSectionClass {
-   hr {
-      display: none;
-   }
-   h2 {
-      display: none;
-   }
+/* Logo above the card (white variant over the dark scrim);
+   resets the default realm-name banner typography/padding */
+body.kcBodyClass #kc-header-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+#eodh-logo {
+    display: block;
+    width: 210px;
+    max-width: 60vw;
+}
+
+/* Card: white, site radius/shadow/border */
+
+body.kcBodyClass .kcFormCardClass {
+    background-color: #fff;
+    border: var(--eodh-content-border);
+    border-radius: var(--eodh-radius-lg);
+    box-shadow: var(--eodh-card-shadow);
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    padding: 2.5rem 2.25rem;
+    color: var(--eodh-label);
+}
+
+/* Page titles on the pages that show them (register, logout, …) */
+body.kcBodyClass #kc-page-title {
+    color: var(--eodh-navy);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Intro block above the SSO options */
+#eodh-login-intro {
+    margin-bottom: 1.5em;
+}
+
+#eodh-login-intro h1 {
+    color: var(--eodh-navy);
+    font-size: clamp(24px, 3vw, 28px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 0.5em;
+}
+
+#eodh-login-intro p {
+    color: var(--eodh-steel);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 0.75em;
+}
+
+/* Text sits on a white card now */
+body.kcBodyClass .kcLabelClass {
+    color: var(--eodh-label);
+    font-weight: 500;
+}
+
+body.kcBodyClass .instruction,
+body.kcBodyClass .instruction span {
+    color: var(--eodh-label);
+}
+
+/* SSO provider buttons: site primary-button style */
+
+body.kcBodyClass .kcFormSocialAccountListClass {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body.kcBodyClass .kcFormSocialAccountListButtonClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    margin: 0;
+    background-color: var(--eodh-accent);
+    border: none;
+    border-radius: var(--eodh-radius-md);
+    color: var(--eodh-button-text);
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+body.kcBodyClass .kcFormSocialAccountListButtonClass:hover,
+body.kcBodyClass .kcFormSocialAccountListButtonClass:focus {
+    background-color: var(--eodh-accent-hover);
+    color: var(--eodh-button-text);
+    text-decoration: none;
+}
+
+/* PatternFly control buttons draw a square border in ::after
+   (1px grey, 2px blue on hover) — drop the pseudo-element */
+body.kcBodyClass .kcFormSocialAccountListButtonClass::after {
+    content: none;
+}
+
+body.kcBodyClass .kcFormSocialAccountListButtonClass .kcCommonLogoIdP {
+    float: none;
+    width: auto;
+    height: auto;
+    font-size: 1.2rem;
+    color: inherit;
+}
+
+body.kcBodyClass .kcFormSocialAccountListButtonClass .kc-social-icon-text {
+    left: 0;
+    margin: 0;
+    color: inherit;
+}
+
+/* Forms and buttons on the other pages (register, logout, …) */
+
+body.kcBodyClass .kcInputClass {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: var(--eodh-radius-sm);
+    padding: 0.5rem;
+    font-size: 1rem;
+    height: auto;
+    color: var(--eodh-label);
+}
+
+body.kcBodyClass .kcButtonClass {
+    border: none;
+    border-radius: var(--eodh-radius-md);
+    cursor: pointer;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.2;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+body.kcBodyClass .kcButtonPrimaryClass {
+    background-color: var(--eodh-accent);
+    color: var(--eodh-button-text);
+}
+
+body.kcBodyClass .kcButtonPrimaryClass:hover,
+body.kcBodyClass .kcButtonPrimaryClass:focus {
+    background-color: var(--eodh-accent-hover);
+    color: var(--eodh-button-text);
+}
+
+body.kcBodyClass .kcButtonClass:disabled {
+    background-color: var(--eodh-button-disabled);
+    color: #969696;
+    cursor: not-allowed;
+}
+
+body.kcBodyClass .kcFormPasswordVisibilityButtonClass {
+    background: transparent;
+    border: none;
+    color: var(--eodh-steel);
+}
+
+/* PatternFly control buttons draw their border in ::after */
+body.kcBodyClass .kcFormPasswordVisibilityButtonClass::after {
+    content: none;
+}
+
+body.kcBodyClass .kcAlertClass {
+    border-radius: var(--eodh-radius-sm);
+}
+
+/* Info strip at the card bottom (e.g. the registration link);
+   negative margins mirror the card padding */
+body.kcBodyClass #kc-info {
+    margin: 1.5rem -2.25rem -2.5rem;
+}
+
+body.kcBodyClass #kc-info-wrapper {
+    background-color: var(--eodh-band-bg);
+    color: var(--eodh-label);
+    padding: 1rem 2.25rem;
+    font-size: 0.875rem;
+    border-radius: 0 0 var(--eodh-radius-lg) var(--eodh-radius-lg);
+}
+
+/* Minimal login-only footer (over the scrim, site link colors) */
+
+#eodh-login-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 2rem;
+    align-self: stretch;
+    margin: 2rem -1rem 0;
+    padding: 1.25rem 2rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--eodh-footer-link);
+    background-color: rgb(26 39 63 / 0.7);
+    border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+#eodh-login-footer nav {
+    display: flex;
+    gap: 1.25rem;
+}
+
+body.kcBodyClass #eodh-login-footer a {
+    color: var(--eodh-footer-link);
+    text-decoration: none;
+}
+
+body.kcBodyClass #eodh-login-footer a:hover {
+    color: var(--eodh-footer-link-hover);
+    text-decoration: underline;
+}
+
+/* SSO-only UX on the login page: hide the username/password
+   form. Scoped to login.ftl so register/reset pages keep their
+   password and username fields visible. */
+
+[data-kc-page-id="login.ftl"] .kcFormHeaderClass {
+    display: none;
+}
+
+[data-kc-page-id="login.ftl"] .kcFormGroupClass:has(> input#username) {
+    display: none;
+}
+
+[data-kc-page-id="login.ftl"] .kcFormGroupClass:has(input#password) {
+    display: none;
+}
+
+[data-kc-page-id="login.ftl"] .kcFormGroupClass:has(input#rememberMe) {
+    display: none;
+}
+
+[data-kc-page-id="login.ftl"] .kcButtonClass[name="login"] {
+    display: none;
+}
+
+[data-kc-page-id="login.ftl"] .kcFormSocialAccountSectionClass hr,
+[data-kc-page-id="login.ftl"] .kcFormSocialAccountSectionClass h2 {
+    display: none;
+}
+
+/* Responsive */
+
+@media (max-width: 520px) {
+    body.kcBodyClass .kcLoginClass {
+        padding: 1.75rem 0.75rem 0;
+    }
+
+    body.kcBodyClass .kcFormCardClass {
+        padding: 1.75rem 1.25rem;
+    }
+
+    body.kcBodyClass #kc-info {
+        margin: 1.25rem -1.25rem -1.75rem;
+    }
+
+    body.kcBodyClass #kc-info-wrapper {
+        padding: 1rem 1.25rem;
+    }
+
+    #eodh-login-footer {
+        margin: 1.75rem -0.75rem 0;
+    }
 }
