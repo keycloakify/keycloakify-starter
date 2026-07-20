@@ -281,6 +281,42 @@ export const WithTwoSocialProviders: Story = {
         />
     )
 };
+export const WithThreeSocialProviders: Story = {
+    render: args => (
+        <KcPageStory
+            {...args}
+            kcContext={{
+                social: {
+                    displayInfo: true,
+                    providers: [
+                        {
+                            loginUrl: "github",
+                            alias: "github",
+                            providerId: "github",
+                            displayName: "Github",
+                            iconClasses: "fa fa-github"
+                        },
+                        {
+                            loginUrl: "google",
+                            alias: "google",
+                            providerId: "google",
+                            displayName: "Google",
+                            iconClasses: "fa fa-google"
+                        },
+                        {
+                            loginUrl: "microsoft",
+                            alias: "microsoft",
+                            providerId: "microsoft",
+                            displayName: "Microsoft",
+                            iconClasses: "fa fa-windows"
+                        }
+                    ]
+                },
+                realm: { registrationAllowed: false }
+            }}
+        />
+    )
+};
 export const WithNoSocialProviders: Story = {
     render: args => (
         <KcPageStory
