@@ -253,6 +253,29 @@ body.kcBodyClass .kcButtonClass:disabled {
     cursor: not-allowed;
 }
 
+/* Secondary buttons */
+body.kcBodyClass .kcButtonDefaultClass {
+    background-color: #fff;
+    background-image: none; /* Keycloak's .btn-default paints a grey gradient */
+    border: 1px solid var(--eodh-accent);
+    color: var(--eodh-accent);
+    padding: calc(0.6rem - 1px) calc(1.4rem - 1px);
+}
+
+body.kcBodyClass .kcButtonDefaultClass:hover,
+body.kcBodyClass .kcButtonDefaultClass:focus {
+    background-color: rgb(76 114 186 / 10%);
+    background-image: none;
+    color: var(--eodh-accent);
+}
+
+/* Stack Submit/Cancel full-width */
+body.kcBodyClass .kcFormButtonsClass {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
 body.kcBodyClass .kcFormPasswordVisibilityButtonClass {
     background: transparent;
     border: none;
