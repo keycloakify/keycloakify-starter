@@ -1,0 +1,735 @@
+/* ==========================================================================
+   Cat/Code — единая тема для страниц логина Keycloak.
+   Оформление построено на семантических kc*-классах Keycloakify: при
+   doUseDefaultCss={false} kcClsx возвращает ровно имя классa (без PatternFly),
+   поэтому один этот файл стилизует ВСЕ страницы темы — и ejected, и дефолтные.
+   ========================================================================== */
+
+@import "@fontsource-variable/geist/index.css";
+@import "@fontsource-variable/geist-mono/index.css";
+
+:root {
+    /* Поверхности (тёмная тема, dark-only — как в desktop-приложении) */
+    --cc-bg: #0f0f0f;
+    --cc-surface: #151515;
+    --cc-surface-2: #181818;
+    --cc-input-bg: #0c0c0c;
+    --cc-hover: #1e1e1e;
+
+    /* Акцент */
+    --cc-accent: #90c8ff;
+    --cc-accent-hover: #a4d2ff;
+    --cc-on-accent: #0c0c0c;
+
+    /* Текст */
+    --cc-text: #ffffff;
+    --cc-text-muted: rgba(255, 255, 255, 0.5);
+    --cc-text-faint: rgba(255, 255, 255, 0.35);
+    --cc-text-strong: rgba(255, 255, 255, 0.85);
+
+    /* Границы (через inset box-shadow) и фокус */
+    --cc-border: rgba(255, 255, 255, 0.08);
+    --cc-border-soft: rgba(255, 255, 255, 0.06);
+    --cc-focus-ring: inset 0 0 0 1.5px rgba(144, 200, 255, 0.6);
+
+    /* Семантика ошибок / успеха */
+    --cc-error-text: rgba(255, 180, 175, 0.92);
+    --cc-error-bg: rgba(220, 90, 80, 0.1);
+    --cc-error-border: rgba(220, 90, 80, 0.28);
+    --cc-success-text: rgba(140, 215, 165, 0.9);
+    --cc-success-bg: rgba(80, 180, 120, 0.1);
+    --cc-success-border: rgba(80, 180, 120, 0.28);
+    --cc-warning-text: rgba(255, 210, 150, 0.92);
+    --cc-warning-bg: rgba(220, 160, 70, 0.1);
+    --cc-warning-border: rgba(220, 160, 70, 0.28);
+
+    /* Радиусы */
+    --cc-radius-btn: 8px;
+    --cc-radius-input: 10px;
+    --cc-radius-card: 16px;
+
+    /* Прочее */
+    --cc-shadow-card: 0 0 0 1px var(--cc-border), 0 24px 60px rgba(0, 0, 0, 0.5);
+    --cc-transition: 0.15s ease;
+    --cc-font: "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        sans-serif;
+    --cc-font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* --------------------------------------------------------------------------
+   База
+   -------------------------------------------------------------------------- */
+
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--cc-bg);
+    color: var(--cc-text);
+    font-family: var(--cc-font);
+    font-size: 15px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-synthesis: none;
+}
+
+a {
+    color: var(--cc-accent);
+    text-decoration: none;
+    transition: color var(--cc-transition);
+}
+a:hover {
+    color: var(--cc-accent-hover);
+}
+
+/* --------------------------------------------------------------------------
+   Раскладка страницы + карточка
+   -------------------------------------------------------------------------- */
+
+.kcLoginClass {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 24px;
+}
+
+/* Штатный заголовок (loginTitleHtml) прячем — брендинг даёт логотип в карточке */
+#kc-header {
+    display: none;
+}
+
+.kcFormCardClass {
+    width: 100%;
+    max-width: 420px;
+    background: var(--cc-surface);
+    border-radius: var(--cc-radius-card);
+    box-shadow: var(--cc-shadow-card);
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Логотип Cat/Code (рендерится в Template) */
+.cc-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+.cc-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.kcFormHeaderClass {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#kc-page-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+/* Имя уже подставленного пользователя (reauth) */
+#kc-username {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--cc-text-muted);
+}
+#kc-username label {
+    color: var(--cc-text);
+}
+
+.kcContentWrapperClass .subtitle,
+.subtitle {
+    font-size: 12px;
+    color: var(--cc-text-muted);
+    text-align: center;
+}
+.required,
+.cc-required {
+    color: var(--cc-accent);
+}
+
+#kc-content,
+#kc-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* --------------------------------------------------------------------------
+   Сообщения / алерты
+   -------------------------------------------------------------------------- */
+
+.kcAlertClass {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 14px;
+    border-radius: var(--cc-radius-btn);
+    font-size: 13px;
+    line-height: 1.45;
+    border: 1px solid var(--cc-border);
+    background: var(--cc-surface-2);
+}
+.kcAlertClass .pf-c-alert__icon {
+    display: none;
+}
+.kcAlertTitleClass {
+    display: block;
+}
+.kcAlertClass.alert-error,
+.kcAlertClass.pf-m-danger {
+    color: var(--cc-error-text);
+    background: var(--cc-error-bg);
+    border-color: var(--cc-error-border);
+}
+.kcAlertClass.alert-success,
+.kcAlertClass.pf-m-success {
+    color: var(--cc-success-text);
+    background: var(--cc-success-bg);
+    border-color: var(--cc-success-border);
+}
+.kcAlertClass.alert-warning,
+.kcAlertClass.pf-m-warning {
+    color: var(--cc-warning-text);
+    background: var(--cc-warning-bg);
+    border-color: var(--cc-warning-border);
+}
+
+/* --------------------------------------------------------------------------
+   Формы: группы, лейблы, поля
+   -------------------------------------------------------------------------- */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 0;
+}
+
+.kcFormGroupClass {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.kcLabelClass {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--cc-text-muted);
+}
+.kcLabelWrapperClass {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.kcInputClass {
+    width: 100%;
+    height: 44px;
+    box-sizing: border-box;
+    background: var(--cc-input-bg);
+    color: var(--cc-text);
+    border: none;
+    border-radius: var(--cc-radius-input);
+    box-shadow: inset 0 0 0 1px var(--cc-border);
+    padding: 0 14px;
+    font-size: 14px;
+    font-family: var(--cc-font);
+    outline: none;
+    transition: box-shadow var(--cc-transition);
+}
+.kcInputClass::placeholder {
+    color: var(--cc-text-faint);
+}
+.kcInputClass:focus,
+.kcInputClass:focus-visible {
+    box-shadow: var(--cc-focus-ring);
+}
+.kcInputClass[aria-invalid="true"] {
+    box-shadow: inset 0 0 0 1.5px var(--cc-error-border);
+}
+.kcInputClass:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* textarea / select */
+textarea.kcInputClass {
+    height: auto;
+    min-height: 96px;
+    padding: 12px 14px;
+    resize: vertical;
+    line-height: 1.5;
+}
+select.kcInputClass {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' stroke='%23ffffff80' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+select.kcInputClass[multiple] {
+    height: auto;
+    padding: 8px;
+    background-image: none;
+}
+
+.kcInputWrapperClass {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Поле пароля с кнопкой показать/скрыть
+   -------------------------------------------------------------------------- */
+
+.kcInputGroup {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.kcInputGroup .kcInputClass {
+    padding-right: 46px;
+}
+.kcFormPasswordVisibilityButtonClass {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--cc-radius-btn);
+    cursor: pointer;
+    color: var(--cc-text-muted);
+    transition:
+        color var(--cc-transition),
+        background var(--cc-transition);
+}
+.kcFormPasswordVisibilityButtonClass:hover {
+    color: var(--cc-text);
+    background: var(--cc-hover);
+}
+/* Иконка «глаз» — через маску, т.к. без PatternFly icon-шрифта */
+.kcFormPasswordVisibilityIconShow,
+.kcFormPasswordVisibilityIconHide {
+    width: 18px;
+    height: 18px;
+    background-color: currentColor;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+.kcFormPasswordVisibilityIconShow {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M1 9s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6Z' stroke='black' stroke-width='1.4'/%3E%3Ccircle cx='9' cy='9' r='2.3' stroke='black' stroke-width='1.4'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M1 9s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6Z' stroke='black' stroke-width='1.4'/%3E%3Ccircle cx='9' cy='9' r='2.3' stroke='black' stroke-width='1.4'/%3E%3C/svg%3E");
+}
+.kcFormPasswordVisibilityIconHide {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M3 3l12 12M7.5 7.6a2.3 2.3 0 0 0 3 3M1 9s3-6 8-6c1 0 1.9.24 2.7.62M16.4 6.3c.4.9.6 1.7.6 2.7 0 0-3 6-8 6-.9 0-1.7-.2-2.5-.5' stroke='black' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M3 3l12 12M7.5 7.6a2.3 2.3 0 0 0 3 3M1 9s3-6 8-6c1 0 1.9.24 2.7.62M16.4 6.3c.4.9.6 1.7.6 2.7 0 0-3 6-8 6-.9 0-1.7-.2-2.5-.5' stroke='black' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   Чекбоксы и радио
+   -------------------------------------------------------------------------- */
+
+.checkbox label,
+.kcLabelWrapperClass label,
+.kcInputClassRadio label,
+.kcInputClassCheckbox label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--cc-text-strong);
+    cursor: pointer;
+}
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin: 0;
+    background: var(--cc-input-bg);
+    box-shadow: inset 0 0 0 1px var(--cc-border);
+    cursor: pointer;
+    transition:
+        background var(--cc-transition),
+        box-shadow var(--cc-transition);
+}
+input[type="checkbox"] {
+    border-radius: 5px;
+}
+input[type="radio"] {
+    border-radius: 50%;
+}
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+    background-color: var(--cc-accent);
+    box-shadow: none;
+}
+input[type="checkbox"]:checked {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' stroke='%230c0c0c' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+input[type="radio"]:checked {
+    box-shadow: inset 0 0 0 4px var(--cc-input-bg);
+}
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+    outline: 2px solid rgba(144, 200, 255, 0.5);
+    outline-offset: 2px;
+}
+.kcInputClassRadio,
+.kcInputClassCheckbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Кнопки
+   -------------------------------------------------------------------------- */
+
+.kcButtonClass {
+    height: 44px;
+    padding: 0 18px;
+    border: none;
+    border-radius: var(--cc-radius-btn);
+    font-family: var(--cc-font);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background var(--cc-transition),
+        opacity var(--cc-transition);
+}
+.kcButtonBlockClass {
+    width: 100%;
+}
+.kcButtonPrimaryClass {
+    background: var(--cc-accent);
+    color: var(--cc-on-accent);
+}
+.kcButtonPrimaryClass:hover:not(:disabled) {
+    background: var(--cc-accent-hover);
+}
+.kcButtonDefaultClass,
+.kcButtonSecondaryClass {
+    background: var(--cc-input-bg);
+    color: var(--cc-text-strong);
+    box-shadow: inset 0 0 0 1px var(--cc-border);
+}
+.kcButtonDefaultClass:hover:not(:disabled),
+.kcButtonSecondaryClass:hover:not(:disabled) {
+    background: var(--cc-hover);
+}
+.kcButtonClass:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Ряд опций: rememberMe / forgot password */
+#kc-form-options {
+    display: flex;
+    align-items: center;
+}
+.kcFormSettingClass {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.kcFormOptionsWrapperClass {
+    font-size: 13px;
+    margin-left: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Ошибки полей и вспомогательный текст
+   -------------------------------------------------------------------------- */
+
+.kcInputErrorMessageClass {
+    display: block;
+    font-size: 12px;
+    color: var(--cc-error-text);
+}
+.kcInputHelperTextBeforeClass,
+.kcInputHelperTextAfterClass {
+    font-size: 12px;
+    color: var(--cc-text-muted);
+}
+
+/* Заголовок группы атрибутов профиля */
+.kcFormGroupHeader {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cc-text);
+}
+
+/* --------------------------------------------------------------------------
+   Соц-провайдеры (OAuth)
+   -------------------------------------------------------------------------- */
+
+#kc-social-providers,
+.kcFormSocialAccountSectionClass {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+#kc-social-providers hr {
+    width: 100%;
+    height: 1px;
+    border: none;
+    background: var(--cc-border);
+    margin: 4px 0;
+}
+#kc-social-providers h2 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--cc-text-muted);
+    text-align: center;
+}
+.kcFormSocialAccountListClass {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.kcFormSocialAccountListClass.kcFormSocialAccountListGridClass {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.kcFormSocialAccountListButtonClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    padding: 0 14px;
+    background: var(--cc-input-bg);
+    color: var(--cc-text-strong);
+    border-radius: var(--cc-radius-input);
+    box-shadow: inset 0 0 0 1px var(--cc-border);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--cc-transition);
+}
+.kcFormSocialAccountListButtonClass:hover {
+    background: var(--cc-hover);
+    color: var(--cc-text);
+}
+.cc-social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.kcFormSocialAccountNameClass {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --------------------------------------------------------------------------
+   Переключатель языка
+   -------------------------------------------------------------------------- */
+
+#kc-locale {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.kcLocaleMainClass {
+    position: relative;
+}
+#kc-current-locale-link {
+    background: var(--cc-surface-2);
+    color: var(--cc-text-muted);
+    border: none;
+    box-shadow: inset 0 0 0 1px var(--cc-border);
+    border-radius: var(--cc-radius-btn);
+    padding: 6px 12px;
+    font-size: 13px;
+    font-family: var(--cc-font);
+    cursor: pointer;
+}
+.kcLocaleListClass {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 6px;
+    position: absolute;
+    right: 0;
+    min-width: 140px;
+    background: var(--cc-surface-2);
+    border-radius: var(--cc-radius-input);
+    box-shadow:
+        inset 0 0 0 1px var(--cc-border),
+        0 16px 40px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+.kcLocaleListItemClass .kcLocaleItemClass {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: var(--cc-text-strong);
+    font-size: 13px;
+}
+.kcLocaleListItemClass .kcLocaleItemClass:hover {
+    background: var(--cc-hover);
+    color: var(--cc-text);
+}
+
+/* --------------------------------------------------------------------------
+   Нижний блок (регистрация / вернуться ко входу)
+   -------------------------------------------------------------------------- */
+
+#kc-info,
+.kcSignUpClass {
+    text-align: center;
+    font-size: 13px;
+    color: var(--cc-text-muted);
+}
+#kc-registration a,
+#kc-registration-container a {
+    font-weight: 600;
+}
+
+/* Ссылка «попробовать другой способ» */
+#kc-select-try-another-way-form {
+    text-align: center;
+    font-size: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   Выбор аутентификатора (select-authenticator.ftl) и списки OTP
+   -------------------------------------------------------------------------- */
+
+#kc-select-credential-form,
+.kcSelectAuthListClass,
+.kcLoginOTPListClass {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Каждый вариант — кнопка-карточка в стиле темы (перебивает дефолт браузера) */
+.kcSelectAuthListItemClass {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    padding: 14px 16px;
+    background: var(--cc-input-bg);
+    color: var(--cc-text);
+    border: none;
+    border-radius: var(--cc-radius-input);
+    box-shadow: inset 0 0 0 1px var(--cc-border);
+    font-family: var(--cc-font);
+    cursor: pointer;
+    transition: background var(--cc-transition);
+}
+.kcSelectAuthListItemClass:hover {
+    background: var(--cc-hover);
+}
+.kcSelectAuthListItemIconClass {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: var(--cc-radius-btn);
+    background: rgba(144, 200, 255, 0.12);
+    color: var(--cc-accent);
+}
+.kcSelectAuthListItemBodyClass {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+.kcSelectAuthListItemHeadingClass {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--cc-text);
+}
+.kcSelectAuthListItemDescriptionClass {
+    font-size: 12px;
+    color: var(--cc-text-muted);
+}
+.kcSelectAuthListItemFillClass {
+    flex: 1;
+}
+/* Стрелка справа — рисуем шеврон (icon-шрифта PatternFly нет) */
+.kcSelectAuthListItemArrowClass {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: var(--cc-text-muted);
+}
+.kcSelectAuthListItemArrowClass::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 1.6px solid currentColor;
+    border-bottom: 1.6px solid currentColor;
+    transform: rotate(-45deg);
+    margin-right: 4px;
+}
