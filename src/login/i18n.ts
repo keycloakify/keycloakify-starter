@@ -7,7 +7,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
     .withThemeName<ThemeName>()
     .withCustomTranslations({
         ru: {
-            loginAccountTitle: "Вход в Cat/Code",
+            loginAccountTitle: "Вход",
             registerTitle: "Создание аккаунта",
             doLogIn: "Войти",
             doRegister: "Зарегистрироваться",
@@ -16,7 +16,7 @@ const { useI18n, ofTypeI18n } = i18nBuilder
             "identity-provider-login-label": "Или войдите через"
         },
         en: {
-            loginAccountTitle: "Sign in to Cat/Code",
+            loginAccountTitle: "Sign in",
             registerTitle: "Create your account",
             doLogIn: "Sign in",
             doRegister: "Sign up",
