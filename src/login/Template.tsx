@@ -1,7 +1,7 @@
 // Общий каркас всех страниц login-темы Cat/Code (ejected из keycloakify).
 // Здесь подключается единый main.css и рендерится логотип бренда, поэтому
 // фирменный вид получают ВСЕ страницы — и кастомные, и дефолтные (DefaultPage).
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { clsx } from "keycloakify/tools/clsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
@@ -12,6 +12,15 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import logoUrl from "./assets/logo-full.png";
 import "./main.css";
+
+// Подписи языков в переключателе приходят с сервера Keycloak (напр. "русский"
+// со строчной). Приводим их к единому виду на клиенте, чтобы не зависеть от
+// серверных бандлов. Неизвестные языки показываются как есть (fallback).
+const LANGUAGE_LABELS: Record<string, string> = {
+    ru: "Русский",
+    en: "English"
+};
+const formatLanguageLabel = (languageTag: string, fallback: string): string => LANGUAGE_LABELS[languageTag] ?? fallback;
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const {
@@ -51,6 +60,33 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     const { isReadyToRender } = useInitialize({ kcContext, doUseDefaultCss });
 
+    // Переключатель языка: собственное состояние open/close (без PatternFly JS,
+    // который в кастомной теме не подключён — иначе список всегда раскрыт).
+    const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+    const localeRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!isLangMenuOpen) {
+            return;
+        }
+        const onPointerDown = (event: MouseEvent) => {
+            if (localeRef.current !== null && !localeRef.current.contains(event.target as Node)) {
+                setIsLangMenuOpen(false);
+            }
+        };
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setIsLangMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", onPointerDown);
+        document.addEventListener("keydown", onKeyDown);
+        return () => {
+            document.removeEventListener("mousedown", onPointerDown);
+            document.removeEventListener("keydown", onKeyDown);
+        };
+    }, [isLangMenuOpen]);
+
     if (!isReadyToRender) {
         return null;
     }
@@ -68,35 +104,43 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 </div>
                 <header className={kcClsx("kcFormHeaderClass")}>
                     {enabledLanguages.length > 1 && (
-                        <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
+                        <div className={kcClsx("kcLocaleMainClass")} id="kc-locale" ref={localeRef}>
                             <div id="kc-locale-wrapper" className={kcClsx("kcLocaleWrapperClass")}>
-                                <div id="kc-locale-dropdown" className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"))}>
+                                <div
+                                    id="kc-locale-dropdown"
+                                    className={clsx("menu-button-links", kcClsx("kcLocaleDropDownClass"), isLangMenuOpen && "cc-locale-open")}
+                                >
                                     <button
+                                        type="button"
                                         tabIndex={1}
                                         id="kc-current-locale-link"
                                         aria-label={msgStr("languages")}
                                         aria-haspopup="true"
-                                        aria-expanded="false"
+                                        aria-expanded={isLangMenuOpen}
                                         aria-controls="language-switch1"
+                                        onClick={() => setIsLangMenuOpen(open => !open)}
                                     >
-                                        {currentLanguage.label}
+                                        {formatLanguageLabel(currentLanguage.languageTag, currentLanguage.label)}
+                                        <span className="cc-locale-chevron" aria-hidden="true" />
                                     </button>
-                                    <ul
-                                        role="menu"
-                                        tabIndex={-1}
-                                        aria-labelledby="kc-current-locale-link"
-                                        aria-activedescendant=""
-                                        id="language-switch1"
-                                        className={kcClsx("kcLocaleListClass")}
-                                    >
-                                        {enabledLanguages.map(({ languageTag, label, href }, i) => (
-                                            <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
-                                                <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
-                                                    {label}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    {isLangMenuOpen && (
+                                        <ul
+                                            role="menu"
+                                            tabIndex={-1}
+                                            aria-labelledby="kc-current-locale-link"
+                                            aria-activedescendant=""
+                                            id="language-switch1"
+                                            className={kcClsx("kcLocaleListClass")}
+                                        >
+                                            {enabledLanguages.map(({ languageTag, label, href }, i) => (
+                                                <li key={languageTag} className={kcClsx("kcLocaleListItemClass")} role="none">
+                                                    <a role="menuitem" id={`language-${i + 1}`} className={kcClsx("kcLocaleItemClass")} href={href}>
+                                                        {formatLanguageLabel(languageTag, label)}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </div>
                             </div>
                         </div>

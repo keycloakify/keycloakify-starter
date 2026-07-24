@@ -595,6 +595,9 @@ input[type="radio"]:focus-visible {
     position: relative;
 }
 #kc-current-locale-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: var(--cc-surface-2);
     color: var(--cc-text-muted);
     border: none;
@@ -604,6 +607,27 @@ input[type="radio"]:focus-visible {
     font-size: 13px;
     font-family: var(--cc-font);
     cursor: pointer;
+    transition:
+        color var(--cc-transition),
+        background var(--cc-transition);
+}
+#kc-current-locale-link:hover {
+    color: var(--cc-text);
+    background: var(--cc-hover);
+}
+/* Шеврон-индикатор открытия */
+.cc-locale-chevron {
+    width: 6px;
+    height: 6px;
+    border-right: 1.2px solid currentColor;
+    border-bottom: 1.2px solid currentColor;
+    transform: rotate(45deg);
+    margin-top: -3px;
+    transition: transform var(--cc-transition);
+}
+.cc-locale-open .cc-locale-chevron {
+    transform: rotate(-135deg);
+    margin-top: 2px;
 }
 .kcLocaleListClass {
     list-style: none;
