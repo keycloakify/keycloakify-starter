@@ -1,0 +1,36 @@
+:root body {
+  --pf-v5-global--primary-color--100: #1A67A3;
+  --pf-v5-global--primary-color--200: #1c77bd;
+}
+
+:root body .pf-v5-c-masthead {
+  --pf-v5-c-masthead--BackgroundColor: #eee;
+}
+
+:root body .pf-v5-c-masthead .pf-v5-c-toolbar {
+  --pf-v5-c-masthead--c-toolbar--BackgroundColor: #eee;
+}
+
+
+:root body .pf-v5-c-masthead .pf-v5-c-button {
+  --pf-v5-c-button--m-link--Color: var(--pf-v5-global--primary-color--200);
+  --pf-v5-c-button--m-link--m-inline--hover--Color: var(--pf-v5-global--primary-color--200);
+}
+
+:root body .pf-v5-c-masthead .pf-v5-c-menu-toggle{
+    --pf-v5-c-menu-toggle--Color: #222;
+    --pf-v5-c-menu-toggle--before--BorderTopColor: #ccc;
+    --pf-v5-c-menu-toggle--before--BorderLeftColor: #ccc;
+    --pf-v5-c-menu-toggle--before--BorderRightColor: #ccc;
+    --pf-v5-c-menu-toggle--before--BorderBottomColor: var(--pf-v5-global--primary-color--100);
+}
+
+
+:root body .pf-v5-c-page__sidebar {
+  --pf-v5-c-page__sidebar--BackgroundColor: #eee;
+}
+
+:root body .pf-v5-c-nav__link {
+  --pf-v5-c-nav__link--Color: #111;
+}
+

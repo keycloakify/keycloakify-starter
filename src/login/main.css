@@ -1,0 +1,18 @@
+@import url(./assets/fonts/titilliumweb/main.css);
+
+
+body.kcBodyClass {
+    --pf-global--primary-color--100: #2A4CDF;
+    --pf-global--primary-color--200: #192E86;
+    background-image: none;
+    background-color: #fafafa;
+    font-family: 'Titillium Web', sans-serif !important;
+}
+
+.kcFormCardClass {
+    border-radius: 4px;
+}
+
+.kcButtonClass {
+    border-radius: 4px;
+}

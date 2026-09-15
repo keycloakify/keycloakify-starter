@@ -1,0 +1,20 @@
+<!--
+ This file has been claimed for ownership from @keycloakify/keycloak-account-ui version 260200.1.0.
+ To relinquish ownership and restore this file to its original content, run the following command:
+
+ $ npx keycloakify own -t "account/assets/favicon.svg" -r
+-->
+
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1500 1500" style="enable-background:new 0 0 1500 1500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#192E86;stroke:#192E86;stroke-width:141.3227;stroke-miterlimit:10;}
+	.st1{fill:#2A4CDF;stroke:#2A4CDF;stroke-width:141.3227;stroke-miterlimit:10;}
+</style>
+<path class="st0" d="M1136.4,636.5c150.8,0,273.1-121.9,273.1-272.2S1287.2,92.1,1136.4,92.1c-150.8,0-273.1,121.9-273.1,272.2
+	S985.6,636.5,1136.4,636.5z"/>
+<path class="st1" d="M1329,946c-106.4-106-278.8-106-386.1,0c-99.6,99.3-258.7,106-365.1,18.1c-6.7-7.6-13.4-16.2-21.1-23.9
+	c-106.4-106-106.4-278,0-384.9c106.4-106,106.4-278,0-384.9s-278.8-106-386.1,0c-107.3,106-106.4,278,0,384.9
+	c106.4,106,106.4,278,0,384.9c-63.2,63-89.1,150-76.7,232.1c7.7,57.3,33.5,113.7,77.6,157.6c106.4,106,278.8,106,386.1,0
+	c106.4-106,278.8-106,386.1,0c106.4,106,278.8,106,386.1,0C1435.4,1224,1435.4,1052,1329,946z"/>
+</svg>
