@@ -1341,6 +1341,11 @@
     camelize-ts "^3.0.0"
     url-template "^3.1.1"
 
+"@keycloakify/email-native@~260007.0.0":
+  version "260007.0.0"
+  resolved "https://registry.yarnpkg.com/@keycloakify/email-native/-/email-native-260007.0.0.tgz#8ee9a889ca022fa13f2d13f166f3c1fa565dc37c"
+  integrity sha512-hFUiOwwpc84eXPAct44G/pTBkYnDQF1jIObME+ZUrb7XidmFJ/TdH9q49LKpd9sIivSyOEJa1qLtrggP+c+BJw==
+
 "@keycloakify/keycloak-account-ui@~260700.0.3":
   version "260700.0.3"
   resolved "https://registry.yarnpkg.com/@keycloakify/keycloak-account-ui/-/keycloak-account-ui-260700.0.3.tgz#918d62048db71998f1cc7c0ad155285a39137f32"

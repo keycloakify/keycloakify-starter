@@ -36,7 +36,8 @@
         "react-router-dom": "^6.30.4",
         "@keycloak/keycloak-admin-client": "26.7.0",
         "@patternfly/react-styles": "^5.4.1",
-        "oidc-spa": "~10.2.10"
+        "oidc-spa": "~10.2.10",
+        "@keycloakify/email-native": "~260007.0.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.15.0",
